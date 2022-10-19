@@ -1,5 +1,5 @@
 #include "Precompile.hpp";
-#include "CodaTuk.hpp"
+#include "Engine.hpp"
 
 struct QA {
     string* questions;
@@ -20,31 +20,34 @@ void setupVars()
 
     string questionsar[10]
     {
-        {"tup li e konq"},
-        {"mnogo tup li e konq"},
-        {"super mnogo tup li e konq"},
-        {"tolkova tup li e konq"},
-        {"umen li e QA(estestveno che daa)"},
-        {"kolko teji shtangata"},
-        {"mrazim li daskaloto"},
-        {"manov shte plache li kato go biem(trudno da go biem)"},
-        {"obichame li konki"},
-        {"tup li e chadura"},
+        {"a"},
+        {"b"},
+        {"c"},
+        {"d"},
+        {"d"},
+        {"f"},
+        {"g"},
+        {"h"},
+        {"i"},
+        {"j"},
     };
 
     //space-a e check za vernite otgovori twa e nai - lesniq variant za check det se sehtam
     string answersar[10][5]
     {
-        {"da", "ne", "malko", "izobshto "},
-        {"ne", "mnogo", "malko ", "izobshto"},
-        {"ne", "ne mnogo", "estestveno ", "izobshto"},
-        {"ne", "ne mnogo ", "estestveno", "za sujalenie da"},
-        {"ne", "toz puk palqk", "da mnogo qsno ", "uuuu neee"},
-        {"10kg", "20kg", "touran-kg ", "0kg"},
-        {"da", "da", "da", "da "},
-        {"nqma da biem", "chak puk da plache ", "pak konq e nepitan", "NESTASHEV"},
-        {"ohoo", "mnogo", "napravoo ", "topaa"},
-        {"insane", "super tup", "chadurini ", "chad"},
+        {"00", "01", "02", "03"},
+        {"10", "11", "12", "13"},
+        {"20", "21", "22", "23"},
+        {"30", "31", "32", "33"},
+        {"40", "41", "42", "43"},
+        {"50", "51", "52", "53"},
+        {"60", "61", "62", "63"},
+        {"70", "71", "72", "73"},
+        {"80", "81", "82", "83"},
+        {"90", "91", "92", "93"},
+        
+        
+        
     };
 
     questionnaire.questions = new string[10];
@@ -116,7 +119,7 @@ int main()
             for (int j = 0; j < 4; j++)
             {
                 //draw the 4 answers
-                DrawText(answerText[0][j], i * 100, 400, 50, BLUE);
+                DrawText(answerText[0][j], i * 100, 400, 50, GREEN);
             }
         }
 
