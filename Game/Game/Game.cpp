@@ -15,6 +15,54 @@ namespace variables {
 
 
 using namespace variables;
+class Game
+{
+public:
+    Game(){
+        InitWindow(1800, 1000, "Quiz");
+        SetTargetFPS(60);
+    }
+    void loop()
+    {
+        while (!WindowShouldClose())
+        {
+            BeginDrawing();
+
+            ClearBackground(RAYWHITE);
+
+            //shuffle the QA and randomise the answers position
+
+            for (int i = 0; i < 10; i++)
+            {
+                randomA = randomizationForA[i];
+
+                const char* questionText = questionnaire.questions[randomA].c_str();
+
+                const char* answerText[1][4];
+                for (int j = 0; j < 4; j++)
+                    answerText[0][j] = questionnaire.answers[randomA * randomQ].c_str();
+
+
+                DrawText(questionText, 1, i * 100, 30, BLUE);
+
+                //DrawText(questionText, 1, 1, 50, BLUE);
+
+                for (int j = 0; j < 4; j++)
+                {
+                    //draw the 4 answers
+                    DrawText(answerText[0][j], i * 100, 400, 50, GREEN);
+                }
+            }
+            EndDrawing();
+        }
+    };
+    ~Game(){
+        delete[] questionnaire.questions;
+        delete[] questionnaire.answers;
+        CloseWindow();
+    }
+
+};
 void setupVars()
 {
 
@@ -63,9 +111,7 @@ void setupVars()
         }
     }
 
-    InitWindow(1800, 1000, "Quiz");
-    SetTargetFPS(60);
-
+    
     for (int i = 0; i < 10; i++)
     {
         int randomForA = rand() % 10;
@@ -78,11 +124,7 @@ void setupVars()
     }
 }
 
-void deleteVars()
-{
-    delete[] questionnaire.questions;
-    delete[] questionnaire.answers;
-}
+
 
 int main()
 {
@@ -93,40 +135,8 @@ int main()
 
     setupVars();
 
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
+    Game* game = new Game();
+    game->loop();
 
-        ClearBackground(RAYWHITE);
-
-        //shuffle the QA and randomise the answers position
-
-        for (int i = 0; i < 10; i++)
-        {
-            randomA = randomizationForA[i];
-
-            const char* questionText = questionnaire.questions[randomA].c_str();
-
-            const char* answerText[1][4];
-            for (int j = 0; j < 4; j++)
-                answerText[0][j] = questionnaire.answers[randomA * randomQ].c_str();
-
-
-            DrawText(questionText, 1, i * 100, 30, BLUE);
-
-            //DrawText(questionText, 1, 1, 50, BLUE);
-
-            for (int j = 0; j < 4; j++)
-            {
-                //draw the 4 answers
-                DrawText(answerText[0][j], i * 100, 400, 50, GREEN);
-            }
-        }
-
-        EndDrawing();
-    }
-
-    deleteVars();
-
-    CloseWindow();
+    
 }
