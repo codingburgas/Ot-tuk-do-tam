@@ -155,10 +155,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Backstory.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Backstory.hpp" />
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="Precompile.hpp" />
   </ItemGroup>

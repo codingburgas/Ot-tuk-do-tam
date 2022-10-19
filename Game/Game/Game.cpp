@@ -1,5 +1,6 @@
 #include "Precompile.hpp";
 #include "Engine.hpp"
+#include "Backstory.hpp"
 
 struct QA {
     string* questions;
@@ -11,15 +12,24 @@ namespace variables {
     int randomizationForQ[10][4];
 
     int shuffleQA = 0, randomA = 0, randomQ = 0;
+
+    int miliseconds;
+    string backstoryText;
+
+    int* milisecondsPtr;
+    string* backstoryTextPtr;
 };
 
 
 using namespace variables;
+
+void setupVars();
+
 class Game
 {
 public:
     Game(){
-        InitWindow(1800, 1000, "Quiz");
+        InitWindow(1800, 1000, "Ot tuk do tam");
         SetTargetFPS(60);
     }
     void loop()
@@ -63,6 +73,7 @@ public:
     }
 
 };
+
 void setupVars()
 {
 
@@ -119,9 +130,15 @@ void setupVars()
 
         int randomForQ = rand() % 4;
         //for (int j = 0; j < 4; j++)
-            //vij twa shot nesh ne moga da gi vkaram i dvete promenlivi
             //randomizationForQ[i][j] = make_pair(randomForA, randomForQ);
     }
+
+    //backstory variables
+    miliseconds = 100;
+    backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap";
+
+    milisecondsPtr = &miliseconds;
+    backstoryTextPtr = &backstoryText;
 }
 
 
@@ -135,8 +152,10 @@ int main()
 
     setupVars();
 
+    backstory(*milisecondsPtr, *backstoryTextPtr);
+    delete milisecondsPtr;
+    delete backstoryTextPtr;
+
     Game* game = new Game();
     game->loop();
-
-    
 }
