@@ -18,6 +18,7 @@ namespace variables {
 
     int* milisecondsPtr;
     string* backstoryTextPtr;
+
 };
 
 
@@ -34,14 +35,27 @@ public:
     }
     void loop()
     {
+        Texture2D map = LoadTexture("../src/sprites/overworld/map.png");
+        map.width = 1800;
+        map.height = 1000;
+
+        Vector2 MousePoint;
+
+        Vector2 circles[4];
+
+        bool countries[4] = { 0,0,0,0 };
+
         while (!WindowShouldClose())
         {
             BeginDrawing();
 
             ClearBackground(RAYWHITE);
 
-            //shuffle the QA and randomise the answers position
 
+            MousePoint = GetMousePosition();
+
+            //shuffle the QA and randomise the answers position
+            /*
             for (int i = 0; i < 10; i++)
             {
                 randomA = randomizationForA[i];
@@ -63,6 +77,61 @@ public:
                     DrawText(answerText[0][j], i * 100, 400, 50, GREEN);
                 }
             }
+            */
+            DrawTexture(map,0,0,WHITE);
+            circles[0].x = 320;
+            circles[0].y = 750;
+            DrawCircleGradient(circles[0].x, circles[0].y, 30, GREEN, SKYBLUE);
+
+            circles[1].x = 550;
+            circles[1].y = 590;
+            DrawCircleGradient(circles[1].x, circles[1].y, 30, PURPLE, BLUE);
+
+            circles[2].x = 380;
+            circles[2].y = 80;
+            DrawCircleGradient(circles[2].x, circles[2].y, 30, LIME, DARKBLUE);
+
+            circles[3].x = 760;
+            circles[3].y = 580;
+            DrawCircleGradient(circles[3].x, circles[3].y, 30, RED, PINK);
+
+            if (CheckCollisionPointCircle(MousePoint, circles[0], 30))
+            {
+                DrawText("Spain",125,725,60,RED);
+            }
+            if (CheckCollisionPointCircle(MousePoint, circles[1], 30))
+            {
+                DrawText("France", 425, 650, 60, DARKPURPLE);
+            }
+            if (CheckCollisionPointCircle(MousePoint, circles[2], 30))
+            {
+                DrawText("Iceland", 200, 150, 60, BLUE);
+            }
+            if (CheckCollisionPointCircle(MousePoint, circles[3], 30))
+            {
+                DrawText("Germany", 650, 474, 60, YELLOW);
+            }
+
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[0], 30))
+            {
+                cout <<"SPAIN";
+            }
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[1], 30))
+            {
+                cout << "FRANCE";
+            }
+
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[2], 30))
+            {
+                cout << "ICELAND";
+            }
+
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[3], 30))
+            {
+                cout << "GERMANY";
+            }
+
+            
             EndDrawing();
         }
     };
@@ -76,6 +145,8 @@ public:
 
 void setupVars()
 {
+    
+    /*
 
     string questionsar[10]
     {
@@ -139,6 +210,7 @@ void setupVars()
 
     milisecondsPtr = &miliseconds;
     backstoryTextPtr = &backstoryText;
+    */
 }
 
 
@@ -152,9 +224,9 @@ int main()
 
     setupVars();
 
-    backstory(*milisecondsPtr, *backstoryTextPtr);
-    delete milisecondsPtr;
-    delete backstoryTextPtr;
+    //backstory(*milisecondsPtr, *backstoryTextPtr);
+    //delete milisecondsPtr;
+    //delete backstoryTextPtr;
 
     Game* game = new Game();
     game->loop();
