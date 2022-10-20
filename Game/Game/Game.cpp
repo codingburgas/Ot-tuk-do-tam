@@ -59,10 +59,11 @@ public:
 
         bool countries[4] = { 0,0,0,0 };
 
+
         while (!WindowShouldClose())
         {
             BeginDrawing();
-            backstory();
+           
             MousePoint = GetMousePosition();
 
             //shuffle the QA and randomise the answers position
@@ -90,7 +91,7 @@ public:
             }
             */
 
-            /*DrawTexture(map, 0, 0, WHITE);
+            DrawTexture(map, 0, 0, WHITE);
             circles[0].x = 320;
             circles[0].y = 800;
             DrawCircleGradient(circles[0].x, circles[0].y, 30, GREEN, SKYBLUE);
@@ -158,7 +159,7 @@ public:
             if (countries[2])
             {
                 DrawTexture(help , 0, 0, WHITE);
-            }*/
+            }
             
             EndDrawing();
         }
@@ -257,7 +258,7 @@ int main()
     srand(time(0));
 
     setupVars();
-
+    backstoryTypewriteEffect(miliseconds, backstoryText);
 
     Game* game = new Game();
     game->loop();
