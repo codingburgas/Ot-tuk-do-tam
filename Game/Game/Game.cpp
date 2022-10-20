@@ -13,18 +13,15 @@ namespace variables {
 
     int shuffleQA = 0, randomA = 0, randomQ = 0;
 
-    int miliseconds;
-    string backstoryText;
-
-    int* milisecondsPtr;
-    string* backstoryTextPtr;
+    int miliseconds = 200;
+    string backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
 
 };
-
 
 using namespace variables;
 
 void setupVars();
+void setWidthAndHeight(Texture2D& variable);
 
 class Game
 {
@@ -33,6 +30,16 @@ public:
         InitWindow(2000, 1025, "Ot tuk do tam");
         SetTargetFPS(60);
     }
+
+    void backstory()
+    {
+        Texture2D backstoryImg = LoadTexture("../src/sprites/overworld/BackstoryFrame.png");
+
+        setWidthAndHeight(backstoryImg);
+        DrawTexture(backstoryImg, 0, 0, WHITE);
+        backstoryTypewriteEffect(miliseconds, backstoryText);
+    }
+
     void loop()
     {
         Texture2D map = LoadTexture("../src/sprites/overworld/map.png");
@@ -41,20 +48,10 @@ public:
         Texture2D cheese = LoadTexture("../src/sprites/overworld/cheddar.png");
         Texture2D help = LoadTexture("../src/sprites/overworld/help.png");
 
-        map.width = 2000;
-        map.height = 1025;
-
-        bull.width = 2000;
-        bull.height = 1025;
-
-        bar.width = 2000;
-        bar.height = 1025;
-
-        cheese.width = 2000;
-        cheese.height = 1025;
-
-        help.width = 2000;
-        help.height = 1025;
+        setWidthAndHeight(map);
+        setWidthAndHeight(bull);
+        setWidthAndHeight(cheese);
+        setWidthAndHeight(help);
 
         Vector2 MousePoint;
 
@@ -65,10 +62,7 @@ public:
         while (!WindowShouldClose())
         {
             BeginDrawing();
-
-            
-
-
+            backstory();
             MousePoint = GetMousePosition();
 
             //shuffle the QA and randomise the answers position
@@ -95,7 +89,8 @@ public:
                 }
             }
             */
-            DrawTexture(map,0,0,WHITE);
+
+            /*DrawTexture(map, 0, 0, WHITE);
             circles[0].x = 320;
             circles[0].y = 800;
             DrawCircleGradient(circles[0].x, circles[0].y, 30, GREEN, SKYBLUE);
@@ -163,7 +158,7 @@ public:
             if (countries[2])
             {
                 DrawTexture(help , 0, 0, WHITE);
-            }
+            }*/
             
             EndDrawing();
         }
@@ -175,6 +170,12 @@ public:
     }
 
 };
+
+void setWidthAndHeight(Texture2D& variable)
+{
+    variable.width = 2000;
+    variable.height = 1025;
+}
 
 void setupVars()
 {
@@ -257,9 +258,6 @@ int main()
 
     setupVars();
 
-    //backstory(*milisecondsPtr, *backstoryTextPtr);
-    //delete milisecondsPtr;
-    //delete backstoryTextPtr;
 
     Game* game = new Game();
     game->loop();
