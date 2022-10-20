@@ -30,14 +30,31 @@ class Game
 {
 public:
     Game(){
-        InitWindow(1800, 1000, "Ot tuk do tam");
+        InitWindow(2000, 1025, "Ot tuk do tam");
         SetTargetFPS(60);
     }
     void loop()
     {
         Texture2D map = LoadTexture("../src/sprites/overworld/map.png");
-        map.width = 1800;
-        map.height = 1000;
+        Texture2D bull = LoadTexture("../src/sprites/overworld/bull.png");
+        Texture2D bar = LoadTexture("../src/sprites/overworld/bar.png");
+        Texture2D cheese = LoadTexture("../src/sprites/overworld/cheddar.png");
+        Texture2D help = LoadTexture("../src/sprites/overworld/help.png");
+
+        map.width = 2000;
+        map.height = 1025;
+
+        bull.width = 2000;
+        bull.height = 1025;
+
+        bar.width = 2000;
+        bar.height = 1025;
+
+        cheese.width = 2000;
+        cheese.height = 1025;
+
+        help.width = 2000;
+        help.height = 1025;
 
         Vector2 MousePoint;
 
@@ -49,7 +66,7 @@ public:
         {
             BeginDrawing();
 
-            ClearBackground(RAYWHITE);
+            
 
 
             MousePoint = GetMousePosition();
@@ -80,18 +97,18 @@ public:
             */
             DrawTexture(map,0,0,WHITE);
             circles[0].x = 320;
-            circles[0].y = 750;
+            circles[0].y = 800;
             DrawCircleGradient(circles[0].x, circles[0].y, 30, GREEN, SKYBLUE);
 
             circles[1].x = 550;
-            circles[1].y = 590;
+            circles[1].y = 650;
             DrawCircleGradient(circles[1].x, circles[1].y, 30, PURPLE, BLUE);
 
             circles[2].x = 380;
             circles[2].y = 80;
             DrawCircleGradient(circles[2].x, circles[2].y, 30, LIME, DARKBLUE);
 
-            circles[3].x = 760;
+            circles[3].x = 860;
             circles[3].y = 580;
             DrawCircleGradient(circles[3].x, circles[3].y, 30, RED, PINK);
 
@@ -114,23 +131,39 @@ public:
 
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[0], 30))
             {
-                cout <<"SPAIN";
+                countries[0] = 1;
             }
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[1], 30))
             {
-                cout << "FRANCE";
+                countries[1] = 1;
             }
 
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[2], 30))
             {
-                cout << "ICELAND";
+                countries[2] = 1;
             }
 
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[3], 30))
             {
-                cout << "GERMANY";
+                countries[3] = 1;
             }
 
+            if (countries[0])
+            {
+                DrawTexture(bull, 0, 0, WHITE);
+            }
+            if (countries[1])
+            {
+                DrawTexture(cheese, 0, 0, WHITE);
+            }
+            if (countries[3])
+            {
+                DrawTexture(bar, 0, 0, WHITE);
+            }
+            if (countries[2])
+            {
+                DrawTexture(help , 0, 0, WHITE);
+            }
             
             EndDrawing();
         }
