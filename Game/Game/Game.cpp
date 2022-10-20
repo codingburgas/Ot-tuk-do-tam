@@ -90,8 +90,8 @@ public:
                 }
             }
             */
-
-            DrawTexture(map, 0, 0, WHITE);
+            backstory();
+            /*DrawTexture(map, 0, 0, WHITE);
             circles[0].x = 320;
             circles[0].y = 800;
             DrawCircleGradient(circles[0].x, circles[0].y, 30, GREEN, SKYBLUE);
@@ -159,7 +159,7 @@ public:
             if (countries[2])
             {
                 DrawTexture(help , 0, 0, WHITE);
-            }
+            }*/
             
             EndDrawing();
         }
