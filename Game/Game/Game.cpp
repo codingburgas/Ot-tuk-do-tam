@@ -9,11 +9,12 @@ struct QA {
 }questionnaire;
 
 namespace variables {
+    Texture2D backstoryImg;
+
     int randomizationForA[10];
     int randomizationForQ[10][4];
 
     int shuffleQA = 0, randomA = 0, randomQ = 0;
-
     int miliseconds = 200;
     string backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
 
@@ -30,11 +31,12 @@ public:
     Game(){
         InitWindow(2000, 1025, "Ot tuk do tam");
         SetTargetFPS(60);
+        ClearBackground(WHITE);
+        backstoryImg = LoadTexture("../src/sprites/overworld/BackstoryFrame.png");
     }
 
     void backstory()
     {
-        Texture2D backstoryImg = LoadTexture("../src/sprites/overworld/BackstoryFrame.png");
 
         setWidthAndHeight(backstoryImg);
         DrawTexture(backstoryImg, 0, 0, WHITE);
@@ -43,7 +45,7 @@ public:
 
     void loop()
     {
-        Texture2D map = LoadTexture("../src/sprites/overworld/map.png");
+        /*Texture2D map = LoadTexture("../src/sprites/overworld/map.png");
         Texture2D bull = LoadTexture("../src/sprites/overworld/bull.png");
         Texture2D bar = LoadTexture("../src/sprites/overworld/bar.png");
         Texture2D cheese = LoadTexture("../src/sprites/overworld/cheddar.png");
@@ -52,7 +54,7 @@ public:
         setWidthAndHeight(map);
         setWidthAndHeight(bull);
         setWidthAndHeight(cheese);
-        setWidthAndHeight(help);
+        setWidthAndHeight(help);*/
 
         Vector2 MousePoint;
 
@@ -168,6 +170,8 @@ public:
     ~Game(){
         delete[] questionnaire.questions;
         delete[] questionnaire.answers;
+        //IMPORTNAT UNLOADING TEXTURES
+        UnloadTexture(backstoryImg);
         CloseWindow();
     }
 
