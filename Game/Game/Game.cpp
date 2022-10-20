@@ -1,6 +1,7 @@
-#include "Precompile.hpp";
+#include "Precompile.hpp"
 #include "Engine.hpp"
 #include "Backstory.hpp"
+#include "Game.hpp"
 
 struct QA {
     string* questions;
@@ -248,9 +249,7 @@ void setupVars()
     */
 }
 
-
-
-int main()
+void gameStartup()
 {
     questionnaire.questions[10];
     questionnaire.answers[10 * 4];
@@ -260,6 +259,6 @@ int main()
     setupVars();
     backstoryTypewriteEffect(miliseconds, backstoryText);
 
-    Game* game = new Game();
-    game->loop();
+    Game game;
+    game.loop();
 }
