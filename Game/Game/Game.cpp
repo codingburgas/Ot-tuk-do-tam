@@ -16,7 +16,7 @@ namespace variables {
 
     int shuffleQA = 0, randomA = 0, randomQ = 0;
     int miliseconds = 200;
-    string backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+    string backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry's standard dummy text ever since the 1500s,\nwhen an unknown printer took a\ngalley of type and scrambled it to make a type specimen book.";
 
 };
 
@@ -32,16 +32,17 @@ public:
         InitWindow(2000, 1025, "Ot tuk do tam");
         SetTargetFPS(60);
         ClearBackground(WHITE);
-        //backstoryImg = LoadTexture("../src/sprites/overworld/BackstoryFrame.png");
+        backstoryImg = LoadTexture("../src/sprites/overworld/BackstoryFrame.png");
     }
-    /*
+
+    
     void backstory()
     {
 
         setWidthAndHeight(backstoryImg);
         DrawTexture(backstoryImg, 0, 0, WHITE);
         backstoryTypewriteEffect(miliseconds, backstoryText);
-    }*/
+    }
 
     void loop()
     {
@@ -100,8 +101,8 @@ public:
                 }
             }
             */
-            //backstory();
-            DrawTexture(map, 0, 0, WHITE);
+            backstory();
+            /*DrawTexture(map, 0, 0, WHITE);
             circles[0].x = 320;
             circles[0].y = 800;
             DrawCircleGradient(circles[0].x, circles[0].y, 30, GREEN, SKYBLUE);
@@ -198,7 +199,7 @@ public:
             if (options)
             {
                 DrawTexture(help, 0, 0, WHITE);
-            }
+            }*/
             EndDrawing();
         }
     };
@@ -206,7 +207,7 @@ public:
         delete[] questionnaire.questions;
         delete[] questionnaire.answers;
         //IMPORTNAT UNLOADING TEXTURES
-        //UnloadTexture(backstoryImg);
+        UnloadTexture(backstoryImg);
         CloseWindow();
     }
 
