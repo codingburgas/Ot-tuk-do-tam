@@ -32,7 +32,7 @@ public:
         InitWindow(2000, 1025, "Ot tuk do tam");
         SetTargetFPS(60);
         ClearBackground(WHITE);
-        backstoryImg = LoadTexture("../src/sprites/overworld/BackstoryFrame.png");
+        backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
     }
 
     
@@ -46,11 +46,11 @@ public:
 
     void loop()
     {
-        Texture2D map = LoadTexture("../src/sprites/overworld/map1440p.png");
-        Texture2D bull = LoadTexture("../src/sprites/overworld/bull.png");
-        Texture2D bar = LoadTexture("../src/sprites/overworld/bar.png");
-        Texture2D cheese = LoadTexture("../src/sprites/overworld/cheddar.png");
-        Texture2D help = LoadTexture("../src/sprites/overworld/help.png");
+        Texture2D map = LoadTexture("../src/sprites/backgrounds/map1440p.png");
+        Texture2D bull = LoadTexture("../src/sprites/backgrounds/bull.png");
+        Texture2D bar = LoadTexture("../src/sprites/backgrounds/bar.png");
+        Texture2D cheese = LoadTexture("../src/sprites/backgrounds/cheddar.png");
+        Texture2D help = LoadTexture("../src/sprites/backgrounds/help.png");
 
         setWidthAndHeight(map);
         setWidthAndHeight(bull);
