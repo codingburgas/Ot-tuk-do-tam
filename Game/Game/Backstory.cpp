@@ -15,8 +15,7 @@ void backstoryTypewriteEffect(int& miliseconds, string& text)
 	Lifetime++;//increment for timer
 
 	if (Lifetime == 10){
-		//neshto troli smisul natiskam nqkolko puti i togaa bachka
-		if (IsKeyDown(KEY_Q))
+		if (IsKeyDown(KEY_ENTER))
 		{
 			i = text.length();
 			my = text;

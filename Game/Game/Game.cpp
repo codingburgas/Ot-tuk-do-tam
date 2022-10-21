@@ -206,8 +206,10 @@ public:
     ~Game(){
         delete[] questionnaire.questions;
         delete[] questionnaire.answers;
+
         //IMPORTNAT UNLOADING TEXTURES
         UnloadTexture(backstoryImg);
+
         CloseWindow();
     }
 
