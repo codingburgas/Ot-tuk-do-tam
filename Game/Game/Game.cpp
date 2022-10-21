@@ -32,20 +32,20 @@ public:
         InitWindow(2000, 1025, "Ot tuk do tam");
         SetTargetFPS(60);
         ClearBackground(WHITE);
-        backstoryImg = LoadTexture("../src/sprites/overworld/BackstoryFrame.png");
+        //backstoryImg = LoadTexture("../src/sprites/overworld/BackstoryFrame.png");
     }
-
+    /*
     void backstory()
     {
 
         setWidthAndHeight(backstoryImg);
         DrawTexture(backstoryImg, 0, 0, WHITE);
         backstoryTypewriteEffect(miliseconds, backstoryText);
-    }
+    }*/
 
     void loop()
     {
-        /*Texture2D map = LoadTexture("../src/sprites/overworld/map.png");
+        Texture2D map = LoadTexture("../src/sprites/overworld/map1440p.png");
         Texture2D bull = LoadTexture("../src/sprites/overworld/bull.png");
         Texture2D bar = LoadTexture("../src/sprites/overworld/bar.png");
         Texture2D cheese = LoadTexture("../src/sprites/overworld/cheddar.png");
@@ -54,7 +54,13 @@ public:
         setWidthAndHeight(map);
         setWidthAndHeight(bull);
         setWidthAndHeight(cheese);
-        setWidthAndHeight(help);*/
+        setWidthAndHeight(help);
+
+        Rectangle lines_Decoration[3];
+
+        Rectangle invisibleRec;
+
+        Rectangle afterClickedOptions;
 
         Vector2 MousePoint;
 
@@ -62,11 +68,12 @@ public:
 
         bool countries[4] = { 0,0,0,0 };
 
+        bool options = 0;
 
         while (!WindowShouldClose())
         {
             BeginDrawing();
-           
+
             MousePoint = GetMousePosition();
 
             //shuffle the QA and randomise the answers position
@@ -93,8 +100,8 @@ public:
                 }
             }
             */
-            backstory();
-            /*DrawTexture(map, 0, 0, WHITE);
+            //backstory();
+            DrawTexture(map, 0, 0, WHITE);
             circles[0].x = 320;
             circles[0].y = 800;
             DrawCircleGradient(circles[0].x, circles[0].y, 30, GREEN, SKYBLUE);
@@ -111,9 +118,28 @@ public:
             circles[3].y = 580;
             DrawCircleGradient(circles[3].x, circles[3].y, 30, RED, PINK);
 
+            invisibleRec.x = 1800;
+            invisibleRec.y = 20;
+            invisibleRec.width = 90;
+            invisibleRec.height = 90;
+
+            DrawRectangleRec(invisibleRec, BLANK);
+
+            DrawRectangleGradientH(invisibleRec.x, invisibleRec.y, invisibleRec.width, invisibleRec.height, GOLD, Fade(MAROON, 0.9444444));
+
+            for (int i = 0; i < 3; i++)
+            {
+                lines_Decoration[i].x = 1807.5;
+                lines_Decoration[i].y = 38.5 + (i * 20);
+                lines_Decoration[i].width = 75;
+                lines_Decoration[i].height = 15;
+
+                DrawRectangleRec(lines_Decoration[i], Fade(WHITE, 0.85));
+            }
+
             if (CheckCollisionPointCircle(MousePoint, circles[0], 30))
             {
-                DrawText("Spain",125,725,60,RED);
+                DrawText("Spain", 125, 725, 60, RED);
             }
             if (CheckCollisionPointCircle(MousePoint, circles[1], 30))
             {
@@ -161,9 +187,18 @@ public:
             }
             if (countries[2])
             {
-                DrawTexture(help , 0, 0, WHITE);
-            }*/
-            
+                DrawTexture(help, 0, 0, WHITE);
+            }
+
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
+            {
+                options = 1;
+            }
+
+            if (options)
+            {
+                DrawTexture(help, 0, 0, WHITE);
+            }
             EndDrawing();
         }
     };
@@ -171,7 +206,7 @@ public:
         delete[] questionnaire.questions;
         delete[] questionnaire.answers;
         //IMPORTNAT UNLOADING TEXTURES
-        UnloadTexture(backstoryImg);
+        //UnloadTexture(backstoryImg);
         CloseWindow();
     }
 
@@ -261,7 +296,7 @@ void gameStartup()
     srand(time(0));
 
     setupVars();
-    backstoryTypewriteEffect(miliseconds, backstoryText);
+    //backstoryTypewriteEffect(miliseconds, backstoryText);
 
     Game game;
     game.loop();
