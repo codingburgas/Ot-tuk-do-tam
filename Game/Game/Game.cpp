@@ -9,6 +9,7 @@ struct QA {
 }questionnaire;
 
 namespace variables {
+
     Texture2D backstoryImg;
 
     int randomizationForA[10];
@@ -18,6 +19,24 @@ namespace variables {
     int miliseconds = 200;
     string backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry's standard dummy text ever since the 1500s,\nwhen an unknown printer took a\ngalley of type and scrambled it to make a type specimen book.";
 
+    Texture2D bulgaria;
+    Texture2D france;
+   
+
+    //map variables
+    Rectangle lines_Decoration[3];
+
+    Rectangle invisibleRec;
+
+    Rectangle afterClickedOptions;
+
+    Vector2 MousePoint;
+
+    Vector2 circles[4];
+
+    bool countries[4] = { 0,0,0,0 };
+
+    bool options = 0;
 };
 
 using namespace variables;
@@ -33,6 +52,10 @@ public:
         SetTargetFPS(60);
         ClearBackground(WHITE);
         backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
+
+        //hover effect variables
+        bulgaria = LoadTexture("../src/sprites/countries/Bulgaria.png");
+        france = LoadTexture("../src/sprites/countries/France.png");
     }
     
     void backstory()
@@ -40,6 +63,11 @@ public:
         setWidthAndHeight(backstoryImg);
         DrawTexture(backstoryImg, 0, 0, WHITE);
         backstoryTypewriteEffect(miliseconds, backstoryText);
+    }
+
+    void hoverEffects(Texture2D& country, int posx, int posy)
+    {
+        DrawTexture(country, posx, posy, WHITE);
     }
 
     void loop()
@@ -55,72 +83,27 @@ public:
         setWidthAndHeight(cheese);
         setWidthAndHeight(help);
 
-        Rectangle lines_Decoration[3];
-
-        Rectangle invisibleRec;
-
-        Rectangle afterClickedOptions;
-
-        Vector2 MousePoint;
-
-        Vector2 circles[4];
-
-        bool countries[4] = { 0,0,0,0 };
-
-        bool options = 0;
-
         while (!WindowShouldClose())
         {
             BeginDrawing();
 
             MousePoint = GetMousePosition();
 
-            //shuffle the QA and randomise the answers position
-            /*
-            for (int i = 0; i < 10; i++)
-            {
-                randomA = randomizationForA[i];
-
-                const char* questionText = questionnaire.questions[randomA].c_str();
-
-                const char* answerText[1][4];
-                for (int j = 0; j < 4; j++)
-                    answerText[0][j] = questionnaire.answers[randomA * randomQ].c_str();
-
-
-                DrawText(questionText, 1, i * 100, 30, BLUE);
-
-                //DrawText(questionText, 1, 1, 50, BLUE);
-
-                for (int j = 0; j < 4; j++)
-                {
-                    //draw the 4 answers
-                    DrawText(answerText[0][j], i * 100, 400, 50, GREEN);
-                }
-            }
-            */
             //backstory();
+
             DrawTexture(map, 0, 0, WHITE);
-            circles[0].x = 320;
-            circles[0].y = 800;
+            
             DrawCircleGradient(circles[0].x, circles[0].y, 30, GREEN, SKYBLUE);
 
-            circles[1].x = 550;
-            circles[1].y = 650;
+            
             DrawCircleGradient(circles[1].x, circles[1].y, 30, PURPLE, BLUE);
 
-            circles[2].x = 380;
-            circles[2].y = 80;
+            
             DrawCircleGradient(circles[2].x, circles[2].y, 30, LIME, DARKBLUE);
 
-            circles[3].x = 860;
-            circles[3].y = 580;
+           
             DrawCircleGradient(circles[3].x, circles[3].y, 30, RED, PINK);
 
-            invisibleRec.x = 1800;
-            invisibleRec.y = 20;
-            invisibleRec.width = 90;
-            invisibleRec.height = 90;
 
             DrawRectangleRec(invisibleRec, BLANK);
 
@@ -128,10 +111,6 @@ public:
 
             for (int i = 0; i < 3; i++)
             {
-                lines_Decoration[i].x = 1807.5;
-                lines_Decoration[i].y = 38.5 + (i * 20);
-                lines_Decoration[i].width = 75;
-                lines_Decoration[i].height = 15;
 
                 DrawRectangleRec(lines_Decoration[i], Fade(WHITE, 0.85));
             }
@@ -142,7 +121,7 @@ public:
             }
             if (CheckCollisionPointCircle(MousePoint, circles[1], 30))
             {
-                DrawText("France", 425, 650, 60, DARKPURPLE);
+                hoverEffects(france, 350, 540);
             }
             if (CheckCollisionPointCircle(MousePoint, circles[2], 30))
             {
@@ -221,83 +200,39 @@ void setWidthAndHeight(Texture2D& variable)
 
 void setupVars()
 {
-    
-    /*
+	circles[0].x = 320;
+	circles[0].y = 800;
 
-    string questionsar[10]
-    {
-        {"a"},
-        {"b"},
-        {"c"},
-        {"d"},
-        {"d"},
-        {"f"},
-        {"g"},
-        {"h"},
-        {"i"},
-        {"j"},
-    };
+	circles[1].x = 550;
+	circles[1].y = 650;
 
-    //space-a e check za vernite otgovori twa e nai - lesniq variant za check det se sehtam
-    string answersar[10][5]
-    {
-        {"00", "01", "02", "03"},
-        {"10", "11", "12", "13"},
-        {"20", "21", "22", "23"},
-        {"30", "31", "32", "33"},
-        {"40", "41", "42", "43"},
-        {"50", "51", "52", "53"},
-        {"60", "61", "62", "63"},
-        {"70", "71", "72", "73"},
-        {"80", "81", "82", "83"},
-        {"90", "91", "92", "93"},
-        
-        
-        
-    };
+	circles[2].x = 380;
+	circles[2].y = 80;
 
-    questionnaire.questions = new string[10];
-    questionnaire.answers = new string[10 * 5];
-    for (int i = 0; i < 10; i++)
-    {
-        *(questionnaire.questions + i) = questionsar[i];
-    }for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; i < 5; i++)
-        {
-            *(questionnaire.answers + i * 5 + j) = answersar[i][j];
-        }
+	circles[3].x = 860;
+	circles[3].y = 580;
+
+	invisibleRec.x = 1800;
+	invisibleRec.y = 20;
+	invisibleRec.width = 90;
+	invisibleRec.height = 90;
+
+	for (int i = 0; i < 3; i++)
+	{
+		lines_Decoration[i].x = 1807.5;
+		lines_Decoration[i].y = 38.5 + (i * 20);
+		lines_Decoration[i].width = 75;
+		lines_Decoration[i].height = 15;
     }
-
-    
-    for (int i = 0; i < 10; i++)
-    {
-        int randomForA = rand() % 10;
-        randomizationForA[i] = randomForA;
-
-        int randomForQ = rand() % 4;
-        //for (int j = 0; j < 4; j++)
-            //randomizationForQ[i][j] = make_pair(randomForA, randomForQ);
-    }
-
-    //backstory variables
-    miliseconds = 100;
-    backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap";
-
-    milisecondsPtr = &miliseconds;
-    backstoryTextPtr = &backstoryText;
-    */
 }
 
 void gameStartup()
 {
-    questionnaire.questions[10];
-    questionnaire.answers[10 * 4];
+    
 
     srand(time(0));
 
     setupVars();
-    //backstoryTypewriteEffect(miliseconds, backstoryText);
 
     Game game;
     game.loop();
