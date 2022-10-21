@@ -1,7 +1,13 @@
 #include "Precompile.hpp"
 #include "Engine.hpp"
-Texture2D my = LoadTexture("../src/");
-void Engine()
-{
 
+namespace variables {
+	Image icon = LoadImage("../src/sprites/icon.png");
+}
+
+using namespace variables;
+
+void setIcon()
+{
+	SetWindowIcon(icon);
 }

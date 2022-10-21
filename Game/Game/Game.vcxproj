@@ -164,7 +164,7 @@
     <ClInclude Include="Backstory.hpp" />
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="Game.hpp" />
-    <ClInclude Include="Player class.h" />
+    <ClInclude Include="Player class.hpp" />
     <ClInclude Include="Precompile.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

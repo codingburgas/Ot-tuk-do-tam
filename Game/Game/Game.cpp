@@ -32,9 +32,9 @@ namespace variables {
 
     Vector2 MousePoint;
 
-    Vector2 circles[4];
+    Vector2 circles[10];
 
-    bool countries[4] = { 0,0,0,0 };
+    bool countries[5] = { 0,0,0,0, 0};
 
     bool options = 0;
 };
@@ -104,6 +104,8 @@ public:
            
             DrawCircleGradient(circles[3].x, circles[3].y, 30, RED, PINK);
 
+			DrawCircleGradient(circles[4].x, circles[4].y, 30, BLACK, DARKPURPLE);
+
 
             DrawRectangleRec(invisibleRec, BLANK);
 
@@ -131,6 +133,10 @@ public:
             {
                 DrawText("Germany", 650, 474, 60, YELLOW);
             }
+			if (CheckCollisionPointCircle(MousePoint, circles[4], 30))
+			{
+				hoverEffects(bulgaria, 1350, 840);
+			}
 
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[0], 30))
             {
@@ -167,6 +173,10 @@ public:
             {
                 DrawTexture(help, 0, 0, WHITE);
             }
+			if(countries[4])
+			{
+				DrawTexture(bull, 0, 0, WHITE);
+			}
 
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
             {
@@ -212,6 +222,9 @@ void setupVars()
 	circles[3].x = 860;
 	circles[3].y = 580;
 
+	circles[4].x = 1160;
+	circles[4].y = 850;
+
 	invisibleRec.x = 1800;
 	invisibleRec.y = 20;
 	invisibleRec.width = 90;
@@ -228,12 +241,13 @@ void setupVars()
 
 void gameStartup()
 {
-    
-
     srand(time(0));
 
     setupVars();
 
     Game game;
+
+    setIcon();
+
     game.loop();
 }
