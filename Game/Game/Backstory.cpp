@@ -13,18 +13,14 @@ using namespace variables;
 void backstoryTypewriteEffect(int& miliseconds, string& text)
 {
 	Lifetime++;//increment for timer
-
-	if (Lifetime == 10){
-		if (IsKeyDown(KEY_ENTER))
-		{
-			i = text.length();
-			my = text;
-			Lifetime = 11;
-		}
-		else {
+	if (IsKeyPressed(KEY_ENTER)){
+		i = text.length();
+		my = text;
+		Lifetime = 11;
+	}
+	if (Lifetime == 10 && !IsKeyPressed(KEY_ENTER)){	
 			my += text[i++];
 			Lifetime = 0;
-		}	  
 	}
 
 	DrawText(my.c_str(), 130, 300, 32, BROWN);

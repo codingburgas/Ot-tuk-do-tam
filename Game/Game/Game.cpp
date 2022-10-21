@@ -46,7 +46,7 @@ public:
 
     void loop()
     {
-        Texture2D map = LoadTexture("../src/sprites/backgrounds/map1440p.png");
+        /*Texture2D map = LoadTexture("../src/sprites/backgrounds/map1440p.png");
         Texture2D bull = LoadTexture("../src/sprites/backgrounds/bull.png");
         Texture2D bar = LoadTexture("../src/sprites/backgrounds/bar.png");
         Texture2D cheese = LoadTexture("../src/sprites/backgrounds/cheddar.png");
@@ -55,7 +55,7 @@ public:
         setWidthAndHeight(map);
         setWidthAndHeight(bull);
         setWidthAndHeight(cheese);
-        setWidthAndHeight(help);
+        setWidthAndHeight(help);*/
 
         Rectangle lines_Decoration[3];
 
