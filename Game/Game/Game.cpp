@@ -34,11 +34,9 @@ public:
         ClearBackground(WHITE);
         backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
     }
-
     
     void backstory()
     {
-
         setWidthAndHeight(backstoryImg);
         DrawTexture(backstoryImg, 0, 0, WHITE);
         backstoryTypewriteEffect(miliseconds, backstoryText);
@@ -46,7 +44,7 @@ public:
 
     void loop()
     {
-        /*Texture2D map = LoadTexture("../src/sprites/backgrounds/map1440p.png");
+        Texture2D map = LoadTexture("../src/sprites/backgrounds/map.png");
         Texture2D bull = LoadTexture("../src/sprites/backgrounds/bull.png");
         Texture2D bar = LoadTexture("../src/sprites/backgrounds/bar.png");
         Texture2D cheese = LoadTexture("../src/sprites/backgrounds/cheddar.png");
@@ -55,7 +53,7 @@ public:
         setWidthAndHeight(map);
         setWidthAndHeight(bull);
         setWidthAndHeight(cheese);
-        setWidthAndHeight(help);*/
+        setWidthAndHeight(help);
 
         Rectangle lines_Decoration[3];
 
@@ -101,8 +99,8 @@ public:
                 }
             }
             */
-            backstory();
-            /*DrawTexture(map, 0, 0, WHITE);
+            //backstory();
+            DrawTexture(map, 0, 0, WHITE);
             circles[0].x = 320;
             circles[0].y = 800;
             DrawCircleGradient(circles[0].x, circles[0].y, 30, GREEN, SKYBLUE);
@@ -199,7 +197,7 @@ public:
             if (options)
             {
                 DrawTexture(help, 0, 0, WHITE);
-            }*/
+            }
             EndDrawing();
         }
     };

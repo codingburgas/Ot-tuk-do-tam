@@ -1,7 +1,7 @@
 #include "Precompile.hpp"
 #include "Engine.hpp"
-
+Texture2D my = LoadTexture("../src/");
 void Engine()
 {
-	DrawRectangle(100, 200, 100, 100, BLUE);
+
 }

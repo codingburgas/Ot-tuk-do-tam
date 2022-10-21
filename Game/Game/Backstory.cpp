@@ -13,6 +13,7 @@ using namespace variables;
 void backstoryTypewriteEffect(int& miliseconds, string& text)
 {
 	Lifetime++;//increment for timer
+	
 	if (IsKeyPressed(KEY_ENTER)){
 		i = text.length();
 		my = text;
