@@ -3,8 +3,7 @@
 
 // define a timer
 namespace variables {
-	unsigned int Lifetime = 0;
-	unsigned int timeExtend = 10;
+	int Lifetime = 9;
 	string my;
 	int i = 0;
 }
@@ -16,7 +15,8 @@ void backstoryTypewriteEffect(int& miliseconds, string& text)
 	Lifetime++;//increment for timer
 
 	if (Lifetime == 10){
-		if (IsKeyPressed(KEY_Q))
+		//neshto troli smisul natiskam nqkolko puti i togaa bachka
+		if (IsKeyDown(KEY_Q))
 		{
 			i = text.length();
 			my = text;
