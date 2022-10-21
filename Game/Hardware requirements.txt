@@ -1,0 +1,7 @@
+Hardware requirements
+
+
+1. 2 GHz or faster processor. 
+2. Hard disk speed: to improve performance, install Windows and Visual Studio on a solid state drive (SSD). 
+3. Video card that supports a minimum display resolution of 720p (1280 by 720); 
+4. 2 GB of RAM; 8 GB of RAM recommended 
