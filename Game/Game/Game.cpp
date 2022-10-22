@@ -28,9 +28,11 @@ namespace variables {
     //map variables
     Rectangle lines_Decoration[3];
 
+    Rectangle choiceFromOptions[4];
+
     Rectangle invisibleRec;
 
-    Rectangle afterClickedOptions;
+    Rectangle afterClickedOptions = {1665,115,250,450};
 
     Vector2 MousePoint;
 
@@ -43,6 +45,8 @@ namespace variables {
     bool changeCircles[5] = { 0, 0, 0, 0, 0 };
 
     bool options = 0;
+
+    bool closeOptions = 0;
 
     Sound mapMusic;
     float renderScale = 7.5;
@@ -122,13 +126,13 @@ public:
             //backstory()
 
             DrawTexture(map, 0, 0, WHITE);
-            
+
             for (int i = 0; i < 5; i++)
             {
                 if (!changeCircles[i])
                 {
                     DrawCircleGradient(circles[i].x, circles[i].y, 30, GREEN, SKYBLUE);
-                }                               
+                }
             }
 
             DrawRectangleRec(invisibleRec, BLANK);
@@ -145,8 +149,8 @@ public:
                 if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)))
                 {
                     switch (i) {
-                    case 0:                      
-                        hoverEffects(spain, 7 * renderScale, 94 * renderScale);                       
+                    case 0:
+                        hoverEffects(spain, 7 * renderScale, 94 * renderScale);
                         break;
 
                     case 1:
@@ -157,11 +161,11 @@ public:
                         hoverEffects(italy, 91 * renderScale, 96 * renderScale);
                         break;
 
-                    case 3:           
+                    case 3:
                         hoverEffects(germany, 96 * renderScale, 65 * renderScale);
                         break;
 
-                    case 4:                       
+                    case 4:
                         hoverEffects(bulgaria, 169 * renderScale, 108 * renderScale);
                         break;
 
@@ -189,28 +193,28 @@ public:
 
                     switch (i)
                     {
-                        case 0:
-                            DrawTexture(bull, 0, 0, WHITE);
-                            break;
+                    case 0:
+                        DrawTexture(bull, 0, 0, WHITE);
+                        break;
 
-                        case 1:
-                            DrawTexture(cheese, 0, 0, WHITE);
-                            break;
+                    case 1:
+                        DrawTexture(cheese, 0, 0, WHITE);
+                        break;
 
-                        case 2:
-                            DrawTexture(help, 0, 0, WHITE);
-                            break;
-                            
-                        case 3:
-                            DrawTexture(bar, 0, 0, WHITE);
-                            break;
+                    case 2:
+                        DrawTexture(help, 0, 0, WHITE);
+                        break;
 
-                        case 4:
-                            DrawTexture(bull, 0, 0, WHITE);
-                            break;
+                    case 3:
+                        DrawTexture(bar, 0, 0, WHITE);
+                        break;
 
-                        default:
-                            break;
+                    case 4:
+                        DrawTexture(bull, 0, 0, WHITE);
+                        break;
+
+                    default:
+                        break;
                     }
                 }
 
@@ -247,17 +251,68 @@ public:
                         }
                     }
                 }
-                
+
             }
 
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
             {
                 options = 1;
             }
+            
 
             if (options)
             {
-                DrawTexture(help, 0, 0, WHITE);
+                DrawRectangleRec(afterClickedOptions,LIGHTGRAY);
+
+                for (int i = 0; i < 4; i++)
+                {
+                    DrawRectangleLinesEx(choiceFromOptions[i], 5, WHITE);
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, choiceFromOptions[i]))
+                    {
+                        switch (i) {
+                        case 0:
+                            //settings happen here
+                            break;
+
+                        case 1:
+                            //settings happen here
+                            break;
+
+                        case 2:
+                            //settings happen here
+                            break;
+
+                        case 3:
+                            //settings happen here
+                            break;
+                        }
+                    }
+                }
+
+                DrawText("Settings",1680,150,50,BLACK);
+
+                DrawText("Help", 1680, 250, 50, BLACK);
+
+                DrawText("Music", 1680, 350, 50, BLACK);
+
+                DrawText("Quit", 1680, 450, 50, BLACK);
+                //
+                if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+                {
+                     closeOptions = 1;
+                }
+                if (closeOptions)
+                {
+                    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
+                    {
+                        options = 0;
+                        closeOptions = 0;
+                    }
+                }
             }
 
             EndDrawing();
@@ -318,6 +373,14 @@ void setupVars()
 		lines_Decoration[i].y = 38.5 + (i * 20);
 		lines_Decoration[i].width = 75;
 		lines_Decoration[i].height = 15;
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        choiceFromOptions[i].x = 1667.5;
+        choiceFromOptions[i].y = 142.5 + (i * 100);
+        choiceFromOptions[i].width = 245;
+        choiceFromOptions[i].height = 60;
     }
 }
 
