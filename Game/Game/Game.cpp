@@ -133,7 +133,7 @@ public:
             }
             if (CheckCollisionPointCircle(MousePoint, circles[1], 30))
             {
-                hoverEffects(france, 350, 540);
+                hoverEffects(france, 329, 570);
             }
             if (CheckCollisionPointCircle(MousePoint, circles[2], 30))
             {
