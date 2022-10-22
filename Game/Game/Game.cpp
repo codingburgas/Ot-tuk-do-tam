@@ -22,9 +22,12 @@ namespace variables {
     int miliseconds = 200;
     string backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry's standard dummy text ever since the 1500s,\nwhen an unknown printer took a\ngalley of type and scrambled it to make a type specimen book.";
 
+    //hover effect variables
     Texture2D bulgaria;
     Texture2D france;
-   
+    Texture2D germany;
+    Texture2D italy;
+    Texture2D spain;
 
     //map variables
     Rectangle lines_Decoration[3];
@@ -41,7 +44,8 @@ namespace variables {
 
     bool options = 0;
 
-    Music mapMusic;
+    Sound mapMusic;
+    float renderScale = 7.5;
 };
 
 using namespace variables;
@@ -56,14 +60,17 @@ public:
         InitWindow(width, height, "Ot tuk do tam");
         SetTargetFPS(60);
         ClearBackground(WHITE);
+
         backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
         setFullScreen(width, height);
 
         //hover effect variables
         bulgaria = LoadTexture("../src/sprites/countries/Bulgaria.png");
         france = LoadTexture("../src/sprites/countries/France.png");
+        germany = LoadTexture("../src/sprites/countries/Germany.png");
+        italy = LoadTexture("../src/sprites/countries/Italy.png");
+        spain = LoadTexture("../src/sprites/countries/Spain.png");
 
-        mapMusic = LoadMusicStream("../Audios/Main.mp3");
     }
     
     void backstory()
@@ -73,7 +80,7 @@ public:
         backstoryTypewriteEffect(miliseconds, backstoryText);
     }
 
-    void hoverEffects(Texture2D& country, int posx, int posy)
+    void hoverEffects(Texture2D& country, float posx, float posy)
     {
         DrawTexture(country, posx, posy, WHITE);
     }
@@ -97,9 +104,7 @@ public:
 
             MousePoint = GetMousePosition();
 
-            //backstory();
-            //SetMusicPitch(mapMusic, 1);
-            //UnloadMusicStream(mapMusic);
+            //backstory()
 
             DrawTexture(map, 0, 0, WHITE);
             
@@ -129,23 +134,27 @@ public:
 
             if (CheckCollisionPointCircle(MousePoint, circles[0], 30))
             {
-                DrawText("Spain", 125, 725, 60, RED);
+                hoverEffects(spain, 7 * renderScale, 94 * renderScale);
             }
+
             if (CheckCollisionPointCircle(MousePoint, circles[1], 30))
             {
-                hoverEffects(france, 329, 570);
+                hoverEffects(france, 44 * renderScale, 76 * renderScale);
             }
+
             if (CheckCollisionPointCircle(MousePoint, circles[2], 30))
             {
-                DrawText("Iceland", 200, 150, 60, BLUE);
+                hoverEffects(italy, 91 * renderScale, 96 * renderScale); 
+
             }
             if (CheckCollisionPointCircle(MousePoint, circles[3], 30))
             {
-                DrawText("Germany", 650, 474, 60, YELLOW);
+                hoverEffects(germany, 96 * renderScale, 65 * renderScale);
+
             }
 			if (CheckCollisionPointCircle(MousePoint, circles[4], 30))
 			{
-				hoverEffects(bulgaria, 1550, 800);
+				hoverEffects(bulgaria, 169 * renderScale, 108 * renderScale);
 			}
 
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[0], 30))
@@ -197,6 +206,7 @@ public:
             {
                 DrawTexture(help, 0, 0, WHITE);
             }
+
             EndDrawing();
         }
     };
