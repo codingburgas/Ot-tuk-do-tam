@@ -15,9 +15,6 @@ namespace variables {
 
     Texture2D backstoryImg;
 
-    int randomizationForA[10];
-    int randomizationForQ[10][4];
-
     int miliseconds = 200;
     string backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry's standard dummy text ever since the 1500s,\nwhen an unknown printer took a\ngalley of type and scrambled it to make a type specimen book.";
 
@@ -37,9 +34,13 @@ namespace variables {
 
     Vector2 MousePoint;
 
-    Vector2 circles[10];
+    Vector2 circles[5];
+    Texture2D barrier[5];
+
+    Vector2 backCircle;
 
     bool countries[5] = {0, 0, 0, 0, 0};
+    bool changeCircles[5] = { 0, 0, 0, 0, 0 };
 
     bool options = 0;
 
@@ -60,9 +61,13 @@ public:
         InitAudioDevice();
 
         SetTargetFPS(60);
+
         ClearBackground(WHITE);
 
-        backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
+        srand(time(0));
+
+        //backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
+
         setFullScreen(width, height);
 
         //hover effect variables
@@ -72,6 +77,11 @@ public:
         italy = LoadTexture("../src/sprites/countries/Italy.png");
         spain = LoadTexture("../src/sprites/countries/Spain.png");
 
+        for (int i = 0; i < 4; i++)
+        {
+            barrier[i] = LoadTexture("../src/sprites/Barrier.png");
+        }
+        
         mapMusic = LoadSound("../Audios/Main.mp3");
         SetSoundVolume(mapMusic, 0.6);
     }
@@ -115,7 +125,10 @@ public:
             
             for (int i = 0; i < 5; i++)
             {
-                DrawCircleGradient(circles[i].x, circles[i].y, 30, GREEN, SKYBLUE);
+                if (!changeCircles[i])
+                {
+                    DrawCircleGradient(circles[i].x, circles[i].y, 30, GREEN, SKYBLUE);
+                }                               
             }
 
             DrawRectangleRec(invisibleRec, BLANK);
@@ -124,7 +137,6 @@ public:
 
             for (int i = 0; i < 3; i++)
             {
-
                 DrawRectangleRec(lines_Decoration[i], Fade(WHITE, 0.85));
             }
 
@@ -171,6 +183,8 @@ public:
             {
                 if (countries[i])
                 {
+                    changeCircles[i] = true;
+
                     StopSound(mapMusic);
 
                     switch (i)
@@ -199,6 +213,41 @@ public:
                             break;
                     }
                 }
+
+                if (changeCircles[i])
+                {
+                    DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
+
+                    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, backCircle, 30))
+                    {
+                        switch (i)
+                        {
+                        case 0:
+                            UnloadTexture(bull);
+                            break;
+
+                        case 1:
+                            UnloadTexture(cheese);
+                            break;
+
+                        case 2:
+                            UnloadTexture(help);
+                            break;
+
+                        case 3:
+                            UnloadTexture(bar);
+                            break;
+
+                        case 4:
+                            UnloadTexture(bull);
+                            break;
+
+                        default:
+                            break;
+                        }
+                    }
+                }
+                
             }
 
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
@@ -254,6 +303,9 @@ void setupVars()
 	circles[4].x = 1360;
 	circles[4].y = 850;
 
+    backCircle.x = 1800;
+    backCircle.y = 800;
+
 	invisibleRec.x = 1800;
 	invisibleRec.y = 20;
 
@@ -271,8 +323,6 @@ void setupVars()
 
 void gameStartup()
 {
-    srand(time(0));
-
     setupVars();
 
     Game game;
