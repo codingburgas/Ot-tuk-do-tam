@@ -18,7 +18,6 @@ namespace variables {
     int randomizationForA[10];
     int randomizationForQ[10][4];
 
-    int shuffleQA = 0, randomA = 0, randomQ = 0;
     int miliseconds = 200;
     string backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry's standard dummy text ever since the 1500s,\nwhen an unknown printer took a\ngalley of type and scrambled it to make a type specimen book.";
 
@@ -58,6 +57,8 @@ class Game
 public:
     Game(){
         InitWindow(width, height, "Ot tuk do tam");
+        InitAudioDevice();
+
         SetTargetFPS(60);
         ClearBackground(WHITE);
 
@@ -71,6 +72,8 @@ public:
         italy = LoadTexture("../src/sprites/countries/Italy.png");
         spain = LoadTexture("../src/sprites/countries/Spain.png");
 
+        mapMusic = LoadSound("../Audios/Main.mp3");
+        SetSoundVolume(mapMusic, 0.6);
     }
     
     void backstory()
@@ -87,6 +90,8 @@ public:
 
     void loop()
     {
+        PlaySoundMulti(mapMusic);
+
         Texture2D map = LoadTexture("../src/sprites/backgrounds/map.png");
         Texture2D bull = LoadTexture("../src/sprites/backgrounds/bull.png");
         Texture2D bar = LoadTexture("../src/sprites/backgrounds/bar.png");
@@ -166,6 +171,8 @@ public:
             {
                 if (countries[i])
                 {
+                    StopSound(mapMusic);
+
                     switch (i)
                     {
                         case 0:
