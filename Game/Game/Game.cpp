@@ -57,6 +57,7 @@ public:
         SetTargetFPS(60);
         ClearBackground(WHITE);
         backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
+        setFullScreen(width, height);
 
         //hover effect variables
         bulgaria = LoadTexture("../src/sprites/countries/Bulgaria.png");
@@ -92,8 +93,6 @@ public:
 
         while (!WindowShouldClose())
         {
-            setFullScreen(width, height);
-
             BeginDrawing();
 
             MousePoint = GetMousePosition();
