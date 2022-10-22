@@ -128,21 +128,26 @@ public:
                 if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)))
                 {
                     switch (i) {
-                    case 0:
+                    case 0:                      
+                        hoverEffects(spain, 7 * renderScale, 94 * renderScale);                       
+                        break;
+
+                    case 1:
                         hoverEffects(france, 44 * renderScale, 76 * renderScale);
                         break;
-                    case 1:
+
+                    case 2:
                         hoverEffects(italy, 91 * renderScale, 96 * renderScale);
                         break;
-                    case 2:
+
+                    case 3:           
                         hoverEffects(germany, 96 * renderScale, 65 * renderScale);
                         break;
-                    case 3:
+
+                    case 4:                       
                         hoverEffects(bulgaria, 169 * renderScale, 108 * renderScale);
                         break;
-                    case 4:
-                        hoverEffects(spain, 7 * renderScale, 94 * renderScale);
-                        break;
+
                     default:
                         break;
                     }
@@ -222,23 +227,29 @@ void setWidthAndHeight(Texture2D& variable)
 
 void setupVars()
 {
+    //spain
 	circles[0].x = 320;
 	circles[0].y = 800;
 
+    //france
 	circles[1].x = 550;
 	circles[1].y = 650;
 
-	circles[2].x = 380;
-	circles[2].y = 80;
+    //italy
+	circles[2].x = 860;
+	circles[2].y = 800;
 
+    //germany
 	circles[3].x = 860;
 	circles[3].y = 580;
 
-	circles[4].x = 1160;
+    //bulgaria
+	circles[4].x = 1360;
 	circles[4].y = 850;
 
 	invisibleRec.x = 1800;
 	invisibleRec.y = 20;
+
 	invisibleRec.width = 90;
 	invisibleRec.height = 90;
 
