@@ -108,19 +108,10 @@ public:
 
             DrawTexture(map, 0, 0, WHITE);
             
-            DrawCircleGradient(circles[0].x, circles[0].y, 30, GREEN, SKYBLUE);
-
-            
-            DrawCircleGradient(circles[1].x, circles[1].y, 30, PURPLE, BLUE);
-
-            
-            DrawCircleGradient(circles[2].x, circles[2].y, 30, LIME, DARKBLUE);
-
-           
-            DrawCircleGradient(circles[3].x, circles[3].y, 30, RED, PINK);
-
-			DrawCircleGradient(circles[4].x, circles[4].y, 30, BLACK, DARKPURPLE);
-
+            for (int i = 0; i < 5; i++)
+            {
+                DrawCircleGradient(circles[i].x, circles[i].y, 30, GREEN, SKYBLUE);
+            }
 
             DrawRectangleRec(invisibleRec, BLANK);
 
@@ -132,70 +123,71 @@ public:
                 DrawRectangleRec(lines_Decoration[i], Fade(WHITE, 0.85));
             }
 
-            if (CheckCollisionPointCircle(MousePoint, circles[0], 30))
+            for (int i = 0; i < 5; i++)
             {
-                hoverEffects(spain, 7 * renderScale, 94 * renderScale);
+                if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)))
+                {
+                    switch (i) {
+                    case 0:
+                        hoverEffects(france, 44 * renderScale, 76 * renderScale);
+                        break;
+                    case 1:
+                        hoverEffects(italy, 91 * renderScale, 96 * renderScale);
+                        break;
+                    case 2:
+                        hoverEffects(germany, 96 * renderScale, 65 * renderScale);
+                        break;
+                    case 3:
+                        hoverEffects(bulgaria, 169 * renderScale, 108 * renderScale);
+                        break;
+                    case 4:
+                        hoverEffects(spain, 7 * renderScale, 94 * renderScale);
+                        break;
+                    default:
+                        break;
+                    }
+                }
             }
 
-            if (CheckCollisionPointCircle(MousePoint, circles[1], 30))
+            for (int i = 0; i < 5; i++)
             {
-                hoverEffects(france, 44 * renderScale, 76 * renderScale);
+                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[i], 30))
+                {
+                    countries[i] = 1;
+                }
             }
 
-            if (CheckCollisionPointCircle(MousePoint, circles[2], 30))
+            for (int i = 0; i < 5; i++)
             {
-                hoverEffects(italy, 91 * renderScale, 96 * renderScale); 
+                if (countries[i])
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            DrawTexture(bull, 0, 0, WHITE);
+                            break;
 
-            }
-            if (CheckCollisionPointCircle(MousePoint, circles[3], 30))
-            {
-                hoverEffects(germany, 96 * renderScale, 65 * renderScale);
+                        case 1:
+                            DrawTexture(cheese, 0, 0, WHITE);
+                            break;
 
-            }
-			if (CheckCollisionPointCircle(MousePoint, circles[4], 30))
-			{
-				hoverEffects(bulgaria, 169 * renderScale, 108 * renderScale);
-			}
+                        case 2:
+                            DrawTexture(help, 0, 0, WHITE);
+                            break;
+                            
+                        case 3:
+                            DrawTexture(bar, 0, 0, WHITE);
+                            break;
 
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[0], 30))
-            {
-                countries[0] = 1;
-            }
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[1], 30))
-            {
-                countries[1] = 1;
-            }
+                        case 4:
+                            DrawTexture(bull, 0, 0, WHITE);
+                            break;
 
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[2], 30))
-            {
-                countries[2] = 1;
+                        default:
+                            break;
+                    }
+                }
             }
-
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[3], 30))
-            {
-                countries[3] = 1;
-            }
-
-            if (countries[0])
-            {
-                DrawTexture(bull, 0, 0, WHITE);
-            }
-            if (countries[1])
-            {
-                DrawTexture(cheese, 0, 0, WHITE);
-            }
-            if (countries[3])
-            {
-                DrawTexture(bar, 0, 0, WHITE);
-            }
-            if (countries[2])
-            {
-                DrawTexture(help, 0, 0, WHITE);
-            }
-			if(countries[4])
-			{
-				DrawTexture(bull, 0, 0, WHITE);
-			}
 
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
             {
