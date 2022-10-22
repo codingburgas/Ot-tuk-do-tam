@@ -9,6 +9,9 @@ struct QA {
 }questionnaire;
 
 namespace variables {
+    //window width and height
+    int width = 1920;
+    int height = 1080;
 
     Texture2D backstoryImg;
 
@@ -34,9 +37,11 @@ namespace variables {
 
     Vector2 circles[10];
 
-    bool countries[5] = { 0,0,0,0, 0};
+    bool countries[5] = {0, 0, 0, 0, 0};
 
     bool options = 0;
+
+    Music mapMusic;
 };
 
 using namespace variables;
@@ -48,7 +53,7 @@ class Game
 {
 public:
     Game(){
-        InitWindow(2000, 1025, "Ot tuk do tam");
+        InitWindow(width, height, "Ot tuk do tam");
         SetTargetFPS(60);
         ClearBackground(WHITE);
         backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
@@ -56,6 +61,8 @@ public:
         //hover effect variables
         bulgaria = LoadTexture("../src/sprites/countries/Bulgaria.png");
         france = LoadTexture("../src/sprites/countries/France.png");
+
+        mapMusic = LoadMusicStream("../Audios/Main.mp3");
     }
     
     void backstory()
@@ -85,11 +92,15 @@ public:
 
         while (!WindowShouldClose())
         {
+            setFullScreen(width, height);
+
             BeginDrawing();
 
             MousePoint = GetMousePosition();
 
             //backstory();
+            //SetMusicPitch(mapMusic, 1);
+            //UnloadMusicStream(mapMusic);
 
             DrawTexture(map, 0, 0, WHITE);
             
@@ -135,7 +146,7 @@ public:
             }
 			if (CheckCollisionPointCircle(MousePoint, circles[4], 30))
 			{
-				hoverEffects(bulgaria, 1350, 840);
+				hoverEffects(bulgaria, 1550, 800);
 			}
 
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[0], 30))
@@ -204,8 +215,8 @@ public:
 
 void setWidthAndHeight(Texture2D& variable)
 {
-    variable.width = 2000;
-    variable.height = 1025;
+    variable.width = width;
+    variable.height = height;
 }
 
 void setupVars()
