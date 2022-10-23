@@ -19,10 +19,10 @@ void setFullScreen(int& windowWidth, int& windowHeight)
 	if (!IsWindowFullscreen())
 	{
 		SetWindowSize(1920, 1080);
-		ToggleFullscreen();
+	;
 	}
 	else {
-		ToggleFullscreen();
+
 		SetWindowSize(windowWidth, windowHeight);
 	}
 }

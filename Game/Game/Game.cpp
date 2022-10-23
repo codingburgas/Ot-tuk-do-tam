@@ -25,6 +25,12 @@ namespace variables {
     Texture2D italy;
     Texture2D spain;
 
+    Texture2D map;
+    Texture2D bull;
+    Texture2D bar;
+    Texture2D cheese;
+    Texture2D help;
+
     //map variables
     Rectangle lines_Decoration[3];
 
@@ -32,16 +38,16 @@ namespace variables {
 
     Rectangle invisibleRec;
 
-    Rectangle afterClickedOptions = {1665,115,250,450};
+    Rectangle afterClickedOptions = { 1665,115,250,450 };
 
     Vector2 MousePoint;
 
     Vector2 circles[5];
-    Texture2D barrier[5];
+    Texture2D barrier;
 
     Vector2 backCircle;
 
-    bool countries[5] = {0, 0, 0, 0, 0};
+    bool countries[5] = { 0, 0, 0, 0, 0 };
     bool changeCircles[5] = { 0, 0, 0, 0, 0 };
 
     bool options = 0;
@@ -50,6 +56,8 @@ namespace variables {
 
     Sound mapMusic;
     float renderScale = 7.5;
+
+    bool unloadBack = false;
 };
 
 using namespace variables;
@@ -60,7 +68,7 @@ void setWidthAndHeight(Texture2D& variable);
 class Game
 {
 public:
-    Game(){
+    Game() {
         InitWindow(width, height, "Ot tuk do tam");
         InitAudioDevice();
 
@@ -81,15 +89,26 @@ public:
         italy = LoadTexture("../src/sprites/countries/Italy.png");
         spain = LoadTexture("../src/sprites/countries/Spain.png");
 
-        for (int i = 0; i < 4; i++)
-        {
-            barrier[i] = LoadTexture("../src/sprites/Barrier.png");
-        }
-        
+        map = LoadTexture("../src/sprites/backgrounds/map.png");
+        bull = LoadTexture("../src/sprites/backgrounds/bull.png");
+        bar = LoadTexture("../src/sprites/backgrounds/bar.png");
+        cheese = LoadTexture("../src/sprites/backgrounds/cheddar.png");
+        help = LoadTexture("../src/sprites/backgrounds/help.png");
+
+        setWidthAndHeight(map);
+        setWidthAndHeight(bull);
+        setWidthAndHeight(cheese);
+        setWidthAndHeight(help);
+
+       
+        barrier = LoadTexture("../src/sprites/Barrier.png");
+        barrier.width = 60;
+        barrier.height = 60;
+
         mapMusic = LoadSound("../Audios/Main.mp3");
         SetSoundVolume(mapMusic, 0.6);
     }
-    
+
     void backstory()
     {
         setWidthAndHeight(backstoryImg);
@@ -104,18 +123,7 @@ public:
 
     void loop()
     {
-        PlaySoundMulti(mapMusic);
-
-        Texture2D map = LoadTexture("../src/sprites/backgrounds/map.png");
-        Texture2D bull = LoadTexture("../src/sprites/backgrounds/bull.png");
-        Texture2D bar = LoadTexture("../src/sprites/backgrounds/bar.png");
-        Texture2D cheese = LoadTexture("../src/sprites/backgrounds/cheddar.png");
-        Texture2D help = LoadTexture("../src/sprites/backgrounds/help.png");
-
-        setWidthAndHeight(map);
-        setWidthAndHeight(bull);
-        setWidthAndHeight(cheese);
-        setWidthAndHeight(help);
+        PlaySound(mapMusic);
 
         while (!WindowShouldClose())
         {
@@ -146,7 +154,7 @@ public:
 
             for (int i = 0; i < 5; i++)
             {
-                if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)))
+                if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)) || countries[i])
                 {
                     switch (i) {
                     case 0:
@@ -216,40 +224,54 @@ public:
                     default:
                         break;
                     }
+
+                    countries[i] = true;
                 }
 
                 if (changeCircles[i])
-                {
+                {                 
+                    
                     DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
-
+                    
                     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, backCircle, 30))
+                    {
+                        countries[i] = 0;    
+                        unloadBack = true;
+                    }
+                    else {
+                        unloadBack = false;
+                    }
+
+                    if (!countries[i])
                     {
                         switch (i)
                         {
                         case 0:
-                            UnloadTexture(bull);
+                            DrawTexture(barrier, 320, 800, WHITE);
                             break;
 
                         case 1:
-                            UnloadTexture(cheese);
+                            DrawTexture(barrier, 550, 650, WHITE);
                             break;
 
                         case 2:
-                            UnloadTexture(help);
+                            DrawTexture(barrier, 860, 800, WHITE);
                             break;
 
                         case 3:
-                            UnloadTexture(bar);
+                            DrawTexture(barrier, 860, 580, WHITE);
                             break;
 
                         case 4:
-                            UnloadTexture(bull);
+                            DrawTexture(barrier, 1360, 850, WHITE);
                             break;
 
                         default:
                             break;
                         }
                     }
+                    
+                             
                 }
 
             }
@@ -258,11 +280,11 @@ public:
             {
                 options = 1;
             }
-            
+
 
             if (options)
             {
-                DrawRectangleRec(afterClickedOptions,LIGHTGRAY);
+                DrawRectangleRec(afterClickedOptions, LIGHTGRAY);
 
                 for (int i = 0; i < 4; i++)
                 {
@@ -293,7 +315,7 @@ public:
                     }
                 }
 
-                DrawText("Settings",1680,150,50,BLACK);
+                DrawText("Settings", 1680, 150, 50, BLACK);
 
                 DrawText("Help", 1680, 250, 50, BLACK);
 
@@ -303,7 +325,7 @@ public:
                 //
                 if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
                 {
-                     closeOptions = 1;
+                    closeOptions = 1;
                 }
                 if (closeOptions)
                 {
@@ -318,7 +340,7 @@ public:
             EndDrawing();
         }
     };
-    ~Game(){
+    ~Game() {
         delete[] questionnaire.questions;
         delete[] questionnaire.answers;
 
@@ -339,40 +361,40 @@ void setWidthAndHeight(Texture2D& variable)
 void setupVars()
 {
     //spain
-	circles[0].x = 320;
-	circles[0].y = 800;
+    circles[0].x = 320;
+    circles[0].y = 800;
 
     //france
-	circles[1].x = 550;
-	circles[1].y = 650;
+    circles[1].x = 550;
+    circles[1].y = 650;
 
     //italy
-	circles[2].x = 860;
-	circles[2].y = 800;
+    circles[2].x = 860;
+    circles[2].y = 800;
 
     //germany
-	circles[3].x = 860;
-	circles[3].y = 580;
+    circles[3].x = 860;
+    circles[3].y = 580;
 
     //bulgaria
-	circles[4].x = 1360;
-	circles[4].y = 850;
+    circles[4].x = 1360;
+    circles[4].y = 850;
 
     backCircle.x = 1800;
     backCircle.y = 800;
 
-	invisibleRec.x = 1800;
-	invisibleRec.y = 20;
+    invisibleRec.x = 1800;
+    invisibleRec.y = 20;
 
-	invisibleRec.width = 90;
-	invisibleRec.height = 90;
+    invisibleRec.width = 90;
+    invisibleRec.height = 90;
 
-	for (int i = 0; i < 3; i++)
-	{
-		lines_Decoration[i].x = 1807.5;
-		lines_Decoration[i].y = 38.5 + (i * 20);
-		lines_Decoration[i].width = 75;
-		lines_Decoration[i].height = 15;
+    for (int i = 0; i < 3; i++)
+    {
+        lines_Decoration[i].x = 1807.5;
+        lines_Decoration[i].y = 38.5 + (i * 20);
+        lines_Decoration[i].width = 75;
+        lines_Decoration[i].height = 15;
     }
 
     for (int i = 0; i < 4; i++)
