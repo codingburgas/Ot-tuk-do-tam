@@ -154,7 +154,7 @@ public:
 
             for (int i = 0; i < 5; i++)
             {
-                if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)) || countries[i])
+                if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)) || changeCircles[i])
                 {
                     switch (i) {
                     case 0:
@@ -194,10 +194,10 @@ public:
             for (int i = 0; i < 5; i++)
             {
                 if (countries[i])
-                {
-                    changeCircles[i] = true;
-
+                {            
                     StopSound(mapMusic);
+
+                    unloadBack = false;
 
                     switch (i)
                     {
@@ -225,7 +225,7 @@ public:
                         break;
                     }
 
-                    countries[i] = true;
+                    changeCircles[i] = true;
                 }
 
                 if (changeCircles[i])
@@ -237,12 +237,9 @@ public:
                     {
                         countries[i] = 0;    
                         unloadBack = true;
-                    }
-                    else {
-                        unloadBack = false;
-                    }
+                    }                   
 
-                    if (!countries[i])
+                    if (!countries[i] && unloadBack)
                     {
                         switch (i)
                         {
@@ -268,10 +265,8 @@ public:
 
                         default:
                             break;
-                        }
-                    }
-                    
-                             
+                        }                     
+                    }                                           
                 }
 
             }
