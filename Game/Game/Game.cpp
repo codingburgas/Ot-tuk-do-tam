@@ -186,10 +186,14 @@ public:
 
             for (int i = 0; i < 5; i++)
             {
-                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[i], 30))
+                if (!banCountry[i])
                 {
-                    countries[i] = 1;
-                }
+                    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[i], 30))
+                    {
+                        countries[i] = 1;
+                    }
+
+                }      
             }
 
             for (int i = 0; i < 5; i++)
@@ -318,7 +322,7 @@ public:
                 DrawText("Music", 1680, 350, 50, BLACK);
 
                 DrawText("Quit", 1680, 450, 50, BLACK);
-                //
+                
                 if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
                 {
                     closeOptions = 1;
