@@ -19,6 +19,14 @@ namespace variables {
     string backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry's standard dummy text ever since the 1500s,\nwhen an unknown printer took a\ngalley of type and scrambled it to make a type specimen book.";
 
     //hover effect variables
+
+    struct country{
+        Texture2D country;
+        float x, y;
+    };
+
+    vector<country> countriesV (6);
+
     Texture2D bulgaria;
     Texture2D france;
     Texture2D germany;
@@ -31,6 +39,8 @@ namespace variables {
     Texture2D bar;
     Texture2D cheese;
     Texture2D help;
+
+    vector<Texture2D> images (6);
 
     int money = 2000;
 
@@ -49,7 +59,15 @@ namespace variables {
     Vector2 MousePoint;
 
     Vector2 circles[6];
-    Texture2D barrier;
+
+    Texture2D barrier;  
+
+    struct barrierPosition {
+        Texture2D barrierS;
+        float x, y;
+    };
+
+    vector<barrierPosition> barrierPositionVct (6);
 
     Vector2 backCircle;
 
@@ -104,17 +122,38 @@ public:
         cheese = LoadTexture("../src/sprites/backgrounds/cheddar.png");
         help = LoadTexture("../src/sprites/backgrounds/help.png");
 
-        plane = LoadTexture("../src/sprites/Plane.png");
-
         setWidthAndHeight(map);
         setWidthAndHeight(bull);
         setWidthAndHeight(cheese);
         setWidthAndHeight(help);
 
+        images[0] = { bull };
+        images[1] = { cheese };
+        images[2] = { help };
+        images[3] = { bar };
+        images[4] = { bull };
+        images[5] = { bar };
+
+        plane = LoadTexture("../src/sprites/Plane.png");
+    
+        countriesV[0] = { spain, 7 * renderScale , 94 * renderScale };
+        countriesV[1] = { france, 44 * renderScale , 76 * renderScale };
+        countriesV[2] = { italy, 91 * renderScale , 96 * renderScale };
+        countriesV[3] = { germany, 96 * renderScale , 65 * renderScale };
+        countriesV[4] = { bulgaria, 169 * renderScale , 108 * renderScale };
+        countriesV[5] = { romania, 160 * renderScale , 92 * renderScale };
        
         barrier = LoadTexture("../src/sprites/Barrier.png");
         barrier.width = 80;
-        barrier.height = 80;
+        barrier.height = 80;      
+
+        barrierPositionVct[0] = { barrier, 320, 800 };
+        barrierPositionVct[1] = { barrier, 550, 650 };
+        barrierPositionVct[2] = { barrier, 860, 800 };
+        barrierPositionVct[3] = { barrier, 860, 500 };
+        barrierPositionVct[4] = { barrier, 1360, 850 };
+        barrierPositionVct[5] = { barrier, 180 * renderScale, 100 * renderScale };
+
 
         mapMusic = LoadSound("../Audios/Main.mp3");
         SetSoundVolume(mapMusic, 0.6);
@@ -167,34 +206,7 @@ public:
             {
                 if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)) || changeCircles[i])
                 {
-                    switch (i) {
-                    case 0:
-                        hoverEffects(spain, 7 * renderScale, 94 * renderScale);
-                        break;
-
-                    case 1:
-                        hoverEffects(france, 44 * renderScale, 76 * renderScale);
-                        break;
-
-                    case 2:
-                        hoverEffects(italy, 91 * renderScale, 96 * renderScale);
-                        break;
-
-                    case 3:
-                        hoverEffects(germany, 96 * renderScale, 65 * renderScale);
-                        break;
-
-                    case 4:
-                        hoverEffects(bulgaria, 169 * renderScale, 108 * renderScale);
-                        break;
-                       
-                    case 5:
-                        hoverEffects(romania, 160 * renderScale, 92 * renderScale);
-                        break;
-
-                    default:
-                        break;
-                    }
+                    hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y);
                 }
             }
 
@@ -215,35 +227,7 @@ public:
                 {            
                     StopSound(mapMusic);
 
-                    switch (i)
-                    {
-                    case 0:
-                        DrawTexture(bull, 0, 0, WHITE);
-                        break;
-
-                    case 1:
-                        DrawTexture(cheese, 0, 0, WHITE);
-                        break;
-
-                    case 2:
-                        DrawTexture(help, 0, 0, WHITE);
-                        break;
-
-                    case 3:
-                        DrawTexture(bar, 0, 0, WHITE);
-                        break;
-
-                    case 4:
-                        DrawTexture(bull, 0, 0, WHITE);
-                        break;
-
-                    case 5:
-                        DrawTexture(bar, 0, 0, WHITE);
-                        break;
-
-                    default:
-                        break;
-                    }
+                    DrawTexture(images[i], 0, 0, WHITE);
 
                     unloadBack = false;
                     changeCircles[i] = true;
@@ -266,35 +250,7 @@ public:
 
                     if (!countries[i] && unloadBack)
                     {
-                        switch (i)
-                        {
-                        case 0:
-                            DrawTexture(barrier, 320, 800, WHITE);
-                            break;
-
-                        case 1:
-                            DrawTexture(barrier, 550, 650, WHITE);
-                            break;
-
-                        case 2:
-                            DrawTexture(barrier, 860, 800, WHITE);
-                            break;
-
-                        case 3:
-                            DrawTexture(barrier, 860, 580, WHITE);
-                            break;
-
-                        case 4:
-                            DrawTexture(barrier, 1360, 850, WHITE);
-                            break;
-
-                        case 5:
-                            DrawTexture(barrier, 180 * renderScale, 100 * renderScale, WHITE);
-                            break;
-
-                        default:
-                            break;
-                        }                     
+                        DrawTexture(barrierPositionVct[i].barrierS, barrierPositionVct[i].x, barrierPositionVct[i].y, WHITE);
                     }                                           
                 }
 
