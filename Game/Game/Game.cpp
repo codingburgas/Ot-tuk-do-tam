@@ -32,6 +32,11 @@ namespace variables {
     Texture2D cheese;
     Texture2D help;
 
+    int money = 2000;
+
+    Texture2D plane;
+    int planeCurrentPosX, planeCurrentPosY;
+
     //map variables
     Rectangle lines_Decoration[3];
 
@@ -99,6 +104,8 @@ public:
         cheese = LoadTexture("../src/sprites/backgrounds/cheddar.png");
         help = LoadTexture("../src/sprites/backgrounds/help.png");
 
+        plane = LoadTexture("../src/sprites/Plane.png");
+
         setWidthAndHeight(map);
         setWidthAndHeight(bull);
         setWidthAndHeight(cheese);
@@ -106,8 +113,8 @@ public:
 
        
         barrier = LoadTexture("../src/sprites/Barrier.png");
-        barrier.width = 60;
-        barrier.height = 60;
+        barrier.width = 80;
+        barrier.height = 80;
 
         mapMusic = LoadSound("../Audios/Main.mp3");
         SetSoundVolume(mapMusic, 0.6);
@@ -199,7 +206,6 @@ public:
                     {
                         countries[i] = 1;
                     }
-
                 }      
             }
 
@@ -246,8 +252,11 @@ public:
                 if (changeCircles[i])
                 {                 
                     
-                    DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
-                    
+                    if (!unloadBack)
+                    {
+                        DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
+                    }
+                                   
                     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, backCircle, 30))
                     {
                         countries[i] = 0;    
