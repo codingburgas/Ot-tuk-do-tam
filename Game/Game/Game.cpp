@@ -3,10 +3,12 @@
 #include "Backstory.hpp"
 #include "Game.hpp"
 
-struct QA {
-    string* questions;
-    string* answers;
-}questionnaire;
+namespace Utils {
+    float toRadian(float angel)
+    {
+        return M_PI / 180 * angel;
+    }
+}
 
 namespace variables {
     //window width and height
@@ -44,8 +46,17 @@ namespace variables {
 
     int money = 2000;
 
-    Texture2D plane;
-    int planeCurrentPosX, planeCurrentPosY;
+    struct plane{
+        Texture2D planeT;
+        float planeCurrentPosX, planeCurrentPosY;
+    } plane;
+
+    struct countryPosition {
+        float x;
+        float y;
+    };
+
+    vector <countryPosition> countryPositions (6);
 
     //map variables
     Rectangle lines_Decoration[3];
@@ -63,7 +74,7 @@ namespace variables {
     Texture2D barrier;  
 
     struct barrierPosition {
-        Texture2D barrierS;
+        Texture2D barrierT;
         float x, y;
     };
 
@@ -133,8 +144,6 @@ public:
         images[3] = { bar };
         images[4] = { bull };
         images[5] = { bar };
-
-        plane = LoadTexture("../src/sprites/Plane.png");
     
         countriesV[0] = { spain, 7 * renderScale , 94 * renderScale };
         countriesV[1] = { france, 44 * renderScale , 76 * renderScale };
@@ -154,9 +163,14 @@ public:
         barrierPositionVct[4] = { barrier, 1360, 850 };
         barrierPositionVct[5] = { barrier, 180 * renderScale, 100 * renderScale };
 
+        plane.planeT = LoadTexture("../src/sprites/Plane.png");
+        plane.planeCurrentPosX = 1360;
+        plane.planeCurrentPosY = 850;
 
         mapMusic = LoadSound("../Audios/Main.mp3");
         SetSoundVolume(mapMusic, 0.6);
+
+        countryPositions[0] = {320, 800};
     }
 
     void backstory()
@@ -169,6 +183,15 @@ public:
     void hoverEffects(Texture2D& country, float posx, float posy)
     {
         DrawTexture(country, posx, posy, WHITE);
+    }
+
+    void moveAirplane(const countryPosition& countryPosition)
+    {
+        Vector2 difference = { countryPosition.x - plane.planeCurrentPosX,  countryPosition.y - plane.planeCurrentPosY };
+        float rotation = atan2(difference.y, difference.x) * 180 / M_PI;
+
+        plane.planeCurrentPosX += cos(Utils::toRadian(rotation)) * 5.0f;
+        plane.planeCurrentPosY += sin(Utils::toRadian(rotation)) * 5.0f;
     }
 
     void loop()
@@ -192,6 +215,11 @@ public:
                     DrawCircleGradient(circles[i].x, circles[i].y, 30, GREEN, SKYBLUE);
                 }
             }
+
+            DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
+            DrawCircleGradient(countryPositions.at(0).x, countryPositions.at(0).y, 2, WHITE, WHITE);
+
+            moveAirplane(countryPositions.at(0));
 
             DrawRectangleRec(invisibleRec, BLANK);
 
@@ -250,7 +278,7 @@ public:
 
                     if (!countries[i] && unloadBack)
                     {
-                        DrawTexture(barrierPositionVct[i].barrierS, barrierPositionVct[i].x, barrierPositionVct[i].y, WHITE);
+                        DrawTexture(barrierPositionVct[i].barrierT, barrierPositionVct[i].x, barrierPositionVct[i].y, WHITE);
                     }                                           
                 }
 
@@ -321,8 +349,6 @@ public:
         }
     };
     ~Game() {
-        delete[] questionnaire.questions;
-        delete[] questionnaire.answers;
 
         //IMPORTNAT UNLOADING TEXTURES
         UnloadTexture(backstoryImg);
