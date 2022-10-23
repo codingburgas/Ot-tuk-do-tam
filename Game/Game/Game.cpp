@@ -80,6 +80,9 @@ namespace variables {
 
     vector<barrierPosition> barrierPositionVct (6);
 
+    int countryFly;
+    bool isFlying;
+
     Vector2 backCircle;
 
     bool countries[6] = { 0, 0, 0, 0, 0 };
@@ -170,7 +173,12 @@ public:
         mapMusic = LoadSound("../Audios/Main.mp3");
         SetSoundVolume(mapMusic, 0.6);
 
-        countryPositions[0] = {320, 800};
+        countryPositions[0] = { 320, 800 };
+        countryPositions[1] = { 550, 650 };
+        countryPositions[2] = { 860, 800 };
+        countryPositions[3] = { 860, 500};
+        countryPositions[4] = { 180 * renderScale, 100 * renderScale };
+        countryPositions[5] = { 1360, 650 };
     }
 
     void backstory()
@@ -188,10 +196,11 @@ public:
     void moveAirplane(const countryPosition& countryPosition)
     {
         Vector2 difference = { countryPosition.x - plane.planeCurrentPosX,  countryPosition.y - plane.planeCurrentPosY };
+
         float rotation = atan2(difference.y, difference.x) * 180 / M_PI;
 
-        plane.planeCurrentPosX += cos(Utils::toRadian(rotation)) * 5.0f;
-        plane.planeCurrentPosY += sin(Utils::toRadian(rotation)) * 5.0f;
+        plane.planeCurrentPosX += cos(Utils::toRadian(rotation)) * 4.0f;
+        plane.planeCurrentPosY += sin(Utils::toRadian(rotation)) * 4.0f;
     }
 
     void loop()
@@ -217,9 +226,7 @@ public:
             }
 
             DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
-            DrawCircleGradient(countryPositions.at(0).x, countryPositions.at(0).y, 2, WHITE, WHITE);
-
-            moveAirplane(countryPositions.at(0));
+            
 
             DrawRectangleRec(invisibleRec, BLANK);
 
@@ -243,11 +250,18 @@ public:
                 if (!banCountry[i])
                 {
                     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[i], 30))
-                    {
-                        countries[i] = 1;
+                    {                      
+                        countryFly = i;
+                        isFlying = true;
                     }
                 }      
-            }
+            }      
+
+            if (isFlying)
+            {
+                moveAirplane(countryPositions.at(countryFly));
+        
+            }       
 
             for (int i = 0; i < 6; i++)
             {
