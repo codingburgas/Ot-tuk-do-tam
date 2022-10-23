@@ -170,7 +170,7 @@ public:
         plane.planeCurrentPosX = 1360;
         plane.planeCurrentPosY = 850;
 
-        mapMusic = LoadSound("../Audios/Main.mp3");
+        mapMusic = LoadSound("../Audios/mapMusic.ogg");
         SetSoundVolume(mapMusic, 0.6);
 
         countryPositions[0] = { 320, 800 };
