@@ -24,6 +24,7 @@ namespace variables {
     Texture2D germany;
     Texture2D italy;
     Texture2D spain;
+    Texture2D romania;
 
     Texture2D map;
     Texture2D bull;
@@ -42,14 +43,14 @@ namespace variables {
 
     Vector2 MousePoint;
 
-    Vector2 circles[5];
+    Vector2 circles[6];
     Texture2D barrier;
 
     Vector2 backCircle;
 
-    bool countries[5] = { 0, 0, 0, 0, 0 };
-    bool changeCircles[5] = { 0, 0, 0, 0, 0 };
-    bool banCountry[5] = {0, 0, 0, 0, 0};
+    bool countries[6] = { 0, 0, 0, 0, 0 };
+    bool changeCircles[6] = { 0, 0, 0, 0, 0 };
+    bool banCountry[6] = {0, 0, 0, 0, 0};
 
     bool options = 0;
 
@@ -89,6 +90,8 @@ public:
         germany = LoadTexture("../src/sprites/countries/Germany.png");
         italy = LoadTexture("../src/sprites/countries/Italy.png");
         spain = LoadTexture("../src/sprites/countries/Spain.png");
+        romania = LoadTexture("../src/sprites/countries/Romania.png");
+
 
         map = LoadTexture("../src/sprites/backgrounds/map.png");
         bull = LoadTexture("../src/sprites/backgrounds/bull.png");
@@ -136,7 +139,7 @@ public:
 
             DrawTexture(map, 0, 0, WHITE);
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 if (!changeCircles[i])
                 {
@@ -153,7 +156,7 @@ public:
                 DrawRectangleRec(lines_Decoration[i], Fade(WHITE, 0.85));
             }
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)) || changeCircles[i])
                 {
@@ -177,6 +180,10 @@ public:
                     case 4:
                         hoverEffects(bulgaria, 169 * renderScale, 108 * renderScale);
                         break;
+                       
+                    case 5:
+                        hoverEffects(romania, 160 * renderScale, 92 * renderScale);
+                        break;
 
                     default:
                         break;
@@ -184,7 +191,7 @@ public:
                 }
             }
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 if (!banCountry[i])
                 {
@@ -196,7 +203,7 @@ public:
                 }      
             }
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 if (countries[i] && !banCountry[i])
                 {            
@@ -222,6 +229,10 @@ public:
 
                     case 4:
                         DrawTexture(bull, 0, 0, WHITE);
+                        break;
+
+                    case 5:
+                        DrawTexture(bar, 0, 0, WHITE);
                         break;
 
                     default:
@@ -266,6 +277,10 @@ public:
 
                         case 4:
                             DrawTexture(barrier, 1360, 850, WHITE);
+                            break;
+
+                        case 5:
+                            DrawTexture(barrier, 180 * renderScale, 100 * renderScale, WHITE);
                             break;
 
                         default:
@@ -379,6 +394,10 @@ void setupVars()
     //bulgaria
     circles[4].x = 1360;
     circles[4].y = 850;
+
+    //romania
+    circles[5].x = 180 * renderScale;
+    circles[5].y = 100 * renderScale;
 
     backCircle.x = 1800;
     backCircle.y = 800;
