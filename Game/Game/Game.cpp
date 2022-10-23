@@ -49,6 +49,7 @@ namespace variables {
 
     bool countries[5] = { 0, 0, 0, 0, 0 };
     bool changeCircles[5] = { 0, 0, 0, 0, 0 };
+    bool banCountry[5] = {0, 0, 0, 0, 0};
 
     bool options = 0;
 
@@ -193,11 +194,9 @@ public:
 
             for (int i = 0; i < 5; i++)
             {
-                if (countries[i])
+                if (countries[i] && !banCountry[i])
                 {            
                     StopSound(mapMusic);
-
-                    unloadBack = false;
 
                     switch (i)
                     {
@@ -225,6 +224,7 @@ public:
                         break;
                     }
 
+                    unloadBack = false;
                     changeCircles[i] = true;
                 }
 
@@ -237,6 +237,7 @@ public:
                     {
                         countries[i] = 0;    
                         unloadBack = true;
+                        banCountry[i] = true;
                     }                   
 
                     if (!countries[i] && unloadBack)
