@@ -46,8 +46,11 @@ namespace variables {
 
     int money = 2000;
 
+    //vehicles
+    //plane
     Texture2D planeLeft, planeRight;
     Vector2 planePoint;
+
     struct plane{
         Texture2D planeT;
         float planeCurrentPosX, planeCurrentPosY;
@@ -58,7 +61,12 @@ namespace variables {
         float y;
     };
 
+    //train
+    Texture2D trainLeft, trainRight;
+
     vector <countryPosition> countryPositions (6);
+
+    bool vehicleChoice = false;
 
     //map variables
     Rectangle lines_Decoration[3];
@@ -130,7 +138,14 @@ public:
 
         planeLeft = LoadTexture("../src/sprites/Map images/planeLeft.png");
         planeRight = LoadTexture("../src/sprites/Map images/planeRight.png");
-        plane.planeT = planeLeft;
+
+        trainLeft = LoadTexture("../src/sprites/Map images/trainLeft.png");
+        trainRight = LoadTexture("../src/sprites/Map images/trainRight.png");
+
+        if (vehicleChoice)
+            plane.planeT = planeLeft;
+        else
+            plane.planeT = trainLeft;
         
         plane.planeCurrentPosX = 1360;
         plane.planeCurrentPosY = 850;
@@ -214,10 +229,16 @@ public:
 
         if (difference.x < 0)
         {
-            plane.planeT = planeLeft;
+            if (vehicleChoice)
+                plane.planeT = planeLeft;
+            else
+                plane.planeT = trainLeft;
         }
         else {
-            plane.planeT = planeRight;
+            if (vehicleChoice)
+                plane.planeT = planeRight;
+            else
+                plane.planeT = trainRight;
         }
     }
 
