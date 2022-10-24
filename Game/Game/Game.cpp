@@ -347,7 +347,7 @@ public:
                         banCountry[i] = true;
                     }                   
 
-                    if (!countries[i] && unloadBack)
+                    if (unloadBack)
                     {
                         DrawTexture(barrierPositionVct[i].barrierT, barrierPositionVct[i].x, barrierPositionVct[i].y, WHITE);
                     }                                           
