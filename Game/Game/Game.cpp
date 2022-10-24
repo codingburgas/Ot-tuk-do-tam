@@ -46,7 +46,8 @@ namespace variables {
 
     int money = 2000;
 
-    Image planeImg;
+    Texture2D planeLeft, planeRight;
+    Vector2 planePoint;
     struct plane{
         Texture2D planeT;
         float planeCurrentPosX, planeCurrentPosY;
@@ -127,7 +128,9 @@ public:
 
         setFullScreen(width, height);
 
-        planeImg = LoadImage("../src/sprites/Plane.png");
+        planeLeft = LoadTexture("../src/sprites/Map images/planeLeft.png");
+        planeRight = LoadTexture("../src/sprites/Map images/planeRight.png");
+        plane.planeT = planeLeft;
         
         plane.planeCurrentPosX = 1360;
         plane.planeCurrentPosY = 850;
@@ -166,7 +169,7 @@ public:
         countriesV[4] = { bulgaria, 169 * renderScale , 108 * renderScale };
         countriesV[5] = { romania, 160 * renderScale , 92 * renderScale };
        
-        barrier = LoadTexture("../src/sprites/Barrier.png");
+        barrier = LoadTexture("../src/sprites/Map images/Barrier.png");
         barrier.width = 80;
         barrier.height = 80;      
 
@@ -180,12 +183,12 @@ public:
         mapMusic = LoadSound("../Audios/mapMusic.ogg");
         SetSoundVolume(mapMusic, 0.6);
 
-        countryPositions[0] = { 320, 800 };
-        countryPositions[1] = { 550, 650 };
-        countryPositions[2] = { 860, 800 };
-        countryPositions[3] = { 860, 500};
-        countryPositions[4] = { 180 * renderScale, 100 * renderScale };
-        countryPositions[5] = { 1360, 650 };
+        countryPositions[0] = { circles[0].x - 15, circles[0].y - 15 };
+        countryPositions[1] = { circles[1].x - 15, circles[1].y - 15 };
+        countryPositions[2] = { circles[2].x - 15, circles[2].y - 15 };
+        countryPositions[3] = { circles[3].x - 15, circles[3].y - 15 };
+        countryPositions[4] = { circles[4].x - 15, circles[4].y - 15};
+        countryPositions[5] = { circles[5].x - 15, circles[5].y - 15 };
     }
 
     void backstory()
@@ -208,6 +211,14 @@ public:
 
         plane.planeCurrentPosX += cos(Utils::toRadian(rotation)) * 4.0f;
         plane.planeCurrentPosY += sin(Utils::toRadian(rotation)) * 4.0f;
+
+        if (difference.x < 0)
+        {
+            plane.planeT = planeLeft;
+        }
+        else {
+            plane.planeT = planeRight;
+        }
     }
 
     void loop()
@@ -243,34 +254,39 @@ public:
             if (plane.planeCurrentPosX <= countryPositions.at(countryFly).x - 20)
             {
                 if (counterPlane != 0)
-                {
-                    ImageFlipHorizontal(&planeImg);
-                    isFlipped = true;
+                {                
+                    if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
+                    {
+                        isFlipped = true;
+                    }
+
                     counterPlane = 0;
                 }
             }
             else if (plane.planeCurrentPosX >= countryPositions.at(countryFly).x + 20) {
                 if (isFlipped)
-                {
-                    ImageFlipHorizontal(&planeImg);
-                    isFlipped = false;
+                {                  
+                    if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
+                    {
+                        isFlipped = false;
+                    }               
                 }
             }
-            
-            //ako toq check se fixne samoleta nqq se cuka navsqkude i she se minava kum drugata funckiq, ma nqqm ideq kak.
-            /*if (plane.planeCurrentPosX == countryPositions.at(countryFly).x)
+
+            planePoint.x = plane.planeCurrentPosX;
+            planePoint.y = plane.planeCurrentPosY;
+
+            if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
             {
                 flyOneTime = true;
                 countries[coutnryNumber] = 1;
-            }*/
-                      
-            plane.planeT = LoadTextureFromImage(planeImg);
+            }                     
 
-            if (flyOneTime)
+            if (!flyOneTime)
             {
                 DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
             }
-                           
+                                   
             DrawRectangleRec(invisibleRec, BLANK);
 
             DrawRectangleGradientH(invisibleRec.x, invisibleRec.y, invisibleRec.width, invisibleRec.height, GOLD, Fade(MAROON, 0.9444444));
@@ -289,11 +305,11 @@ public:
                         if (flyOneTime)
                         {
                            countryFly = i;
-                           //flyOneTime = false;
+                           flyOneTime = false;
                         }
                         
                         isFlying = true;
-                        counterPlane += 1;
+                        counterPlane++;
                         coutnryNumber = i;
                     }
                 }      
