@@ -188,12 +188,12 @@ public:
         barrier.width = 80;
         barrier.height = 80;      
 
-        barrierPositionVct[0] = { barrier, 320, 800 };
-        barrierPositionVct[1] = { barrier, 550, 650 };
+        barrierPositionVct[0] = { barrier, 200, 815 };
+        barrierPositionVct[1] = { barrier, 530, 650 };
         barrierPositionVct[2] = { barrier, 860, 800 };
-        barrierPositionVct[3] = { barrier, 860, 500 };
-        barrierPositionVct[4] = { barrier, 1360, 850 };
-        barrierPositionVct[5] = { barrier, 180 * renderScale, 100 * renderScale };
+        barrierPositionVct[3] = { barrier, 830, 550 };
+        barrierPositionVct[4] = { barrier, 1330, 810 };
+        barrierPositionVct[5] = { barrier, 1310, 710 };
     
         mapMusic = LoadSound("../Audios/mapMusic.ogg");
         SetSoundVolume(mapMusic, 0.6);
@@ -408,7 +408,7 @@ public:
                             break;
 
                         case 3:
-                            //settings happen here
+                            exit(0);
                             break;
                         }
                     }
