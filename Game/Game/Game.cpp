@@ -46,6 +46,7 @@ namespace variables {
 
     int money = 2000;
 
+    Image planeImg;
     struct plane{
         Texture2D planeT;
         float planeCurrentPosX, planeCurrentPosY;
@@ -121,7 +122,10 @@ public:
 
         setFullScreen(width, height);
 
-        plane.planeT = LoadTexture("../src/sprites/Plane.png");
+        planeImg = LoadImage("../src/sprites/Plane.png");
+        ImageFlipHorizontal(&planeImg);
+
+        plane.planeT = LoadTextureFromImage(planeImg);
         plane.planeCurrentPosX = 1360;
         plane.planeCurrentPosY = 850;
 
@@ -235,6 +239,7 @@ public:
                 }
             }
 
+            //if()
             DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);                  
 
             DrawRectangleRec(invisibleRec, BLANK);
