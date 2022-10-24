@@ -66,7 +66,7 @@ namespace variables {
 
     vector <countryPosition> countryPositions (6);
 
-    bool vehicleChoice = false;
+    bool vehicleChoice = true;
 
     //map variables
     Rectangle lines_Decoration[3];
@@ -242,6 +242,199 @@ public:
         }
     }
 
+    void mapEurope()
+    {
+        MousePoint = GetMousePosition();
+
+        //backstory()
+
+        DrawTexture(map, 0, 0, WHITE);
+
+        for (int i = 0; i < 6; i++)
+        {
+            if (!changeCircles[i])
+            {
+                DrawCircleGradient(circles[i].x, circles[i].y, 30, GREEN, SKYBLUE);
+            }
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)) || changeCircles[i])
+            {
+                hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y);
+            }
+        }
+
+        if (plane.planeCurrentPosX <= countryPositions.at(countryFly).x - 20)
+        {
+            if (counterPlane != 0)
+            {
+                if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
+                {
+                    isFlipped = true;
+                }
+
+                counterPlane = 0;
+            }
+        }
+        else if (plane.planeCurrentPosX >= countryPositions.at(countryFly).x + 20) {
+            if (isFlipped)
+            {
+                if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
+                {
+                    isFlipped = false;
+                }
+            }
+        }
+
+        planePoint.x = plane.planeCurrentPosX;
+        planePoint.y = plane.planeCurrentPosY;
+
+        if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
+        {
+            flyOneTime = true;
+            countries[coutnryNumber] = 1;
+        }
+
+        if (!flyOneTime)
+        {
+            DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
+        }
+
+        DrawRectangleRec(invisibleRec, BLANK);
+
+        DrawRectangleGradientH(invisibleRec.x, invisibleRec.y, invisibleRec.width, invisibleRec.height, GOLD, Fade(MAROON, 0.9444444));
+
+        for (int i = 0; i < 3; i++)
+        {
+            DrawRectangleRec(lines_Decoration[i], Fade(WHITE, 0.85));
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            if (!banCountry[i])
+            {
+                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[i], 30))
+                {
+                    if (flyOneTime)
+                    {
+                        countryFly = i;
+                        flyOneTime = false;
+                    }
+
+                    isFlying = true;
+                    counterPlane++;
+                    coutnryNumber = i;
+                }
+            }
+        }
+
+        if (isFlying)
+        {
+            moveAirplane(countryPositions.at(countryFly));
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            if (countries[i] && !banCountry[i])
+            {
+                StopSound(mapMusic);
+
+                DrawTexture(images[i], 0, 0, WHITE);
+
+                unloadBack = false;
+                changeCircles[i] = true;
+            }
+
+            if (changeCircles[i])
+            {
+
+                if (!unloadBack)
+                {
+                    DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
+                }
+
+                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, backCircle, 30))
+                {
+                    countries[i] = 0;
+                    unloadBack = true;
+                    banCountry[i] = true;
+                }
+
+                if (unloadBack)
+                {
+                    DrawTexture(barrierPositionVct[i].barrierT, barrierPositionVct[i].x, barrierPositionVct[i].y, WHITE);
+                }
+            }
+
+        }         
+    }
+
+    void optionsMenu()
+    {
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
+		{
+			options = 1;
+		}
+
+		if (options)
+		{
+			DrawRectangleRec(afterClickedOptions, LIGHTGRAY);
+
+			for (int i = 0; i < 4; i++)
+			{
+				DrawRectangleLinesEx(choiceFromOptions[i], 5, WHITE);
+			}
+
+			for (int i = 0; i < 4; i++)
+			{
+				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, choiceFromOptions[i]))
+				{
+					switch (i) {
+					case 0:
+						//settings happen here
+						break;
+
+					case 1:
+						//settings happen here
+						break;
+
+					case 2:
+						//settings happen here
+						break;
+
+					case 3:
+						exit(0);
+						break;
+					}
+				}
+			}
+
+			DrawText("Settings", 1680, 150, 50, BLACK);
+
+			DrawText("Help", 1680, 250, 50, BLACK);
+
+			DrawText("Music", 1680, 350, 50, BLACK);
+
+			DrawText("Quit", 1680, 450, 50, BLACK);
+
+			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+			{
+				closeOptions = 1;
+			}
+
+			if (closeOptions)
+			{
+				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
+				{
+					options = 0;
+					closeOptions = 0;
+				}
+			}
+		}
+    }
+
     void loop()
     {
         PlaySound(mapMusic);       
@@ -250,192 +443,9 @@ public:
         {
             BeginDrawing();
 
-            MousePoint = GetMousePosition();
+            mapEurope();
 
-            //backstory()
-
-            DrawTexture(map, 0, 0, WHITE);
-
-            for (int i = 0; i < 6; i++)
-            {
-                if (!changeCircles[i])
-                {
-                    DrawCircleGradient(circles[i].x, circles[i].y, 30, GREEN, SKYBLUE);
-                }
-            }
-
-            for (int i = 0; i < 6; i++)
-            {
-                if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)) || changeCircles[i])
-                {
-                    hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y);
-                }
-            }
-            
-            if (plane.planeCurrentPosX <= countryPositions.at(countryFly).x - 20)
-            {
-                if (counterPlane != 0)
-                {                
-                    if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
-                    {
-                        isFlipped = true;
-                    }
-
-                    counterPlane = 0;
-                }
-            }
-            else if (plane.planeCurrentPosX >= countryPositions.at(countryFly).x + 20) {
-                if (isFlipped)
-                {                  
-                    if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
-                    {
-                        isFlipped = false;
-                    }               
-                }
-            }
-
-            planePoint.x = plane.planeCurrentPosX;
-            planePoint.y = plane.planeCurrentPosY;
-
-            if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
-            {
-                flyOneTime = true;
-                countries[coutnryNumber] = 1;
-            }                     
-
-            if (!flyOneTime)
-            {
-                DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
-            }
-                                   
-            DrawRectangleRec(invisibleRec, BLANK);
-
-            DrawRectangleGradientH(invisibleRec.x, invisibleRec.y, invisibleRec.width, invisibleRec.height, GOLD, Fade(MAROON, 0.9444444));
-
-            for (int i = 0; i < 3; i++)
-            {
-                DrawRectangleRec(lines_Decoration[i], Fade(WHITE, 0.85));
-            }
-         
-            for (int i = 0; i < 6; i++)
-            {
-                if (!banCountry[i])
-                {
-                    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[i], 30))
-                    {                  
-                        if (flyOneTime)
-                        {
-                           countryFly = i;
-                           flyOneTime = false;
-                        }
-                        
-                        isFlying = true;
-                        counterPlane++;
-                        coutnryNumber = i;
-                    }
-                }      
-            }      
-
-            if (isFlying)
-            {
-                moveAirplane(countryPositions.at(countryFly));    
-            }       
-
-            for (int i = 0; i < 6; i++)
-            {
-                if (countries[i] && !banCountry[i])
-                {            
-                    StopSound(mapMusic);
-
-                    DrawTexture(images[i], 0, 0, WHITE);
-
-                    unloadBack = false;
-                    changeCircles[i] = true;
-                }
-
-                if (changeCircles[i])
-                {                 
-                    
-                    if (!unloadBack)
-                    {
-                        DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
-                    }
-                                   
-                    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, backCircle, 30))
-                    {
-                        countries[i] = 0;    
-                        unloadBack = true;
-                        banCountry[i] = true;
-                    }                   
-
-                    if (unloadBack)
-                    {
-                        DrawTexture(barrierPositionVct[i].barrierT, barrierPositionVct[i].x, barrierPositionVct[i].y, WHITE);
-                    }                                           
-                }
-
-            }
-
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
-            {
-                options = 1;
-            }
-
-            if (options)
-            {
-                DrawRectangleRec(afterClickedOptions, LIGHTGRAY);
-
-                for (int i = 0; i < 4; i++)
-                {
-                    DrawRectangleLinesEx(choiceFromOptions[i], 5, WHITE);
-                }
-
-                for (int i = 0; i < 4; i++)
-                {
-                    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, choiceFromOptions[i]))
-                    {
-                        switch (i) {
-                        case 0:
-                            //settings happen here
-                            break;
-
-                        case 1:
-                            //settings happen here
-                            break;
-
-                        case 2:
-                            //settings happen here
-                            break;
-
-                        case 3:
-                            exit(0);
-                            break;
-                        }
-                    }
-                }
-
-                DrawText("Settings", 1680, 150, 50, BLACK);
-
-                DrawText("Help", 1680, 250, 50, BLACK);
-
-                DrawText("Music", 1680, 350, 50, BLACK);
-
-                DrawText("Quit", 1680, 450, 50, BLACK);
-                
-                if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
-                {
-                    closeOptions = 1;
-                }
-
-                if (closeOptions)
-                {
-                    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
-                    {
-                        options = 0;
-                        closeOptions = 0;
-                    }
-                }
-            }
+            optionsMenu();
 
             EndDrawing();
         }
