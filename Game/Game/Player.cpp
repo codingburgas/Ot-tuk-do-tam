@@ -14,25 +14,57 @@ Player::Player()
 
 void Player::CheckDir()
 {
-	if (IsKeyPressed(KEY_UP) or IsKeyPressed(KEY_W))
+	if (IsKeyDown(KEY_UP) or IsKeyDown(KEY_W))
 	{
 		HeroDir = UP;
+		HorizotnalOrVertical[1] = 1;
 	}
-	else if (IsKeyPressed(KEY_LEFT) or IsKeyPressed(KEY_D))
-	{
-		HeroDir = LEFT;
-	}
-	else if (IsKeyPressed(KEY_DOWN) or IsKeyPressed(KEY_S))
+	else if (IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S))
 	{
 		HeroDir = DOWN;
+		HorizotnalOrVertical[1] = 1;
 	}
-	else if (IsKeyPressed(KEY_RIGHT) or IsKeyPressed(KEY_A))
+	else {
+		HorizotnalOrVertical[1] = 0;
+	}
+
+	if (IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A))
+	{
+		HeroDir = LEFT;
+		HorizotnalOrVertical[0] = 1;
+	}
+	else if (IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D))
 	{
 		HeroDir = RIGHT;
+		HorizotnalOrVertical[0] = 1;
 	}
+	else {
+		HorizotnalOrVertical[0] = 0;
+		switch (HeroDir)
+		{
+		case LEFT:
+			//left idle
+			break;
+
+		case RIGHT:
+			// right idle
+			break;
+
+		case UP:
+			//up idle
+			break;
+
+		case DOWN:
+			//down idle
+			break;
+
+		}
+	}
+
 }
 void Player::Engine()
 {
+
 	switch (HeroDir)
 	{
 	case LEFT:
@@ -71,6 +103,7 @@ void Player::Engine()
 	}
 	counter++;
 	DrawTexturePro(sprite, view, { (float)GetScreenWidth() / 2,(float)GetScreenHeight() / 2, (float)sprite.width / 4, (float)sprite.height }, Vector2{ (float)sprite.width / 2, (float)sprite.height / 2 }, 0, WHITE);
+
 }
 Player::~Player()
 {
@@ -79,4 +112,3 @@ Player::~Player()
 	UnloadTexture(r);
 	UnloadTexture(u);
 }
-

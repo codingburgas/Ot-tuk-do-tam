@@ -13,7 +13,7 @@ private:
 	Rectangle view;
 	int counter = 0;
 	float lim;
-
+	bool HorizotnalOrVertical[2] = { 0, 0 };
 	enum Dir {
 		LEFT,
 		RIGHT,

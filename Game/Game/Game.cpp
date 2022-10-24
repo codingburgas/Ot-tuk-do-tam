@@ -2,6 +2,7 @@
 #include "Engine.hpp"
 #include "Backstory.hpp"
 #include "Game.hpp"
+#include "Player.hpp"
 
 namespace Utils {
     float toRadian(float angel)
@@ -14,6 +15,8 @@ namespace variables {
     //window width and height
     int width = 1920;
     int height = 1080;
+    //player obj
+    Player player;
 
     Texture2D backstoryImg;
 
@@ -342,7 +345,6 @@ public:
                 StopSound(mapMusic);
 
                 DrawTexture(images[i], 0, 0, WHITE);
-
                 unloadBack = false;
                 changeCircles[i] = true;
             }
