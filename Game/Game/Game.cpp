@@ -98,6 +98,8 @@ namespace variables {
     float renderScale = 7.5;
 
     bool unloadBack = false;
+
+    int counterPlane = 0;
 };
 
 using namespace variables;
@@ -123,9 +125,7 @@ public:
         setFullScreen(width, height);
 
         planeImg = LoadImage("../src/sprites/Plane.png");
-        ImageFlipHorizontal(&planeImg);
-
-        plane.planeT = LoadTextureFromImage(planeImg);
+        
         plane.planeCurrentPosX = 1360;
         plane.planeCurrentPosY = 850;
 
@@ -211,7 +211,7 @@ public:
 
     void loop()
     {
-        PlaySound(mapMusic);
+        PlaySound(mapMusic);       
 
         while (!WindowShouldClose())
         {
@@ -238,8 +238,18 @@ public:
                     hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y);
                 }
             }
+        
+            
+            if (plane.planeCurrentPosX <= countryPositions.at(countryFly).x - 20)
+            {
+                if (counterPlane != 0)
+                {
+                    ImageFlipHorizontal(&planeImg);
+                    counterPlane = 0;
+                }
+            }
 
-            //if()
+            plane.planeT = LoadTextureFromImage(planeImg);
             DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);                  
 
             DrawRectangleRec(invisibleRec, BLANK);
@@ -259,6 +269,7 @@ public:
                     {                      
                         countryFly = i;
                         isFlying = true;
+                        counterPlane += 1;
                     }
                 }      
             }      
