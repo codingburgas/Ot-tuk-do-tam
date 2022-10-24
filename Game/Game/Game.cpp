@@ -174,9 +174,7 @@ public:
         barrierPositionVct[3] = { barrier, 860, 500 };
         barrierPositionVct[4] = { barrier, 1360, 850 };
         barrierPositionVct[5] = { barrier, 180 * renderScale, 100 * renderScale };
-
-       
-
+    
         mapMusic = LoadSound("../Audios/mapMusic.ogg");
         SetSoundVolume(mapMusic, 0.6);
 
@@ -240,7 +238,6 @@ public:
                 }
             }
 
-
             if (plane.planeCurrentPosX <= countryPositions.at(countryFly).x - 20)
             {
                 if (counterPlane != 0)
@@ -250,13 +247,13 @@ public:
                     counterPlane = 0;
                 }
             }
-            else {
+            else if(plane.planeCurrentPosX >= countryPositions.at(countryFly).x + 20) {
                 if (isFlipped)
                 {
                     ImageFlipHorizontal(&planeImg);
                     isFlipped = false;
                 }
-            }
+            }                 
 
             plane.planeT = LoadTextureFromImage(planeImg);
             DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);                  
@@ -279,6 +276,7 @@ public:
                         countryFly = i;
                         isFlying = true;
                         counterPlane += 1;
+                        //countries[i] = 1;
                     }
                 }      
             }      
@@ -328,7 +326,6 @@ public:
                 options = 1;
             }
 
-
             if (options)
             {
                 DrawRectangleRec(afterClickedOptions, LIGHTGRAY);
@@ -374,6 +371,7 @@ public:
                 {
                     closeOptions = 1;
                 }
+
                 if (closeOptions)
                 {
                     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
