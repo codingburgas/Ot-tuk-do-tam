@@ -87,11 +87,12 @@ namespace variables {
     Vector2 backCircle;
 
     bool countries[6] = { 0, 0, 0, 0, 0 };
+    int coutnryNumber;
+
     bool changeCircles[6] = { 0, 0, 0, 0, 0 };
     bool banCountry[6] = {0, 0, 0, 0, 0};
 
     bool options = 0;
-
     bool closeOptions = 0;
 
     Sound mapMusic;
@@ -101,6 +102,7 @@ namespace variables {
 
     int counterPlane = 0;
     bool isFlipped = false;
+    bool flyOneTime = true;
 };
 
 using namespace variables;
@@ -237,7 +239,7 @@ public:
                     hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y);
                 }
             }
-
+            
             if (plane.planeCurrentPosX <= countryPositions.at(countryFly).x - 20)
             {
                 if (counterPlane != 0)
@@ -247,17 +249,28 @@ public:
                     counterPlane = 0;
                 }
             }
-            else if(plane.planeCurrentPosX >= countryPositions.at(countryFly).x + 20) {
+            else if (plane.planeCurrentPosX >= countryPositions.at(countryFly).x + 20) {
                 if (isFlipped)
                 {
                     ImageFlipHorizontal(&planeImg);
                     isFlipped = false;
                 }
-            }                 
-
+            }
+            
+            //ako toq check se fixne samoleta nqq se cuka navsqkude i she se minava kum drugata funckiq, ma nqqm ideq kak.
+            /*if (plane.planeCurrentPosX == countryPositions.at(countryFly).x)
+            {
+                flyOneTime = true;
+                countries[coutnryNumber] = 1;
+            }*/
+                      
             plane.planeT = LoadTextureFromImage(planeImg);
-            DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);                  
 
+            if (flyOneTime)
+            {
+                DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
+            }
+                           
             DrawRectangleRec(invisibleRec, BLANK);
 
             DrawRectangleGradientH(invisibleRec.x, invisibleRec.y, invisibleRec.width, invisibleRec.height, GOLD, Fade(MAROON, 0.9444444));
@@ -272,11 +285,16 @@ public:
                 if (!banCountry[i])
                 {
                     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[i], 30))
-                    {                      
-                        countryFly = i;
+                    {                  
+                        if (flyOneTime)
+                        {
+                           countryFly = i;
+                           //flyOneTime = false;
+                        }
+                        
                         isFlying = true;
                         counterPlane += 1;
-                        //countries[i] = 1;
+                        coutnryNumber = i;
                     }
                 }      
             }      
