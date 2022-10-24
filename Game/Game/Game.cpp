@@ -121,6 +121,10 @@ public:
 
         setFullScreen(width, height);
 
+        plane.planeT = LoadTexture("../src/sprites/Plane.png");
+        plane.planeCurrentPosX = 1360;
+        plane.planeCurrentPosY = 850;
+
         //hover effect variables
         bulgaria = LoadTexture("../src/sprites/countries/Bulgaria.png");
         france = LoadTexture("../src/sprites/countries/France.png");
@@ -166,9 +170,7 @@ public:
         barrierPositionVct[4] = { barrier, 1360, 850 };
         barrierPositionVct[5] = { barrier, 180 * renderScale, 100 * renderScale };
 
-        plane.planeT = LoadTexture("../src/sprites/Plane.png");
-        plane.planeCurrentPosX = 1360;
-        plane.planeCurrentPosY = 850;
+       
 
         mapMusic = LoadSound("../Audios/mapMusic.ogg");
         SetSoundVolume(mapMusic, 0.6);
@@ -225,8 +227,15 @@ public:
                 }
             }
 
-            DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
-            
+            for (int i = 0; i < 6; i++)
+            {
+                if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)) || changeCircles[i])
+                {
+                    hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y);
+                }
+            }
+
+            DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);                  
 
             DrawRectangleRec(invisibleRec, BLANK);
 
@@ -236,15 +245,7 @@ public:
             {
                 DrawRectangleRec(lines_Decoration[i], Fade(WHITE, 0.85));
             }
-
-            for (int i = 0; i < 6; i++)
-            {
-                if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)) || changeCircles[i])
-                {
-                    hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y);
-                }
-            }
-
+         
             for (int i = 0; i < 6; i++)
             {
                 if (!banCountry[i])
@@ -259,8 +260,7 @@ public:
 
             if (isFlying)
             {
-                moveAirplane(countryPositions.at(countryFly));
-        
+                moveAirplane(countryPositions.at(countryFly));    
             }       
 
             for (int i = 0; i < 6; i++)
