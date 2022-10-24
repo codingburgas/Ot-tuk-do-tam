@@ -100,6 +100,7 @@ namespace variables {
     bool unloadBack = false;
 
     int counterPlane = 0;
+    bool isFlipped = false;
 };
 
 using namespace variables;
@@ -238,14 +239,22 @@ public:
                     hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y);
                 }
             }
-        
-            
+
+
             if (plane.planeCurrentPosX <= countryPositions.at(countryFly).x - 20)
             {
                 if (counterPlane != 0)
                 {
                     ImageFlipHorizontal(&planeImg);
+                    isFlipped = true;
                     counterPlane = 0;
+                }
+            }
+            else {
+                if (isFlipped)
+                {
+                    ImageFlipHorizontal(&planeImg);
+                    isFlipped = false;
                 }
             }
 
