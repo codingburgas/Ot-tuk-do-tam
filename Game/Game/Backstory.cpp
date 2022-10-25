@@ -10,7 +10,7 @@ namespace variables {
 
 using namespace variables;
 
-void backstoryTypewriteEffect(int& miliseconds, string& text)
+void backstoryTypewriteEffect(string& text)
 {
 	Lifetime++;//increment for timer
 	

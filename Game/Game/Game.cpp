@@ -5,9 +5,9 @@
 #include "Player.hpp"
 
 namespace Utils {
-    float toRadian(float angel)
+    float toRadian(float angle)
     {
-        return M_PI / 180 * angel;
+        return M_PI / 180 * angle;
     }
 }
 
@@ -15,12 +15,12 @@ namespace variables {
     //window width and height
     int width = 1920;
     int height = 1080;
+
     //player obj
     Player player;
 
     Texture2D backstoryImg;
 
-    int miliseconds = 200;
     string backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry's standard dummy text ever since the 1500s,\nwhen an unknown printer took a\ngalley of type and scrambled it to make a type specimen book.";
 
     //hover effect variables
@@ -67,9 +67,15 @@ namespace variables {
     //train
     Texture2D trainLeft, trainRight;
 
+    //vehicle audios
+    Sound touranSound, planeSound, trainSound;
+
+
+    Sound vehicleSound;
+
     vector <countryPosition> countryPositions (6);
 
-    bool vehicleChoice = true;
+    int vehicleChoice = 1;
 
     //map variables
     Rectangle lines_Decoration[3];
@@ -145,11 +151,27 @@ public:
         trainLeft = LoadTexture("../src/sprites/Map images/trainLeft.png");
         trainRight = LoadTexture("../src/sprites/Map images/trainRight.png");
 
-        if (vehicleChoice)
+        touranSound = LoadSound("../Audios/Touran.mp3");
+        trainSound = LoadSound("../Audios/Train.mp3");
+        planeSound = LoadSound("../Audios/Plane.mp3");
+
+        if (vehicleChoice == 0)
+        {
             plane.planeT = planeLeft;
-        else
+            vehicleSound = planeSound;
+        }       
+        else if (vehicleChoice == 1)
+        {
             plane.planeT = trainLeft;
-        
+            vehicleSound = trainSound;         
+        }           
+        else {
+            //plane.planeT = touranLeft;
+            vehicleSound = touranSound;
+        }
+            
+        SetSoundVolume(vehicleSound, 0.5);
+               
         plane.planeCurrentPosX = 1360;
         plane.planeCurrentPosY = 850;
 
@@ -213,7 +235,7 @@ public:
     {
         setWidthAndHeight(backstoryImg);
         DrawTexture(backstoryImg, 0, 0, WHITE);
-        backstoryTypewriteEffect(miliseconds, backstoryText);
+        backstoryTypewriteEffect(backstoryText);
     }
 
     void hoverEffects(Texture2D& country, float posx, float posy)
@@ -232,16 +254,23 @@ public:
 
         if (difference.x < 0)
         {
-            if (vehicleChoice)
+            if (vehicleChoice == 0)
                 plane.planeT = planeLeft;
-            else
+            else if(vehicleChoice == 1)
                 plane.planeT = trainLeft;
+            else {
+                //plane.planeT = touranLeft;
+            }
         }
         else {
             if (vehicleChoice)
                 plane.planeT = planeRight;
-            else
+            else if(vehicleChoice == 1)
                 plane.planeT = trainRight;
+            else {
+                //plane.planeT = touranRight;
+            }
+              
         }
     }
 
@@ -296,6 +325,7 @@ public:
 
         if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
         {
+            StopSoundMulti();
             flyOneTime = true;
             countries[coutnryNumber] = 1;
         }
@@ -335,6 +365,7 @@ public:
 
         if (isFlying)
         {
+            PlaySoundMulti(vehicleSound);
             moveAirplane(countryPositions.at(countryFly));
         }
 
@@ -439,7 +470,7 @@ public:
 
     void loop()
     {
-        PlaySound(mapMusic);       
+        //PlaySound(mapMusic);       
 
         while (!WindowShouldClose())
         {
@@ -505,16 +536,16 @@ void setupVars()
 
     for (int i = 0; i < 3; i++)
     {
-        lines_Decoration[i].x = 1807.5;
-        lines_Decoration[i].y = 38.5 + (i * 20);
+        lines_Decoration[i].x = 1807.5f;
+        lines_Decoration[i].y = 38.5f + (i * 20);
         lines_Decoration[i].width = 75;
         lines_Decoration[i].height = 15;
     }
 
     for (int i = 0; i < 4; i++)
     {
-        choiceFromOptions[i].x = 1667.5;
-        choiceFromOptions[i].y = 142.5 + (i * 100);
+        choiceFromOptions[i].x = 1667.5f;
+        choiceFromOptions[i].y = 142.5f + (i * 100);
         choiceFromOptions[i].width = 245;
         choiceFromOptions[i].height = 60;
     }

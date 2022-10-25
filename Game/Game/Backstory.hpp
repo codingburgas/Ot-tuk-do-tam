@@ -1,2 +1,2 @@
 #pragma once
-void backstoryTypewriteEffect(int& miliseconds, string& text);
+void backstoryTypewriteEffect(string& text);
