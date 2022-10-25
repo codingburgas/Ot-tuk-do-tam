@@ -151,6 +151,9 @@ public:
         trainLeft = LoadTexture("../src/sprites/Map images/trainLeft.png");
         trainRight = LoadTexture("../src/sprites/Map images/trainRight.png");
 
+        //touranLeft = LoadTexture("../src/sprites/Map images/trainLeft.png");
+        //touranRight = LoadTexture("../src/sprites/Map images/trainRight.png");
+
         touranSound = LoadSound("../Audios/Touran.mp3");
         trainSound = LoadSound("../Audios/Train.mp3");
         planeSound = LoadSound("../Audios/Plane.mp3");
@@ -263,7 +266,7 @@ public:
             }
         }
         else {
-            if (vehicleChoice)
+            if (vehicleChoice == 0)
                 plane.planeT = planeRight;
             else if(vehicleChoice == 1)
                 plane.planeT = trainRight;
