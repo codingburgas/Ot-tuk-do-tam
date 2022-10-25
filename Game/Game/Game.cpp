@@ -84,15 +84,15 @@ namespace variables {
     //map variables
     Rectangle lines_Decoration[3];
 
-    Rectangle choiceFromOptions[4];
+    Rectangle choiceFromOptions[3];
 
-    Rectangle invisibleRec;
+    Rectangle invisibleRec = {1800,20,90,90};
 
-    Rectangle afterClickedOptions = { 1665,115,250,450 };
+    Rectangle afterClickedOptions = { 1665,115,250,330 };
 
     Vector2 MousePoint;
 
-    Vector2 circles[6];
+    Vector2 circles[6] = {320, 800};
 
     Texture2D barrier;  
 
@@ -125,6 +125,8 @@ namespace variables {
     int counterPlane = 0;
     bool isFlipped = false;
     bool flyOneTime = true;
+
+    bool helpIsClicked = false;
 };
 
 using namespace variables;
@@ -247,7 +249,7 @@ public:
     {
         setWidthAndHeight(backstoryImg);
         DrawTexture(backstoryImg, 0, 0, WHITE);
-        backstoryTypewriteEffect(backstoryText);
+       // backstoryTypewriteEffect(backstoryText);
     }
 
     void hoverEffects(Texture2D& country, float posx, float posy)
@@ -372,6 +374,7 @@ public:
             countries[coutnryNumber] = 1;
         }
 
+
         DrawRectangleRec(invisibleRec, BLANK);
 
         DrawRectangleGradientH(invisibleRec.x, invisibleRec.y, invisibleRec.width, invisibleRec.height, GOLD, Fade(MAROON, 0.9444444));
@@ -460,12 +463,12 @@ public:
 		{
 			DrawRectangleRec(afterClickedOptions, LIGHTGRAY);
 
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 3; i++)
 			{
 				DrawRectangleLinesEx(choiceFromOptions[i], 5, WHITE);
 			}
 
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 3; i++)
 			{
 				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, choiceFromOptions[i]))
 				{
@@ -475,27 +478,30 @@ public:
 						break;
 
 					case 1:
-						//settings happen here
+                        helpIsClicked = true;
 						break;
 
 					case 2:
-						//settings happen here
-						break;
-
-					case 3:
 						exit(0);
 						break;
 					}
 				}
 			}
 
-			DrawText("Settings", 1680, 150, 50, BLACK);
+            DrawText("Settings", 1680, 150, 50, BLACK);
 
-			DrawText("Help", 1680, 250, 50, BLACK);
+            DrawText("Help", 1680, 250, 50, BLACK);
 
-			DrawText("Music", 1680, 350, 50, BLACK);
+            DrawText("Quit", 1680, 350, 50, BLACK);
 
-			DrawText("Quit", 1680, 450, 50, BLACK);
+            if (helpIsClicked)
+            {
+                DrawTexture(help, 0, 0, WHITE);
+
+                DrawRectangleRec(invisibleRec, Fade(ORANGE, 0.5));
+            }
+
+			
 
 			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 			{
@@ -572,12 +578,6 @@ void setupVars()
 
     backCircle.x = 1800;
     backCircle.y = 800;
-
-    invisibleRec.x = 1800;
-    invisibleRec.y = 20;
-
-    invisibleRec.width = 90;
-    invisibleRec.height = 90;
 
     for (int i = 0; i < 3; i++)
     {
