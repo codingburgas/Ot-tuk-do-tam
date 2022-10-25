@@ -67,6 +67,10 @@ namespace variables {
     //train
     Texture2D trainLeft, trainRight;
 
+    //transport menu
+    Texture2D transportMenu;
+    Texture2D isClickedCheck;
+    
     //vehicle audios
     Sound touranSound, planeSound, trainSound;
 
@@ -211,8 +215,11 @@ public:
         trainLeft = LoadTexture("../src/sprites/Map images/trainLeft.png");
         trainRight = LoadTexture("../src/sprites/Map images/trainRight.png");
 
-        //touranLeft = LoadTexture("../src/sprites/Map images/trainLeft.png");
-        //touranRight = LoadTexture("../src/sprites/Map images/trainRight.png");
+        transportMenu = LoadTexture("../src/sprites/Map images/transportMenu.png");
+        isClickedCheck = LoadTexture("../src/sprites/Map images/check.png");
+
+        //touranLeft = LoadTexture("../src/sprites/Map images/touranLeft.png");
+        //touranRight = LoadTexture("../src/sprites/Map images/touranRight.png");
 
         touranSound = LoadSound("../Audios/Touran.mp3");
         trainSound = LoadSound("../Audios/Train.mp3");
@@ -277,10 +284,40 @@ public:
         }
     }
 
+    void transportMenuF()
+    {
+        DrawTexture(transportMenu, 744, 154, WHITE);
+
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        {
+            if (MousePoint.x >= 904 && MousePoint.x <= 916)
+            {
+                if (MousePoint.y >= 167 && MousePoint.y <= 180)
+                {
+                    UnloadTexture(isClickedCheck);
+                    DrawTexture(isClickedCheck, 904, 167, WHITE);
+                    vehicleChoice = 0;
+                }
+                else if (MousePoint.y >= 193 && MousePoint.y <= 205)
+                {
+                    UnloadTexture(isClickedCheck);
+                    DrawTexture(isClickedCheck, 904, 193, WHITE);
+                    vehicleChoice = 1;
+                }
+            }
+            else if (MousePoint.x <= 744 || MousePoint.x >= 926 || MousePoint.y <= 154 || MousePoint.y >= 216);
+            {
+                UnloadTexture(transportMenu);
+            }
+        }
+        
+    }
+
     void mapEurope()
     {
         MousePoint = GetMousePosition();
 
+        //transportMenuF();
         //backstory()
 
         DrawTexture(map, 0, 0, WHITE);
@@ -476,7 +513,7 @@ public:
         //PlaySound(mapMusic);       
 
         while (!WindowShouldClose())
-        {
+        { 
             BeginDrawing();
 
             mapEurope();
