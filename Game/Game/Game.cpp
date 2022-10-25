@@ -146,7 +146,10 @@ public:
         srand(time(0));
 
         //backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
-
+       
+        //player
+        /*player.LoadSprites();*/
+        
         setFullScreen(width, height);
        
         SetSoundVolume(vehicleSound, 0.5);
@@ -240,7 +243,6 @@ public:
             vehicleSound = touranSound;
         }
     }
-
     void backstory()
     {
         setWidthAndHeight(backstoryImg);
@@ -411,6 +413,9 @@ public:
                 StopSound(mapMusic);
 
                 DrawTexture(images[i], 0, 0, WHITE);
+                //for player but I need help
+                /*player.CheckDir();
+                player.Engine();*/
                 unloadBack = false;
                 changeCircles[i] = true;
             }

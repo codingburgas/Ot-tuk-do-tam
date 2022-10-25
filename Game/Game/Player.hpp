@@ -24,6 +24,7 @@ private:
 public:
 	Player();
 	void Engine();
+	void LoadSprites();
 	void CheckDir();
 	~Player();
 };

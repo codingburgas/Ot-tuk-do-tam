@@ -3,14 +3,17 @@
 
 Player::Player()
 {
-	d = LoadTexture("../src/down.png");
-	u = LoadTexture("../src/up.png");
-	l = LoadTexture("../src/left.png");
-	r = LoadTexture("../src/right.png");
+	
 	lim = (float)d.width / 4;
 	view = { lim, 0, (float)d.width / 4, (float)d.height };
 }
-
+void Player::LoadSprites()
+{
+	d = LoadTexture("../src/sprites/heroSprite/down.png");
+	u = LoadTexture("../src/sprites/heroSprite/up.png");
+	l = LoadTexture("../src/sprites/heroSprite/left.png");
+	r = LoadTexture("../src/sprites/heroSprite/right.png");
+}
 void Player::CheckDir()
 {
 	if (IsKeyDown(KEY_UP) or IsKeyDown(KEY_W))
