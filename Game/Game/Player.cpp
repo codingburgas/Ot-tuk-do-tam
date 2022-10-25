@@ -3,7 +3,6 @@
 
 Player::Player()
 {
-
 	d = LoadTexture("../src/down.png");
 	u = LoadTexture("../src/up.png");
 	l = LoadTexture("../src/left.png");

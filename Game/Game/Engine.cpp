@@ -3,8 +3,6 @@
 
 namespace variables {
 	Image icon = LoadImage("../src/sprites/icon.png");
-
-
 }
 
 using namespace variables;

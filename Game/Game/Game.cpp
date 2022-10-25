@@ -75,7 +75,7 @@ namespace variables {
 
     vector <countryPosition> countryPositions (6);
 
-    int vehicleChoice = 1;
+    int vehicleChoice = 0;
 
     //map variables
     Rectangle lines_Decoration[3];
@@ -144,35 +144,7 @@ public:
         //backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
 
         setFullScreen(width, height);
-
-        planeLeft = LoadTexture("../src/sprites/Map images/planeLeft.png");
-        planeRight = LoadTexture("../src/sprites/Map images/planeRight.png");
-
-        trainLeft = LoadTexture("../src/sprites/Map images/trainLeft.png");
-        trainRight = LoadTexture("../src/sprites/Map images/trainRight.png");
-
-        //touranLeft = LoadTexture("../src/sprites/Map images/trainLeft.png");
-        //touranRight = LoadTexture("../src/sprites/Map images/trainRight.png");
-
-        touranSound = LoadSound("../Audios/Touran.mp3");
-        trainSound = LoadSound("../Audios/Train.mp3");
-        planeSound = LoadSound("../Audios/Plane.mp3");
-
-        if (vehicleChoice == 0)
-        {
-            plane.planeT = planeLeft;
-            vehicleSound = planeSound;
-        }       
-        else if (vehicleChoice == 1)
-        {
-            plane.planeT = trainLeft;
-            vehicleSound = trainSound;         
-        }           
-        else {
-            //plane.planeT = touranLeft;
-            vehicleSound = touranSound;
-        }
-            
+       
         SetSoundVolume(vehicleSound, 0.5);
                
         plane.planeCurrentPosX = 1360;
@@ -232,6 +204,34 @@ public:
         countryPositions[3] = { circles[3].x - 15, circles[3].y - 15 };
         countryPositions[4] = { circles[4].x - 15, circles[4].y - 15};
         countryPositions[5] = { circles[5].x - 15, circles[5].y - 15 };
+
+        planeLeft = LoadTexture("../src/sprites/Map images/planeLeft.png");
+        planeRight = LoadTexture("../src/sprites/Map images/planeRight.png");
+
+        trainLeft = LoadTexture("../src/sprites/Map images/trainLeft.png");
+        trainRight = LoadTexture("../src/sprites/Map images/trainRight.png");
+
+        //touranLeft = LoadTexture("../src/sprites/Map images/trainLeft.png");
+        //touranRight = LoadTexture("../src/sprites/Map images/trainRight.png");
+
+        touranSound = LoadSound("../Audios/Touran.mp3");
+        trainSound = LoadSound("../Audios/Train.mp3");
+        planeSound = LoadSound("../Audios/Plane.mp3");
+
+        if (vehicleChoice == 0)
+        {
+            plane.planeT = planeLeft;
+            vehicleSound = planeSound;
+        }       
+        else if (vehicleChoice == 1)
+        {
+            plane.planeT = trainLeft;
+            vehicleSound = trainSound;         
+        }           
+        else {
+            //plane.planeT = touranLeft;
+            vehicleSound = touranSound;
+        }
     }
 
     void backstory()
@@ -333,11 +333,6 @@ public:
             countries[coutnryNumber] = 1;
         }
 
-        if (!flyOneTime)
-        {
-            DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
-        }
-
         DrawRectangleRec(invisibleRec, BLANK);
 
         DrawRectangleGradientH(invisibleRec.x, invisibleRec.y, invisibleRec.width, invisibleRec.height, GOLD, Fade(MAROON, 0.9444444));
@@ -405,6 +400,11 @@ public:
             }
 
         }         
+
+        if (!flyOneTime)
+        {
+            DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
+        }
     }
 
     void optionsMenu()
