@@ -538,7 +538,7 @@ public:
 
         //IMPORTNAT UNLOADING TEXTURES
         UnloadTexture(backstoryImg);
-
+        //player.UnLoadTextures();
         CloseWindow();
     }
 

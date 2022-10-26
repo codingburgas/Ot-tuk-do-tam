@@ -22,10 +22,9 @@ private:
 	} HeroDir = LEFT;
 
 public:
-	Player();
-	void Engine();
+	void Movement();
 	void LoadSprites();
 	void CheckDir();
-	~Player();
+	void UnLoadTextures();
 };
 

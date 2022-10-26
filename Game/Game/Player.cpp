@@ -1,18 +1,14 @@
 #include "Precompile.hpp"
 #include "Player.hpp"
 
-Player::Player()
-{
-	
-	lim = (float)d.width / 4;
-	view = { lim, 0, (float)d.width / 4, (float)d.height };
-}
 void Player::LoadSprites()
 {
 	d = LoadTexture("../src/sprites/heroSprite/down.png");
 	u = LoadTexture("../src/sprites/heroSprite/up.png");
 	l = LoadTexture("../src/sprites/heroSprite/left.png");
 	r = LoadTexture("../src/sprites/heroSprite/right.png");
+	lim = (float)d.width / 4;
+	view = { lim, 0, (float)d.width / 4, (float)d.height };
 }
 void Player::CheckDir()
 {
@@ -64,7 +60,7 @@ void Player::CheckDir()
 	}
 
 }
-void Player::Engine()
+void Player::Movement()
 {
 
 	switch (HeroDir)
@@ -107,7 +103,7 @@ void Player::Engine()
 	DrawTexturePro(sprite, view, { (float)GetScreenWidth() / 2,(float)GetScreenHeight() / 2, (float)sprite.width / 4, (float)sprite.height }, Vector2{ (float)sprite.width / 2, (float)sprite.height / 2 }, 0, WHITE);
 
 }
-Player::~Player()
+void Player::UnLoadTextures()
 {
 	UnloadTexture(d);
 	UnloadTexture(l);
