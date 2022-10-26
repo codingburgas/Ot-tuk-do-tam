@@ -11,9 +11,12 @@ private:
 	Texture2D l;
 
 	Rectangle view;
+	Rectangle move;
 	int counter = 0;
 	float lim;
 	bool HorizotnalOrVertical[2] = { 0, 0 };
+	float speed = 100;
+	float PosX, PosY;
 	enum Dir {
 		LEFT,
 		RIGHT,
@@ -22,9 +25,8 @@ private:
 	} HeroDir = LEFT;
 
 public:
-	void Movement();
 	void LoadSprites();
+	void Movement();
 	void CheckDir();
 	void UnLoadTextures();
 };
-

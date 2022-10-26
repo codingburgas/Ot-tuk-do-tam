@@ -3,7 +3,7 @@
 #include "Backstory.hpp"
 #include "Game.hpp"
 #include "Player.hpp"
-
+//bool isF;
 namespace Utils {
     float toRadian(float angle)
     {
@@ -138,8 +138,7 @@ class Game
 {
 public:
     Game() {
-        InitWindow(width, height, "Ot tuk do tam");
-        InitAudioDevice();
+        
 
         SetTargetFPS(60);
         srand(time(0));
@@ -403,7 +402,8 @@ public:
 
         if (isFlying)
         {
-            PlaySound(vehicleSound);
+            //isF = true;
+            //PlaySound(vehicleSound);
             moveAirplane(countryPositions.at(countryFly));
         }
 
@@ -520,7 +520,8 @@ public:
     void loop()
     {
         //PlaySound(mapMusic);       
-
+        //if (isF) PlaySound(vehicleSound);
+        //else if (flyOneTime) StopSound(vehicleSound);
         while (!WindowShouldClose())
         { 
             BeginDrawing();
@@ -597,6 +598,8 @@ void setupVars()
 
 void gameStartup()
 {
+    InitWindow(width, height, "Ot tuk do tam");
+    InitAudioDevice();
     setupVars();
 
     Game game;

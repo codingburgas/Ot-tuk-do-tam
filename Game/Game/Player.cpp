@@ -9,16 +9,20 @@ void Player::LoadSprites()
 	r = LoadTexture("../src/sprites/heroSprite/right.png");
 	lim = (float)d.width / 4;
 	view = { lim, 0, (float)d.width / 4, (float)d.height };
+	PosX = GetScreenWidth() / 2;
+	PosY = GetScreenHeight() / 2;
 }
 void Player::CheckDir()
 {
 	if (IsKeyDown(KEY_UP) or IsKeyDown(KEY_W))
 	{
+		PosY -= speed * GetFrameTime();
 		HeroDir = UP;
 		HorizotnalOrVertical[1] = 1;
 	}
 	else if (IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S))
 	{
+		PosY += speed * GetFrameTime();
 		HeroDir = DOWN;
 		HorizotnalOrVertical[1] = 1;
 	}
@@ -28,11 +32,13 @@ void Player::CheckDir()
 
 	if (IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A))
 	{
+		PosX -= speed * GetFrameTime();
 		HeroDir = LEFT;
 		HorizotnalOrVertical[0] = 1;
 	}
 	else if (IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D))
 	{
+		PosX += speed * GetFrameTime();
 		HeroDir = RIGHT;
 		HorizotnalOrVertical[0] = 1;
 	}
@@ -62,6 +68,8 @@ void Player::CheckDir()
 }
 void Player::Movement()
 {
+	if (HorizotnalOrVertical[0] && HorizotnalOrVertical[1]) speed = 90;
+	else speed = 150;
 
 	switch (HeroDir)
 	{
@@ -100,7 +108,11 @@ void Player::Movement()
 		view.x = lim;
 	}
 	counter++;
-	DrawTexturePro(sprite, view, { (float)GetScreenWidth() / 2,(float)GetScreenHeight() / 2, (float)sprite.width / 4, (float)sprite.height }, Vector2{ (float)sprite.width / 2, (float)sprite.height / 2 }, 0, WHITE);
+
+
+	move = Rectangle{ PosX, PosY, (float)sprite.width / 4, (float)sprite.height };
+	//cout << move.x <<  " " << move.y << endl;
+	DrawTexturePro(sprite, view, move, Vector2{ (float)sprite.width / 2, (float)sprite.height / 2 }, 0, WHITE);
 
 }
 void Player::UnLoadTextures()
