@@ -142,19 +142,16 @@ public:
         InitAudioDevice();
 
         SetTargetFPS(60);
-
-        ClearBackground(WHITE);
-
         srand(time(0));
 
         //backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
        
         //player
-        /*player.LoadSprites();*/
+        player.LoadSprites();
         
         setFullScreen(width, height);
        
-        SetSoundVolume(vehicleSound, 0.5);
+        
                
         plane.planeCurrentPosX = 1360;
         plane.planeCurrentPosY = 850;
@@ -204,8 +201,8 @@ public:
         barrierPositionVct[4] = { barrier, 1330, 810 };
         barrierPositionVct[5] = { barrier, 1310, 710 };
     
-        mapMusic = LoadSound("../Audios/mapMusic.ogg");
-        SetSoundVolume(mapMusic, 0.6);
+        //mapMusic = LoadSound("../Audios/mapMusic.ogg");
+        //SetSoundVolume(mapMusic, 0.6);
 
         countryPositions[0] = { circles[0].x - 15, circles[0].y - 15 };
         countryPositions[1] = { circles[1].x - 15, circles[1].y - 15 };
@@ -244,6 +241,7 @@ public:
             //plane.planeT = touranLeft;
             vehicleSound = touranSound;
         }
+        SetSoundVolume(vehicleSound, 0.5);
     }
     void backstory()
     {
@@ -405,7 +403,7 @@ public:
 
         if (isFlying)
         {
-            PlaySoundMulti(vehicleSound);
+            PlaySound(vehicleSound);
             moveAirplane(countryPositions.at(countryFly));
         }
 
@@ -413,12 +411,12 @@ public:
         {
             if (countries[i] && !banCountry[i])
             {
-                StopSound(mapMusic);
-
-                DrawTexture(images[i], 0, 0, WHITE);
+                StopSound(vehicleSound);
+                DrawRectangle(0,0,GetScreenWidth(), GetScreenHeight(), GRAY);
+                //DrawTexture(images[i], 0, 0, WHITE);
                 //for player but I need help
-                /*player.CheckDir();
-                player.Engine();*/
+                player.CheckDir();
+                player.Movement();
                 unloadBack = false;
                 changeCircles[i] = true;
             }
@@ -526,7 +524,7 @@ public:
         while (!WindowShouldClose())
         { 
             BeginDrawing();
-
+            ClearBackground(WHITE);
             mapEurope();
 
             optionsMenu();
@@ -538,7 +536,8 @@ public:
 
         //IMPORTNAT UNLOADING TEXTURES
         UnloadTexture(backstoryImg);
-        //player.UnLoadTextures();
+        player.UnLoadTextures();
+        CloseAudioDevice();
         CloseWindow();
     }
 
@@ -587,7 +586,7 @@ void setupVars()
         lines_Decoration[i].height = 15;
     }
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 3; i++)
     {
         choiceFromOptions[i].x = 1667.5f;
         choiceFromOptions[i].y = 142.5f + (i * 100);
