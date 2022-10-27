@@ -128,7 +128,7 @@ namespace variables {
 
     bool helpIsClicked = false;
 
-    bool planeToMove = false;
+    bool planeToMove = false ;
     int transportCheck = 0;
 };
 
@@ -274,28 +274,25 @@ public:
 
     void transportMenuF()
     {
-        DrawTexture(transportMenu, 1450, 270, WHITE);
-
-       
+        if (!planeToMove)
+        {
+            DrawTexture(transportMenu, 1450, 270, WHITE);
+        }
+        
         if (MousePoint.x >= 1795 && MousePoint.x <= 1820)
         {
-            if (MousePoint.y >= 300 && MousePoint.y <= 325)
-            {                  
-                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-                {
-                    vehicleChoice = 0;
+            if (MousePoint.y >= 300 && MousePoint.y <= 325 && isClicked())
+            {                           
+                vehicleChoice = 0;
 
-                    transportCheck = 1;                  
-                }             
+                transportCheck = 1;                  
             }
-            else if (MousePoint.y >= 350 && MousePoint.y <= 375)
+            else if (MousePoint.y >= 350 && MousePoint.y <= 375 && isClicked())
             {
-                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-                {
-                    transportCheck = 2;
+                
+                transportCheck = 2;
                     
-                    vehicleChoice = 1;
-                }              
+                vehicleChoice = 1;
             }
         }
 
@@ -308,10 +305,10 @@ public:
             DrawTexture(isClickedCheck, 1795, 365, WHITE);
         }
             
-        if (MousePoint.x <= 1450 || MousePoint.x >= 1860 || MousePoint.y <= 270 || MousePoint.y >= 435);
+        /*if ((MousePoint.x <= 1450 || MousePoint.x >= 1860 || MousePoint.y <= 270 || MousePoint.y >= 435) && isClicked())
         {
             planeToMove = true;
-        }
+        }*/
     }
 
     void mapEurope()
@@ -399,7 +396,7 @@ public:
         {
             if (!banCountry[i])
             {
-                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, circles[i], 30))
+                if (isClicked() && CheckCollisionPointCircle(MousePoint, circles[i], 30))
                 {
                     if (flyOneTime)
                     {
@@ -418,7 +415,6 @@ public:
         {
             //isF = true;
             //PlaySound(vehicleSound);
-            
             moveAirplane(countryPositions.at(countryFly));
         }
 
@@ -444,7 +440,7 @@ public:
                     DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
                 }
 
-                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointCircle(MousePoint, backCircle, 30))
+                if (isClicked() && CheckCollisionPointCircle(MousePoint, backCircle, 30))
                 {
                     countries[i] = 0;
                     unloadBack = true;
@@ -466,7 +462,6 @@ public:
             if (planeToMove)
             {
                 DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
-                planeToMove = false;
             }
             
         }
@@ -474,7 +469,7 @@ public:
 
     void optionsMenu()
     {
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
+		if (isClicked() && CheckCollisionPointRec(MousePoint, invisibleRec))
 		{
 			options = 1;
 		}
@@ -490,7 +485,7 @@ public:
 
 			for (int i = 0; i < 3; i++)
 			{
-				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, choiceFromOptions[i]))
+				if (isClicked() && CheckCollisionPointRec(MousePoint, choiceFromOptions[i]))
 				{
 					switch (i) {
 					case 0:
@@ -523,14 +518,14 @@ public:
 
 			
 
-			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+			if (isClicked())
 			{
 				closeOptions = 1;
 			}
 
 			if (closeOptions)
 			{
-				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(MousePoint, invisibleRec))
+				if (isClicked() && CheckCollisionPointRec(MousePoint, invisibleRec))
 				{
 					options = 0;
 					closeOptions = 0;
@@ -555,6 +550,7 @@ public:
             EndDrawing();
         }
     };
+
     ~Game() {
 
         //IMPORTNAT UNLOADING TEXTURES

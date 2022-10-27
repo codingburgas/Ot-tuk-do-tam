@@ -23,3 +23,14 @@ void setFullScreen(int& windowWidth, int& windowHeight)
 		SetWindowSize(windowWidth, windowHeight);
 	}
 }
+
+bool isClicked()
+{
+	return IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+}
+
+void darkEffect()
+{
+	//RectangleShape blackEffect(Vector2f(1920, 1080));
+	//blackEffect.setFillColor(Color(0, 0, 0, 120));
+}
