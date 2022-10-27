@@ -127,6 +127,9 @@ namespace variables {
     bool flyOneTime = true;
 
     bool helpIsClicked = false;
+
+    bool planeToMove = false;
+    int transportCheck = 0;
 };
 
 using namespace variables;
@@ -149,8 +152,6 @@ public:
         player.LoadSprites();
         
         setFullScreen(width, height);
-       
-        
                
         plane.planeCurrentPosX = 1360;
         plane.planeCurrentPosY = 850;
@@ -226,20 +227,6 @@ public:
         trainSound = LoadSound("../Audios/Train.mp3");
         planeSound = LoadSound("../Audios/Plane.mp3");
 
-        if (vehicleChoice == 0)
-        {
-            plane.planeT = planeLeft;
-            vehicleSound = planeSound;
-        }       
-        else if (vehicleChoice == 1)
-        {
-            plane.planeT = trainLeft;
-            vehicleSound = trainSound;         
-        }           
-        else {
-            //plane.planeT = touranLeft;
-            vehicleSound = touranSound;
-        }
         SetSoundVolume(vehicleSound, 0.5);
     }
     void backstory()
@@ -287,38 +274,65 @@ public:
 
     void transportMenuF()
     {
-        DrawTexture(transportMenu, 744, 154, WHITE);
+        DrawTexture(transportMenu, 1450, 270, WHITE);
 
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+       
+        if (MousePoint.x >= 1795 && MousePoint.x <= 1820)
         {
-            if (MousePoint.x >= 904 && MousePoint.x <= 916)
-            {
-                if (MousePoint.y >= 167 && MousePoint.y <= 180)
+            if (MousePoint.y >= 300 && MousePoint.y <= 325)
+            {                  
+                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
                 {
-                    UnloadTexture(isClickedCheck);
-                    DrawTexture(isClickedCheck, 904, 167, WHITE);
                     vehicleChoice = 0;
-                }
-                else if (MousePoint.y >= 193 && MousePoint.y <= 205)
-                {
-                    UnloadTexture(isClickedCheck);
-                    DrawTexture(isClickedCheck, 904, 193, WHITE);
-                    vehicleChoice = 1;
-                }
+
+                    transportCheck = 1;                  
+                }             
             }
-            else if (MousePoint.x <= 744 || MousePoint.x >= 926 || MousePoint.y <= 154 || MousePoint.y >= 216);
+            else if (MousePoint.y >= 350 && MousePoint.y <= 375)
             {
-                UnloadTexture(transportMenu);
+                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+                {
+                    transportCheck = 2;
+                    
+                    vehicleChoice = 1;
+                }              
             }
         }
-        
+
+        if (transportCheck == 1)
+        {
+            DrawTexture(isClickedCheck, 1795, 315, WHITE);
+        }
+        else if (transportCheck == 2)
+        {
+            DrawTexture(isClickedCheck, 1795, 365, WHITE);
+        }
+            
+        if (MousePoint.x <= 1450 || MousePoint.x >= 1860 || MousePoint.y <= 270 || MousePoint.y >= 435);
+        {
+            planeToMove = true;
+        }
     }
 
     void mapEurope()
     {
         MousePoint = GetMousePosition();
 
-        //transportMenuF();
+        if (vehicleChoice == 0)
+        {
+            plane.planeT = planeLeft;
+            vehicleSound = planeSound;
+        }
+        else if (vehicleChoice == 1)
+        {
+            plane.planeT = trainLeft;
+            vehicleSound = trainSound;
+        }
+        else {
+            //plane.planeT = touranLeft;
+            vehicleSound = touranSound;
+        }
+        
         //backstory()
 
         DrawTexture(map, 0, 0, WHITE);
@@ -400,10 +414,11 @@ public:
             }
         }
 
-        if (isFlying)
+        if (isFlying && planeToMove)
         {
             //isF = true;
             //PlaySound(vehicleSound);
+            
             moveAirplane(countryPositions.at(countryFly));
         }
 
@@ -446,7 +461,14 @@ public:
 
         if (!flyOneTime)
         {
-            DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
+            transportMenuF();
+
+            if (planeToMove)
+            {
+                DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
+                planeToMove = false;
+            }
+            
         }
     }
 
