@@ -1,7 +1,6 @@
-#include "Precompile.hpp"
 #include "Player.hpp"
 
-void Player::LoadSprites()
+void Player::LoadSprites(int fps)
 {
 	d = LoadTexture("../src/sprites/heroSprite/down.png");
 	u = LoadTexture("../src/sprites/heroSprite/up.png");
@@ -9,6 +8,7 @@ void Player::LoadSprites()
 	r = LoadTexture("../src/sprites/heroSprite/right.png");
 	lim = (float)d.width / 4;
 	view = { lim, 0, (float)d.width / 4, (float)d.height };
+	this->fps = fps;
 	PosX = GetScreenWidth() / 2;
 	PosY = GetScreenHeight() / 2;
 }
@@ -98,7 +98,7 @@ void Player::Movement()
 		break;
 
 	}
-	if (counter == 10)
+	if (counter == fps / animationSpeed)
 	{
 		view.x += lim;
 		counter = 0;
@@ -111,7 +111,6 @@ void Player::Movement()
 
 
 	move = Rectangle{ PosX, PosY, (float)sprite.width / 4, (float)sprite.height };
-	//cout << move.x <<  " " << move.y << endl;
 	DrawTexturePro(sprite, view, move, Vector2{ (float)sprite.width / 2, (float)sprite.height / 2 }, 0, WHITE);
 
 }

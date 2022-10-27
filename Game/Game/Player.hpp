@@ -16,6 +16,8 @@ private:
 	float lim;
 	bool HorizotnalOrVertical[2] = { 0, 0 };
 	float speed = 100;
+	int animationSpeed = 6;
+	int fps;
 	float PosX, PosY;
 	enum Dir {
 		LEFT,
@@ -25,7 +27,7 @@ private:
 	} HeroDir = LEFT;
 
 public:
-	void LoadSprites();
+	void LoadSprites(int fps);
 	void Movement();
 	void CheckDir();
 	void UnLoadTextures();

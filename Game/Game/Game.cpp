@@ -130,6 +130,9 @@ namespace variables {
 
     bool planeToMove = false ;
     int transportCheck = 0;
+
+    bool playSound = 0;
+    int fps = 60;
 };
 
 using namespace variables;
@@ -143,13 +146,13 @@ public:
     Game() {
         
 
-        SetTargetFPS(60);
+        SetTargetFPS(fps);
         srand(time(0));
 
         //backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
        
         //player
-        player.LoadSprites();
+        player.LoadSprites(fps);
         
         setFullScreen(width, height);
                
@@ -405,12 +408,17 @@ public:
                     }
 
                     isFlying = true;
+                    playSound = true;
                     counterPlane++;
                     coutnryNumber = i;
                 }
             }
         }
-
+        if (isFlying && playSound)
+        {
+            PlaySound(vehicleSound);
+            playSound = 0;
+        }
         if (isFlying && planeToMove)
         {
             //isF = true;
