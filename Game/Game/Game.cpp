@@ -359,28 +359,28 @@ public:
             }
         }
 
-        if (plane.planeCurrentPosX <= countryPositions.at(countryFly).x)
+        if (plane.planeCurrentPosX < countryPositions.at(countryFly).x)
         {
             if (counterPlane != 0)
             {
                 if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
                 {
                     isFlipped = true;
-                    
+                    planeToMove = false;
                 }
-                planeToMove = false;
+               
                 counterPlane = 0;
             }
         }
-        else if (plane.planeCurrentPosX >= countryPositions.at(countryFly).x) {
+        else if (plane.planeCurrentPosX > countryPositions.at(countryFly).x) {
             if (isFlipped)
             {
                 if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
                 {
                     isFlipped = false;
-                    
+                    planeToMove = false;
                 }
-                planeToMove = false;
+                
             }
             
         }

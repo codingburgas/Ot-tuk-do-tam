@@ -31,6 +31,5 @@ bool isClicked()
 
 void darkEffect()
 {
-	//RectangleShape blackEffect(Vector2f(1920, 1080));
-	//blackEffect.setFillColor(Color(0, 0, 0, 120));
+	//DrawRectangle(0, 0, 1920, 1080, /*rgb(0, 0, 0, 120)*/)
 }
