@@ -28,8 +28,3 @@ bool isClicked()
 {
 	return IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 }
-
-void darkEffect()
-{
-	//DrawRectangle(0, 0, 1920, 1080, /*rgb(0, 0, 0, 120)*/)
-}

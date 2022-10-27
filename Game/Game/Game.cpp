@@ -133,6 +133,8 @@ namespace variables {
 
     bool playSound = 0;
     int fps = 60;
+
+    Color darkerWindow = { 0,0,0,120 };
 };
 
 using namespace variables;
@@ -279,6 +281,7 @@ public:
     {
         if (!planeToMove)
         {
+            DrawRectangle(0, 0, 1920, 1080, darkerWindow);
             DrawTexture(transportMenu, 1450, 270, WHITE);
         }
         
@@ -322,7 +325,7 @@ public:
     void mapEurope()
     {
         MousePoint = GetMousePosition();
-        cout << MousePoint.x << " " << MousePoint.y << endl;
+        //cout << MousePoint.x << " " << MousePoint.y << endl;
 
         if (vehicleChoice == 0)
         {
@@ -379,10 +382,8 @@ public:
                 {
                     isFlipped = false;
                     planeToMove = false;
-                }
-                
+                }             
             }
-            
         }
 
         planePoint.x = plane.planeCurrentPosX;
