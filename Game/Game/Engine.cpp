@@ -3,6 +3,11 @@
 
 namespace variables {
 	Image icon = LoadImage("../src/sprites/icon.png");
+
+	Texture2D confirmationT;
+	bool isQuitting;
+
+	Color darkerScreen = { 0,0,0,120 };
 }
 
 using namespace variables;
@@ -27,4 +32,10 @@ void setFullScreen(int& windowWidth, int& windowHeight)
 bool isClicked()
 {
 	return IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+}
+
+
+void isUserQuitting()
+{
+
 }
