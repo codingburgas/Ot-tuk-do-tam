@@ -152,7 +152,7 @@ public:
         //backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
        
         //player
-        player.LoadSprites(fps);
+        //player.LoadSprites(fps);
         
         setFullScreen(width, height);
                
@@ -302,21 +302,27 @@ public:
         if (transportCheck == 1)
         {
             DrawTexture(isClickedCheck, 1795, 315, WHITE);
+            transportCheck = 0;
         }
         else if (transportCheck == 2)
         {
             DrawTexture(isClickedCheck, 1795, 365, WHITE);
+            transportCheck = 0;
         }
             
-        /*if ((MousePoint.x <= 1450 || MousePoint.x >= 1860 || MousePoint.y <= 270 || MousePoint.y >= 435) && isClicked())
+        if ((MousePoint.x >= 1450 && MousePoint.x <= 1860) && (MousePoint.y >= 270 && MousePoint.y <= 435) && isClicked())
         {
-            planeToMove = true;
-        }*/
+            if (isClicked())
+            {
+                planeToMove = true;
+            }          
+        }
     }
 
     void mapEurope()
     {
         MousePoint = GetMousePosition();
+        cout << MousePoint.x << " " << MousePoint.y << endl;
 
         if (vehicleChoice == 0)
         {
@@ -353,26 +359,30 @@ public:
             }
         }
 
-        if (plane.planeCurrentPosX <= countryPositions.at(countryFly).x - 20)
+        if (plane.planeCurrentPosX <= countryPositions.at(countryFly).x)
         {
             if (counterPlane != 0)
             {
                 if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
                 {
                     isFlipped = true;
+                    
                 }
-
+                planeToMove = false;
                 counterPlane = 0;
             }
         }
-        else if (plane.planeCurrentPosX >= countryPositions.at(countryFly).x + 20) {
+        else if (plane.planeCurrentPosX >= countryPositions.at(countryFly).x) {
             if (isFlipped)
             {
                 if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
                 {
                     isFlipped = false;
+                    
                 }
+                planeToMove = false;
             }
+            
         }
 
         planePoint.x = plane.planeCurrentPosX;
@@ -414,16 +424,19 @@ public:
                 }
             }
         }
-        if (isFlying && playSound)
-        {
-            PlaySound(vehicleSound);
-            playSound = 0;
-        }
+
         if (isFlying && planeToMove)
         {
             //isF = true;
-            //PlaySound(vehicleSound);
+
+            if (playSound)
+            {
+                PlaySound(vehicleSound);
+            }
+            
             moveAirplane(countryPositions.at(countryFly));
+
+            playSound = 0;
         }
 
         for (int i = 0; i < 6; i++)
@@ -433,7 +446,7 @@ public:
                 StopSound(vehicleSound);
                 DrawRectangle(0,0,GetScreenWidth(), GetScreenHeight(), GRAY);
                 //DrawTexture(images[i], 0, 0, WHITE);
-                //for player but I need help
+                
                 player.CheckDir();
                 player.Movement();
                 unloadBack = false;
@@ -449,7 +462,7 @@ public:
                 }
 
                 if (isClicked() && CheckCollisionPointCircle(MousePoint, backCircle, 30))
-                {
+                {    
                     countries[i] = 0;
                     unloadBack = true;
                     banCountry[i] = true;
