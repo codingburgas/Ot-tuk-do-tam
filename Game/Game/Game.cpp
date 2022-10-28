@@ -157,7 +157,7 @@ public:
         //backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
        
         //player
-        //player.LoadSprites(fps);
+        player.LoadSprites(fps);
         
         setFullScreen(width, height);
                
@@ -236,7 +236,10 @@ public:
         planeSound = LoadSound("../Audios/Plane.mp3");
 
         SetSoundVolume(vehicleSound, 0.5);
+
+        SetExitKey(-1);
     }
+
     void backstory()
     {
         setWidthAndHeight(backstoryImg);
@@ -327,8 +330,13 @@ public:
 
     void mapEurope()
     {
+        if (IsKeyPressed(KEY_ESCAPE))
+        {
+            isQuitting = true;
+        }
+
         mousePoint = GetMousePosition();
-        //cout << MousePoint.x << " " << MousePoint.y << endl;
+        //cout << mousePoint.x << " " << mousePoint.y << endl;
 
         if (vehicleChoice == 0)
         {
@@ -528,8 +536,6 @@ public:
 				}
 			}
 
-            isUserQuitting(isQuitting, mousePoint, confirmationT, darkerWindow);
-
             DrawText("Settings", 1680, 150, 50, BLACK);
 
             DrawText("Help", 1680, 250, 50, BLACK);
@@ -568,9 +574,12 @@ public:
         { 
             BeginDrawing();
             ClearBackground(WHITE);
+
             mapEurope();
 
             optionsMenu();
+
+            isUserQuitting(isQuitting, mousePoint, confirmationT, darkerWindow);
 
             EndDrawing();
         }
