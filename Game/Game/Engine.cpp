@@ -3,11 +3,6 @@
 
 namespace variables {
 	Image icon = LoadImage("../src/sprites/icon.png");
-
-	Texture2D confirmationT;
-	bool isQuitting;
-
-	Color darkerScreen = { 0,0,0,120 };
 }
 
 using namespace variables;
@@ -34,8 +29,26 @@ bool isClicked()
 	return IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 }
 
-
-void isUserQuitting()
+void isUserQuitting(bool& isQuitting, Vector2& mousePoint, Texture2D& confirmationT, Color& darkerWindow)
 {
+	if (isQuitting)
+	{
+		DrawTexture(confirmationT, 0, 0, WHITE);
+		DrawRectangle(0, 0, 1920, 1080, darkerWindow);
 
+		if (isClicked() && (mousePoint.y >= 580 && mousePoint.y <= 640))
+		{
+			if (mousePoint.x >= 790 && mousePoint.x <= 920)
+			{
+				exit(0);
+			}
+			else if (mousePoint.x >= 990 && mousePoint.x <= 1110)
+			{
+				isQuitting = false;
+			}
+		}
+	}
+	else {
+		cout << "";
+	}
 }

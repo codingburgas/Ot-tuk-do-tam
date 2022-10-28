@@ -90,7 +90,7 @@ namespace variables {
 
     Rectangle afterClickedOptions = { 1665,115,250,330 };
 
-    Vector2 MousePoint;
+    Vector2 mousePoint;
 
     Vector2 circles[6] = {320, 800};
 
@@ -134,7 +134,10 @@ namespace variables {
     bool playSound = 0;
     int fps = 60;
 
+    //Exit confirmaiton table
     Color darkerWindow = { 0,0,0,120 };
+    bool isQuitting = false;
+    Texture2D confirmationT;
 };
 
 using namespace variables;
@@ -285,15 +288,15 @@ public:
             DrawTexture(transportMenu, 1450, 270, WHITE);
         }
         
-        if (MousePoint.x >= 1795 && MousePoint.x <= 1820)
+        if (mousePoint.x >= 1795 && mousePoint.x <= 1820)
         {
-            if (MousePoint.y >= 300 && MousePoint.y <= 325 && isClicked())
+            if (mousePoint.y >= 300 && mousePoint.y <= 325 && isClicked())
             {                           
                 vehicleChoice = 0;
 
                 transportCheck = 1;                  
             }
-            else if (MousePoint.y >= 350 && MousePoint.y <= 375 && isClicked())
+            else if (mousePoint.y >= 350 && mousePoint.y <= 375 && isClicked())
             {
                 
                 transportCheck = 2;
@@ -313,7 +316,7 @@ public:
             transportCheck = 0;
         }
             
-        if ((MousePoint.x >= 1450 && MousePoint.x <= 1860) && (MousePoint.y >= 270 && MousePoint.y <= 435) && isClicked())
+        if ((mousePoint.x >= 1450 && mousePoint.x <= 1860) && (mousePoint.y >= 270 && mousePoint.y <= 435) && isClicked())
         {
             if (isClicked())
             {
@@ -324,7 +327,7 @@ public:
 
     void mapEurope()
     {
-        MousePoint = GetMousePosition();
+        mousePoint = GetMousePosition();
         //cout << MousePoint.x << " " << MousePoint.y << endl;
 
         if (vehicleChoice == 0)
@@ -356,7 +359,7 @@ public:
 
         for (int i = 0; i < 6; i++)
         {
-            if ((CheckCollisionPointCircle(MousePoint, circles[i], 30)) || changeCircles[i])
+            if ((CheckCollisionPointCircle(mousePoint, circles[i], 30)) || changeCircles[i])
             {
                 hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y);
             }
@@ -410,7 +413,7 @@ public:
         {
             if (!banCountry[i])
             {
-                if (isClicked() && CheckCollisionPointCircle(MousePoint, circles[i], 30))
+                if (isClicked() && CheckCollisionPointCircle(mousePoint, circles[i], 30))
                 {
                     if (flyOneTime)
                     {
@@ -462,7 +465,7 @@ public:
                     DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
                 }
 
-                if (isClicked() && CheckCollisionPointCircle(MousePoint, backCircle, 30))
+                if (isClicked() && CheckCollisionPointCircle(mousePoint, backCircle, 30))
                 {    
                     countries[i] = 0;
                     unloadBack = true;
@@ -491,7 +494,7 @@ public:
 
     void optionsMenu()
     {
-		if (isClicked() && CheckCollisionPointRec(MousePoint, invisibleRec))
+		if (isClicked() && CheckCollisionPointRec(mousePoint, invisibleRec))
 		{
 			options = 1;
 		}
@@ -507,7 +510,7 @@ public:
 
 			for (int i = 0; i < 3; i++)
 			{
-				if (isClicked() && CheckCollisionPointRec(MousePoint, choiceFromOptions[i]))
+				if (isClicked() && CheckCollisionPointRec(mousePoint, choiceFromOptions[i]))
 				{
 					switch (i) {
 					case 0:
@@ -519,11 +522,13 @@ public:
 						break;
 
 					case 2:
-						exit(0);
+                        isQuitting = true;
 						break;
 					}
 				}
 			}
+
+            isUserQuitting(isQuitting, mousePoint, confirmationT, darkerWindow);
 
             DrawText("Settings", 1680, 150, 50, BLACK);
 
@@ -538,8 +543,6 @@ public:
                 DrawRectangleRec(invisibleRec, Fade(ORANGE, 0.5));
             }
 
-			
-
 			if (isClicked())
 			{
 				closeOptions = 1;
@@ -547,10 +550,10 @@ public:
 
 			if (closeOptions)
 			{
-				if (isClicked() && CheckCollisionPointRec(MousePoint, invisibleRec))
+				if (isClicked() && CheckCollisionPointRec(mousePoint, invisibleRec))
 				{
-					options = 0;
-					closeOptions = 0;
+					//options = 0;
+					//closeOptions = 0;
 				}
 			}
 		}
@@ -634,6 +637,8 @@ void setupVars()
         choiceFromOptions[i].width = 245;
         choiceFromOptions[i].height = 60;
     }
+
+    confirmationT = LoadTexture("../src/sprites/Menus and boards/Confirmation.png");
 }
 
 void gameStartup()
