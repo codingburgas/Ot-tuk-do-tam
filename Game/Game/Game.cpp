@@ -89,6 +89,7 @@ namespace variables {
     Texture2D optionImage;
     Texture2D optionImageHovered;
     Texture2D optionImageClicked;
+    int optionCounter;
 
     Rectangle afterClickedOptions = { 1665,115,250,330 };
 
@@ -505,6 +506,7 @@ public:
             {
                 DrawTexture(optionImageClicked, 1840, 30, WHITE);
                 options = 1;
+                optionCounter++;
             }	
 		}
 
@@ -542,12 +544,14 @@ public:
             {
                 DrawTexture(help, 0, 0, WHITE);
             }
-
-            if ((mousePoint.x >= 1845 && mousePoint.x <= 1900) && (mousePoint.y >= 20 && mousePoint.y <= 70) && isClicked())
-            {
-                options = 0;
-            }
+   
 		}
+
+        if ((mousePoint.x >= 1845 && mousePoint.x <= 1900) && (mousePoint.y >= 20 && mousePoint.y <= 70) && isClicked() && optionCounter == 2)
+        {
+            options = 0;
+            optionCounter = 0;
+        }
     }
 
     void loop()
