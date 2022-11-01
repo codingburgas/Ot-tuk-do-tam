@@ -136,6 +136,9 @@ namespace variables {
     bool planeToMove = false ;
     int transportCheck = 0;
 
+    bool outsideCheck;
+    int isCheckedOutside = 0;
+
     bool playSound = 0;
     int fps = 60;
 
@@ -202,12 +205,12 @@ public:
         images[4] = { bull };
         images[5] = { bar };
     
-        countriesV[0] = { spain, 7 * renderScale , 94 * renderScale };
-        countriesV[1] = { france, 44 * renderScale , 76 * renderScale };
-        countriesV[2] = { italy, 91 * renderScale, 96 * renderScale };
-        countriesV[3] = { germany, 96 * renderScale , 65 * renderScale };
-        countriesV[4] = { bulgaria, 169 * renderScale , 108 * renderScale };
-        countriesV[5] = { romania, 160 * renderScale , 92 * renderScale };
+        countriesV[0] = { spain, 52.5 , 705 };
+        countriesV[1] = { france, 330 , 570 };
+        countriesV[2] = { italy, 682.5, 720 };
+        countriesV[3] = { germany, 720 , 487.5 };
+        countriesV[4] = { bulgaria, 1267.5 , 810 };
+        countriesV[5] = { romania, 1200 , 690 };
        
         barrier = LoadTexture("../src/sprites/Map images/Barrier.png");
         barrier.width = 80;
@@ -352,6 +355,12 @@ public:
 
             transportCheck = 0;
         }
+
+        if ((mousePoint.x <= 1450 || mousePoint.x >= 1865 || mousePoint.y <= 250 || mousePoint.y >= 475) && isClicked())
+        {
+            isCheckedOutside++;
+            cout << isCheckedOutside;
+        }
     }
 
     void mapEurope()
@@ -376,7 +385,6 @@ public:
                 allMoneyCopy += 5;
             }
         }
-        
 
         if (vehicleChoice == 0)
         {
@@ -504,24 +512,22 @@ public:
                 {
                     DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
                 }
+                else {
+                    DrawTexture(barrierPositionVct[i].barrierT, barrierPositionVct[i].x, barrierPositionVct[i].y, WHITE);
+                }
 
                 if (isClicked() && CheckCollisionPointCircle(mousePoint, backCircle, 30))
-                {    
+                {
                     countries[i] = 0;
                     unloadBack = true;
                     banCountry[i] = true;
-                }
-
-                if (unloadBack)
-                {
-                    DrawTexture(barrierPositionVct[i].barrierT, barrierPositionVct[i].x, barrierPositionVct[i].y, WHITE);
                 }
             }
 
         }         
 
         if (!flyOneTime)
-        {
+        {        
             transportMenuF();
 
             if (planeToMove)
