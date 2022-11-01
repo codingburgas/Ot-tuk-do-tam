@@ -123,6 +123,7 @@ namespace variables {
     bool closeOptions = 0;
 
     Sound mapMusic;
+    float renderScale = 7.5;
 
     bool unloadBack = false;
 
