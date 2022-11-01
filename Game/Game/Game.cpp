@@ -69,6 +69,7 @@ namespace variables {
 
     //transport menu
     Texture2D transportMenu;
+    Texture2D okButtonTransportMenu;
     Texture2D isClickedCheck;
     
     //vehicle audios
@@ -193,7 +194,7 @@ public:
     
         countriesV[0] = { spain, 7 * renderScale , 94 * renderScale };
         countriesV[1] = { france, 44 * renderScale , 76 * renderScale };
-        countriesV[2] = { italy, 91 * renderScale , 96 * renderScale };
+        countriesV[2] = { italy, 91 * renderScale + 1, 96 * renderScale };
         countriesV[3] = { germany, 96 * renderScale , 65 * renderScale };
         countriesV[4] = { bulgaria, 169 * renderScale , 108 * renderScale };
         countriesV[5] = { romania, 160 * renderScale , 92 * renderScale };
@@ -227,6 +228,7 @@ public:
 
         transportMenu = LoadTexture("../src/sprites/Map images/transportMenu.png");
         isClickedCheck = LoadTexture("../src/sprites/Map images/check.png");
+        okButtonTransportMenu = LoadTexture("../src/sprites/Map images/okCLean.png");
 
         //touranLeft = LoadTexture("../src/sprites/Map images/touranLeft.png");
         //touranRight = LoadTexture("../src/sprites/Map images/touranRight.png");
@@ -288,6 +290,7 @@ public:
         if (!planeToMove)
         {
             DrawRectangle(0, 0, 1920, 1080, darkerWindow);
+            DrawTexture(okButtonTransportMenu, 1725, 420, WHITE);
             DrawTexture(transportMenu, 1450, 270, WHITE);
         }
         
@@ -311,20 +314,15 @@ public:
         if (transportCheck == 1)
         {
             DrawTexture(isClickedCheck, 1795, 315, WHITE);
-            transportCheck = 0;
         }
         else if (transportCheck == 2)
         {
             DrawTexture(isClickedCheck, 1795, 365, WHITE);
-            transportCheck = 0;
         }
             
-        if ((mousePoint.x >= 1450 && mousePoint.x <= 1860) && (mousePoint.y >= 270 && mousePoint.y <= 435) && isClicked())
-        {
-            if (isClicked())
-            {
-                planeToMove = true;
-            }          
+        if ((mousePoint.x >= 1725 && mousePoint.x <= 1825) && transportCheck != 0 && (mousePoint.y >= 400 && mousePoint.y <= 450) && isClicked())
+        {          
+            planeToMove = true;                  
         }
     }
 
