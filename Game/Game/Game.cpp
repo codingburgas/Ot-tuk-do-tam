@@ -64,6 +64,8 @@ namespace variables {
         float y;
     };
 
+    int vehicleSpeed;
+
     //train
     Texture2D trainLeft, trainRight;
 
@@ -196,7 +198,7 @@ public:
     
         countriesV[0] = { spain, 7 * renderScale , 94 * renderScale };
         countriesV[1] = { france, 44 * renderScale , 76 * renderScale };
-        countriesV[2] = { italy, 91 * renderScale + 1, 96 * renderScale };
+        countriesV[2] = { italy, 91 * renderScale, 96 * renderScale };
         countriesV[3] = { germany, 96 * renderScale , 65 * renderScale };
         countriesV[4] = { bulgaria, 169 * renderScale , 108 * renderScale };
         countriesV[5] = { romania, 160 * renderScale , 92 * renderScale };
@@ -226,6 +228,7 @@ public:
         countryPositions[4] = { circles[4].x - 15, circles[4].y - 15};
         countryPositions[5] = { circles[5].x - 15, circles[5].y - 15 };
 
+        vehicleSpeed = 4.0f;
         planeLeft = LoadTexture("../src/sprites/Map images/planeLeft.png");
         planeRight = LoadTexture("../src/sprites/Map images/planeRight.png");
 
@@ -266,8 +269,8 @@ public:
 
         float rotation = atan2(difference.y, difference.x) * 180 / M_PI;
 
-        plane.planeCurrentPosX += cos(Utils::toRadian(rotation)) * 4.0f;
-        plane.planeCurrentPosY += sin(Utils::toRadian(rotation)) * 4.0f;
+        plane.planeCurrentPosX += cos(Utils::toRadian(rotation)) * vehicleSpeed;
+        plane.planeCurrentPosY += sin(Utils::toRadian(rotation)) * vehicleSpeed;
 
         if (difference.x < 0)
         {
@@ -310,7 +313,6 @@ public:
             }
             else if (mousePoint.y >= 350 && mousePoint.y <= 375 && isClicked())
             {
-                
                 transportCheck = 2;
                     
                 vehicleChoice = 1;
@@ -328,7 +330,8 @@ public:
             
         if ((mousePoint.x >= 1725 && mousePoint.x <= 1825) && transportCheck != 0 && (mousePoint.y >= 400 && mousePoint.y <= 450) && isClicked())
         {          
-            planeToMove = true;                  
+            planeToMove = true;       
+            transportCheck = 0;
         }
     }
 
