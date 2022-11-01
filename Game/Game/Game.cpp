@@ -123,7 +123,6 @@ namespace variables {
     bool closeOptions = 0;
 
     Sound mapMusic;
-    float renderScale = 7.5;
 
     bool unloadBack = false;
 
@@ -143,6 +142,14 @@ namespace variables {
     Color darkerWindow = { 0,0,0,120 };
     bool isQuitting = false;
     Texture2D confirmationT;
+
+    //money mechanic 
+    int allMoney = 2000;
+    int moneySpent;
+    string printMoney;
+
+    //points mechanic
+    int points;
 };
 
 using namespace variables;
@@ -154,8 +161,6 @@ class Game
 {
 public:
     Game() {
-        
-
         SetTargetFPS(fps);
         srand(time(0));
 
@@ -345,6 +350,9 @@ public:
         mousePoint = GetMousePosition();
         //cout << mousePoint.x << " " << mousePoint.y << endl;
 
+        printMoney = to_string(allMoney);
+        
+
         if (vehicleChoice == 0)
         {
             plane.planeT = planeLeft;
@@ -497,6 +505,8 @@ public:
             }
             
         }
+
+        DrawText(printMoney.c_str(), 565, 10, 50, GREEN);
     }
 
     void optionsMenu()
