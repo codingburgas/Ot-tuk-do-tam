@@ -10,19 +10,26 @@ namespace variables {
 
 using namespace variables;
 
-void backstoryTypewriteEffect(string& text)
+void typewriteEffect(string& text, int posX, int posY, int fontSize, Color color)
 {
 	Lifetime++;//increment for timer
-	
-	if (IsKeyPressed(KEY_ENTER)){
+
+	if (IsKeyPressed(KEY_ENTER)) {
 		i = text.length();
 		my = text;
 		Lifetime = 11;
 	}
-	if (Lifetime == 10 && !IsKeyPressed(KEY_ENTER)){	
-			my += text[i++];
-			Lifetime = 0;
+	if (Lifetime == 10 && !IsKeyPressed(KEY_ENTER)) {
+		my += text[i++];
+		Lifetime = 0;
 	}
 
-	DrawText(my.c_str(), 130, 300, 32, BROWN);
+	if (my[i] == text.length())
+	{
+		cout << "";
+	}
+	else {
+		DrawText(my.c_str(), posX, posY, fontSize, color);
+	}
 }
+	

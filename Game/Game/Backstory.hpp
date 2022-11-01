@@ -1,2 +1,3 @@
 #pragma once
-void backstoryTypewriteEffect(string& text);
+
+void typewriteEffect(string& text, int posX, int posY, int fontSize, Color color);

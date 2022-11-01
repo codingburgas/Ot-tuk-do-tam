@@ -145,9 +145,9 @@ namespace variables {
     Texture2D confirmationT;
 
     //money mechanic 
-    int allMoney = 2000;
-    int moneySpent;
-    string printMoney;
+    int allMoney = 2000, allMoneyCopy, moneySpent;
+    string printMoney, allMoneyCopyPrint, moneySpentPrint;
+    Sound moneySound;
 
     //points mechanic
     int points;
@@ -227,12 +227,10 @@ public:
         optionImageHovered = LoadTexture("../src/sprites/Map images/settingsButtonHover.png");
         optionImageClicked = LoadTexture("../src/sprites/Map images/settingsButtonPressed.png");
 
-        countryPositions[0] = { circles[0].x - 15, circles[0].y - 15 };
-        countryPositions[1] = { circles[1].x - 15, circles[1].y - 15 };
-        countryPositions[2] = { circles[2].x - 15, circles[2].y - 15 };
-        countryPositions[3] = { circles[3].x - 15, circles[3].y - 15 };
-        countryPositions[4] = { circles[4].x - 15, circles[4].y - 15};
-        countryPositions[5] = { circles[5].x - 15, circles[5].y - 15 };
+        for (int i = 0; i < 6; i++)
+        {
+            countryPositions[i] = { circles[i].x - 15, circles[i].y - 15 };
+        }
 
         vehicleSpeed = 4.0f;
         planeLeft = LoadTexture("../src/sprites/Map images/planeLeft.png");
@@ -251,10 +249,13 @@ public:
         touranSound = LoadSound("../Audios/Touran.mp3");
         trainSound = LoadSound("../Audios/Train.mp3");
         planeSound = LoadSound("../Audios/Plane.mp3");
+        moneySound = LoadSound("../Audios/Money.mp3");
 
         SetSoundVolume(vehicleSound, 0.5);
 
         SetExitKey(-1);
+
+        allMoneyCopy = allMoney;
     }
 
     void backstory()
@@ -315,7 +316,7 @@ public:
             {                           
                 vehicleChoice = 0;
 
-                transportCheck = 1;                  
+                transportCheck = 1;            
             }
             else if (mousePoint.y >= 350 && mousePoint.y <= 375 && isClicked())
             {
@@ -336,7 +337,19 @@ public:
             
         if ((mousePoint.x >= 1725 && mousePoint.x <= 1825) && transportCheck != 0 && (mousePoint.y >= 400 && mousePoint.y <= 450) && isClicked())
         {          
-            planeToMove = true;       
+            planeToMove = true; 
+
+            PlaySound(moneySound);
+
+            if (transportCheck == 1)
+            {
+                allMoney -= 1000;
+            }
+            else if (transportCheck == 2)
+            {
+                allMoney -= 500;
+            }
+
             transportCheck = 0;
         }
     }
@@ -351,7 +364,18 @@ public:
         mousePoint = GetMousePosition();
         //cout << mousePoint.x << " " << mousePoint.y << endl;
 
-        printMoney = to_string(allMoney);
+        printMoney = to_string(allMoneyCopy) + "$";
+        
+        if (allMoney != allMoneyCopy)
+        {
+            if (allMoney < allMoneyCopy)
+            {
+                allMoneyCopy -= 5;
+            }
+            else {
+                allMoneyCopy += 5;
+            }
+        }
         
 
         if (vehicleChoice == 0)
@@ -507,7 +531,7 @@ public:
             
         }
 
-        DrawText(printMoney.c_str(), 565, 10, 50, GREEN);
+        DrawText(printMoney.c_str(), 500, 50, 50, BROWN);
     }
 
     void optionsMenu()
