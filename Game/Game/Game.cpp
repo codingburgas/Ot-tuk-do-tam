@@ -83,11 +83,12 @@ namespace variables {
     int vehicleChoice = 0;
 
     //map variables
-    Rectangle lines_Decoration[3];
 
     Rectangle choiceFromOptions[3];
 
-    Rectangle invisibleRec = {1800,20,90,90};
+    Texture2D optionImage;
+    Texture2D optionImageHovered;
+    Texture2D optionImageClicked;
 
     Rectangle afterClickedOptions = { 1665,115,250,330 };
 
@@ -212,6 +213,10 @@ public:
     
         //mapMusic = LoadSound("../Audios/mapMusic.ogg");
         //SetSoundVolume(mapMusic, 0.6);
+
+        optionImage = LoadTexture("../src/sprites/Map images/settingsButtonClean.png");
+        optionImageHovered = LoadTexture("../src/sprites/Map images/settingsButtonHover.png");
+        optionImageClicked = LoadTexture("../src/sprites/Map images/settingsButtonPressed.png");
 
         countryPositions[0] = { circles[0].x - 15, circles[0].y - 15 };
         countryPositions[1] = { circles[1].x - 15, circles[1].y - 15 };
@@ -405,15 +410,7 @@ public:
             countries[coutnryNumber] = 1;
         }
 
-
-        DrawRectangleRec(invisibleRec, BLANK);
-
-        DrawRectangleGradientH(invisibleRec.x, invisibleRec.y, invisibleRec.width, invisibleRec.height, GOLD, Fade(MAROON, 0.9444444));
-
-        for (int i = 0; i < 3; i++)
-        {
-            DrawRectangleRec(lines_Decoration[i], Fade(WHITE, 0.85));
-        }
+        DrawTexture(optionImage, 1840, 30, WHITE);
 
         for (int i = 0; i < 6; i++)
         {
@@ -500,19 +497,20 @@ public:
 
     void optionsMenu()
     {
-		if (isClicked() && CheckCollisionPointRec(mousePoint, invisibleRec))
+		if ((mousePoint.x >= 1845 && mousePoint.x <= 1900) && (mousePoint.y >= 20 && mousePoint.y <= 70))
 		{
-			options = 1;
+            DrawTexture(optionImageHovered, 1840, 30, WHITE);
+
+            if(isClicked())
+            {
+                DrawTexture(optionImageClicked, 1840, 30, WHITE);
+                options = 1;
+            }	
 		}
 
 		if (options)
 		{
 			DrawRectangleRec(afterClickedOptions, LIGHTGRAY);
-
-			for (int i = 0; i < 3; i++)
-			{
-				DrawRectangleLinesEx(choiceFromOptions[i], 5, WHITE);
-			}
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -543,23 +541,12 @@ public:
             if (helpIsClicked)
             {
                 DrawTexture(help, 0, 0, WHITE);
-
-                DrawRectangleRec(invisibleRec, Fade(ORANGE, 0.5));
             }
 
-			if (isClicked())
-			{
-				closeOptions = 1;
-			}
-
-			if (closeOptions)
-			{
-				if (isClicked() && CheckCollisionPointRec(mousePoint, invisibleRec))
-				{
-					//options = 0;
-					//closeOptions = 0;
-				}
-			}
+            if ((mousePoint.x >= 1845 && mousePoint.x <= 1900) && (mousePoint.y >= 20 && mousePoint.y <= 70) && isClicked())
+            {
+                options = 0;
+            }
 		}
     }
 
@@ -628,14 +615,6 @@ void setupVars()
 
     backCircle.x = 1800;
     backCircle.y = 800;
-
-    for (int i = 0; i < 3; i++)
-    {
-        lines_Decoration[i].x = 1807.5f;
-        lines_Decoration[i].y = 38.5f + (i * 20);
-        lines_Decoration[i].width = 75;
-        lines_Decoration[i].height = 15;
-    }
 
     for (int i = 0; i < 3; i++)
     {
