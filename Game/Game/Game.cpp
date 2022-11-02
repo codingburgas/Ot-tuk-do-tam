@@ -140,6 +140,7 @@ namespace variables {
     Texture2D confirmationT;
 
     //money mechanic 
+    Texture2D moneyBackground;
     int allMoney = 2000, allMoneyCopy, moneySpent;
     string printMoney, allMoneyCopyPrint, moneySpentPrint;
     Sound moneySound;
@@ -238,6 +239,8 @@ public:
         trainSound = LoadSound("../Audios/Train.mp3");
         planeSound = LoadSound("../Audios/Plane.mp3");
         moneySound = LoadSound("../Audios/Money.mp3");
+
+        moneyBackground = LoadTexture("../src/sprites/Menus and boards/moneyDisplay.png");
 
         SetSoundVolume(vehicleSound, 0.5);
 
@@ -363,7 +366,7 @@ public:
         mousePoint = GetMousePosition();
         //cout << mousePoint.x << " " << mousePoint.y << endl;
 
-        printMoney = to_string(allMoneyCopy) + "$";
+        printMoney = to_string(allMoneyCopy);
         
         if (allMoney != allMoneyCopy)
         {
@@ -531,7 +534,8 @@ public:
             
         }
 
-        DrawText(printMoney.c_str(), 500, 50, 50, BROWN);
+        DrawTexture(moneyBackground, 7, 30, WHITE);
+        DrawText(printMoney.c_str(), 85, 50, 50, DARKGREEN);
     }
 
     void optionsMenu()
