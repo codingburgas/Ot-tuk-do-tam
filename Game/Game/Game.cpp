@@ -12,6 +12,8 @@ namespace Utils {
 }
 
 namespace variables {
+    Texture2D map;
+
     //window width and height
     int width = 1920;
     int height = 1080;
@@ -39,14 +41,6 @@ namespace variables {
     Texture2D italy, italyHovered;
     Texture2D spain, spainHovered;
     Texture2D romania, romaniaHovered;
-
-    Texture2D map;
-    Texture2D bull;
-    Texture2D bar;
-    Texture2D cheese;
-    Texture2D help;
-
-    vector<Texture2D> images (6);
 
     int money = 2000;
 
@@ -165,6 +159,9 @@ public:
         SetTargetFPS(fps);
         srand(time(0));
 
+        map = LoadTexture("../src/sprites/backgrounds/map.png");
+        setWidthAndHeight(map);
+
         //backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
        
         //player
@@ -181,6 +178,7 @@ public:
         germany = LoadTexture("../src/sprites/countries/Germany.png");
         italy = LoadTexture("../src/sprites/countries/Italy.png");
         spain = LoadTexture("../src/sprites/countries/Spain.png");
+        spain = LoadTexture("../src/sprites/countries/Spain.png");
         romania = LoadTexture("../src/sprites/countries/Romania.png");
 
         bulgariaHovered = LoadTexture("../src/sprites/countries/BulgariaDark.png");
@@ -192,24 +190,6 @@ public:
 
         target = LoadTexture("../src/sprites/Map images/targetClean.png");
         targetHover = LoadTexture("../src/sprites/Map images/targetHover.png");
-
-        map = LoadTexture("../src/sprites/backgrounds/map.png");
-        bull = LoadTexture("../src/sprites/backgrounds/bull.png");
-        bar = LoadTexture("../src/sprites/backgrounds/bar.png");
-        cheese = LoadTexture("../src/sprites/backgrounds/cheddar.png");
-        help = LoadTexture("../src/sprites/backgrounds/help.png");
-
-        setWidthAndHeight(map);
-        setWidthAndHeight(bull);
-        setWidthAndHeight(cheese);
-        setWidthAndHeight(help);
-
-        images[0] = { bull };
-        images[1] = { cheese };
-        images[2] = { help };
-        images[3] = { bar };
-        images[4] = { bull };
-        images[5] = { bar };
     
         countriesV[0] = { spain, 52.5 , 705 };
         countriesV[1] = { france, 330 , 570 };
@@ -508,7 +488,6 @@ public:
             {
                 StopSound(vehicleSound);
                 DrawRectangle(0,0,GetScreenWidth(), GetScreenHeight(), GRAY);
-                //DrawTexture(images[i], 0, 0, WHITE);
                 
                 player.CheckDir();
                 player.Movement();
@@ -597,7 +576,7 @@ public:
 
             if (helpIsClicked)
             {
-                DrawTexture(help, 0, 0, WHITE);
+                //DrawTexture(help, 0, 0, WHITE);
             }
    
 		}
