@@ -70,6 +70,7 @@ namespace variables {
     Texture2D okHoverButtonTransportMenu;
 
     Texture2D isClickedCheck;
+    bool isTransportMenuOn = false;
     
     //vehicle audios
     Sound touranSound, planeSound, trainSound;
@@ -290,7 +291,7 @@ public:
     }
 
     void transportMenuF()
-    {
+    {     
         if (!planeToMove)
         {
             DrawRectangle(0, 0, 1920, 1080, darkerWindow);
@@ -326,13 +327,11 @@ public:
 
         if ((mousePoint.x >= 1725 && mousePoint.x <= 1825) && transportCheck != 0 && (mousePoint.y >= 400 && mousePoint.y <= 450))
         {
-
             DrawTexture(okHoverButtonTransportMenu, 1725, 420, WHITE);
+
             if (isClicked())
             {
-                planeToMove = true;
-
-                PlaySound(moneySound);
+                planeToMove = true;            
 
                 if (transportCheck == 1)
                 {
@@ -398,7 +397,7 @@ public:
 
         for (int i = 0; i < 6; i++)
         {
-            if (!changeCircles[i])
+            if (!changeCircles[i] && !isTransportMenuOn)
             {
                 DrawTexture(target, circles[i].x-20, circles[i].y-40, WHITE);
             }
@@ -406,7 +405,7 @@ public:
 
         for (int i = 0; i < 6; i++)
         {
-            if ((CheckCollisionPointCircle(mousePoint, circles[i], 30)) || changeCircles[i])
+            if ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || changeCircles[i]) && !isTransportMenuOn)
             {
                 hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y, circles[i].x -20, circles[i].y - 40);
             }
@@ -454,6 +453,10 @@ public:
             {
                 if (isClicked() && CheckCollisionPointCircle(mousePoint, circles[i], 30))
                 {
+                    PlaySound(moneySound);
+
+                    isTransportMenuOn = true;
+
                     if (flyOneTime)
                     {
                         countryFly = i;
@@ -504,6 +507,7 @@ public:
                 }
                 else {
                     DrawTexture(countriesHoveredV[i].country, countriesHoveredV[i].x, countriesHoveredV[i].y, WHITE);
+                    isTransportMenuOn = false;
                 }
 
                 if (isClicked() && CheckCollisionPointCircle(mousePoint, backCircle, 30))
@@ -517,7 +521,7 @@ public:
         }         
 
         if (!flyOneTime)
-        {        
+        {       
             transportMenuF();
 
             if (planeToMove)
