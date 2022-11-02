@@ -31,13 +31,14 @@ namespace variables {
     };
 
     vector<country> countriesV (6);
+    vector<country> countriesHoveredV(6);
 
-    Texture2D bulgaria;
-    Texture2D france;
-    Texture2D germany;
-    Texture2D italy;
-    Texture2D spain;
-    Texture2D romania;
+    Texture2D bulgaria, bulgariaHovered;
+    Texture2D france, franceHovered;
+    Texture2D germany, germanyHovered;
+    Texture2D italy, italyHovered;
+    Texture2D spain, spainHovered;
+    Texture2D romania, romaniaHovered;
 
     Texture2D map;
     Texture2D bull;
@@ -98,15 +99,6 @@ namespace variables {
     Vector2 mousePoint;
 
     Vector2 circles[6] = {320, 800};
-
-    Texture2D barrier;  
-
-    struct barrierPosition {
-        Texture2D barrierT;
-        float x, y;
-    };
-
-    vector<barrierPosition> barrierPositionVct (6);
 
     int countryFly;
     bool isFlying;
@@ -186,6 +178,13 @@ public:
         spain = LoadTexture("../src/sprites/countries/Spain.png");
         romania = LoadTexture("../src/sprites/countries/Romania.png");
 
+        bulgariaHovered = LoadTexture("../src/sprites/countries/BulgariaDark.png");
+        franceHovered = LoadTexture("../src/sprites/countries/FranceDark.png");
+        germanyHovered = LoadTexture("../src/sprites/countries/GermanyDark.png");
+        italyHovered = LoadTexture("../src/sprites/countries/ItalyDark.png");
+        spainHovered = LoadTexture("../src/sprites/countries/SpainDark.png");
+        romaniaHovered = LoadTexture("../src/sprites/countries/RomaniaDark.png");
+
 
         map = LoadTexture("../src/sprites/backgrounds/map.png");
         bull = LoadTexture("../src/sprites/backgrounds/bull.png");
@@ -211,17 +210,13 @@ public:
         countriesV[3] = { germany, 720 , 487.5 };
         countriesV[4] = { bulgaria, 1267.5 , 810 };
         countriesV[5] = { romania, 1200 , 690 };
-       
-        barrier = LoadTexture("../src/sprites/Map images/Barrier.png");
-        barrier.width = 80;
-        barrier.height = 80;      
 
-        barrierPositionVct[0] = { barrier, 200, 815 };
-        barrierPositionVct[1] = { barrier, 530, 650 };
-        barrierPositionVct[2] = { barrier, 860, 800 };
-        barrierPositionVct[3] = { barrier, 830, 550 };
-        barrierPositionVct[4] = { barrier, 1330, 810 };
-        barrierPositionVct[5] = { barrier, 1310, 710 };
+        countriesHoveredV[0] = { spainHovered, 52.5 , 705 };
+        countriesHoveredV[1] = { franceHovered, 330 , 570 };
+        countriesHoveredV[2] = { italyHovered, 682.5, 720 };
+        countriesHoveredV[3] = { germanyHovered, 720 , 487.5 };
+        countriesHoveredV[4] = { bulgariaHovered, 1267.5 , 810 };
+        countriesHoveredV[5] = { romaniaHovered, 1200 , 690 };     
     
         //mapMusic = LoadSound("../Audios/mapMusic.ogg");
         //SetSoundVolume(mapMusic, 0.6);
@@ -513,7 +508,7 @@ public:
                     DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
                 }
                 else {
-                    DrawTexture(barrierPositionVct[i].barrierT, barrierPositionVct[i].x, barrierPositionVct[i].y, WHITE);
+                    DrawTexture(countriesHoveredV[i].country, countriesHoveredV[i].x, countriesHoveredV[i].y, WHITE);
                 }
 
                 if (isClicked() && CheckCollisionPointCircle(mousePoint, backCircle, 30))
