@@ -42,6 +42,8 @@ namespace variables {
     Texture2D spain, spainHovered;
     Texture2D romania, romaniaHovered;
 
+    Texture2D menuOptions;
+
     int money = 2000;
 
     //vehicles
@@ -69,6 +71,8 @@ namespace variables {
     Texture2D okCleanButtonTransportMenu;
     Texture2D okHoverButtonTransportMenu;
 
+    Texture2D audioIsOn;
+
     Texture2D isClickedCheck;
     bool isTransportMenuOn = false;
     
@@ -92,6 +96,9 @@ namespace variables {
     Texture2D optionImage;
     Texture2D optionImageHovered;
     Texture2D optionImageClicked;
+
+    
+
     int optionCounter;
 
     Rectangle afterClickedOptions = { 1665,115,250,330 };
@@ -125,6 +132,8 @@ namespace variables {
 
     bool helpIsClicked = false;
 
+    bool audioIsClicked = false;
+
     bool planeToMove = false ;
     int transportCheck = 0;
 
@@ -147,6 +156,7 @@ namespace variables {
 
     //points mechanic
     int points;
+
 };
 
 using namespace variables;
@@ -213,6 +223,9 @@ public:
         optionImage = LoadTexture("../src/sprites/Map images/settingsButtonClean.png");
         optionImageHovered = LoadTexture("../src/sprites/Map images/settingsButtonHover.png");
         optionImageClicked = LoadTexture("../src/sprites/Map images/settingsButtonPressed.png");
+        
+        menuOptions = LoadTexture("../src/sprites/Map images/settingsMenu.png");
+        audioIsOn = LoadTexture("../src/sprites/Map images/audioOn.png");
 
         for (int i = 0; i < 6; i++)
         {
@@ -554,7 +567,7 @@ public:
 
 		if (options)
 		{
-			DrawRectangleRec(afterClickedOptions, LIGHTGRAY);
+            DrawTexture(menuOptions, 1635, 100, WHITE);
 
 			for (int i = 0; i < 3; i++)
 			{
@@ -562,11 +575,11 @@ public:
 				{
 					switch (i) {
 					case 0:
-						//settings happen here
+                        helpIsClicked = true;
 						break;
 
 					case 1:
-                        helpIsClicked = true;
+                        audioIsClicked = true;
 						break;
 
 					case 2:
@@ -576,17 +589,24 @@ public:
 				}
 			}
 
-            DrawText("Settings", 1680, 150, 50, BLACK);
-
-            DrawText("Help", 1680, 250, 50, BLACK);
-
-            DrawText("Quit", 1680, 350, 50, BLACK);
-
             if (helpIsClicked)
             {
-                //DrawTexture(help, 0, 0, WHITE);
+                //idk what will happen here Deivid :)
             }
-   
+            
+            if (audioIsClicked)
+            {
+                DrawTexture(audioIsOn, 1857.5, 187.5, WHITE);
+
+                if (IsMouseButtonReleased)
+                {
+                    if (isClicked() && CheckCollisionPointRec(mousePoint, choiceFromOptions[1]))
+                    {
+                        audioIsClicked = false;
+                    }
+                }
+                //problem pri clickvaneto utre shte pokaja
+            }
 		}
 
         if ((mousePoint.x >= 1845 && mousePoint.x <= 1900) && (mousePoint.y >= 20 && mousePoint.y <= 70) && isClicked() && optionCounter == 2)
@@ -672,9 +692,9 @@ void setupVars()
     for (int i = 0; i < 3; i++)
     {
         choiceFromOptions[i].x = 1667.5f;
-        choiceFromOptions[i].y = 142.5f + (i * 100);
-        choiceFromOptions[i].width = 245;
-        choiceFromOptions[i].height = 60;
+        choiceFromOptions[i].y = 130.5f + (i * 60);
+        choiceFromOptions[i].width = 200;
+        choiceFromOptions[i].height = 50;
     }
 
     confirmationT = LoadTexture("../src/sprites/Menus and boards/Confirmation.png");
