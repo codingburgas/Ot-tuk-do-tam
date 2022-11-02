@@ -72,7 +72,9 @@ namespace variables {
 
     //transport menu
     Texture2D transportMenu;
-    Texture2D okButtonTransportMenu;
+    Texture2D okCleanButtonTransportMenu;
+    Texture2D okHoverButtonTransportMenu;
+
     Texture2D isClickedCheck;
     
     //vehicle audios
@@ -244,7 +246,9 @@ public:
 
         transportMenu = LoadTexture("../src/sprites/Map images/transportMenu.png");
         isClickedCheck = LoadTexture("../src/sprites/Map images/check.png");
-        okButtonTransportMenu = LoadTexture("../src/sprites/Map images/okCLean.png");
+        okCleanButtonTransportMenu = LoadTexture("../src/sprites/Map images/okCLean.png");
+        okHoverButtonTransportMenu = LoadTexture("../src/sprites/Map images/okHover.png");
+
 
         //touranLeft = LoadTexture("../src/sprites/Map images/touranLeft.png");
         //touranRight = LoadTexture("../src/sprites/Map images/touranRight.png");
@@ -310,8 +314,9 @@ public:
         if (!planeToMove)
         {
             DrawRectangle(0, 0, 1920, 1080, darkerWindow);
-            DrawTexture(okButtonTransportMenu, 1725, 420, WHITE);
+            DrawTexture(okCleanButtonTransportMenu, 1725, 420, WHITE);
             DrawTexture(transportMenu, 1450, 270, WHITE);
+
         }
         
         if (mousePoint.x >= 1795 && mousePoint.x <= 1820)
@@ -338,23 +343,28 @@ public:
         {
             DrawTexture(isClickedCheck, 1795, 365, WHITE);
         }
-            
-        if ((mousePoint.x >= 1725 && mousePoint.x <= 1825) && transportCheck != 0 && (mousePoint.y >= 400 && mousePoint.y <= 450) && isClicked())
-        {          
-            planeToMove = true; 
 
-            PlaySound(moneySound);
+        if ((mousePoint.x >= 1725 && mousePoint.x <= 1825) && transportCheck != 0 && (mousePoint.y >= 400 && mousePoint.y <= 450))
+        {
 
-            if (transportCheck == 1)
+            DrawTexture(okHoverButtonTransportMenu, 1725, 420, WHITE);
+            if (isClicked())
             {
-                allMoney -= 1000;
-            }
-            else if (transportCheck == 2)
-            {
-                allMoney -= 500;
-            }
+                planeToMove = true;
 
-            transportCheck = 0;
+                PlaySound(moneySound);
+
+                if (transportCheck == 1)
+                {
+                    allMoney -= 1000;
+                }
+                else if (transportCheck == 2)
+                {
+                    allMoney -= 500;
+                }
+
+                transportCheck = 0;
+            }
         }
 
         if ((mousePoint.x <= 1450 || mousePoint.x >= 1865 || mousePoint.y <= 250 || mousePoint.y >= 475) && isClicked())
