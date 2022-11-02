@@ -89,6 +89,9 @@ namespace variables {
 
     Rectangle choiceFromOptions[3];
 
+    Texture2D target;
+    Texture2D targetHover;
+
     Texture2D optionImage;
     Texture2D optionImageHovered;
     Texture2D optionImageClicked;
@@ -185,6 +188,8 @@ public:
         spainHovered = LoadTexture("../src/sprites/countries/SpainDark.png");
         romaniaHovered = LoadTexture("../src/sprites/countries/RomaniaDark.png");
 
+        target = LoadTexture("../src/sprites/Map images/targetClean.png");
+        targetHover = LoadTexture("../src/sprites/Map images/targetHover.png");
 
         map = LoadTexture("../src/sprites/backgrounds/map.png");
         bull = LoadTexture("../src/sprites/backgrounds/bull.png");
@@ -263,9 +268,10 @@ public:
        // backstoryTypewriteEffect(backstoryText);
     }
 
-    void hoverEffects(Texture2D& country, float posx, float posy)
+    void hoverEffects(Texture2D& country, float posx, float posy ,float posxTarget, float posyTarget)
     {
         DrawTexture(country, posx, posy, WHITE);
+        DrawTexture(targetHover, posxTarget, posyTarget, WHITE);
     }
 
     void moveAirplane(const countryPosition& countryPosition)
@@ -404,7 +410,7 @@ public:
         {
             if (!changeCircles[i])
             {
-                DrawCircleGradient(circles[i].x, circles[i].y, 30, GREEN, SKYBLUE);
+                DrawTexture(target, circles[i].x-20, circles[i].y-40, WHITE);
             }
         }
 
@@ -412,7 +418,7 @@ public:
         {
             if ((CheckCollisionPointCircle(mousePoint, circles[i], 30)) || changeCircles[i])
             {
-                hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y);
+                hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y, circles[i].x -20, circles[i].y - 40);
             }
         }
 
@@ -632,6 +638,13 @@ void setWidthAndHeight(Texture2D& variable)
 
 void setupVars()
 {
+
+    target.width = 100;
+    target.height = 100;
+
+    targetHover.width = 100;
+    targetHover.height = 100;
+
     //spain
     circles[0].x = 320;
     circles[0].y = 800;
