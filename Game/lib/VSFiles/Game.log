@@ -1,8 +1,25 @@
-﻿D:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(519,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
-D:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(520,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
-  Player.cpp
-C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(13,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(14,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(120,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(120,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Game.vcxproj -> C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\lib\Game.exe
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(519,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(520,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Engine.cpp
+  Game.cpp
+D:\Projects\da\Game\Game\Game.cpp(10,27): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(169,19): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(232,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(271,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(271,30): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(272,46): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(272,34): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(279,24): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(419,66): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(419,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(526,64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(526,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(529,107): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(529,83): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(549,72): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(549,48): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(606,48): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(606,40): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\Projects\da\Game\Game\Game.cpp(608,1): warning C4551: function call missing argument list
+  Generating Code...
+  Game.vcxproj -> D:\Projects\da\Game\lib\Game.exe
