@@ -107,13 +107,13 @@ void Player::Movement()
 	}
 	counter++;
 	//limits
-	if (PosX > 200 && PosX < GetScreenWidth() - 200)
+	if (PosX > speedBg && PosX < GetScreenWidth() - speedBg)
 	{
-		XBg = -PosX + 200;
+		XBg = -PosX + speedBg;
 	}
-	if (PosY > 200 && PosY < GetScreenHeight() - 200)
+	if (PosY > speedBg && PosY < GetScreenHeight() - speedBg)
 	{
-		YBg = -PosY + 200;
+		YBg = -PosY + speedBg;
 	}
 
 	move = Rectangle{ PosX, PosY, (float)sprite.width / 4, (float)sprite.height };
