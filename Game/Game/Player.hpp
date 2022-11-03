@@ -4,13 +4,14 @@
 class Player : public Bg
 {
 private:
-	Texture2D sprite;
+	Texture2D playerSprite;
 
 	Texture2D u;
 	Texture2D d;
 	Texture2D r;
 	Texture2D l;
-	
+
+	vector<Texture2D> playerSprites;
 
 	Rectangle view;
 	Rectangle move;

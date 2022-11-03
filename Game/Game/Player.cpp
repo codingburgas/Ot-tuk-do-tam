@@ -7,12 +7,19 @@ void Player::LoadSprites(int fps)
 	l = LoadTexture("../src/sprites/heroSprite/left.png");
 	r = LoadTexture("../src/sprites/heroSprite/right.png");
 	background = LoadTexture("../src/sprites/backgrounds/bar.png");
+
+	playerSprites.push_back(l);
+	playerSprites.push_back(r);
+	playerSprites.push_back(u);
+	playerSprites.push_back(d);
+
 	lim = (float)d.width / 4;
 	view = { lim, 0, (float)d.width / 4, (float)d.height };
 	this->fps = fps;
 	PosX = GetScreenWidth() / 2;
 	PosY = GetScreenHeight() / 2;
 }
+
 void Player::CheckDir()
 {
 	if ((IsKeyDown(KEY_UP) or IsKeyDown(KEY_W)) && !(PosY <= 20))
@@ -21,7 +28,7 @@ void Player::CheckDir()
 		HeroDir = UP;
 		HorizotnalOrVertical[1] = 1;
 	}
-	else if ((IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S)) && !(PosY >= GetScreenHeight() - sprite.height))
+	else if ((IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S)) && !(PosY >= GetScreenHeight() - playerSprite.height))
 	{
 		PosY += speed * GetFrameTime();
 		HeroDir = DOWN;
@@ -37,7 +44,7 @@ void Player::CheckDir()
 		HeroDir = LEFT;
 		HorizotnalOrVertical[0] = 1;
 	}
-	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(PosX >= GetScreenWidth() - sprite.width /5))
+	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(PosX >= GetScreenWidth() - playerSprite.width /5))
 	{
 		PosX += speed * GetFrameTime();
 		HeroDir = RIGHT;
@@ -69,43 +76,28 @@ void Player::CheckDir()
 }
 void Player::Movement()
 {
-	if (HorizotnalOrVertical[0] && HorizotnalOrVertical[1]) speed = 90;
-	else speed = 150;
+	if (HorizotnalOrVertical[0] && HorizotnalOrVertical[1]) 
+		speed = 90;
+	else 
+		speed = 150;
 
-	switch (HeroDir)
-	{
-	case LEFT:
-		sprite = l;
-		view.height = (float)sprite.height;
-		break;
+	
+	playerSprite = playerSprites.at(int(HeroDir));
+	view.height = (float)playerSprite.height;
 
-	case RIGHT:
-		sprite = r;
-		view.height = (float)sprite.height;
-		break;
-
-	case UP:
-		sprite = u;
-		view.height = (float)sprite.height;
-		break;
-
-	case DOWN:
-		sprite = d;
-		view.height = (float)sprite.height;
-		break;
-
-	}
 	//flames
 	if (counter == fps / animationSpeed)
 	{
 		view.x += lim;
 		counter = 0;
 	}
-	if (abs(view.x) > sprite.width)
+	if (abs(view.x) > playerSprite.width)
 	{
 		view.x = lim;
 	}
+
 	counter++;
+
 	//limits
 	if (PosX > speedBg && PosX < GetScreenWidth() - speedBg)
 	{
@@ -116,9 +108,9 @@ void Player::Movement()
 		YBg = -PosY + speedBg;
 	}
 
-	move = Rectangle{ PosX, PosY, (float)sprite.width / 4, (float)sprite.height };
+	move = Rectangle{ PosX, PosY, (float)playerSprite.width / 4, (float)playerSprite.height };
 	DrawTexture(background, XBg, YBg, WHITE);
-	DrawTexturePro(sprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
+	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
 
 }
 void Player::UnLoadTextures()

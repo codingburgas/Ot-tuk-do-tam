@@ -2,13 +2,13 @@
 #include "Backstory.hpp"
 
 // define a timer
-namespace variables {
+namespace variablesV {
 	int Lifetime = 9;
 	string my;
 	int i = 0;
 }
 
-using namespace variables;
+using namespace variablesV;
 
 void typewriteEffect(string& text, int posX, int posY, int fontSize, Color color)
 {

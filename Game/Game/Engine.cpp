@@ -1,11 +1,11 @@
 #include "Precompile.hpp"
 #include "Engine.hpp"
 
-namespace variables {
+namespace variablesB {
 	Image icon = LoadImage("../src/sprites/icon.png");
 }
 
-using namespace variables;
+using namespace variablesB;
 
 void setIcon()
 {
