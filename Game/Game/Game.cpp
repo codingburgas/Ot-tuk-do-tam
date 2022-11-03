@@ -79,7 +79,6 @@ namespace variables {
     //vehicle audios
     Sound touranSound, planeSound, trainSound;
 
-
     Sound vehicleSound;
 
     vector <countryPosition> countryPositions (6);
@@ -96,8 +95,6 @@ namespace variables {
     Texture2D optionImage;
     Texture2D optionImageHovered;
     Texture2D optionImageClicked;
-
-    
 
     int optionCounter;
 
@@ -122,7 +119,6 @@ namespace variables {
     bool closeOptions = 0;
 
     Sound mapMusic;
-    float renderScale = 7.5;
 
     bool unloadBack = false;
 
@@ -140,7 +136,7 @@ namespace variables {
 
     bool outsideCheck;
     int isCheckedOutside = 0;
-
+    
     bool playSound = 0;
     int fps = 60;
 
@@ -314,9 +310,13 @@ public:
             DrawRectangle(0, 0, 1920, 1080, darkerWindow);
             DrawTexture(okCleanButtonTransportMenu, 1725, 420, WHITE);
             DrawTexture(transportMenu, 1450, 270, WHITE);
-
         }
         
+        if (isCheckedOutside == 1)
+        {
+            isTransportMenuOn = false;
+        }
+
         if (mousePoint.x >= 1795 && mousePoint.x <= 1820)
         {
             if (mousePoint.y >= 300 && mousePoint.y <= 325 && isClicked())
@@ -365,8 +365,7 @@ public:
 
         if ((mousePoint.x <= 1450 || mousePoint.x >= 1865 || mousePoint.y <= 250 || mousePoint.y >= 475) && isClicked())
         {
-            isCheckedOutside++;
-            cout << isCheckedOutside;
+            //isCheckedOutside++;
         }
     }
 
@@ -375,6 +374,7 @@ public:
         if (IsKeyPressed(KEY_ESCAPE))
         {
             isQuitting = true;
+            isTransportMenuOn = true;
         }
 
         mousePoint = GetMousePosition();
@@ -470,7 +470,10 @@ public:
             {
                 if (isClicked() && CheckCollisionPointCircle(mousePoint, circles[i], 30))
                 {
-                    PlaySound(moneySound);
+                    if (audioIsClicked)
+                    {
+                        PlaySound(moneySound);
+                    }                
 
                     isTransportMenuOn = true;
 
@@ -492,7 +495,7 @@ public:
         {
             //isF = true;
 
-            if (playSound)
+            if (playSound && audioIsClicked)
             {
                 PlaySound(vehicleSound);
             }
@@ -586,6 +589,7 @@ public:
 
 					case 2:
                         isQuitting = true;
+                        isTransportMenuOn = true;
 						break;
 					}
 				}
@@ -603,13 +607,9 @@ public:
 
                 if (IsMouseButtonUp && isClicked() && CheckCollisionPointRec(mousePoint, choiceFromOptions[1]) && audioIsClickedCounter == 2)
                 {
-                    cout << audioIsClicked << " ";
                     audioIsClicked = false;
-                    audioIsClickedCounter = 0;
-                    cout << audioIsClicked;
-                    
+                    audioIsClickedCounter = 0;                 
                 }
-                //problem pri clickvaneto utre shte pokaja
             }
 		}
 
@@ -634,7 +634,7 @@ public:
 
             optionsMenu();
 
-            isUserQuitting(isQuitting, mousePoint, confirmationT, darkerWindow);
+            isUserQuitting(isQuitting, mousePoint, confirmationT, darkerWindow, isTransportMenuOn);
 
             EndDrawing();
         }
@@ -687,8 +687,8 @@ void setupVars()
     circles[4].y = 850;
 
     //romania
-    circles[5].x = 180 * renderScale;
-    circles[5].y = 100 * renderScale;
+    circles[5].x = 1350;
+    circles[5].y = 750;
 
     backCircle.x = 1800;
     backCircle.y = 800;
