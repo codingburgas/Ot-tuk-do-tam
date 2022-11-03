@@ -5,6 +5,4 @@ C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(13,26): warning C4244:
 C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(14,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(120,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(120,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(123,22): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(123,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Game.vcxproj -> C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\lib\Game.exe
