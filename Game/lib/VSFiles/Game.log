@@ -1,0 +1,10 @@
+﻿D:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(519,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
+D:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(520,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Player.cpp
+C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(13,26): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(14,27): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(120,31): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(120,26): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(123,22): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\Game\Player.cpp(123,16): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Game.vcxproj -> C:\Users\Hello\Desktop\Ot-tuk-do-tam\Game\lib\Game.exe
