@@ -119,4 +119,5 @@ void Player::UnLoadTextures()
 	UnloadTexture(l);
 	UnloadTexture(r);
 	UnloadTexture(u);
+	UnloadTexture(background);
 }

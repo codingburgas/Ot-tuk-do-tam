@@ -1,7 +1,5 @@
 #include "Game.hpp"
 
-//bool isF;
-
 namespace Utils {
     float toRadian(float angle)
     {
@@ -103,8 +101,7 @@ Game::Game() {
         { romaniaHovered, 1200 , 690 } 
     };
     
-    //mapMusic = LoadSound("../Audios/mapMusic.ogg");
-    //SetSoundVolume(mapMusic, 0.6);
+    
 
     optionImage = LoadTexture("../src/sprites/Map images/settingsButtonClean.png");
     optionImageHovered = LoadTexture("../src/sprites/Map images/settingsButtonHover.png");
@@ -165,7 +162,7 @@ void Game::moveAirplane(const countryPosition& countryPosition)
 {
     Vector2 difference = { countryPosition.x - plane.planeCurrentPosX,  countryPosition.y - plane.planeCurrentPosY };
 
-    cout << difference.x << " " << difference.y << endl;
+    //cout << difference.x << " " << difference.y << endl;
 
     float rotation = atan2(difference.y, difference.x) * 180 / M_PI;
 
@@ -391,7 +388,6 @@ void Game::mapEurope()
 
     if (isFlying && planeToMove)
     {
-        //isF = true;
 
         if (playSound && audioIsClicked)
         {
@@ -520,9 +516,7 @@ void Game::optionsMenu()
 
 void Game::update()
 {
-    //PlaySound(mapMusic);       
-    //if (isF) PlaySound(vehicleSound);
-    //else if (flyOneTime) StopSound(vehicleSound);
+    
     while (!WindowShouldClose())
     {
         BeginDrawing();
