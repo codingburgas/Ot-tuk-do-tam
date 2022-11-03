@@ -1,6 +1,7 @@
 #include "Precompile.hpp"
+#include "Background.hpp"
 #pragma once
-class Player
+class Player : public Bg
 {
 private:
 	Texture2D sprite;
@@ -9,6 +10,7 @@ private:
 	Texture2D d;
 	Texture2D r;
 	Texture2D l;
+	
 
 	Rectangle view;
 	Rectangle move;

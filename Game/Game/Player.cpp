@@ -6,6 +6,7 @@ void Player::LoadSprites(int fps)
 	u = LoadTexture("../src/sprites/heroSprite/up.png");
 	l = LoadTexture("../src/sprites/heroSprite/left.png");
 	r = LoadTexture("../src/sprites/heroSprite/right.png");
+	background = LoadTexture("../src/sprites/backgrounds/bar.png");
 	lim = (float)d.width / 4;
 	view = { lim, 0, (float)d.width / 4, (float)d.height };
 	this->fps = fps;
@@ -14,13 +15,13 @@ void Player::LoadSprites(int fps)
 }
 void Player::CheckDir()
 {
-	if (IsKeyDown(KEY_UP) or IsKeyDown(KEY_W))
+	if ((IsKeyDown(KEY_UP) or IsKeyDown(KEY_W)) && !(PosY <= 20))
 	{
 		PosY -= speed * GetFrameTime();
 		HeroDir = UP;
 		HorizotnalOrVertical[1] = 1;
 	}
-	else if (IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S))
+	else if ((IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S)) && !(PosY >= GetScreenHeight() - sprite.height))
 	{
 		PosY += speed * GetFrameTime();
 		HeroDir = DOWN;
@@ -30,13 +31,13 @@ void Player::CheckDir()
 		HorizotnalOrVertical[1] = 0;
 	}
 
-	if (IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A))
+	if ((IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A)) && !(PosX <= 0))
 	{
 		PosX -= speed * GetFrameTime();
 		HeroDir = LEFT;
 		HorizotnalOrVertical[0] = 1;
 	}
-	else if (IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D))
+	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(PosX >= GetScreenWidth() - sprite.width /5))
 	{
 		PosX += speed * GetFrameTime();
 		HeroDir = RIGHT;
@@ -75,29 +76,26 @@ void Player::Movement()
 	{
 	case LEFT:
 		sprite = l;
-		lim *= 1;
 		view.height = (float)sprite.height;
 		break;
 
 	case RIGHT:
 		sprite = r;
-		lim *= -1;
 		view.height = (float)sprite.height;
 		break;
 
 	case UP:
 		sprite = u;
-		lim *= 1;
 		view.height = (float)sprite.height;
 		break;
 
 	case DOWN:
 		sprite = d;
-		lim *= 1;
 		view.height = (float)sprite.height;
 		break;
 
 	}
+	//flames
 	if (counter == fps / animationSpeed)
 	{
 		view.x += lim;
@@ -108,10 +106,19 @@ void Player::Movement()
 		view.x = lim;
 	}
 	counter++;
-
+	//limits
+	if (PosX > 200 && PosX < GetScreenWidth() - 200)
+	{
+		XBg = -PosX + 200;
+	}
+	if (PosY > 200 && PosY < GetScreenHeight() - 200)
+	{
+		YBg = -PosY + 200;
+	}
 
 	move = Rectangle{ PosX, PosY, (float)sprite.width / 4, (float)sprite.height };
-	DrawTexturePro(sprite, view, move, Vector2{ (float)sprite.width / 2, (float)sprite.height / 2 }, 0, WHITE);
+	DrawTexture(background, XBg, YBg, WHITE);
+	DrawTexturePro(sprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
 
 }
 void Player::UnLoadTextures()
