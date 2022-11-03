@@ -128,8 +128,7 @@ Game::Game() {
     okHoverButtonTransportMenu = LoadTexture("../src/sprites/Map images/okHover.png");
 
 
-    //touranLeft = LoadTexture("../src/sprites/Map images/touranLeft.png");
-    //touranRight = LoadTexture("../src/sprites/Map images/touranRight.png");
+   
 
     touranSound = LoadSound("../Audios/Touran.mp3");
     trainSound = LoadSound("../Audios/Train.mp3");
@@ -200,67 +199,70 @@ void Game::moveAirplane(const countryPosition& countryPosition)
 
 void Game::transportMenuF()
 {     
-    if (!planeToMove)
-    {
-        DrawRectangle(0, 0, 1920, 1080, darkerWindow);
-        DrawTexture(okCleanButtonTransportMenu, 1725, 420, WHITE);
-        DrawTexture(transportMenu, 1450, 270, WHITE);
-    }
+    if(enableClick)
+    { 
+        if (!planeToMove)
+        {
+            DrawRectangle(0, 0, 1920, 1080, darkerWindow);
+            DrawTexture(okCleanButtonTransportMenu, 1725, 420, WHITE);
+            DrawTexture(transportMenu, 1450, 270, WHITE);
+        }
         
-    if (isCheckedOutside == 1)
-    {
-        isTransportMenuOn = false;
-    }
-
-    if (mousePoint.x >= 1795 && mousePoint.x <= 1820)
-    {
-        if (mousePoint.y >= 300 && mousePoint.y <= 325 && isClicked())
-        {                           
-            vehicleChoice = 0;
-
-            transportCheck = 1;            
-        }
-        else if (mousePoint.y >= 350 && mousePoint.y <= 375 && isClicked())
+        if (isCheckedOutside == 1)
         {
-            transportCheck = 2;
+            isTransportMenuOn = false;
+        }
+
+        if (mousePoint.x >= 1795 && mousePoint.x <= 1820)
+        {
+            if (mousePoint.y >= 300 && mousePoint.y <= 325 && isClicked())
+            {                           
+                vehicleChoice = 0;
+
+                transportCheck = 1;            
+            }
+            else if (mousePoint.y >= 350 && mousePoint.y <= 375 && isClicked())
+            {
+                transportCheck = 2;
                     
-            vehicleChoice = 1;
+                vehicleChoice = 1;
+            }
         }
-    }
 
-    if (transportCheck == 1)
-    {
-        DrawTexture(isClickedCheck, 1795, 315, WHITE);
-    }
-    else if (transportCheck == 2)
-    {
-        DrawTexture(isClickedCheck, 1795, 365, WHITE);
-    }
-
-    if ((mousePoint.x >= 1725 && mousePoint.x <= 1825) && transportCheck != 0 && (mousePoint.y >= 400 && mousePoint.y <= 450))
-    {
-        DrawTexture(okHoverButtonTransportMenu, 1725, 420, WHITE);
-
-        if (isClicked())
+        if (transportCheck == 1)
         {
-            planeToMove = true;            
-
-            if (transportCheck == 1)
-            {
-                allMoney -= 1000;
-            }
-            else if (transportCheck == 2)
-            {
-                allMoney -= 500;
-            }
-
-            transportCheck = 0;
+            DrawTexture(isClickedCheck, 1795, 315, WHITE);
         }
-    }
+        else if (transportCheck == 2)
+        {
+            DrawTexture(isClickedCheck, 1795, 365, WHITE);
+        }
 
-    if ((mousePoint.x <= 1450 || mousePoint.x >= 1865 || mousePoint.y <= 250 || mousePoint.y >= 475) && isClicked())
-    {
-        //isCheckedOutside++;
+        if ((mousePoint.x >= 1725 && mousePoint.x <= 1825) && transportCheck != 0 && (mousePoint.y >= 400 && mousePoint.y <= 450))
+        {
+            DrawTexture(okHoverButtonTransportMenu, 1725, 420, WHITE);
+
+            if (isClicked())
+            {
+                planeToMove = true;            
+
+                if (transportCheck == 1)
+                {
+                    allMoney -= 1000;
+                }
+                else if (transportCheck == 2)
+                {
+                    allMoney -= 500;
+                }
+
+                transportCheck = 0;
+            }
+        }
+
+        if ((mousePoint.x <= 1450 || mousePoint.x >= 1865 || mousePoint.y <= 250 || mousePoint.y >= 475) && isClicked())
+        {
+            //isCheckedOutside++;
+        }
     }
 }
 
@@ -350,8 +352,9 @@ void Game::mapEurope()
     planePoint.x = plane.planeCurrentPosX;
     planePoint.y = plane.planeCurrentPosY;
 
-    if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30))
+    if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30) && enableClick)
     {
+        
         StopSoundMulti();
         flyOneTime = true;
         countries[coutnryNumber] = 1;
@@ -365,7 +368,7 @@ void Game::mapEurope()
         {
             if (isClicked() && CheckCollisionPointCircle(mousePoint, circles[i], 30))
             {
-                if (audioIsClicked)
+                if (audioIsClicked && enableClick)
                 {
                     PlaySound(moneySound);
                 }                
@@ -403,6 +406,7 @@ void Game::mapEurope()
     {
         if (countries[i] && !banCountry[i])
         {
+            enableClick = false;
             StopSound(vehicleSound);
             DrawRectangle(0,0,GetScreenWidth(), GetScreenHeight(), GRAY);
                 
@@ -424,8 +428,9 @@ void Game::mapEurope()
                 isTransportMenuOn = false;
             }
 
-            if (isClicked() && CheckCollisionPointCircle(mousePoint, backCircle, 30))
+            if (isClicked() && CheckCollisionPointCircle(mousePoint, backCircle, 30) )
             {
+                enableClick = true;
                 countries[i] = 0;
                 unloadBack = true;
                 banCountry[i] = true;
