@@ -133,6 +133,7 @@ namespace variables {
     bool helpIsClicked = false;
 
     bool audioIsClicked = false;
+    int audioIsClickedCounter;
 
     bool planeToMove = false ;
     int transportCheck = 0;
@@ -580,6 +581,7 @@ public:
 
 					case 1:
                         audioIsClicked = true;
+                        audioIsClickedCounter++;
 						break;
 
 					case 2:
@@ -592,18 +594,20 @@ public:
             if (helpIsClicked)
             {
                 //idk what will happen here Deivid :)
+                //mislish li che az znam sh ima nesh sig
             }
             
             if (audioIsClicked)
             {
                 DrawTexture(audioIsOn, 1857.5, 187.5, WHITE);
 
-                if (IsMouseButtonReleased)
+                if (IsMouseButtonUp && isClicked() && CheckCollisionPointRec(mousePoint, choiceFromOptions[1]) && audioIsClickedCounter == 2)
                 {
-                    if (isClicked() && CheckCollisionPointRec(mousePoint, choiceFromOptions[1]))
-                    {
-                        audioIsClicked = false;
-                    }
+                    cout << audioIsClicked << " ";
+                    audioIsClicked = false;
+                    audioIsClickedCounter = 0;
+                    cout << audioIsClicked;
+                    
                 }
                 //problem pri clickvaneto utre shte pokaja
             }
