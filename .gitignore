@@ -514,6 +514,7 @@ storybook-static
 # Temporary folders
 tmp/
 temp/
+lib/VSFiles/
 
 ### VisualStudioCode ###
 .vscode/*
