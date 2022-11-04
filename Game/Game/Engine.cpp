@@ -29,7 +29,7 @@ bool isClicked()
 	return IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 }
 
-void isUserQuitting(bool& isQuitting, Vector2& mousePoint, Texture2D& confirmationT, Color& darkerWindow, bool& isTransportMenuOn)
+void isUserQuitting(bool& isQuitting, bool& enable, Vector2& mousePoint, Texture2D& confirmationT, Color& darkerWindow, bool& isTransportMenuOn)
 {
 	if (isQuitting)
 	{
@@ -45,6 +45,7 @@ void isUserQuitting(bool& isQuitting, Vector2& mousePoint, Texture2D& confirmati
 			else if (mousePoint.x >= 990 && mousePoint.x <= 1110)
 			{
 				isQuitting = false;
+				enable = true;
 				isTransportMenuOn = false;
 			}
 		}

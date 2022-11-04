@@ -313,7 +313,7 @@ void Game::mapEurope()
 
     for (int i = 0; i < 6; i++)
     {
-        if (!changeCircles[i] && !isTransportMenuOn)
+        if (!changeCircles[i] && !isTransportMenuOn && enableClick)
         {
             DrawTexture(target, circles[i].x-20, circles[i].y-40, WHITE);
         }
@@ -321,7 +321,7 @@ void Game::mapEurope()
 
     for (int i = 0; i < 6; i++)
     {
-        if ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || changeCircles[i]) && !isTransportMenuOn)
+        if ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || changeCircles[i]) && !isTransportMenuOn && enableClick)
         {
             hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y, circles[i].x -20, circles[i].y - 40);
         }
@@ -408,10 +408,10 @@ void Game::mapEurope()
     {
         if (countries[i] && !banCountry[i])
         {
-            enableClick = false;
             StopSound(vehicleSound);
             DrawRectangle(0,0,GetScreenWidth(), GetScreenHeight(), GRAY);
                 
+            enableClick = false;
             player.CheckDir();
             player.Movement();
             unloadBack = false;
@@ -534,7 +534,7 @@ void Game::update()
 
         optionsMenu();
 
-        isUserQuitting(isQuitting, mousePoint, confirmationT, darkerWindow, isTransportMenuOn);
+        isUserQuitting(isQuitting,enableClick, mousePoint, confirmationT, darkerWindow, isTransportMenuOn);
 
         EndDrawing();
     }

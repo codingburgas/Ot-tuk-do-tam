@@ -6,7 +6,7 @@ void Player::LoadSprites(int fps)
 	u = LoadTexture("../src/sprites/heroSprite/up.png");
 	l = LoadTexture("../src/sprites/heroSprite/left.png");
 	r = LoadTexture("../src/sprites/heroSprite/right.png");
-	background = LoadTexture("../src/sprites/backgrounds/bar.png");
+	background = LoadTexture("../src/sprites/inner country elements/france/frBackground.png");
 
 	playerSprites.push_back(l);
 	playerSprites.push_back(r);
