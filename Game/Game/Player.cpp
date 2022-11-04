@@ -27,6 +27,7 @@ void Player::CheckDir()
 		PosY -= speed * GetFrameTime();
 		HeroDir = UP;
 		HorizotnalOrVertical[1] = 1;
+		
 	}
 	else if ((IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S)) && !(PosY >= GetScreenHeight() - playerSprite.height))
 	{
@@ -111,7 +112,7 @@ void Player::Movement()
 	move = Rectangle{ PosX, PosY, (float)playerSprite.width / 4, (float)playerSprite.height };
 	DrawTexture(background, XBg, YBg, WHITE);
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
-
+	DrawRectangle(enemyPosX +XBg, enemyPosY+YBg, 169, 169, RED);
 }
 void Player::UnLoadTextures()
 {

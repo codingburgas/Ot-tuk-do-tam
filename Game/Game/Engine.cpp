@@ -34,7 +34,7 @@ void isUserQuitting(bool& isQuitting, bool& enable, Vector2& mousePoint, Texture
 	if (isQuitting)
 	{
 		DrawRectangle(0, 0, 1920, 1080, darkerWindow);
-		DrawTexture(confirmationT, 0, 0, WHITE);
+		DrawTexture(confirmationT, 0, 0, Fade(WHITE, 0.84));
 
 		if (isClicked() && (mousePoint.y >= 580 && mousePoint.y <= 640))
 		{

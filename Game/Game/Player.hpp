@@ -1,7 +1,9 @@
+#pragma once
 #include "Precompile.hpp"
 #include "Background.hpp"
-#pragma once
-class Player : public Bg
+#include "Enemy.hpp"
+
+class Player : public Bg, public Enemy
 {
 private:
 	Texture2D playerSprite;

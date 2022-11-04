@@ -169,6 +169,9 @@
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Precompile.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Enemy.hpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

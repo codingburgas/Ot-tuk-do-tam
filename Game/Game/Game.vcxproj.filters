@@ -51,4 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Enemy.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
