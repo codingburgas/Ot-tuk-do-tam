@@ -137,7 +137,7 @@ private:
     int isCheckedOutside = 0;
 
     bool playSound = 0;
-    int fps = 60;
+    int fps = 120;
 
     //Exit confirmaiton table
     Color darkerWindow = { 0,0,0,120 };

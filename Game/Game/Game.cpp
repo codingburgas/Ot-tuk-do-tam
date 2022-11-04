@@ -3,7 +3,7 @@
 namespace Utils {
     float toRadian(float angle)
     {
-        return M_PI / 180 * angle;
+        return PI / 180 * angle;
     }
 }
 void setWidthAndHeight(Texture2D& variable);
@@ -114,7 +114,7 @@ Game::Game() {
         countryPositions.push_back({circles[i].x - 15, circles[i].y - 15});
     }
 
-    vehicleSpeed = 4.0f;
+    vehicleSpeed = 169;
     planeLeft = LoadTexture("../src/sprites/Map images/planeLeft.png");
     planeRight = LoadTexture("../src/sprites/Map images/planeRight.png");
 
@@ -164,22 +164,22 @@ void Game::moveAirplane(const countryPosition& countryPosition)
 
     //cout << difference.x << " " << difference.y << endl;
 
-    float rotation = atan2(difference.y, difference.x) * 180 / M_PI;
+    float rotation = atan2(difference.y, difference.x) * 180 / PI;
 
-    plane.planeCurrentPosX += cos(Utils::toRadian(rotation)) * vehicleSpeed;
-    plane.planeCurrentPosY += sin(Utils::toRadian(rotation)) * vehicleSpeed;
+    plane.planeCurrentPosX += cos(Utils::toRadian(rotation)) * vehicleSpeed * GetFrameTime();
+    plane.planeCurrentPosY += sin(Utils::toRadian(rotation)) * vehicleSpeed * GetFrameTime();
 
     if (difference.x < 0)
     {
         if (vehicleChoice == 0)
         {
-            vehicleSpeed = 4.0f;
+            vehicleSpeed = 169;
             plane.planeT = planeLeft;
 
         }
         else if (vehicleChoice == 1)
         {
-            vehicleSpeed = 3.0f;
+            vehicleSpeed = 169;
             plane.planeT = trainLeft;
         }         
         else {
@@ -361,7 +361,7 @@ void Game::mapEurope()
         flyOneTime = true;
         countries[coutnryNumber] = 1;
     }
-
+    //egg
     DrawTexture(optionImage, 1840, 30, WHITE);
 
     for (int i = 0; i < 6; i++)
@@ -501,8 +501,9 @@ void Game::optionsMenu()
         {
             //idk what will happen here Deivid :)
             //mislish li che az znam sh ima nesh sig
+            //ok yani shte misli 
         }
-            
+         
         if (audioIsClicked)
         {
             DrawTexture(audioIsOn, 1857.5, 187.5, WHITE);
