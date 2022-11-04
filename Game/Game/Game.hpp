@@ -44,8 +44,6 @@ private:
 
     int money = 2000;
 
-
-    //
     bool enableClick = true;
     //vehicles
     //plane

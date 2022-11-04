@@ -152,8 +152,10 @@ void Game::backstory()
 
 void Game::hoverEffects(Texture2D& country, float posx, float posy ,float posxTarget, float posyTarget)
 {
+    
     DrawTexture(country, posx, posy, WHITE);
     DrawTexture(targetHover, posxTarget, posyTarget, WHITE);
+    
 }
 
 void Game::moveAirplane(const countryPosition& countryPosition)
