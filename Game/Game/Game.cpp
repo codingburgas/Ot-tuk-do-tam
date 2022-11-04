@@ -6,7 +6,6 @@ namespace Utils {
         return M_PI / 180 * angle;
     }
 }
-
 void setWidthAndHeight(Texture2D& variable);
 
 Game::Game() {
@@ -271,6 +270,7 @@ void Game::mapEurope()
     if (IsKeyPressed(KEY_ESCAPE))
     {
         isQuitting = true;
+        enableClick = false;
         isTransportMenuOn = true;
     }
 
@@ -488,6 +488,7 @@ void Game::optionsMenu()
 
 				case 2:
                     isQuitting = true;
+                    enableClick = false;
                     isTransportMenuOn = true;
 					break;
 				}
