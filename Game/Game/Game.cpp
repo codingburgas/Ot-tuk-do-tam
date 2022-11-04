@@ -506,7 +506,7 @@ void Game::optionsMenu()
          
         if (audioIsClicked)
         {
-            DrawTexture(audioIsOn, 1857.5, 187.5, WHITE);
+            DrawTexture(audioIsOn, 1857.5, 190.5, WHITE);
 
             if (IsMouseButtonUp && isClicked() && CheckCollisionPointRec(mousePoint, choiceFromOptions[1]) && audioIsClickedCounter == 2)
             {
