@@ -166,7 +166,13 @@ private:
 
     Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
     vector<Texture2D> dotsBubble;
-    int counterDotsBubble = 180;
+    int counterDotsBubble = 0;
+    int changeDotsBubble = 0;
+
+    string firstDialogue[3] = {"Ko staa manqk", "Da", "Tocho"};
+    int firstDialogueCounter = 0;
+
+    int counterPressed;
 
 public:
 
@@ -177,7 +183,7 @@ public:
     void moveAirplane(const countryPosition& countryPosition);
     void transportMenuF();
     void mapEurope();
-    void dialogues(Texture2D& character, int characterPosX, int characterPosY, int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, vector<string> characterDialogues, int& dialogueCounter, int dialogueLength);
+    void dialogues(Texture2D& character, int characterPosX, int characterPosY, int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength);
     void optionsMenu();
     void update();
 

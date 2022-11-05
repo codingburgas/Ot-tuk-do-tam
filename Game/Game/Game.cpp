@@ -148,7 +148,7 @@ Game::Game() {
     chadFrTwo = LoadTexture("../src/sprites/inner country elements/france/frChad2.png");
 
     mainCharacterDialogue = LoadTexture("../src/sprites/dialogues/KurabirovDialogue.png");
-    chadDialogue = LoadTexture("../src/sprites/dialogues/Nestashev.png");
+    chadDialogue = LoadTexture("../src/sprites/dialogues/NestashevDialogue.png");
 
     dotsBubbleOne = LoadTexture("../src/sprites/menus and boards/dotsBubble1.png");
     dotsBubbleTwo = LoadTexture("../src/sprites/menus and boards/dotsBubble2.png");
@@ -443,7 +443,7 @@ void Game::mapEurope()
             if (!unloadBack)
             {
                 DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
-                //Game::dialogues(chadFr, 800, 500, 850, 480, mainCharacterDialogue, chadDialogue);
+                Game::dialogues(chadFr, 800, 500, 850, 480, mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 3);
             }
             else {
                 DrawTexture(countriesHoveredV[i].country, countriesHoveredV[i].x, countriesHoveredV[i].y, WHITE);
@@ -476,42 +476,53 @@ void Game::mapEurope()
     DrawText(printMoney.c_str(), 85, 50, 50, DARKGREEN);
 }
 
-void Game::dialogues(Texture2D& character, int characterPosX, int characterPosY, int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, vector<string> characterDialogues, int& dialogueCounter, int dialogueLength)
+void Game::dialogues(Texture2D& character, int characterPosX, int characterPosY, int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
 {
     DrawTexture(character, characterPosX, characterPosY, WHITE);
 
-    if (counterDotsBubble == 180)
+    //cout << counterDotsBubble << " ";
+    if (counterDotsBubble >= 180)
     {
         changeDotsBubble++;
-        DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
-    }
-    
-    if (changeDotsBubble == 4)
-    {
-        changeDotsBubble = 0;
+        //DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
+        counterDotsBubble = 0;
+
+        if (changeDotsBubble == 4)
+        {
+            changeDotsBubble = 0;
+        }
     }
 
-    if (IsKeyPressed(KEY_E) && !isDialogueStarted)
+    if (IsKeyPressed(KEY_E))
     {
-        DrawTexture(firstDialogue, 0, 0, WHITE);
-        isDialogueTurn = false;
         isDialogueStarted = true;
     }
-    
-    if (IsKeyPressed(KEY_ENTER) && isDialogueStarted && dialogueCounter <= dialogueLength)
-    {
-        if (isDialogueTurn)
-        {
-            DrawTexture(firstDialogue, 0, 0, WHITE);
-            isDialogueTurn = true;
-        }
-        else {
-            DrawTexture(secondDialogue, 0, 0, WHITE);
-            isDialogueTurn = false;
-        }
 
-        typewriteEffect(characterDialogues.at(dialogueCounter), 20, 900, 24, dialogueColor);
-        dialogueCounter++;
+    if (isDialogueStarted)
+    {
+        DrawTexture(firstDialogue, 0, 0, WHITE);
+        DrawText(characterDialogues[dialogueCounter].c_str(), 20, 900, 24, dialogueColor);
+    }
+
+    if (IsKeyPressed(KEY_ENTER))
+    {
+        counterPressed++;
+        isDialogueStarted = false;
+
+        if (dialogueCounter <= dialogueLength)
+        {
+            if (counterPressed % 2 == 0 && counterPressed > 0)
+            {
+                DrawTexture(secondDialogue, 0, 0, WHITE);
+
+            }
+            else {
+                DrawTexture(firstDialogue, 0, 0, WHITE);
+            }
+
+            DrawText(characterDialogues[dialogueCounter].c_str(), 20, 900, 24, dialogueColor);
+            dialogueCounter++;
+        }
     }
 }
 

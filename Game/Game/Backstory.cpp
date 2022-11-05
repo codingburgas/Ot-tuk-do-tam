@@ -10,6 +10,7 @@ namespace variablesV {
 
 using namespace variablesV;
 
+//kogato lengtha na my e po golqm ot na text bugva i ne znam kak da go fixna
 void typewriteEffect(string& text, int posX, int posY, int fontSize, Color color)
 {
 	Lifetime++;//increment for timer
@@ -19,14 +20,15 @@ void typewriteEffect(string& text, int posX, int posY, int fontSize, Color color
 		my = text;
 		Lifetime = 11;
 	}
+
 	if (Lifetime == 10 && !IsKeyPressed(KEY_ENTER)) {
 		my += text[i++];
 		Lifetime = 0;
 	}
 
-	if (my[i] == text.length())
+	if (my.length() > text.length())
 	{
-		cout << "";
+
 	}
 	else {
 		DrawText(my.c_str(), posX, posY, fontSize, color);
