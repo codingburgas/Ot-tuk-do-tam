@@ -19,6 +19,9 @@ private:
     int width = 1920;
     int height = 1080;
 
+    //fonts
+    Font headerFont, textFont;
+
     Texture2D backstoryImg;
 
     string backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry's standard dummy text ever since the 1500s,\nwhen an unknown printer took a\ngalley of type and scrambled it to make a type specimen book.";
@@ -153,6 +156,18 @@ private:
     //points mechanic
     int points;
 
+    //dialogue mechanic
+    Texture2D chadFr, chadFrTwo;
+    
+    Texture2D mainCharacterDialogue, chadDialogue;
+    bool isDialogueTurn;
+    bool isDialogueStarted = false;
+    Color dialogueColor = {255, 255, 255 ,255};
+
+    Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
+    vector<Texture2D> dotsBubble;
+    int counterDotsBubble = 180;
+
 public:
 
     Game();
@@ -162,6 +177,7 @@ public:
     void moveAirplane(const countryPosition& countryPosition);
     void transportMenuF();
     void mapEurope();
+    void dialogues(Texture2D& character, int characterPosX, int characterPosY, int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, vector<string> characterDialogues, int& dialogueCounter, int dialogueLength);
     void optionsMenu();
     void update();
 

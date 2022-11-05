@@ -7,6 +7,7 @@ class Player : public Bg, public Enemy
 {
 private:
 	Texture2D playerSprite;
+	Vector2 playerCords;
 
 	Texture2D u;
 	Texture2D d;

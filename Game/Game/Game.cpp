@@ -12,6 +12,10 @@ Game::Game() {
     SetTargetFPS(fps);
     srand(time(0));
 
+    //fonts
+    //headerFont = LoadFont("../src/Fonts/headerFont");
+   // textFont = LoadFont("../src/Fonts/textFont");
+
     map = LoadTexture("../src/sprites/backgrounds/map.png");
 
     setWidthAndHeight(map);
@@ -126,9 +130,6 @@ Game::Game() {
     okCleanButtonTransportMenu = LoadTexture("../src/sprites/Map images/okCLean.png");
     okHoverButtonTransportMenu = LoadTexture("../src/sprites/Map images/okHover.png");
 
-
-   
-
     touranSound = LoadSound("../Audios/Touran.mp3");
     trainSound = LoadSound("../Audios/Train.mp3");
     planeSound = LoadSound("../Audios/Plane.mp3");
@@ -141,6 +142,20 @@ Game::Game() {
     SetExitKey(-1);
 
     allMoneyCopy = allMoney;
+
+    //dialogue mechanic
+    chadFr = LoadTexture("../src/sprites/inner country elements/france/frChad1.png");
+    chadFrTwo = LoadTexture("../src/sprites/inner country elements/france/frChad2.png");
+
+    mainCharacterDialogue = LoadTexture("../src/sprites/dialogues/KurabirovDialogue.png");
+    chadDialogue = LoadTexture("../src/sprites/dialogues/Nestashev.png");
+
+    dotsBubbleOne = LoadTexture("../src/sprites/menus and boards/dotsBubble1.png");
+    dotsBubbleTwo = LoadTexture("../src/sprites/menus and boards/dotsBubble2.png");
+    dotsBubblThree = LoadTexture("../src/sprites/menus and boards/dotsBubble3.png");
+    dotsBubbleFour = LoadTexture("../src/sprites/menus and boards/dotsBubble4.png");
+    dotsBubble = { dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour };
+    
 }
 
 void Game::backstory()
@@ -361,8 +376,12 @@ void Game::mapEurope()
         flyOneTime = true;
         countries[coutnryNumber] = 1;
     }
+
     //egg
+    //egg??
     DrawTexture(optionImage, 1840, 30, WHITE);
+
+    counterDotsBubble++;
 
     for (int i = 0; i < 6; i++)
     {
@@ -424,6 +443,7 @@ void Game::mapEurope()
             if (!unloadBack)
             {
                 DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
+                //Game::dialogues(chadFr, 800, 500, 850, 480, mainCharacterDialogue, chadDialogue);
             }
             else {
                 DrawTexture(countriesHoveredV[i].country, countriesHoveredV[i].x, countriesHoveredV[i].y, WHITE);
@@ -454,6 +474,45 @@ void Game::mapEurope()
 
     DrawTexture(moneyBackground, 7, 30, WHITE);
     DrawText(printMoney.c_str(), 85, 50, 50, DARKGREEN);
+}
+
+void Game::dialogues(Texture2D& character, int characterPosX, int characterPosY, int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, vector<string> characterDialogues, int& dialogueCounter, int dialogueLength)
+{
+    DrawTexture(character, characterPosX, characterPosY, WHITE);
+
+    if (counterDotsBubble == 180)
+    {
+        changeDotsBubble++;
+        DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
+    }
+    
+    if (changeDotsBubble == 4)
+    {
+        changeDotsBubble = 0;
+    }
+
+    if (IsKeyPressed(KEY_E) && !isDialogueStarted)
+    {
+        DrawTexture(firstDialogue, 0, 0, WHITE);
+        isDialogueTurn = false;
+        isDialogueStarted = true;
+    }
+    
+    if (IsKeyPressed(KEY_ENTER) && isDialogueStarted && dialogueCounter <= dialogueLength)
+    {
+        if (isDialogueTurn)
+        {
+            DrawTexture(firstDialogue, 0, 0, WHITE);
+            isDialogueTurn = true;
+        }
+        else {
+            DrawTexture(secondDialogue, 0, 0, WHITE);
+            isDialogueTurn = false;
+        }
+
+        typewriteEffect(characterDialogues.at(dialogueCounter), 20, 900, 24, dialogueColor);
+        dialogueCounter++;
+    }
 }
 
 void Game::optionsMenu()
@@ -502,6 +561,7 @@ void Game::optionsMenu()
             //idk what will happen here Deivid :)
             //mislish li che az znam sh ima nesh sig
             //ok yani shte misli 
+            //stava
         }
          
         if (audioIsClicked)

@@ -16,6 +16,10 @@ void Player::LoadSprites(int fps)
 	lim = (float)d.width / 4;
 	view = { lim, 0, (float)d.width / 4, (float)d.height };
 	this->fps = fps;
+
+	playerCords.x = GetScreenWidth() / 2;
+	playerCords.y = GetScreenHeight() / 2;
+
 	PosX = GetScreenWidth() / 2;
 	PosY = GetScreenHeight() / 2;
 }
@@ -25,6 +29,8 @@ void Player::CheckDir()
 	if ((IsKeyDown(KEY_UP) or IsKeyDown(KEY_W)) && !(PosY <= 20))
 	{
 		PosY -= speed * GetFrameTime();
+		playerCords.y -= speed * GetFrameTime();
+
 		HeroDir = UP;
 		HorizotnalOrVertical[1] = 1;
 		
@@ -32,6 +38,8 @@ void Player::CheckDir()
 	else if ((IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S)) && !(PosY >= GetScreenHeight() - playerSprite.height))
 	{
 		PosY += speed * GetFrameTime();
+		playerCords.y += speed * GetFrameTime();
+
 		HeroDir = DOWN;
 		HorizotnalOrVertical[1] = 1;
 	}
@@ -42,12 +50,16 @@ void Player::CheckDir()
 	if ((IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A)) && !(PosX <= 0))
 	{
 		PosX -= speed * GetFrameTime();
+		playerCords.x -= speed * GetFrameTime();
+
 		HeroDir = LEFT;
 		HorizotnalOrVertical[0] = 1;
 	}
 	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(PosX >= GetScreenWidth() - playerSprite.width /5))
 	{
 		PosX += speed * GetFrameTime();
+		playerCords.x += speed * GetFrameTime();
+
 		HeroDir = RIGHT;
 		HorizotnalOrVertical[0] = 1;
 	}
@@ -75,6 +87,7 @@ void Player::CheckDir()
 	}
 
 }
+
 void Player::Movement()
 {
 	if (HorizotnalOrVertical[0] && HorizotnalOrVertical[1]) 
