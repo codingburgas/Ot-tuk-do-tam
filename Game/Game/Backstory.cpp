@@ -18,20 +18,17 @@ void typewriteEffect(string& text, int posX, int posY, int fontSize, Color color
 	if (IsKeyPressed(KEY_ENTER)) {
 		i = text.length();
 		my = text;
-		Lifetime = 11;
+		Lifetime = 16;
 	}
 
-	if (Lifetime == 10 && !IsKeyPressed(KEY_ENTER)) {
-		my += text[i++];
+	if (Lifetime == 15 && !IsKeyPressed(KEY_ENTER) && text[i] != text[text.length()]) {
+		if(my.length() < text.length())
+			i++;
+
+		my += text[i - 1];
 		Lifetime = 0;
 	}
 
-	if (my.length() > text.length())
-	{
-
-	}
-	else {
-		DrawText(my.c_str(), posX, posY, fontSize, color);
-	}
+	DrawText(my.c_str(), posX, posY, fontSize, color);
 }
 	

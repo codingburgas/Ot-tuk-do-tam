@@ -14,6 +14,11 @@ private:
 	Texture2D r;
 	Texture2D l;
 
+	//Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
+	//vector<Texture2D> dotsBubble;
+	//int counterDotsBubble = 0;
+	//int changeDotsBubble = 0;
+
 	vector<Texture2D> playerSprites;
 
 	Rectangle view;
@@ -33,8 +38,10 @@ private:
 	} HeroDir = LEFT;
 
 public:
+	//Game();
 	void LoadSprites(int fps);
 	void Movement();
 	void CheckDir();
+	//void DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY);
 	void UnLoadTextures();
 };

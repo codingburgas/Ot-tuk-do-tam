@@ -9,6 +9,12 @@ void Player::LoadSprites(int fps)
 	background = LoadTexture("../src/sprites/inner country elements/france/frBackground.png");
 	chadFr = LoadTexture("../src/sprites/inner country elements/france/frChad1.png");
 	chadFrTwo = LoadTexture("../src/sprites/inner country elements/france/frChad2.png");
+	//dots
+	//dotsBubbleOne = LoadTexture("../src/sprites/menus and boards/dotsBubble1.png");
+ //   dotsBubbleTwo = LoadTexture("../src/sprites/menus and boards/dotsBubble2.png");
+ //   dotsBubblThree = LoadTexture("../src/sprites/menus and boards/dotsBubble3.png");
+ //   dotsBubbleFour = LoadTexture("../src/sprites/menus and boards/dotsBubble4.png");
+ //   dotsBubble = { dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour };
 
 	playerSprites.push_back(l);
 	playerSprites.push_back(r);
@@ -25,6 +31,29 @@ void Player::LoadSprites(int fps)
 	PosX = GetScreenWidth() / 2;
 	PosY = GetScreenHeight() / 2;
 }
+//Game::Game()
+//{
+// initilize variables 
+//}
+
+//void Player::DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY)
+//{
+//	counterDotsBubble++;
+//	if (counterDotsBubble > 180)
+//	{
+//		changeDotsBubble++;
+
+//		if (changeDotsBubble == 4)
+//		{
+//			changeDotsBubble = 0;
+//		}
+
+//		counterDotsBubble = 0;
+//	}
+//	else {
+//		DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
+//	}
+//}
 
 void Player::CheckDir()
 {
@@ -128,6 +157,7 @@ void Player::Movement()
 	DrawTexture(background, XBg, YBg, WHITE);
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
 	DrawTexture(chadFr, 800 + XBg, 500 + YBg, WHITE);
+	//DrawDotsAnimation(PosX - 10, PosY - 10);
 }
 void Player::UnLoadTextures()
 {

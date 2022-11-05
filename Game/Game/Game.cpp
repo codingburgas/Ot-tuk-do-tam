@@ -14,7 +14,7 @@ Game::Game() {
 
     //fonts
     //headerFont = LoadFont("../src/Fonts/headerFont");
-   // textFont = LoadFont("../src/Fonts/textFont");
+    // textFont = LoadFont("../src/Fonts/textFont");
 
     map = LoadTexture("../src/sprites/backgrounds/map.png");
 
@@ -22,30 +22,30 @@ Game::Game() {
 
     //spain
     circles[0].x = 320;
-    circles[0].y = 775;
+    circles[0].y = 760;
 
     //france
     circles[1].x = 550;
-    circles[1].y = 635;
+    circles[1].y = 630;
 
     //italy
     circles[2].x = 860;
-    circles[2].y = 775;
+    circles[2].y = 760;
 
     //germany
     circles[3].x = 860;
-    circles[3].y = 565;
+    circles[3].y = 550;
 
     //bulgaria
     circles[4].x = 1360;
-    circles[4].y = 835;
+    circles[4].y = 820;
 
     //romania
     circles[5].x = 1350;
-    circles[5].y = 735;
+    circles[5].y = 720;
 
     backCircle.x = 1800;
-    backCircle.y = 800;
+    backCircle.y = 785;
 
     for (int i = 0; i < 3; i++)
     {
@@ -102,9 +102,7 @@ Game::Game() {
         { germanyHovered, 720 , 487.5 },
         { bulgariaHovered, 1267.5 , 810 },
         { romaniaHovered, 1200 , 690 } 
-    };
-    
-    
+    };  
 
     optionImage = LoadTexture("../src/sprites/Map images/settingsButtonClean.png");
     optionImageHovered = LoadTexture("../src/sprites/Map images/settingsButtonHover.png");
@@ -206,8 +204,7 @@ void Game::moveAirplane(const countryPosition& countryPosition)
             plane.planeT = trainRight;
         else {
             //plane.planeT = touranRight;
-        }
-              
+        }           
     }
 }
 
@@ -328,7 +325,7 @@ void Game::mapEurope()
     {
         if (!changeCircles[i] && !isTransportMenuOn && enableClick)
         {
-            DrawTexture(target, circles[i].x-20, circles[i].y-40, WHITE);
+            DrawTexture(target, circles[i].x-20, circles[i].y-5, WHITE);
         }
     }
 
@@ -336,7 +333,7 @@ void Game::mapEurope()
     {
         if ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || changeCircles[i]) && !isTransportMenuOn && enableClick)
         {
-            hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y, circles[i].x -20, circles[i].y - 40);
+            hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y, circles[i].x -20, circles[i].y-5);
         }
     }
 
@@ -375,8 +372,6 @@ void Game::mapEurope()
         countries[coutnryNumber] = 1;
     }
 
-    //egg
-    //egg??
     DrawTexture(optionImage, 1840, 30, WHITE);
 
     counterDotsBubble++;
@@ -441,8 +436,10 @@ void Game::mapEurope()
             if (!unloadBack)
             {
                 DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
-                Game::dialogues(850, 480, mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 3);
-                
+                if (counterPressed < 3)
+                {
+                    dialogues(850, 480, mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 3);
+                }
             }
             else {
                 DrawTexture(countriesHoveredV[i].country, countriesHoveredV[i].x, countriesHoveredV[i].y, WHITE);
@@ -457,7 +454,6 @@ void Game::mapEurope()
                 banCountry[i] = true;
             }
         }
-
     }         
 
     if (!flyOneTime)
@@ -477,51 +473,50 @@ void Game::mapEurope()
 
 void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
 {
-    
-
-    //cout << counterDotsBubble << " ";
-    if (counterDotsBubble >= 180)
+    if (counterDotsBubble > 180)
     {
         changeDotsBubble++;
-        //DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
-        counterDotsBubble = 0;
-
+        
         if (changeDotsBubble == 4)
         {
             changeDotsBubble = 0;
         }
+
+        counterDotsBubble = 0;
+    }
+    else {
+        DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
     }
 
     if (IsKeyPressed(KEY_E))
     {
-        isDialogueStarted = true;
+        isDialogueStarted = 1;
     }
 
-    if (isDialogueStarted)
+    if (isDialogueStarted == 1)
     {
         DrawTexture(firstDialogue, 0, 0, WHITE);
-        DrawText(characterDialogues[dialogueCounter].c_str(), 20, 900, 24, dialogueColor);
+        typewriteEffect(characterDialogues[counterPressed], 20, 900, 24, dialogueColor);
+        counterPressed++;
     }
 
     if (IsKeyPressed(KEY_ENTER))
     {
         counterPressed++;
-        isDialogueStarted = false;
+        isDialogueStarted = 2;
+    }
 
-        if (dialogueCounter <= dialogueLength)
+    if (isDialogueStarted == 2)
+    {
+        if (counterPressed % 2 == 0 && counterPressed > 0)
         {
-            if (counterPressed % 2 == 0 && counterPressed > 0)
-            {
-                DrawTexture(secondDialogue, 0, 0, WHITE);
-
-            }
-            else {
-                DrawTexture(firstDialogue, 0, 0, WHITE);
-            }
-
-            DrawText(characterDialogues[dialogueCounter].c_str(), 20, 900, 24, dialogueColor);
-            dialogueCounter++;
+            DrawTexture(secondDialogue, 0, 0, WHITE);
         }
+        else {
+            DrawTexture(firstDialogue, 0, 0, WHITE);
+        }
+
+        typewriteEffect(characterDialogues[counterPressed], 20, 900, 24, dialogueColor);
     }
 }
 
@@ -610,7 +605,6 @@ void Game::update()
     }
 }
   
-
 Game::~Game() {
 
     //IMPORTNAT UNLOADING TEXTURES
