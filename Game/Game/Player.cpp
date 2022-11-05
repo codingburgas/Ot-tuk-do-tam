@@ -7,6 +7,8 @@ void Player::LoadSprites(int fps)
 	l = LoadTexture("../src/sprites/heroSprite/left.png");
 	r = LoadTexture("../src/sprites/heroSprite/right.png");
 	background = LoadTexture("../src/sprites/inner country elements/france/frBackground.png");
+	chadFr = LoadTexture("../src/sprites/inner country elements/france/frChad1.png");
+	chadFrTwo = LoadTexture("../src/sprites/inner country elements/france/frChad2.png");
 
 	playerSprites.push_back(l);
 	playerSprites.push_back(r);
@@ -125,7 +127,7 @@ void Player::Movement()
 	move = Rectangle{ PosX, PosY, (float)playerSprite.width / 4, (float)playerSprite.height };
 	DrawTexture(background, XBg, YBg, WHITE);
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
-	DrawRectangle(enemyPosX +XBg, enemyPosY+YBg, 169, 169, RED);
+	DrawTexture(chadFr, 800 + XBg, 500 + YBg, WHITE);
 }
 void Player::UnLoadTextures()
 {

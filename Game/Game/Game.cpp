@@ -144,9 +144,7 @@ Game::Game() {
     allMoneyCopy = allMoney;
 
     //dialogue mechanic
-    chadFr = LoadTexture("../src/sprites/inner country elements/france/frChad1.png");
-    chadFrTwo = LoadTexture("../src/sprites/inner country elements/france/frChad2.png");
-
+    
     mainCharacterDialogue = LoadTexture("../src/sprites/dialogues/KurabirovDialogue.png");
     chadDialogue = LoadTexture("../src/sprites/dialogues/NestashevDialogue.png");
 
@@ -443,7 +441,8 @@ void Game::mapEurope()
             if (!unloadBack)
             {
                 DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
-                Game::dialogues(chadFr, 800, 500, 850, 480, mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 3);
+                Game::dialogues(850, 480, mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 3);
+                
             }
             else {
                 DrawTexture(countriesHoveredV[i].country, countriesHoveredV[i].x, countriesHoveredV[i].y, WHITE);
@@ -476,9 +475,9 @@ void Game::mapEurope()
     DrawText(printMoney.c_str(), 85, 50, 50, DARKGREEN);
 }
 
-void Game::dialogues(Texture2D& character, int characterPosX, int characterPosY, int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
+void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
 {
-    DrawTexture(character, characterPosX, characterPosY, WHITE);
+    
 
     //cout << counterDotsBubble << " ";
     if (counterDotsBubble >= 180)
