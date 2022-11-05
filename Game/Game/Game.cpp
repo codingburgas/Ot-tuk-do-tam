@@ -220,7 +220,7 @@ void Game::transportMenuF()
         if (!planeToMove)
         {
             DrawRectangle(0, 0, 1920, 1080, darkerWindow);
-            DrawTexture(okCleanButtonTransportMenu, 1725, 420, WHITE);
+            DrawTexture(okCleanButtonTransportMenu, 1728, 420, WHITE);
             DrawTexture(transportMenu, 1450, 270, WHITE);
         }
         
@@ -256,7 +256,7 @@ void Game::transportMenuF()
 
         if ((mousePoint.x >= 1725 && mousePoint.x <= 1825) && transportCheck != 0 && (mousePoint.y >= 400 && mousePoint.y <= 450))
         {
-            DrawTexture(okHoverButtonTransportMenu, 1725, 420, WHITE);
+            DrawTexture(okHoverButtonTransportMenu, 1728, 420, WHITE);
 
             if (isClicked())
             {
