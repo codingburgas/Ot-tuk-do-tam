@@ -18,27 +18,27 @@ Game::Game() {
 
     //spain
     circles[0].x = 320;
-    circles[0].y = 800;
+    circles[0].y = 775;
 
     //france
     circles[1].x = 550;
-    circles[1].y = 650;
+    circles[1].y = 635;
 
     //italy
     circles[2].x = 860;
-    circles[2].y = 800;
+    circles[2].y = 775;
 
     //germany
     circles[3].x = 860;
-    circles[3].y = 580;
+    circles[3].y = 565;
 
     //bulgaria
     circles[4].x = 1360;
-    circles[4].y = 850;
+    circles[4].y = 835;
 
     //romania
     circles[5].x = 1350;
-    circles[5].y = 750;
+    circles[5].y = 735;
 
     backCircle.x = 1800;
     backCircle.y = 800;
@@ -525,7 +525,6 @@ void Game::optionsMenu()
 
 void Game::update()
 {
-    
     while (!WindowShouldClose())
     {
         BeginDrawing();
