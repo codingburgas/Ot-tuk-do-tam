@@ -436,10 +436,8 @@ void Game::mapEurope()
             if (!unloadBack)
             {
                 DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
-                if (counterPressed < 3)
-                {
-                    dialogues(850, 480, mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 3);
-                }
+                dialogues(850, 480, mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 4);
+                
             }
             else {
                 DrawTexture(countriesHoveredV[i].country, countriesHoveredV[i].x, countriesHoveredV[i].y, WHITE);
@@ -473,6 +471,9 @@ void Game::mapEurope()
 
 void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
 {
+    if (counterPressed > dialogueLength)
+        return;
+
     if (counterDotsBubble > 180)
     {
         changeDotsBubble++;
@@ -488,25 +489,30 @@ void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue,
         DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
     }
 
-    if (IsKeyPressed(KEY_E))
+    if (IsKeyPressed(KEY_E) && !isDialogueStarted)
     {
-        isDialogueStarted = 1;
+        isDialogueStarted = true;
+        isDialogueContinued = false;
+        isDialogueEntered = true;
+
+        counterPressed++;
     }
 
-    if (isDialogueStarted == 1)
+    if (isDialogueStarted && !isDialogueContinued)
     {
         DrawTexture(firstDialogue, 0, 0, WHITE);
-        typewriteEffect(characterDialogues[counterPressed], 20, 900, 24, dialogueColor);
-        counterPressed++;
+        typewriteEffect(characterDialogues[counterPressed - 1], 20, 900, 24, WHITE);
     }
 
-    if (IsKeyPressed(KEY_ENTER))
+    if (IsKeyPressed(KEY_ENTER) && isDialogueEntered)
     {
         counterPressed++;
-        isDialogueStarted = 2;
+
+        isDialogueStarted = false;
+        isDialogueContinued = true;
     }
 
-    if (isDialogueStarted == 2)
+    if (isDialogueContinued && !isDialogueStarted)
     {
         if (counterPressed % 2 == 0 && counterPressed > 0)
         {
@@ -516,7 +522,7 @@ void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue,
             DrawTexture(firstDialogue, 0, 0, WHITE);
         }
 
-        typewriteEffect(characterDialogues[counterPressed], 20, 900, 24, dialogueColor);
+        typewriteEffect(characterDialogues[counterPressed - 1], 20, 900, 24, WHITE);
     }
 }
 

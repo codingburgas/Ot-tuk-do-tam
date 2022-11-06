@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <vector>
 #include <string>
+#include <iomanip>
 #include "raylib.h"
 
 using namespace std;

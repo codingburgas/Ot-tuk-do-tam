@@ -160,16 +160,16 @@ private:
     Texture2D chadFr, chadFrTwo;
     
     Texture2D mainCharacterDialogue, chadDialogue;
-    bool isDialogueTurn;
-    int isDialogueStarted = 0;
-    Color dialogueColor = {255, 255, 255 ,255};
+    bool isDialogueStarted;
+    bool isDialogueContinued;
+    bool isDialogueEntered;
 
 	Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
 	vector<Texture2D> dotsBubble;
 	int counterDotsBubble = 0;
 	int changeDotsBubble = 0;
 
-    string firstDialogue[3] = {"Ko staa manqk", "Da", "Tocho"};
+    string firstDialogue[5] = {"Ko staa manqk", "Da", "Tocho", "Tos puk", ""};
     int firstDialogueCounter = 0;
 
     int counterPressed;
