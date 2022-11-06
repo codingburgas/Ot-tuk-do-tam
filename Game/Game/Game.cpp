@@ -469,7 +469,7 @@ void Game::mapEurope()
             if (!unloadBack)
             {
                 DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
-                dialogues(1050, 480, mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 4);
+                dialogues(mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 4);
 
             }
             else {
@@ -502,47 +502,51 @@ void Game::mapEurope()
     DrawText(printMoney.c_str(), 85, 50, 50, DARKGREEN);
 }
 
-void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
+void Game::dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
 {
-    if (counterPressed > dialogueLength)
+    if (abs(player.PosX - (player.enemyPosX + player.XBg)) <= player.enemyDistance && abs(player.PosY - (player.enemyPosY + player.YBg)) <= player.enemyDistance)
     {
-        questBoard();
-    }
-
-    if (IsKeyPressed(KEY_E) && !isDialogueEntered)
-    {
-        isDialogueStarted = true;
-        isDialogueContinued = false;
-        isDialogueEntered = true;
-
-        counterPressed++;
-    }
-
-    if (isDialogueStarted && !isDialogueContinued)
-    {
-        DrawTexture(firstDialogue, 0, 0, WHITE);
-        typewriteEffect(characterDialogues[counterPressed - 1], 20, 900, 24, WHITE);
-    }
-
-    if (IsKeyPressed(KEY_ENTER) && isDialogueEntered)
-    {
-        counterPressed++;
-
-        isDialogueStarted = false;
-        isDialogueContinued = true;
-    }
-
-    if (isDialogueContinued && !isDialogueStarted && counterPressed <= dialogueLength)
-    {
-        if (counterPressed % 2 == 0 && counterPressed > 0)
+        player.DrawDotsAnimation(player.enemyPosX - 10 + player.XBg, player.enemyPosY - 10 + player.YBg);
+        if (counterPressed > dialogueLength)
         {
-            DrawTexture(secondDialogue, 0, 0, WHITE);
-        }
-        else {
-            DrawTexture(firstDialogue, 0, 0, WHITE);
+            questBoard();
         }
 
-        typewriteEffect(characterDialogues[counterPressed - 1], 20, 900, 24, WHITE);
+        if (IsKeyPressed(KEY_E) && !isDialogueEntered)
+        {
+            isDialogueStarted = true;
+            isDialogueContinued = false;
+            isDialogueEntered = true;
+
+            counterPressed++;
+        }
+
+        if (isDialogueStarted && !isDialogueContinued)
+        {
+            DrawTexture(firstDialogue, 0, 0, WHITE);
+            typewriteEffect(characterDialogues[counterPressed - 1], 20, 900, 24, WHITE);
+        }
+
+        if (IsKeyPressed(KEY_ENTER) && isDialogueEntered)
+        {
+            counterPressed++;
+
+            isDialogueStarted = false;
+            isDialogueContinued = true;
+        }
+
+        if (isDialogueContinued && !isDialogueStarted && counterPressed <= dialogueLength)
+        {
+            if (counterPressed % 2 == 0 && counterPressed > 0)
+            {
+                DrawTexture(secondDialogue, 0, 0, WHITE);
+            }
+            else {
+                DrawTexture(firstDialogue, 0, 0, WHITE);
+            }
+
+            typewriteEffect(characterDialogues[counterPressed - 1], 20, 900, 24, WHITE);
+        }
     }
 }
 

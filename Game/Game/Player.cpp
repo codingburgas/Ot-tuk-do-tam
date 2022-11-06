@@ -27,12 +27,11 @@ void Player::LoadSprites(int fps)
 
 	playerCords.x = GetScreenWidth() / 2;
 	playerCords.y = GetScreenHeight() / 2;
-
-	PosX = GetScreenWidth() / 2;
-	PosY = GetScreenHeight() / 2;
 }
 Player::Player()
 {
+	PosX = GetScreenWidth() / 2;
+	PosY = GetScreenHeight() / 2;
 	counterDotsBubble = 0;
 	changeDotsBubble = 0;
 	HorizotnalOrVertical[0] = 0;
@@ -163,8 +162,8 @@ void Player::Movement()
 	DrawTexture(background, XBg, YBg, WHITE);
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
 	DrawTexture(chadFr, enemyPosX + XBg, enemyPosY + YBg, WHITE);
-	if (abs(PosX - (enemyPosX + XBg)) <= enemyDistance && abs(PosY - (enemyPosY + YBg)) <= enemyDistance)
-		DrawDotsAnimation(enemyPosX - 10 + XBg, enemyPosY - 10 + YBg);
+	//if (abs(PosX - (enemyPosX + XBg)) <= enemyDistance && abs(PosY - (enemyPosY + YBg)) <= enemyDistance)
+		//DrawDotsAnimation(enemyPosX - 10 + XBg, enemyPosY - 10 + YBg);
 
 }
 void Player::UnLoadTextures()

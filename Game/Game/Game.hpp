@@ -8,7 +8,7 @@ void setWidthAndHeight(Texture2D& variable);
 
 void gameStartup();
 
-class Game
+class Game : public Player
 {
 private:
     Player player;
@@ -195,7 +195,7 @@ public:
     void moveAirplane(const countryPosition& countryPosition);
     void transportMenuF();
     void mapEurope();
-    void dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength);
+    void dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength);
     void questBoard();
     void optionsMenu();
     void update();

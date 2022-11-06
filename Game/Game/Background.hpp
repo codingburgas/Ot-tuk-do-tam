@@ -4,6 +4,8 @@ class Bg
 {
 	protected:
 		Texture2D background;
-		int XBg = -1920 / 2, YBg = -1080 / 2;
-		unsigned int speedBg = 200;
+		unsigned int speedBg;
+	public:
+		int XBg, YBg;
+		Bg();
 };

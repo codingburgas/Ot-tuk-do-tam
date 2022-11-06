@@ -29,7 +29,6 @@ private:
 	float speed;
 	int animationSpeed;
 	int fps;
-	float PosX, PosY;
 	enum Dir {
 		LEFT,
 		RIGHT,
@@ -38,6 +37,7 @@ private:
 	}HeroDir;
 
 public:
+	float PosX, PosY;
 	Player();
 	void LoadSprites(int fps);
 	void Movement();
