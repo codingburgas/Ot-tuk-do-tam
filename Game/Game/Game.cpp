@@ -379,8 +379,6 @@ void Game::mapEurope()
         countries[coutnryNumber] = 1;
     }
 
-    DrawTexture(optionImage, 1840, 30, WHITE);
-
     counterDotsBubble++;
 
     for (int i = 0; i < 6; i++)
@@ -571,6 +569,8 @@ void Game::questBoard()
 
 void Game::optionsMenu()
 {
+    DrawTexture(optionImage, 1840, 30, WHITE);
+
 	if ((mousePoint.x >= 1845 && mousePoint.x <= 1900) && (mousePoint.y >= 20 && mousePoint.y <= 70))
 	{
         DrawTexture(optionImageHovered, 1840, 30, WHITE);
