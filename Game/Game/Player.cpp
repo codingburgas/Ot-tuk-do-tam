@@ -25,13 +25,12 @@ void Player::LoadSprites(int fps)
 	view = { lim, 0, (float)d.width / 4, (float)d.height };
 	this->fps = fps;
 
-	playerCords.x = GetScreenWidth() / 2;
-	playerCords.y = GetScreenHeight() / 2;
+	
 }
 Player::Player()
 {
-	PosX = GetScreenWidth() / 2;
-	PosY = GetScreenHeight() / 2;
+	playerCords.x = GetScreenWidth() / 2;
+	playerCords.y = GetScreenHeight() / 2;
 	counterDotsBubble = 0;
 	changeDotsBubble = 0;
 	HorizotnalOrVertical[0] = 0;
@@ -62,18 +61,18 @@ void Player::DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY)
 
 void Player::CheckDir()
 {
-	if ((IsKeyDown(KEY_UP) or IsKeyDown(KEY_W)) && !(PosY <= 20))
+	if ((IsKeyDown(KEY_UP) or IsKeyDown(KEY_W)) && !(playerCords.y <= 20))
 	{
-		PosY -= speed * GetFrameTime();
+		//PosY -= speed * GetFrameTime();
 		playerCords.y -= speed * GetFrameTime();
 
 		HeroDir = UP;
 		HorizotnalOrVertical[1] = 1;
 
 	}
-	else if ((IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S)) && !(PosY >= GetScreenHeight() - playerSprite.height))
+	else if ((IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S)) && !(playerCords.y >= GetScreenHeight() - playerSprite.height))
 	{
-		PosY += speed * GetFrameTime();
+		//PosY += speed * GetFrameTime();
 		playerCords.y += speed * GetFrameTime();
 
 		HeroDir = DOWN;
@@ -83,17 +82,17 @@ void Player::CheckDir()
 		HorizotnalOrVertical[1] = 0;
 	}
 
-	if ((IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A)) && !(PosX <= 0))
+	if ((IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A)) && !(playerCords.x <= 0))
 	{
-		PosX -= speed * GetFrameTime();
+		//PosX -= speed * GetFrameTime();
 		playerCords.x -= speed * GetFrameTime();
 
 		HeroDir = LEFT;
 		HorizotnalOrVertical[0] = 1;
 	}
-	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(PosX >= GetScreenWidth() - playerSprite.width / 5))
+	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(playerCords.x >= GetScreenWidth() - playerSprite.width / 5))
 	{
-		PosX += speed * GetFrameTime();
+		//PosX += speed * GetFrameTime();
 		playerCords.x += speed * GetFrameTime();
 
 		HeroDir = RIGHT;
@@ -149,16 +148,16 @@ void Player::Movement()
 	counter++;
 
 	//limits
-	if (PosX > speedBg && PosX < GetScreenWidth() - speedBg)
+	if (playerCords.x > speedBg && playerCords.x < GetScreenWidth() - speedBg)
 	{
-		XBg = -PosX + speedBg;
+		XBg = -playerCords.x + speedBg;
 	}
-	if (PosY > speedBg && PosY < GetScreenHeight() - speedBg)
+	if (playerCords.y > speedBg && playerCords.y < GetScreenHeight() - speedBg)
 	{
-		YBg = -PosY + speedBg;
+		YBg = -playerCords.y + speedBg;
 	}
 
-	move = Rectangle{ PosX, PosY, (float)playerSprite.width / 4, (float)playerSprite.height };
+	move = Rectangle{ playerCords.x, playerCords.y, (float)playerSprite.width / 4, (float)playerSprite.height };
 	DrawTexture(background, XBg, YBg, WHITE);
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
 	DrawTexture(chadFr, enemyPosX + XBg, enemyPosY + YBg, WHITE);

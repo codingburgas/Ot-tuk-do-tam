@@ -504,7 +504,7 @@ void Game::mapEurope()
 
 void Game::dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
 {
-    if (abs(player.PosX - (player.enemyPosX + player.XBg)) <= player.enemyDistance && abs(player.PosY - (player.enemyPosY + player.YBg)) <= player.enemyDistance)
+    if (abs(player.playerCords.x - (player.enemyPosX + player.XBg)) <= player.enemyDistance && abs(player.playerCords.y - (player.enemyPosY + player.YBg)) <= player.enemyDistance)
     {
         player.DrawDotsAnimation(player.enemyPosX - 10 + player.XBg, player.enemyPosY - 10 + player.YBg);
         if (counterPressed > dialogueLength)
