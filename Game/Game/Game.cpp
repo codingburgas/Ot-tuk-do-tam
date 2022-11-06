@@ -217,19 +217,6 @@ void Game::moveAirplane(const countryPosition& countryPosition)
 
 void Game::transportMenuF()
 {     
-    DrawTexture(questBoardT, 581, 233, WHITE);
-    DrawTexture(acceptButton, 610, 758, WHITE);
-    DrawTexture(cancelButton, 1090, 758, WHITE);
-
-
-    if (mousePoint.y >= 758 && mousePoint.y <= 834)
-    {
-        if (mousePoint.x >= 610 && mousePoint.x <= 835)
-            DrawTexture(acceptButtonHover, 610, 758, WHITE);
-        else if (mousePoint.x >= 1090 && mousePoint.x <= 1308)
-            DrawTexture(cancelButtonHover, 1090, 758, WHITE);
-    }
-
     if(enableClick)
     { 
         if (!planeToMove)
@@ -491,11 +478,8 @@ void Game::mapEurope()
 
 void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
 {
-    if (counterPressed > dialogueLength)
-        return;
-
     if (counterDotsBubble <= 180)
-    {    
+    {
         DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
     }
     else {
@@ -509,6 +493,11 @@ void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue,
         counterDotsBubble = 0;
     }
 
+    if (counterPressed > dialogueLength)
+    {
+        questBoard();
+    }
+        
     if (IsKeyPressed(KEY_E) && !isDialogueStarted)
     {
         isDialogueStarted = true;
@@ -532,7 +521,7 @@ void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue,
         isDialogueContinued = true;
     }
 
-    if (isDialogueContinued && !isDialogueStarted)
+    if (isDialogueContinued && !isDialogueStarted && counterPressed <= dialogueLength)
     {
         if (counterPressed % 2 == 0 && counterPressed > 0)
         {
@@ -548,7 +537,36 @@ void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue,
 
 void Game::questBoard()
 {
+    if (!openQuest)
+    {
+        DrawTexture(questBoardT, 581, 233, WHITE);
+        DrawTexture(acceptButton, 610, 758, WHITE);
+        DrawTexture(cancelButton, 1090, 758, WHITE);
+    }
+    
+    if (mousePoint.y >= 758 && mousePoint.y <= 834)
+    {
+        if (mousePoint.x >= 610 && mousePoint.x <= 835 && !openQuest)
+        {
+            DrawTexture(acceptButtonHover, 610, 758, WHITE);
 
+            if (isClicked())
+            {
+                openQuest = true;
+                acceptQuest = true;
+            }
+        }     
+        else if (mousePoint.x >= 1090 && mousePoint.x <= 1308 && !openQuest)
+        {
+            DrawTexture(cancelButtonHover, 1090, 758, WHITE);
+            
+            if (isClicked())
+            {
+                openQuest = true;
+                acceptQuest = false;
+            }
+        }   
+    }
 }
 
 void Game::optionsMenu()

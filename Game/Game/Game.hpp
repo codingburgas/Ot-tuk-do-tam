@@ -178,6 +178,8 @@ private:
     Texture2D questBoardT;
     Texture2D acceptButton, cancelButton;
     Texture2D acceptButtonHover, cancelButtonHover;
+    bool openQuest;
+    bool acceptQuest;
 
     string questDisplay[10];
 
