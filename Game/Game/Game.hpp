@@ -172,6 +172,7 @@ private:
 
     string firstDialogue[5] = { "Ko staa manqk", "Da", "Tocho", "Tos puk", "" };
     int firstDialogueCounter;
+    bool onGoingTypewriteEffect;
 
     int counterPressed;
 

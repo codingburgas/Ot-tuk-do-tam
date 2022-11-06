@@ -11,7 +11,7 @@ namespace variables {
 using namespace variables;
 
 //kogato lengtha na my e po golqm ot na text bugva i ne znam kak da go fixna
-void typewriteEffect(string text, int posX, int posY, int fontSize, Color color)
+void typewriteEffect(string& text, int posX, int posY, int fontSize, Color color)
 {
 	Lifetime++;//increment for timer
 
@@ -21,7 +21,7 @@ void typewriteEffect(string text, int posX, int posY, int fontSize, Color color)
 		Lifetime = 16;
 	}
 
-	if (Lifetime == 15 && !IsKeyPressed(KEY_ENTER) && text[i] != text[text.length()]) {
+	if (Lifetime == 15 && text[i] != text[text.length()]) {
 		if(my.length() < text.length())
 			i++;
 

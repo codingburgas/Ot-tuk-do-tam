@@ -13,8 +13,8 @@ Game::Game() {
     srand(time(0));
 
     //fonts
-    //headerFont = LoadFont("../src/Fonts/headerFont");
-    // textFont = LoadFont("../src/Fonts/textFont");
+    headerFont = LoadFont("../src/Fonts/headerFont.ttf");
+    textFont = LoadFont("../src/Fonts/textFont.ttf");
 
     map = LoadTexture("../src/sprites/backgrounds/map.png");
 
