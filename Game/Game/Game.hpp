@@ -24,7 +24,7 @@ private:
 
     Texture2D backstoryImg;
 
-    string backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry's standard dummy text ever since the 1500s,\nwhen an unknown printer took a\ngalley of type and scrambled it to make a type specimen book.";
+    string backstoryText;
 
     //hover effect variables
 
@@ -45,9 +45,9 @@ private:
 
     Texture2D menuOptions;
 
-    int money = 2000;
+    int money;
 
-    bool enableClick = true;
+    bool enableClick;
     //vehicles
     //plane
     Texture2D planeLeft, planeRight;
@@ -76,7 +76,7 @@ private:
     Texture2D audioIsOn;
 
     Texture2D isClickedCheck;
-    bool isTransportMenuOn = false;
+    bool isTransportMenuOn;
 
     //vehicle audios
     Sound touranSound, planeSound, trainSound;
@@ -85,7 +85,7 @@ private:
 
     vector <countryPosition> countryPositions;
 
-    int vehicleChoice = 0;
+    int vehicleChoice;
 
     //map variables
 
@@ -100,10 +100,11 @@ private:
 
     int optionCounter;
 
-    Rectangle afterClickedOptions = { 1665,115,250,330 };
+    Rectangle afterClickedOptions;
 
     Vector2 mousePoint;
 
+    //ne se pipa ne znaem kakvo pravi :( )    
     Vector2 circles[6] = { 320, 800 };
 
     int countryFly;
@@ -111,45 +112,45 @@ private:
 
     Vector2 backCircle;
 
-    bool countries[6] = { 0, 0, 0, 0, 0 };
+    bool countries[6];
     int coutnryNumber;
 
-    bool changeCircles[6] = { 0, 0, 0, 0, 0 };
-    bool banCountry[6] = { 0, 0, 0, 0, 0 };
+    bool changeCircles[6];
+    bool banCountry[6];
 
-    bool options = 0;
-    bool closeOptions = 0;
+    bool options;
+    bool closeOptions;
 
     Sound mapMusic;
 
-    bool unloadBack = false;
+    bool unloadBack;
 
-    int counterPlane = 0;
-    bool isFlipped = false;
-    bool flyOneTime = true;
+    int counterPlane;
+    bool isFlipped;
+    bool flyOneTime;
 
-    bool helpIsClicked = false;
+    bool helpIsClicked;
 
-    bool audioIsClicked = true;
+    bool audioIsClicked;
     int audioIsClickedCounter;
 
-    bool planeToMove = false;
-    int transportCheck = 0;
+    bool planeToMove;
+    int transportCheck;
 
     bool outsideCheck;
-    int isCheckedOutside = 0;
+    int isCheckedOutside;
 
-    bool playSound = 0;
+    bool playSound;
     int fps = 60;
 
     //Exit confirmaiton table
-    Color darkerWindow = { 0,0,0,120 };
-    bool isQuitting = false;
+    Color darkerWindow;
+    bool isQuitting;
     Texture2D confirmationT;
 
     //money mechanic 
     Texture2D moneyBackground;
-    int allMoney = 2000, allMoneyCopy, moneySpent;
+    int allMoney, allMoneyCopy, moneySpent;
     string printMoney, allMoneyCopyPrint, moneySpentPrint;
     Sound moneySound;
 
@@ -166,11 +167,11 @@ private:
 
 	Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
 	vector<Texture2D> dotsBubble;
-	int counterDotsBubble = 0;
-	int changeDotsBubble = 0;
+	int counterDotsBubble;
+	int changeDotsBubble;
 
-    string firstDialogue[5] = {"Ko staa manqk", "Da", "Tocho", "Tos puk", ""};
-    int firstDialogueCounter = 0;
+    string firstDialogue[5] = { "Ko staa manqk", "Da", "Tocho", "Tos puk", "" };
+    int firstDialogueCounter;
 
     int counterPressed;
 

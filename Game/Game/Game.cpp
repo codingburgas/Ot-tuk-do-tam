@@ -67,6 +67,10 @@ Game::Game() {
     plane.planeCurrentPosX = 1360;
     plane.planeCurrentPosY = 850;
 
+    enableClick = true;
+    money = 2000;
+    allMoney = 2000;
+
     //hover effect variables
     bulgaria = LoadTexture("../src/sprites/countries/Bulgaria.png");
     france = LoadTexture("../src/sprites/countries/France.png");
@@ -159,6 +163,22 @@ Game::Game() {
     acceptButtonHover = LoadTexture("../src/sprites/menus and boards/acceptHover.png");
     cancelButton = LoadTexture("../src/sprites/menus and boards/cancelClean.png");
     cancelButtonHover = LoadTexture("../src/sprites/menus and boards/cancelHover.png");
+
+	afterClickedOptions = { 1665,115,250,330 };
+
+    flyOneTime = true;
+
+    audioIsClicked = true;
+
+	darkerWindow = { 0,0,0,120 };
+
+
+	width = 1920;
+	height = 1080;
+
+	darkerWindow = { 0,0,0,120 };
+
+	backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry's standard dummy text ever since the 1500s,\nwhen an unknown printer took a\ngalley of type and scrambled it to make a type specimen book.";
 }
 
 void Game::backstory()
@@ -217,11 +237,6 @@ void Game::moveAirplane(const countryPosition& countryPosition)
 
 void Game::transportMenuF()
 {
-    DrawTexture(questBoardT, 581, 233, WHITE);
-    DrawTexture(acceptButton, 610, 758, WHITE);
-    DrawTexture(cancelButton, 1090, 758, WHITE);
-
-
     if (mousePoint.y >= 758 && mousePoint.y <= 834)
     {
         if (mousePoint.x >= 610 && mousePoint.x <= 835)
@@ -392,8 +407,6 @@ void Game::mapEurope()
         countries[coutnryNumber] = 1;
     }
 
-    DrawTexture(optionImage, 1840, 30, WHITE);
-
     //counterDotsBubble++;
 
     for (int i = 0; i < 6; i++)
@@ -492,9 +505,11 @@ void Game::mapEurope()
 void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
 {
     if (counterPressed > dialogueLength)
-        return;
+    {
+        questBoard();
+    }
 
-    if (IsKeyPressed(KEY_E) && !isDialogueStarted)
+    if (IsKeyPressed(KEY_E) && !isDialogueEntered)
     {
         isDialogueStarted = true;
         isDialogueContinued = false;
@@ -517,7 +532,7 @@ void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue,
         isDialogueContinued = true;
     }
 
-    if (isDialogueContinued && !isDialogueStarted)
+    if (isDialogueContinued && !isDialogueStarted && counterPressed <= dialogueLength)
     {
         if (counterPressed % 2 == 0 && counterPressed > 0)
         {
@@ -533,11 +548,42 @@ void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue,
 
 void Game::questBoard()
 {
+    if (!openQuest)
+    {
+        DrawTexture(questBoardT, 581, 233, WHITE);
+        DrawTexture(acceptButton, 610, 758, WHITE);
+        DrawTexture(cancelButton, 1090, 758, WHITE);
+    }
 
+    if (mousePoint.y >= 758 && mousePoint.y <= 834)
+    {
+        if (mousePoint.x >= 610 && mousePoint.x <= 835 && !openQuest)
+        {
+            DrawTexture(acceptButtonHover, 610, 758, WHITE);
+
+            if (isClicked())
+            {
+                openQuest = true;
+                acceptQuest = true;
+            }
+        }
+        else if (mousePoint.x >= 1090 && mousePoint.x <= 1308 && !openQuest)
+        {
+            DrawTexture(cancelButtonHover, 1090, 758, WHITE);
+
+            if (isClicked())
+            {
+                openQuest = true;
+                acceptQuest = false;
+            }
+        }
+    }
 }
 
 void Game::optionsMenu()
 {
+    DrawTexture(optionImage, 1840, 30, WHITE);
+
     if ((mousePoint.x >= 1845 && mousePoint.x <= 1900) && (mousePoint.y >= 20 && mousePoint.y <= 70))
     {
         DrawTexture(optionImageHovered, 1840, 30, WHITE);
