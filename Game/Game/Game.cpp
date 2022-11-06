@@ -151,7 +151,14 @@ Game::Game() {
     dotsBubblThree = LoadTexture("../src/sprites/menus and boards/dotsBubble3.png");
     dotsBubbleFour = LoadTexture("../src/sprites/menus and boards/dotsBubble4.png");
     dotsBubble = { dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour };
-    
+
+    //quest board
+    questBoardT = LoadTexture("../src/sprites/menus and boards/questMenu.png");
+
+    acceptButton = LoadTexture("../src/sprites/menus and boards/acceptClean.png");
+    acceptButtonHover = LoadTexture("../src/sprites/menus and boards/acceptHover.png");
+    cancelButton = LoadTexture("../src/sprites/menus and boards/cancelClean.png");
+    cancelButtonHover = LoadTexture("../src/sprites/menus and boards/cancelHover.png");
 }
 
 void Game::backstory()
@@ -210,6 +217,19 @@ void Game::moveAirplane(const countryPosition& countryPosition)
 
 void Game::transportMenuF()
 {     
+    DrawTexture(questBoardT, 581, 233, WHITE);
+    DrawTexture(acceptButton, 610, 758, WHITE);
+    DrawTexture(cancelButton, 1090, 758, WHITE);
+
+
+    if (mousePoint.y >= 758 && mousePoint.y <= 834)
+    {
+        if (mousePoint.x >= 610 && mousePoint.x <= 835)
+            DrawTexture(acceptButtonHover, 610, 758, WHITE);
+        else if (mousePoint.x >= 1090 && mousePoint.x <= 1308)
+            DrawTexture(cancelButtonHover, 1090, 758, WHITE);
+    }
+
     if(enableClick)
     { 
         if (!planeToMove)
@@ -474,19 +494,19 @@ void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue,
     if (counterPressed > dialogueLength)
         return;
 
-    if (counterDotsBubble > 180)
-    {
+    if (counterDotsBubble <= 180)
+    {    
+        DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
+    }
+    else {
         changeDotsBubble++;
-        
+
         if (changeDotsBubble == 4)
         {
             changeDotsBubble = 0;
         }
 
         counterDotsBubble = 0;
-    }
-    else {
-        DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
     }
 
     if (IsKeyPressed(KEY_E) && !isDialogueStarted)
@@ -524,6 +544,11 @@ void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue,
 
         typewriteEffect(characterDialogues[counterPressed - 1], 20, 900, 24, WHITE);
     }
+}
+
+void Game::questBoard()
+{
+
 }
 
 void Game::optionsMenu()

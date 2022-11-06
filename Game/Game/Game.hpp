@@ -174,6 +174,14 @@ private:
 
     int counterPressed;
 
+    //quest board 
+    Texture2D questBoardT;
+    Texture2D acceptButton, cancelButton;
+    Texture2D acceptButtonHover, cancelButtonHover;
+
+    string questDisplay[10];
+
+
 public:
 
     Game();
@@ -184,6 +192,7 @@ public:
     void transportMenuF();
     void mapEurope();
     void dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength);
+    void questBoard();
     void optionsMenu();
     void update();
 
