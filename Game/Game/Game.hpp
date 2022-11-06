@@ -158,8 +158,6 @@ private:
     int points;
 
     //dialogue mechanic
-    Texture2D chadFr, chadFrTwo;
-    
     Texture2D mainCharacterDialogue, chadDialogue;
     bool isDialogueStarted;
     bool isDialogueContinued;

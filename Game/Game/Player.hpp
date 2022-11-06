@@ -12,6 +12,11 @@ private:
 	Texture2D d;
 	Texture2D r;
 	Texture2D l;
+	
+	Texture2D idleU;
+	Texture2D idleD;
+	Texture2D idleR;
+	Texture2D idleL;
 
 	Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
 	vector<Texture2D> dotsBubble;
@@ -19,6 +24,7 @@ private:
 	int changeDotsBubble;
 
 	vector<Texture2D> playerSprites;
+	vector<Texture2D> idleSprites;
 
 	Rectangle view;
 	Rectangle move;
@@ -37,7 +43,6 @@ private:
 
 public:
 	Vector2 playerCords;
-	//float PosX, PosY;
 	Player();
 	void LoadSprites(int fps);
 	void Movement();

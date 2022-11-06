@@ -150,12 +150,6 @@ Game::Game() {
     mainCharacterDialogue = LoadTexture("../src/sprites/dialogues/KurabirovDialogue.png");
     chadDialogue = LoadTexture("../src/sprites/dialogues/NestashevDialogue.png");
 
-    /*dotsBubbleOne = LoadTexture("../src/sprites/menus and boards/dotsBubble1.png");
-    dotsBubbleTwo = LoadTexture("../src/sprites/menus and boards/dotsBubble2.png");
-    dotsBubblThree = LoadTexture("../src/sprites/menus and boards/dotsBubble3.png");
-    dotsBubbleFour = LoadTexture("../src/sprites/menus and boards/dotsBubble4.png");
-    dotsBubble = { dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour };*/
-
     //quest board
     questBoardT = LoadTexture("../src/sprites/menus and boards/questMenu.png");
 
