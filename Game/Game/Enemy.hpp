@@ -1,8 +1,11 @@
 #pragma once
 #include "Precompile.hpp"
-class Enemy{
-	protected:
-	float enemyPosX = 1000, enemyPosY = 1000;
+class Enemy {
+protected:
+	int enemyPosX, enemyPosY;
+	int enemyDistance;
 	Texture2D chadFr;
 	Texture2D chadFrTwo;
+public:
+	Enemy();
 };

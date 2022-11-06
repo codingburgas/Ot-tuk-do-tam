@@ -14,10 +14,10 @@ private:
 	Texture2D r;
 	Texture2D l;
 
-	//Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
-	//vector<Texture2D> dotsBubble;
-	//int counterDotsBubble = 0;
-	//int changeDotsBubble = 0;
+	Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
+	vector<Texture2D> dotsBubble;
+	int counterDotsBubble;
+	int changeDotsBubble;
 
 	vector<Texture2D> playerSprites;
 
@@ -25,9 +25,9 @@ private:
 	Rectangle move;
 	int counter = 0;
 	float lim;
-	bool HorizotnalOrVertical[2] = { 0, 0 };
-	float speed = 100;
-	int animationSpeed = 6;
+	bool HorizotnalOrVertical[2];
+	float speed;
+	int animationSpeed;
 	int fps;
 	float PosX, PosY;
 	enum Dir {
@@ -35,13 +35,13 @@ private:
 		RIGHT,
 		UP,
 		DOWN
-	} HeroDir = LEFT;
+	}HeroDir;
 
 public:
-	//Game();
+	Player();
 	void LoadSprites(int fps);
 	void Movement();
 	void CheckDir();
-	//void DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY);
+	void DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY);
 	void UnLoadTextures();
 };

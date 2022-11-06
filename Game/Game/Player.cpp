@@ -10,11 +10,11 @@ void Player::LoadSprites(int fps)
 	chadFr = LoadTexture("../src/sprites/inner country elements/france/frChad1.png");
 	chadFrTwo = LoadTexture("../src/sprites/inner country elements/france/frChad2.png");
 	//dots
-	//dotsBubbleOne = LoadTexture("../src/sprites/menus and boards/dotsBubble1.png");
- //   dotsBubbleTwo = LoadTexture("../src/sprites/menus and boards/dotsBubble2.png");
- //   dotsBubblThree = LoadTexture("../src/sprites/menus and boards/dotsBubble3.png");
- //   dotsBubbleFour = LoadTexture("../src/sprites/menus and boards/dotsBubble4.png");
- //   dotsBubble = { dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour };
+	dotsBubbleOne = LoadTexture("../src/sprites/menus and boards/dotsBubble1.png");
+	dotsBubbleTwo = LoadTexture("../src/sprites/menus and boards/dotsBubble2.png");
+	dotsBubblThree = LoadTexture("../src/sprites/menus and boards/dotsBubble3.png");
+	dotsBubbleFour = LoadTexture("../src/sprites/menus and boards/dotsBubble4.png");
+	dotsBubble = { dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour };
 
 	playerSprites.push_back(l);
 	playerSprites.push_back(r);
@@ -31,29 +31,35 @@ void Player::LoadSprites(int fps)
 	PosX = GetScreenWidth() / 2;
 	PosY = GetScreenHeight() / 2;
 }
-//Game::Game()
-//{
-// initilize variables 
-//}
+Player::Player()
+{
+	counterDotsBubble = 0;
+	changeDotsBubble = 0;
+	HorizotnalOrVertical[0] = 0;
+	HorizotnalOrVertical[1] = 0;
+	speed = 100;
+	animationSpeed = 6;
+	HeroDir = LEFT;
+}
 
-//void Player::DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY)
-//{
-//	counterDotsBubble++;
-//	if (counterDotsBubble > 180)
-//	{
-//		changeDotsBubble++;
+void Player::DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY)
+{
+	counterDotsBubble++;
+	if (counterDotsBubble <= 180)
+	{
+		DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
+	}
+	else {
+		changeDotsBubble++;
 
-//		if (changeDotsBubble == 4)
-//		{
-//			changeDotsBubble = 0;
-//		}
+		if (changeDotsBubble == 4)
+		{
+			changeDotsBubble = 0;
+		}
 
-//		counterDotsBubble = 0;
-//	}
-//	else {
-//		DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
-//	}
-//}
+		counterDotsBubble = 0;
+	}
+}
 
 void Player::CheckDir()
 {
@@ -64,7 +70,7 @@ void Player::CheckDir()
 
 		HeroDir = UP;
 		HorizotnalOrVertical[1] = 1;
-		
+
 	}
 	else if ((IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S)) && !(PosY >= GetScreenHeight() - playerSprite.height))
 	{
@@ -86,7 +92,7 @@ void Player::CheckDir()
 		HeroDir = LEFT;
 		HorizotnalOrVertical[0] = 1;
 	}
-	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(PosX >= GetScreenWidth() - playerSprite.width /5))
+	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(PosX >= GetScreenWidth() - playerSprite.width / 5))
 	{
 		PosX += speed * GetFrameTime();
 		playerCords.x += speed * GetFrameTime();
@@ -121,12 +127,12 @@ void Player::CheckDir()
 
 void Player::Movement()
 {
-	if (HorizotnalOrVertical[0] && HorizotnalOrVertical[1]) 
+	if (HorizotnalOrVertical[0] && HorizotnalOrVertical[1])
 		speed = 90;
-	else 
+	else
 		speed = 150;
 
-	
+
 	playerSprite = playerSprites.at(int(HeroDir));
 	view.height = (float)playerSprite.height;
 
@@ -156,8 +162,10 @@ void Player::Movement()
 	move = Rectangle{ PosX, PosY, (float)playerSprite.width / 4, (float)playerSprite.height };
 	DrawTexture(background, XBg, YBg, WHITE);
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
-	DrawTexture(chadFr, 800 + XBg, 500 + YBg, WHITE);
-	//DrawDotsAnimation(PosX - 10, PosY - 10);
+	DrawTexture(chadFr, enemyPosX + XBg, enemyPosY + YBg, WHITE);
+	if (abs(PosX - (enemyPosX + XBg)) <= enemyDistance && abs(PosY - (enemyPosY + YBg)) <= enemyDistance)
+		DrawDotsAnimation(enemyPosX - 10 + XBg, enemyPosY - 10 + YBg);
+
 }
 void Player::UnLoadTextures()
 {

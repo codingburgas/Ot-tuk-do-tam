@@ -58,12 +58,12 @@ Game::Game() {
     confirmationT = LoadTexture("../src/sprites/Menus and boards/Confirmation.png");
 
     //backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
-       
+
     //player
     player.LoadSprites(fps);
-        
+
     setFullScreen(width, height);
-               
+
     plane.planeCurrentPosX = 1360;
     plane.planeCurrentPosY = 850;
 
@@ -85,35 +85,35 @@ Game::Game() {
 
     target = LoadTexture("../src/sprites/Map images/targetClean.png");
     targetHover = LoadTexture("../src/sprites/Map images/targetHover.png");
-    
-    countriesV = { 
+
+    countriesV = {
         {spain, 52.5, 705},
         { france, 330 , 570 },
         { italy, 682.5, 720 },
         {  germany, 720 , 487.5 },
         { bulgaria, 1267.5 , 810 },
-        { romania, 1200 , 690 } 
+        { romania, 1200 , 690 }
     };
 
-    countriesHoveredV = { 
+    countriesHoveredV = {
         { spainHovered, 52.5, 705 },
         { franceHovered, 330 , 570 },
         { italyHovered, 682.5, 720 },
         { germanyHovered, 720 , 487.5 },
         { bulgariaHovered, 1267.5 , 810 },
-        { romaniaHovered, 1200 , 690 } 
-    };  
+        { romaniaHovered, 1200 , 690 }
+    };
 
     optionImage = LoadTexture("../src/sprites/Map images/settingsButtonClean.png");
     optionImageHovered = LoadTexture("../src/sprites/Map images/settingsButtonHover.png");
     optionImageClicked = LoadTexture("../src/sprites/Map images/settingsButtonPressed.png");
-        
+
     menuOptions = LoadTexture("../src/sprites/Map images/settingsMenu.png");
     audioIsOn = LoadTexture("../src/sprites/Map images/audioOn.png");
 
     for (int i = 0; i < 6; i++)
     {
-        countryPositions.push_back({circles[i].x - 15, circles[i].y - 15});
+        countryPositions.push_back({ circles[i].x - 15, circles[i].y - 15 });
     }
 
     vehicleSpeed = 169;
@@ -142,15 +142,15 @@ Game::Game() {
     allMoneyCopy = allMoney;
 
     //dialogue mechanic
-    
+
     mainCharacterDialogue = LoadTexture("../src/sprites/dialogues/KurabirovDialogue.png");
     chadDialogue = LoadTexture("../src/sprites/dialogues/NestashevDialogue.png");
 
-    dotsBubbleOne = LoadTexture("../src/sprites/menus and boards/dotsBubble1.png");
+    /*dotsBubbleOne = LoadTexture("../src/sprites/menus and boards/dotsBubble1.png");
     dotsBubbleTwo = LoadTexture("../src/sprites/menus and boards/dotsBubble2.png");
     dotsBubblThree = LoadTexture("../src/sprites/menus and boards/dotsBubble3.png");
     dotsBubbleFour = LoadTexture("../src/sprites/menus and boards/dotsBubble4.png");
-    dotsBubble = { dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour };
+    dotsBubble = { dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour };*/
 
     //quest board
     questBoardT = LoadTexture("../src/sprites/menus and boards/questMenu.png");
@@ -168,12 +168,12 @@ void Game::backstory()
     // backstoryTypewriteEffect(backstoryText);
 }
 
-void Game::hoverEffects(Texture2D& country, float posx, float posy ,float posxTarget, float posyTarget)
+void Game::hoverEffects(Texture2D& country, float posx, float posy, float posxTarget, float posyTarget)
 {
-    
+
     DrawTexture(country, posx, posy, WHITE);
     DrawTexture(targetHover, posxTarget, posyTarget, WHITE);
-    
+
 }
 
 void Game::moveAirplane(const countryPosition& countryPosition)
@@ -199,7 +199,7 @@ void Game::moveAirplane(const countryPosition& countryPosition)
         {
             vehicleSpeed = 169;
             plane.planeT = trainLeft;
-        }         
+        }
         else {
             //plane.planeT = touranLeft;
         }
@@ -207,25 +207,38 @@ void Game::moveAirplane(const countryPosition& countryPosition)
     else {
         if (vehicleChoice == 0)
             plane.planeT = planeRight;
-        else if(vehicleChoice == 1)
+        else if (vehicleChoice == 1)
             plane.planeT = trainRight;
         else {
             //plane.planeT = touranRight;
-        }           
+        }
     }
 }
 
 void Game::transportMenuF()
-{     
-    if(enableClick)
-    { 
+{
+    DrawTexture(questBoardT, 581, 233, WHITE);
+    DrawTexture(acceptButton, 610, 758, WHITE);
+    DrawTexture(cancelButton, 1090, 758, WHITE);
+
+
+    if (mousePoint.y >= 758 && mousePoint.y <= 834)
+    {
+        if (mousePoint.x >= 610 && mousePoint.x <= 835)
+            DrawTexture(acceptButtonHover, 610, 758, WHITE);
+        else if (mousePoint.x >= 1090 && mousePoint.x <= 1308)
+            DrawTexture(cancelButtonHover, 1090, 758, WHITE);
+    }
+
+    if (enableClick)
+    {
         if (!planeToMove)
         {
             DrawRectangle(0, 0, 1920, 1080, darkerWindow);
             DrawTexture(okCleanButtonTransportMenu, 1728, 420, WHITE);
             DrawTexture(transportMenu, 1450, 270, WHITE);
         }
-        
+
         if (isCheckedOutside == 1)
         {
             isTransportMenuOn = false;
@@ -234,15 +247,15 @@ void Game::transportMenuF()
         if (mousePoint.x >= 1795 && mousePoint.x <= 1820)
         {
             if (mousePoint.y >= 300 && mousePoint.y <= 325 && isClicked())
-            {                           
+            {
                 vehicleChoice = 0;
 
-                transportCheck = 1;            
+                transportCheck = 1;
             }
             else if (mousePoint.y >= 350 && mousePoint.y <= 375 && isClicked())
             {
                 transportCheck = 2;
-                    
+
                 vehicleChoice = 1;
             }
         }
@@ -262,7 +275,7 @@ void Game::transportMenuF()
 
             if (isClicked())
             {
-                planeToMove = true;            
+                planeToMove = true;
 
                 if (transportCheck == 1)
                 {
@@ -297,7 +310,7 @@ void Game::mapEurope()
     //cout << mousePoint.x << " " << mousePoint.y << endl;
 
     printMoney = to_string(allMoneyCopy);
-        
+
     if (allMoney != allMoneyCopy)
     {
         if (allMoney < allMoneyCopy)
@@ -323,7 +336,7 @@ void Game::mapEurope()
         //plane.planeT = touranLeft;
         vehicleSound = touranSound;
     }
-        
+
     //backstory()
 
     DrawTexture(map, 0, 0, WHITE);
@@ -332,7 +345,7 @@ void Game::mapEurope()
     {
         if (!changeCircles[i] && !isTransportMenuOn && enableClick)
         {
-            DrawTexture(target, circles[i].x-20, circles[i].y-5, WHITE);
+            DrawTexture(target, circles[i].x - 20, circles[i].y - 5, WHITE);
         }
     }
 
@@ -340,7 +353,7 @@ void Game::mapEurope()
     {
         if ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || changeCircles[i]) && !isTransportMenuOn && enableClick)
         {
-            hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y, circles[i].x -20, circles[i].y-5);
+            hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y, circles[i].x - 20, circles[i].y - 5);
         }
     }
 
@@ -353,7 +366,7 @@ void Game::mapEurope()
                 isFlipped = true;
                 planeToMove = false;
             }
-               
+
             counterPlane = 0;
         }
     }
@@ -364,7 +377,7 @@ void Game::mapEurope()
             {
                 isFlipped = false;
                 planeToMove = false;
-            }             
+            }
         }
     }
 
@@ -373,13 +386,15 @@ void Game::mapEurope()
 
     if (CheckCollisionPointCircle(planePoint, circles[coutnryNumber], 30) && enableClick)
     {
-        
+
         StopSoundMulti();
         flyOneTime = true;
         countries[coutnryNumber] = 1;
     }
 
-    counterDotsBubble++;
+    DrawTexture(optionImage, 1840, 30, WHITE);
+
+    //counterDotsBubble++;
 
     for (int i = 0; i < 6; i++)
     {
@@ -390,7 +405,7 @@ void Game::mapEurope()
                 if (audioIsClicked && enableClick)
                 {
                     PlaySound(moneySound);
-                }                
+                }
 
                 isTransportMenuOn = true;
 
@@ -415,7 +430,7 @@ void Game::mapEurope()
         {
             PlaySound(vehicleSound);
         }
-            
+
         moveAirplane(countryPositions.at(countryFly));
 
         playSound = 0;
@@ -426,8 +441,8 @@ void Game::mapEurope()
         if (countries[i] && !banCountry[i])
         {
             StopSound(vehicleSound);
-            DrawRectangle(0,0,GetScreenWidth(), GetScreenHeight(), GRAY);
-                
+            DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), GRAY);
+
             enableClick = false;
             player.CheckDir();
             player.Movement();
@@ -441,15 +456,15 @@ void Game::mapEurope()
             if (!unloadBack)
             {
                 DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
-                dialogues(850, 480, mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 4);
-                
+                dialogues(1050, 480, mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 4);
+
             }
             else {
                 DrawTexture(countriesHoveredV[i].country, countriesHoveredV[i].x, countriesHoveredV[i].y, WHITE);
                 isTransportMenuOn = false;
             }
 
-            if (isClicked() && CheckCollisionPointCircle(mousePoint, backCircle, 30) )
+            if (isClicked() && CheckCollisionPointCircle(mousePoint, backCircle, 30))
             {
                 enableClick = true;
                 countries[i] = 0;
@@ -457,17 +472,17 @@ void Game::mapEurope()
                 banCountry[i] = true;
             }
         }
-    }         
+    }
 
     if (!flyOneTime)
-    {       
+    {
         transportMenuF();
 
         if (planeToMove)
         {
             DrawTexture(plane.planeT, plane.planeCurrentPosX, plane.planeCurrentPosY, WHITE);
         }
-            
+
     }
 
     DrawTexture(moneyBackground, 7, 30, WHITE);
@@ -476,26 +491,9 @@ void Game::mapEurope()
 
 void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
 {
-    if (counterDotsBubble <= 180)
-    {
-        DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
-    }
-    else {
-        changeDotsBubble++;
-
-        if (changeDotsBubble == 4)
-        {
-            changeDotsBubble = 0;
-        }
-
-        counterDotsBubble = 0;
-    }
-
     if (counterPressed > dialogueLength)
-    {
-        questBoard();
-    }
-        
+        return;
+
     if (IsKeyPressed(KEY_E) && !isDialogueStarted)
     {
         isDialogueStarted = true;
@@ -519,7 +517,7 @@ void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue,
         isDialogueContinued = true;
     }
 
-    if (isDialogueContinued && !isDialogueStarted && counterPressed <= dialogueLength)
+    if (isDialogueContinued && !isDialogueStarted)
     {
         if (counterPressed % 2 == 0 && counterPressed > 0)
         {
@@ -535,80 +533,49 @@ void Game::dialogues(int dotsBubbleX, int dotsBubbleY, Texture2D& firstDialogue,
 
 void Game::questBoard()
 {
-    if (!openQuest)
-    {
-        DrawTexture(questBoardT, 581, 233, WHITE);
-        DrawTexture(acceptButton, 610, 758, WHITE);
-        DrawTexture(cancelButton, 1090, 758, WHITE);
-    }
-    
-    if (mousePoint.y >= 758 && mousePoint.y <= 834)
-    {
-        if (mousePoint.x >= 610 && mousePoint.x <= 835 && !openQuest)
-        {
-            DrawTexture(acceptButtonHover, 610, 758, WHITE);
 
-            if (isClicked())
-            {
-                openQuest = true;
-                acceptQuest = true;
-            }
-        }     
-        else if (mousePoint.x >= 1090 && mousePoint.x <= 1308 && !openQuest)
-        {
-            DrawTexture(cancelButtonHover, 1090, 758, WHITE);
-            
-            if (isClicked())
-            {
-                openQuest = true;
-                acceptQuest = false;
-            }
-        }   
-    }
 }
 
 void Game::optionsMenu()
 {
-    DrawTexture(optionImage, 1840, 30, WHITE);
-
-	if ((mousePoint.x >= 1845 && mousePoint.x <= 1900) && (mousePoint.y >= 20 && mousePoint.y <= 70))
-	{
+    if ((mousePoint.x >= 1845 && mousePoint.x <= 1900) && (mousePoint.y >= 20 && mousePoint.y <= 70))
+    {
         DrawTexture(optionImageHovered, 1840, 30, WHITE);
 
-        if(isClicked())
+        if (isClicked())
         {
             DrawTexture(optionImageClicked, 1840, 30, WHITE);
             options = 1;
             optionCounter++;
-        }	
-	}
+        }
+    }
 
-	if (options)
-	{
+    if (options)
+    {
         DrawTexture(menuOptions, 1635, 100, WHITE);
 
-		for (int i = 0; i < 3; i++)
-		{
-			if (isClicked() && CheckCollisionPointRec(mousePoint, choiceFromOptions[i]))
-			{
-				switch (i) {
-				case 0:
+        for (int i = 0; i < 3; i++)
+        {
+            if (isClicked() && CheckCollisionPointRec(mousePoint, choiceFromOptions[i]))
+            {
+                switch (i) {
+                case 0:
                     helpIsClicked = true;
-					break;
+                    break;
 
-				case 1:
+                case 1:
                     audioIsClicked = true;
                     audioIsClickedCounter++;
-					break;
+                    break;
 
-				case 2:
+                case 2:
                     isQuitting = true;
                     enableClick = false;
                     isTransportMenuOn = true;
-					break;
-				}
-			}
-		}
+                    break;
+                }
+            }
+        }
 
         if (helpIsClicked)
         {
@@ -617,7 +584,7 @@ void Game::optionsMenu()
             //ok yani shte misli 
             //stava
         }
-         
+
         if (audioIsClicked)
         {
             DrawTexture(audioIsOn, 1857.5, 190.5, WHITE);
@@ -625,10 +592,10 @@ void Game::optionsMenu()
             if (IsMouseButtonUp && isClicked() && CheckCollisionPointRec(mousePoint, choiceFromOptions[1]) && audioIsClickedCounter == 2)
             {
                 audioIsClicked = false;
-                audioIsClickedCounter = 0;                 
+                audioIsClickedCounter = 0;
             }
         }
-	}
+    }
 
     if ((mousePoint.x >= 1845 && mousePoint.x <= 1900) && (mousePoint.y >= 20 && mousePoint.y <= 70) && isClicked() && optionCounter == 2)
     {
@@ -648,12 +615,12 @@ void Game::update()
 
         optionsMenu();
 
-        isUserQuitting(isQuitting,enableClick, mousePoint, confirmationT, darkerWindow, isTransportMenuOn);
+        isUserQuitting(isQuitting, enableClick, mousePoint, confirmationT, darkerWindow, isTransportMenuOn);
 
         EndDrawing();
     }
 }
-  
+
 Game::~Game() {
 
     //IMPORTNAT UNLOADING TEXTURES
