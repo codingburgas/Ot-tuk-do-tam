@@ -499,7 +499,7 @@ void Game::mapEurope()
     DrawTexture(moneyBackground, 7, 30, WHITE);
     DrawText(printMoney.c_str(), 85, 50, 50, moneyColor);
 
-    if (!itemPicked)
+    if (!itemPicked && !isDelivered && acceptQuest)
     {
        DrawTexture(exampleItem, 1000 + player.XBg, 500 + player.YBg, WHITE);
     }
@@ -507,13 +507,14 @@ void Game::mapEurope()
     if (findDistance(player, 1000, 500) && IsKeyPressed(KEY_Q))
     {
         itemPicked = true;
-        cout << "da";
     }
 
     if (IsKeyDown(KEY_TAB))
     {
         showInventory();
     }
+
+    returnItem(1000);
 }
 
 void Game::dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
@@ -586,7 +587,7 @@ void Game::questBoard(string& title, string& description, string& reward)
             if (isClicked())
             {
                 openQuest = true;
-                acceptQuest = true;
+                acceptQuest = false;
             }
         }
         else if (mousePoint.x >= 1090 && mousePoint.x <= 1308 && !openQuest)
@@ -596,7 +597,7 @@ void Game::questBoard(string& title, string& description, string& reward)
             if (isClicked())
             {
                 openQuest = true;
-                acceptQuest = false;
+                acceptQuest = true;
             }
         }
     }
@@ -609,6 +610,16 @@ void Game::showInventory()
     if (itemPicked)
     {
         DrawTexture(exampleItem, 1000, 500, WHITE);
+    }
+}
+
+void Game::returnItem(int reward)
+{
+    if (itemPicked && findDistance(player, player.enemyPosX, player.enemyPosY) && IsKeyPressed(KEY_Q))
+    {
+        isDelivered = true;
+        itemPicked = false;
+        allMoney += reward;
     }
 }
 

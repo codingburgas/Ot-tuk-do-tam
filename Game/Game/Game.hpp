@@ -187,6 +187,7 @@ private:
     //picup system
     Texture2D inventory;
     bool itemPicked;
+    bool isDelivered;
 
     Texture2D exampleItem;
 
@@ -209,6 +210,7 @@ public:
     void dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength);
     void questBoard(string& title, string& description, string& reward);
     void showInventory();
+    void returnItem(int reward);
     void optionsMenu();
     void update();
 
