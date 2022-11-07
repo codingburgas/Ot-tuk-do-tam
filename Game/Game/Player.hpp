@@ -43,7 +43,7 @@ private:
 
 	Texture2D exampleItem;
 	Vector2 playerCords;
-	friend bool FindDistance(Player&player);
+	friend bool findDistance(Player& player, int posX, int posY);
 public:
 	Player();
 	void LoadSprites(int fps);

@@ -499,6 +499,17 @@ void Game::mapEurope()
     DrawTexture(moneyBackground, 7, 30, WHITE);
     DrawText(printMoney.c_str(), 85, 50, 50, moneyColor);
 
+    if (!itemPicked)
+    {
+       DrawTexture(exampleItem, 1000 + player.XBg, 500 + player.YBg, WHITE);
+    }
+
+    if (findDistance(player, 1000, 500) && IsKeyPressed(KEY_Q))
+    {
+        itemPicked = true;
+        cout << "da";
+    }
+
     if (IsKeyDown(KEY_TAB))
     {
         showInventory();
@@ -507,7 +518,8 @@ void Game::mapEurope()
 
 void Game::dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
 {
-    if(FindDistance(player))
+	player.DrawDotsAnimation(player.enemyPosX - 10 + player.XBg, player.enemyPosY - 10 + player.YBg);
+    if(findDistance(player, player.enemyPosX, player.enemyPosY))
     {
         if (counterPressed > dialogueLength)
         {
@@ -588,11 +600,6 @@ void Game::questBoard(string& title, string& description, string& reward)
             }
         }
     }
-}
-
-void Game::pickupSystem()
-{
-
 }
 
 void Game::showInventory()

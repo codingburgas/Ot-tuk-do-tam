@@ -208,7 +208,6 @@ public:
     void mapEurope();
     void dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength);
     void questBoard(string& title, string& description, string& reward);
-    void pickupSystem();
     void showInventory();
     void optionsMenu();
     void update();

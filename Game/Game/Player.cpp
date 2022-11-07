@@ -37,8 +37,6 @@ void Player::LoadSprites(int fps)
 	lim = (float)idleD.width / 2;
 	view = { lim, 0, (float)idleD.width / 2, (float)idleD.height };
 	this->fps = fps;
-
-	exampleItem = LoadTexture("../src/sprites/Menus and boards/heartIcon.png");
 }
 Player::Player()
 {
@@ -52,10 +50,11 @@ Player::Player()
 	animationSpeed = 6;
 	HeroDir = LEFT;
 }
-bool FindDistance(Player&player)
+
+bool findDistance(Player&player, int posX, int posY)
 {
-	player.DrawDotsAnimation(player.enemyPosX - 10 + player.XBg, player.enemyPosY - 10 + player.YBg);
-	if (abs(player.playerCords.x - (player.enemyPosX + player.XBg)) <= player.enemyDistance && abs(player.playerCords.y - (player.enemyPosY + player.YBg)) <= player.enemyDistance)
+	
+	if (abs(player.playerCords.x - (posX + player.XBg)) <= player.enemyDistance && abs(player.playerCords.y - (posY + player.YBg)) <= player.enemyDistance)
 	{
 		return 1;
 	}
@@ -63,6 +62,7 @@ bool FindDistance(Player&player)
 		return 0;
 	}
 }
+
 void Player::DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY)
 {
 	counterDotsBubble++;
@@ -71,14 +71,13 @@ void Player::DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY)
 		DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
 	}
 	else {
+		counterDotsBubble = 0;
 		changeDotsBubble++;
 
 		if (changeDotsBubble == 4)
 		{
 			changeDotsBubble = 0;
 		}
-
-		counterDotsBubble = 0;
 	}
 }
 
@@ -168,7 +167,6 @@ void Player::Movement()
 	DrawTexture(background, XBg, YBg, WHITE);
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
 	DrawTexture(chadFr, enemyPosX + XBg, enemyPosY + YBg, WHITE);
-	DrawTexture(exampleItem, 1000 + XBg, 500 + YBg, WHITE);
 }
 void Player::UnLoadTextures()
 {

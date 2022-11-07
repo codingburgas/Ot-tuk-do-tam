@@ -2,5 +2,5 @@
 Enemy::Enemy()
 {
 	enemyPosX = 1000, enemyPosY = 1000;
-	enemyDistance = 200;
+	enemyDistance = 100;
 }
