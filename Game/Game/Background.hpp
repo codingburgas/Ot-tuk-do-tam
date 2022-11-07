@@ -5,7 +5,7 @@ class Bg
 	protected:
 		Texture2D background;
 		unsigned int speedBg;
-	public:
 		int XBg, YBg;
+	public:
 		Bg();
 };

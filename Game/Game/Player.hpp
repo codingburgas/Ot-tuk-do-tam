@@ -42,9 +42,9 @@ private:
 	}HeroDir;
 
 	Texture2D exampleItem;
-
-public:
 	Vector2 playerCords;
+	friend bool FindDistance(Player&player);
+public:
 	Player();
 	void LoadSprites(int fps);
 	void Movement();

@@ -52,7 +52,17 @@ Player::Player()
 	animationSpeed = 6;
 	HeroDir = LEFT;
 }
-
+bool FindDistance(Player&player)
+{
+	player.DrawDotsAnimation(player.enemyPosX - 10 + player.XBg, player.enemyPosY - 10 + player.YBg);
+	if (abs(player.playerCords.x - (player.enemyPosX + player.XBg)) <= player.enemyDistance && abs(player.playerCords.y - (player.enemyPosY + player.YBg)) <= player.enemyDistance)
+	{
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
 void Player::DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY)
 {
 	counterDotsBubble++;
