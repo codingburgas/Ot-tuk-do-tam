@@ -56,7 +56,7 @@ Player::Player()
 void Player::DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY)
 {
 	counterDotsBubble++;
-	if (counterDotsBubble <= 180)
+	if (counterDotsBubble <= 12)
 	{
 		DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
 	}

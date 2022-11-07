@@ -70,6 +70,7 @@ Game::Game() {
     enableClick = true;
     money = 2000;
     allMoney = 2000;
+    moneyColor = { 51, 171, 69, 255 };
 
     //hover effect variables
     bulgaria = LoadTexture("../src/sprites/countries/Bulgaria.png");
@@ -177,6 +178,8 @@ Game::Game() {
     //pickup mechanic
     inventory = LoadTexture("../src/sprites/Menus and boards/inventory.png");
     exampleItem = LoadTexture("../src/sprites/Menus and boards/heartIcon.png");
+
+    textColor = { 54, 54, 54, 255 };
 }
 
 void Game::backstory()
@@ -494,7 +497,7 @@ void Game::mapEurope()
     }
 
     DrawTexture(moneyBackground, 7, 30, WHITE);
-    DrawText(printMoney.c_str(), 85, 50, 50, DARKGREEN);
+    DrawText(printMoney.c_str(), 85, 50, 50, moneyColor);
 
     if (IsKeyDown(KEY_TAB))
     {
@@ -509,7 +512,7 @@ void Game::dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string
         player.DrawDotsAnimation(player.enemyPosX - 10 + player.XBg, player.enemyPosY - 10 + player.YBg);
         if (counterPressed > dialogueLength)
         {
-            questBoard();
+            questBoard(titleChadQuest, descriptionChadQuest, rewardChadQuest);
         }
 
         if (IsKeyPressed(KEY_E) && !isDialogueEntered)
@@ -550,13 +553,17 @@ void Game::dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string
     }
 }
 
-void Game::questBoard()
+void Game::questBoard(string& title, string& description, string& reward)
 {
     if (!openQuest)
     {
         DrawTexture(questBoardT, 581, 233, WHITE);
         DrawTexture(cancelButton, 610, 758, WHITE);
         DrawTexture(acceptButton, 1090, 758, WHITE);
+
+        DrawTextEx(headerFont, title.c_str(), {635, 265}, 48, 5, textColor);
+        DrawTextEx(textFont, description.c_str(), { 635, 400 }, 32, 5, textColor);
+        DrawTextEx(textFont, reward.c_str(), { 635, 640 }, 32, 5, textColor);
     }
 
     if (mousePoint.y >= 758 && mousePoint.y <= 834)

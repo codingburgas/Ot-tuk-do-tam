@@ -46,6 +46,7 @@ private:
     Texture2D menuOptions;
 
     int money;
+    Color moneyColor;
 
     bool enableClick;
     //vehicles
@@ -191,6 +192,11 @@ private:
 
     vector<Texture2D> items;
 
+    //quest texts
+    Color textColor;
+    string titleChadQuest = "Pickup the heard!";
+    string descriptionChadQuest = "Go to the heart and take it.";
+    string rewardChadQuest = "Reward:           1000$";
 public:
 
     Game();
@@ -201,7 +207,7 @@ public:
     void transportMenuF();
     void mapEurope();
     void dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength);
-    void questBoard();
+    void questBoard(string& title, string& description, string& reward);
     void pickupSystem();
     void showInventory();
     void optionsMenu();
