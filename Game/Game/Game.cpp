@@ -72,6 +72,10 @@ Game::Game() {
     allMoney = 2000;
     moneyColor = { 51, 171, 69, 255 };
 
+    banCountry[4] = true;
+
+    counterBans = 0;
+
     //hover effect variables
     bulgaria = LoadTexture("../src/sprites/countries/Bulgaria.png");
     france = LoadTexture("../src/sprites/countries/France.png");
@@ -412,25 +416,28 @@ void Game::mapEurope()
     {
         if (!banCountry[i])
         {
-            if (isClicked() && CheckCollisionPointCircle(mousePoint, circles[i], 30))
+            if (isClicked())
             {
-                if (audioIsClicked && enableClick)
+                if (CheckCollisionPointCircle(mousePoint, circles[i], 30))
                 {
-                    PlaySound(moneySound);
+                    if (audioIsClicked && enableClick)
+                    {
+                        PlaySound(moneySound);
+                    }
+
+                    isTransportMenuOn = true;
+
+                    if (flyOneTime)
+                    {
+                        countryFly = i;
+                        flyOneTime = false;
+                    }
+
+                    isFlying = true;
+                    playSound = true;
+                    counterPlane++;
+                    coutnryNumber = i;
                 }
-
-                isTransportMenuOn = true;
-
-                if (flyOneTime)
-                {
-                    countryFly = i;
-                    flyOneTime = false;
-                }
-
-                isFlying = true;
-                playSound = true;
-                counterPlane++;
-                coutnryNumber = i;
             }
         }
     }
@@ -446,6 +453,19 @@ void Game::mapEurope()
         moveAirplane(countryPositions.at(countryFly));
 
         playSound = 0;
+    }
+
+    for (int i = 0; i < 6; i++)
+    {
+        if (banCountry[i] ==true)
+        {
+            counterBans++;
+        }
+    }
+
+    if (counterBans == 6)
+    {
+        banCountry[4] = false;
     }
 
     for (int i = 0; i < 6; i++)

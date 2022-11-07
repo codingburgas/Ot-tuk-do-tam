@@ -101,6 +101,8 @@ private:
 
     int optionCounter;
 
+    int counterBans;
+
     Rectangle afterClickedOptions;
 
     Vector2 mousePoint;
