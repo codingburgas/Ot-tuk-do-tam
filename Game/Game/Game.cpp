@@ -668,10 +668,7 @@ void Game::optionsMenu()
 
         if (helpIsClicked)
         {
-            //idk what will happen here Deivid :)
-            //mislish li che az znam sh ima nesh sig
-            //ok yani shte misli 
-            //stava
+            
         }
 
         if (audioIsClicked)

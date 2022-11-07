@@ -12,14 +12,16 @@ private:
 	Texture2D d;
 	Texture2D r;
 	Texture2D l;
-	
+
 	Texture2D idleU;
 	Texture2D idleD;
 	Texture2D idleR;
 	Texture2D idleL;
-
-	Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
-	vector<Texture2D> dotsBubble;
+	//add this
+	Texture2D dotsBubble;
+	float limitFrameDots;
+	Rectangle viewDots;
+	//to this
 	int counterDotsBubble;
 	int changeDotsBubble;
 
@@ -49,6 +51,6 @@ public:
 	void LoadSprites(int fps);
 	void Movement();
 	void CheckDir();
-	void DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY);
+	void DrawDotsAnimation(float dotsBubbleX, float dotsBubbleY);
 	void UnLoadTextures();
 };

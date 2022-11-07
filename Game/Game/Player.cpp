@@ -18,11 +18,7 @@ void Player::LoadSprites(int fps)
 	chadFrTwo = LoadTexture("../src/sprites/inner country elements/france/frChad2.png");
 
 	//dots
-	dotsBubbleOne = LoadTexture("../src/sprites/menus and boards/dotsBubble1.png");
-	dotsBubbleTwo = LoadTexture("../src/sprites/menus and boards/dotsBubble2.png");
-	dotsBubblThree = LoadTexture("../src/sprites/menus and boards/dotsBubble3.png");
-	dotsBubbleFour = LoadTexture("../src/sprites/menus and boards/dotsBubble4.png");
-	dotsBubble = { dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour };
+	dotsBubble = LoadTexture("../src/sprites/menus and boards/dotsBubble.png");
 
 	playerSprites.push_back(l);
 	playerSprites.push_back(r);
@@ -36,6 +32,10 @@ void Player::LoadSprites(int fps)
 
 	lim = (float)idleD.width / 2;
 	view = { lim, 0, (float)idleD.width / 2, (float)idleD.height };
+	//for dots
+	limitFrameDots = (float)dotsBubble.width / 4;
+	viewDots = { limitFrameDots, 0, (float)dotsBubble.width / 4, (float)dotsBubble.height };
+
 	this->fps = fps;
 }
 Player::Player()
@@ -63,22 +63,19 @@ bool findDistance(Player&player, int posX, int posY)
 	}
 }
 
-void Player::DrawDotsAnimation(int dotsBubbleX, int dotsBubbleY)
+void Player::DrawDotsAnimation(float dotsBubbleX, float dotsBubbleY)
 {
-	counterDotsBubble++;
-	if (counterDotsBubble <= 12)
+	if (counterDotsBubble >= 15/*<- primeren fps na dots*/)
 	{
-		DrawTexture(dotsBubble.at(changeDotsBubble), dotsBubbleX, dotsBubbleY, WHITE);
-	}
-	else {
+		viewDots.x += limitFrameDots;
 		counterDotsBubble = 0;
-		changeDotsBubble++;
-
-		if (changeDotsBubble == 4)
-		{
-			changeDotsBubble = 0;
-		}
 	}
+	if (abs(viewDots.x) > dotsBubble.width)
+	{
+		viewDots.x = limitFrameDots;
+	}
+	counterDotsBubble++;
+	DrawTextureRec(dotsBubble, viewDots, Vector2{ dotsBubbleX, dotsBubbleY }, WHITE);
 }
 
 void Player::CheckDir()
