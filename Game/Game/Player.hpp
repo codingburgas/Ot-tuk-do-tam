@@ -41,6 +41,8 @@ private:
 		DOWN
 	}HeroDir;
 
+	Texture2D exampleItem;
+
 public:
 	Vector2 playerCords;
 	Player();

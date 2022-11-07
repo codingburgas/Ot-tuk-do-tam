@@ -185,8 +185,9 @@ private:
     
     //picup system
     Texture2D inventory;
-    Texture2D exampleItem;
     bool itemPicked;
+
+    Texture2D exampleItem;
 
     vector<Texture2D> items;
 

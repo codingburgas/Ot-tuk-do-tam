@@ -176,7 +176,7 @@ Game::Game() {
 
     //pickup mechanic
     inventory = LoadTexture("../src/sprites/Menus and boards/inventory.png");
-    exampleItem = LoadTexture("../src/sprites/Menus and boards/heartIcon.png");;
+    exampleItem = LoadTexture("../src/sprites/Menus and boards/heartIcon.png");
 }
 
 void Game::backstory()
@@ -188,10 +188,8 @@ void Game::backstory()
 
 void Game::hoverEffects(Texture2D& country, float posx, float posy, float posxTarget, float posyTarget)
 {
-
     DrawTexture(country, posx, posy, WHITE);
     DrawTexture(targetHover, posxTarget, posyTarget, WHITE);
-
 }
 
 void Game::moveAirplane(const countryPosition& countryPosition)
@@ -468,8 +466,6 @@ void Game::mapEurope()
             {
                 DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
                 dialogues(mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 4);
-                DrawTexture(exampleItem, 1000, 500, WHITE);
-
             }
             else {
                 DrawTexture(countriesHoveredV[i].country, countriesHoveredV[i].x, countriesHoveredV[i].y, WHITE);
@@ -596,6 +592,11 @@ void Game::pickupSystem()
 void Game::showInventory()
 {
     DrawTexture(inventory, 0, 0, WHITE);
+
+    if (itemPicked)
+    {
+        DrawTexture(exampleItem, 1000, 500, WHITE);
+    }
 }
 
 void Game::optionsMenu()

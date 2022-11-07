@@ -16,6 +16,7 @@ void Player::LoadSprites(int fps)
 
 	chadFr = LoadTexture("../src/sprites/inner country elements/france/frChad1.png");
 	chadFrTwo = LoadTexture("../src/sprites/inner country elements/france/frChad2.png");
+
 	//dots
 	dotsBubbleOne = LoadTexture("../src/sprites/menus and boards/dotsBubble1.png");
 	dotsBubbleTwo = LoadTexture("../src/sprites/menus and boards/dotsBubble2.png");
@@ -37,7 +38,7 @@ void Player::LoadSprites(int fps)
 	view = { lim, 0, (float)idleD.width / 2, (float)idleD.height };
 	this->fps = fps;
 
-	
+	exampleItem = LoadTexture("../src/sprites/Menus and boards/heartIcon.png");
 }
 Player::Player()
 {
@@ -127,11 +128,9 @@ void Player::Movement()
 	}
 	else if (!HorizotnalOrVertical[0] && !HorizotnalOrVertical[1])
 	{
-		animationSpeed = 4;	
+		animationSpeed = 4;
 		playerSprite = idleSprites.at(int(HeroDir));
 	}
-		
-	
 
 	//flames
 	if (counter >= fps / animationSpeed)
@@ -159,7 +158,7 @@ void Player::Movement()
 	DrawTexture(background, XBg, YBg, WHITE);
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
 	DrawTexture(chadFr, enemyPosX + XBg, enemyPosY + YBg, WHITE);
-
+	DrawTexture(exampleItem, 1000 + XBg, 500 + YBg, WHITE);
 }
 void Player::UnLoadTextures()
 {
