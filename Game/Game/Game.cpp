@@ -173,6 +173,10 @@ Game::Game() {
 	darkerWindow = { 0,0,0,120 };
 
 	backstoryText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry's standard dummy text ever since the 1500s,\nwhen an unknown printer took a\ngalley of type and scrambled it to make a type specimen book.";
+
+    //pickup mechanic
+    inventory = LoadTexture("../src/sprites/Menus and boards/inventory.png");
+    exampleItem = LoadTexture("../src/sprites/Menus and boards/heartIcon.png");;
 }
 
 void Game::backstory()
@@ -464,6 +468,7 @@ void Game::mapEurope()
             {
                 DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
                 dialogues(mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 4);
+                DrawTexture(exampleItem, 1000, 500, WHITE);
 
             }
             else {
@@ -494,6 +499,11 @@ void Game::mapEurope()
 
     DrawTexture(moneyBackground, 7, 30, WHITE);
     DrawText(printMoney.c_str(), 85, 50, 50, DARKGREEN);
+
+    if (IsKeyDown(KEY_TAB))
+    {
+        showInventory();
+    }
 }
 
 void Game::dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
@@ -549,15 +559,15 @@ void Game::questBoard()
     if (!openQuest)
     {
         DrawTexture(questBoardT, 581, 233, WHITE);
-        DrawTexture(acceptButton, 610, 758, WHITE);
-        DrawTexture(cancelButton, 1090, 758, WHITE);
+        DrawTexture(cancelButton, 610, 758, WHITE);
+        DrawTexture(acceptButton, 1090, 758, WHITE);
     }
 
     if (mousePoint.y >= 758 && mousePoint.y <= 834)
     {
         if (mousePoint.x >= 610 && mousePoint.x <= 835 && !openQuest)
         {
-            DrawTexture(acceptButtonHover, 610, 758, WHITE);
+            DrawTexture(cancelButtonHover, 610, 758, WHITE);
 
             if (isClicked())
             {
@@ -567,7 +577,7 @@ void Game::questBoard()
         }
         else if (mousePoint.x >= 1090 && mousePoint.x <= 1308 && !openQuest)
         {
-            DrawTexture(cancelButtonHover, 1090, 758, WHITE);
+            DrawTexture(acceptButtonHover, 1090, 758, WHITE);
 
             if (isClicked())
             {
@@ -576,6 +586,16 @@ void Game::questBoard()
             }
         }
     }
+}
+
+void Game::pickupSystem()
+{
+
+}
+
+void Game::showInventory()
+{
+    DrawTexture(inventory, 0, 0, WHITE);
 }
 
 void Game::optionsMenu()

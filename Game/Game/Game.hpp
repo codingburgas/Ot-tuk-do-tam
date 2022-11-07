@@ -182,7 +182,13 @@ private:
     bool acceptQuest;
 
     string questDisplay[10];
+    
+    //picup system
+    Texture2D inventory;
+    Texture2D exampleItem;
+    bool itemPicked;
 
+    vector<Texture2D> items;
 
 public:
 
@@ -195,6 +201,8 @@ public:
     void mapEurope();
     void dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength);
     void questBoard();
+    void pickupSystem();
+    void showInventory();
     void optionsMenu();
     void update();
 
