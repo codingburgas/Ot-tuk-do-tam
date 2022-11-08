@@ -72,10 +72,6 @@ Game::Game() {
     allMoney = 2000;
     moneyColor = { 51, 171, 69, 255 };
 
-    banCountry[4] = true;
-
-    counterBans = 0;
-
     //hover effect variables
     bulgaria = LoadTexture("../src/sprites/countries/Bulgaria.png");
     france = LoadTexture("../src/sprites/countries/France.png");
@@ -361,7 +357,7 @@ void Game::mapEurope()
 
     for (int i = 0; i < 6; i++)
     {
-        if (!changeCircles[i] && !isTransportMenuOn && enableClick)
+        if (!changeCircles[i] && !isTransportMenuOn && enableClick && i != 4)
         {
             DrawTexture(target, circles[i].x - 20, circles[i].y - 5, WHITE);
         }
@@ -369,9 +365,20 @@ void Game::mapEurope()
 
     for (int i = 0; i < 6; i++)
     {
-        if ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || changeCircles[i]) && !isTransportMenuOn && enableClick)
+        if ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || (changeCircles[i]) && !isTransportMenuOn && enableClick && i != 4))
         {
             hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y, circles[i].x - 20, circles[i].y - 5);
+        }
+    }
+    
+    
+    if (isBulgariaEnd)
+    {
+        DrawTexture(target, circles[4].x - 20, circles[4].y - 5, WHITE);
+
+        if (CheckCollisionPointCircle(mousePoint, circles[4], 30))
+        {
+            hoverEffects(countriesV[4].country, countriesV[4].x, countriesV[4].y, circles[4].x - 20, circles[4].y - 5);
         }
     }
 
@@ -455,17 +462,9 @@ void Game::mapEurope()
         playSound = 0;
     }
 
-    for (int i = 0; i < 6; i++)
+    if (banCountry[0] && banCountry[1] && banCountry[2] && banCountry[3] && banCountry[5])
     {
-        if (banCountry[i] ==true)
-        {
-            counterBans++;
-        }
-    }
-
-    if (counterBans == 6)
-    {
-        banCountry[4] = false;
+        isBulgariaEnd = true;
     }
 
     for (int i = 0; i < 6; i++)

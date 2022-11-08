@@ -101,8 +101,6 @@ private:
 
     int optionCounter;
 
-    int counterBans;
-
     Rectangle afterClickedOptions;
 
     Vector2 mousePoint;
@@ -200,6 +198,8 @@ private:
     string titleChadQuest = "Pickup the heard!";
     string descriptionChadQuest = "Go to the heart and take it.";
     string rewardChadQuest = "Reward:           1000$";
+
+    bool isBulgariaEnd = true;
 public:
 
     Game();
