@@ -10,7 +10,6 @@ namespace variables {
 
 using namespace variables;
 
-//kogato lengtha na my e po golqm ot na text bugva i ne znam kak da go fixna
 void typewriteEffect(string& text, int posX, int posY, int fontSize, Color color)
 {
 	Lifetime++;//increment for timer
@@ -22,7 +21,7 @@ void typewriteEffect(string& text, int posX, int posY, int fontSize, Color color
 	}
 
 	if (Lifetime == 15 && text[i] != text[text.length()]) {
-		if(my.length() < text.length())
+		if (my.length() < text.length())
 			i++;
 
 		my += text[i - 1];
@@ -31,4 +30,3 @@ void typewriteEffect(string& text, int posX, int posY, int fontSize, Color color
 
 	DrawText(my.c_str(), posX, posY, fontSize, color);
 }
-	

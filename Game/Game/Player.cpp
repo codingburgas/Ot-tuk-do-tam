@@ -165,6 +165,7 @@ void Player::Movement()
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
 	DrawTexture(chadFr, enemyPosX + XBg, enemyPosY + YBg, WHITE);
 }
+
 void Player::UnLoadTextures()
 {
 	UnloadTexture(d);

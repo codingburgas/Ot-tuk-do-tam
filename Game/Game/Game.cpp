@@ -624,7 +624,7 @@ void Game::questBoard(string& title, string& description, string& reward)
 
 void Game::showInventory()
 {
-    DrawTexture(inventory, 0, 0, WHITE);
+    DrawTexture(inventory, 505, 223, WHITE);
 
     if (itemPicked)
     {
