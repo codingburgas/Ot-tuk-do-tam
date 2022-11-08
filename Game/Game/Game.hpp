@@ -159,7 +159,7 @@ private:
     int points;
 
     //dialogue mechanic
-    Texture2D mainCharacterDialogue, chadDialogue;
+    Texture2D dialogueBox, finishedDialogueArrow;
     bool isDialogueStarted;
     bool isDialogueContinued;
     bool isDialogueEntered;
@@ -170,8 +170,7 @@ private:
 	int changeDotsBubble;
 
     string firstDialogue[5] = { "Ko staa manqk", "Da", "Tocho", "Tos puk", "" };
-    int firstDialogueCounter;
-    bool onGoingTypewriteEffect;
+    bool isTextEffectEnded;
 
     int counterPressed;
 
@@ -209,7 +208,7 @@ public:
     void moveAirplane(const countryPosition& countryPosition);
     void transportMenuF();
     void mapEurope();
-    void dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength);
+    void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength);
     void questBoard(string& title, string& description, string& reward);
     void showInventory();
     void returnItem(int reward);

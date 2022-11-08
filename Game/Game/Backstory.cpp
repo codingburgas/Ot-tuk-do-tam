@@ -3,8 +3,7 @@
 
 // define a timer
 namespace variables {
-	int Lifetime = 9;
-	string my;
+	int Lifetime = 4;
 	int i = 0;
 }
 
@@ -14,19 +13,15 @@ void typewriteEffect(string& text, int posX, int posY, int fontSize, Color color
 {
 	Lifetime++;//increment for timer
 
-	if (IsKeyPressed(KEY_ENTER)) {
-		i = text.length();
-		my = text;
-		Lifetime = 16;
-	}
-
-	if (Lifetime == 15 && text[i] != text[text.length()]) {
-		if (my.length() < text.length())
-			i++;
-
-		my += text[i - 1];
+	if (Lifetime == 5 && text[i] != text[text.length()]) {
+		i++;
 		Lifetime = 0;
 	}
 
-	DrawText(my.c_str(), posX, posY, fontSize, color);
+	if (text[i] == text[text.length()])
+	{
+		i = 0;
+	}
+
+	DrawText(text.substr(0, i).c_str(), posX, posY, fontSize, color);
 }

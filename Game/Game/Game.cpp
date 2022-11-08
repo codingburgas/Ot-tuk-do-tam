@@ -147,9 +147,8 @@ Game::Game() {
     allMoneyCopy = allMoney;
 
     //dialogue mechanic
-
-    mainCharacterDialogue = LoadTexture("../src/sprites/dialogues/KurabirovDialogue.png");
-    chadDialogue = LoadTexture("../src/sprites/dialogues/NestashevDialogue.png");
+    dialogueBox = LoadTexture("../src/sprites/dialogues/dialogueBox.png");
+    finishedDialogueArrow = LoadTexture("../src/sprites/dialogues/dialogueArrow.png");
 
     //quest board
     questBoardT = LoadTexture("../src/sprites/menus and boards/questMenu.png");
@@ -487,7 +486,7 @@ void Game::mapEurope()
             if (!unloadBack)
             {
                 DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
-                dialogues(mainCharacterDialogue, chadDialogue, firstDialogue, firstDialogueCounter, 4);
+                dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3);
             }
             else {
                 DrawTexture(countriesHoveredV[i].country, countriesHoveredV[i].x, countriesHoveredV[i].y, WHITE);
@@ -536,7 +535,7 @@ void Game::mapEurope()
     returnItem(1000);
 }
 
-void Game::dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string characterDialogues[], int& dialogueCounter, int dialogueLength)
+void Game::dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength)
 {
 	player.DrawDotsAnimation(player.enemyPosX - 10 + player.XBg, player.enemyPosY - 10 + player.YBg);
     if(findDistance(player, player.enemyPosX, player.enemyPosY))
@@ -551,14 +550,17 @@ void Game::dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string
             isDialogueStarted = true;
             isDialogueContinued = false;
             isDialogueEntered = true;
-
-            counterPressed++;
         }
 
         if (isDialogueStarted && !isDialogueContinued)
         {
-            DrawTexture(firstDialogue, 0, 0, WHITE);
-            typewriteEffect(characterDialogues[counterPressed - 1], 20, 900, 24, WHITE);
+            DrawTexture(dialogueBox, 0, 715, WHITE);
+
+            DrawTextEx(headerFont, firstName.c_str(), { 50, 750 }, 24, 5, textColor);
+
+            typewriteEffect(characterDialogues[counterPressed], 40, 900, 24, textColor);
+
+            DrawTexture(finishedDialogueArrow, 1290, 965, WHITE);   
         }
 
         if (IsKeyPressed(KEY_ENTER) && isDialogueEntered)
@@ -571,15 +573,19 @@ void Game::dialogues(Texture2D& firstDialogue, Texture2D& secondDialogue, string
 
         if (isDialogueContinued && !isDialogueStarted && counterPressed <= dialogueLength)
         {
+            DrawTexture(dialogueBox, 0, 715, WHITE);
+
             if (counterPressed % 2 == 0 && counterPressed > 0)
             {
-                DrawTexture(secondDialogue, 0, 0, WHITE);
+                DrawTextEx(headerFont, secondName.c_str(), { 50, 750 }, 24, 5, textColor);
             }
             else {
-                DrawTexture(firstDialogue, 0, 0, WHITE);
+                DrawTextEx(headerFont, firstName.c_str(), { 50, 750 }, 24, 5, textColor);
             }
+       
+            DrawText(characterDialogues[counterPressed].c_str(), 40, 900, 24, textColor);
 
-            typewriteEffect(characterDialogues[counterPressed - 1], 20, 900, 24, WHITE);
+            DrawTexture(finishedDialogueArrow, 1290, 965, WHITE);          
         }
     }
 }
