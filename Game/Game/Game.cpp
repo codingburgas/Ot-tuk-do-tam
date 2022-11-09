@@ -750,6 +750,7 @@ void setWidthAndHeight(Texture2D& variable)
 void gameStartup()
 {
     InitWindow(1920, 1080, "Ot tuk do tam");
+    ToggleFullscreen();
     InitAudioDevice();
 
     Game game;
