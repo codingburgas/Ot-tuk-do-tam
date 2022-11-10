@@ -12,17 +12,6 @@ void setIcon()
 	SetWindowIcon(icon);
 }
 
-void setFullScreen(int& windowWidth, int& windowHeight)
-{
-	if (!IsWindowFullscreen())
-	{
-		SetWindowSize(1920, 1080);
-	}
-	else {
-		SetWindowSize(windowWidth, windowHeight);
-	}
-}
-
 bool isClicked()
 {
 	return IsMouseButtonPressed(MOUSE_BUTTON_LEFT);

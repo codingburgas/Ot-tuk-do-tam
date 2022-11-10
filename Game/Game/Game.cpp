@@ -6,7 +6,6 @@ namespace Utils {
         return PI / 180 * angle;
     }
 }
-void setWidthAndHeight(Texture2D& variable);
 
 Game::Game() {
     SetTargetFPS(fps);
@@ -61,8 +60,6 @@ Game::Game() {
 
     //player
     player.LoadSprites(fps);
-
-    //setFullScreen(width, height);
 
     plane.planeCurrentPosX = 1360;
     plane.planeCurrentPosY = 850;
@@ -163,12 +160,6 @@ Game::Game() {
     flyOneTime = true;
 
     audioIsClicked = true;
-
-	darkerWindow = { 0,0,0,120 };
-
-
-	width = 1920;
-	height = 1080;
 
 	darkerWindow = { 0,0,0,120 };
 

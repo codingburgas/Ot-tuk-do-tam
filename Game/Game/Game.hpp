@@ -15,10 +15,6 @@ private:
 
     Texture2D map;
 
-    //window width and height
-    int width = 1920;
-    int height = 1080;
-
     //fonts
     Font headerFont, textFont;
 
