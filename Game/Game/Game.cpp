@@ -328,10 +328,10 @@ void Game::mapEurope()
     {
         if (allMoney < allMoneyCopy)
         {
-            allMoneyCopy -= 5;
+            allMoneyCopy -= 20;
         }
         else {
-            allMoneyCopy += 5;
+            allMoneyCopy += 20;
         }
     }
 
@@ -718,7 +718,7 @@ void Game::franceLevel()
 
     itemPicked(1000, 500, isItemPicked);
 
-    returnItem(1000, 1000, 500);
+    returnItem(1000, 1000, 1000);
 }
 
 void Game::update()
