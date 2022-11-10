@@ -170,6 +170,7 @@ private:
 	int changeDotsBubble;
 
     string firstDialogue[5] = { "Ko staa manqk", "Da", "Tocho", "Tos puk", "" };
+    string secondDialogue[5] = { "Ko staa manqk", "Zemi twa i razslevai", "Dobre", "Sh ti dam pari", "" };
     bool isTextEffectEnded;
 
     int counterPressed;
@@ -185,7 +186,7 @@ private:
     
     //picup system
     Texture2D inventory;
-    bool itemPicked;
+    bool isItemPicked;
     bool isDelivered;
 
     Texture2D exampleItem;
@@ -194,6 +195,7 @@ private:
 
     //quest texts
     Color textColor;
+    string chadText[100][3];
     string titleChadQuest = "Pickup the heard!";
     string descriptionChadQuest = "Go to the heart and take it.";
     string rewardChadQuest = "Reward:           1000$";
@@ -208,11 +210,15 @@ public:
     void moveAirplane(const countryPosition& countryPosition);
     void transportMenuF();
     void mapEurope();
-    void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength);
+    void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY);
     void questBoard(string& title, string& description, string& reward);
+    void itemPicked(int itemX, int itemY, bool& itemPicked);
     void showInventory();
-    void returnItem(int reward);
+    void returnItem(int reward, int posX, int posY);
     void optionsMenu();
+    
+    //country levels
+    void franceLevel();
     void update();
 
     ~Game();

@@ -65,7 +65,7 @@ bool findDistance(Player&player, int posX, int posY)
 
 void Player::DrawDotsAnimation(float dotsBubbleX, float dotsBubbleY)
 {
-	if (counterDotsBubble >= 15/*<- primeren fps na dots*/)
+	if (counterDotsBubble >= 15)
 	{
 		viewDots.x += limitFrameDots;
 		counterDotsBubble = 0;
@@ -164,6 +164,7 @@ void Player::Movement()
 	DrawTexture(background, XBg, YBg, WHITE);
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
 	DrawTexture(chadFr, enemyPosX + XBg, enemyPosY + YBg, WHITE);
+	DrawTexture(chadFrTwo, enemyPosX + XBg + 1000, enemyPosY + YBg, WHITE);
 }
 
 void Player::UnLoadTextures()

@@ -485,8 +485,14 @@ void Game::mapEurope()
 
             if (!unloadBack)
             {
+                franceLevel();
+
+                if (IsKeyDown(KEY_TAB))
+                {
+                    showInventory();
+                }
+
                 DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
-                dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3);
             }
             else {
                 DrawTexture(countriesHoveredV[i].country, countriesHoveredV[i].x, countriesHoveredV[i].y, WHITE);
@@ -516,29 +522,12 @@ void Game::mapEurope()
 
     DrawTexture(moneyBackground, 7, 30, WHITE);
     DrawText(printMoney.c_str(), 85, 50, 50, moneyColor);
-
-    if (!itemPicked && !isDelivered && acceptQuest)
-    {
-       DrawTexture(exampleItem, 1000 + player.XBg, 500 + player.YBg, WHITE);
-    }
-
-    if (findDistance(player, 1000, 500) && IsKeyPressed(KEY_Q))
-    {
-        itemPicked = true;
-    }
-
-    if (IsKeyDown(KEY_TAB))
-    {
-        showInventory();
-    }
-
-    returnItem(1000);
 }
 
-void Game::dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength)
+void Game::dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY)
 {
-	player.DrawDotsAnimation(player.enemyPosX - 10 + player.XBg, player.enemyPosY - 10 + player.YBg);
-    if(findDistance(player, player.enemyPosX, player.enemyPosY))
+	player.DrawDotsAnimation(chadCordsX - 10 + player.XBg, chadCordsY - 10 + player.YBg);
+    if(findDistance(player, chadCordsX, chadCordsY))
     {
         if (counterPressed > dialogueLength)
         {
@@ -632,18 +621,26 @@ void Game::showInventory()
 {
     DrawTexture(inventory, 505, 223, WHITE);
 
-    if (itemPicked)
+    if (isItemPicked)
     {
         DrawTexture(exampleItem, 1000, 500, WHITE);
     }
 }
 
-void Game::returnItem(int reward)
+void Game::itemPicked(int itemX, int itemY, bool& itemPicked)
 {
-    if (itemPicked && findDistance(player, player.enemyPosX, player.enemyPosY) && IsKeyPressed(KEY_Q))
+    if (findDistance(player, itemX, itemY) && IsKeyPressed(KEY_Q))
+    {
+        itemPicked = true;
+    }
+}
+
+void Game::returnItem(int reward, int posX, int posY)
+{
+    if (isItemPicked && findDistance(player, posX, posY) && IsKeyPressed(KEY_Q))
     {
         isDelivered = true;
-        itemPicked = false;
+        isItemPicked = false;
         allMoney += reward;
     }
 }
@@ -713,6 +710,21 @@ void Game::optionsMenu()
         options = 0;
         optionCounter = 0;
     }
+}
+
+void Game::franceLevel()
+{
+    dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000);
+    dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000);
+
+    if (!isItemPicked && !isDelivered && acceptQuest)
+    {
+        DrawTexture(exampleItem, 1000 + player.XBg, 500 + player.YBg, WHITE);
+    }
+
+    itemPicked(1000, 500, isItemPicked);
+
+    returnItem(1000, 1000, 500);
 }
 
 void Game::update()

@@ -18,10 +18,5 @@ void typewriteEffect(string& text, int posX, int posY, int fontSize, Color color
 		Lifetime = 0;
 	}
 
-	if (text[i] == text[text.length()])
-	{
-		i = 0;
-	}
-
 	DrawText(text.substr(0, i).c_str(), posX, posY, fontSize, color);
 }

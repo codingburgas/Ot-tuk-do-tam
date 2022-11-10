@@ -19,7 +19,6 @@ void setFullScreen(int& windowWidth, int& windowHeight)
 		SetWindowSize(1920, 1080);
 	}
 	else {
-
 		SetWindowSize(windowWidth, windowHeight);
 	}
 }
