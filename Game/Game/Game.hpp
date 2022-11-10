@@ -161,9 +161,18 @@ private:
     //dialogue mechanic
     Texture2D dialogueBox, finishedDialogueArrow;
 
-    bool isDialogueStarted;
-    bool isDialogueContinued;
-    bool isDialogueEntered;
+    struct isDialogue {
+        bool isDialogueStarted = false;
+        bool isDialogueContinued = false;
+        bool isDialogueEntered = false;
+    };
+    
+    vector<isDialogue> isDialogueV = 
+    {
+        {},
+        {},
+        {},
+    };
 
 	Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
 	vector<Texture2D> dotsBubble;
@@ -173,8 +182,6 @@ private:
     string firstDialogue[5] = { "Ko staa manqk", "Da", "Tocho", "Tos puk", "" };
     string secondDialogue[5] = { "Ko staa manqk", "Zemi twa i razslevai", "Dobre", "Sh ti dam pari", "" };
     bool isTextEffectEnded;
-
-    int counterPressed;
 
     //quest board 
     Texture2D questBoardT;
@@ -203,7 +210,14 @@ private:
         string reward;
     };
 
-    vector<chadText> chadTextV = { {"", "", ""}, {"Pickup the heard!", "Go to the heart and take it.", "Reward:           1000$"} };
+    vector<chadText> chadTextV = 
+    { 
+        {"", "", ""}, 
+        {"Pickup the heard!", "Go to the heart and take it.", "Reward:           1000$"},
+        {}
+    };
+
+    vector<int> counterPressed = {0, 0, 0, 0};
 
     bool isBulgariaEnd = true;
 public:
@@ -215,7 +229,7 @@ public:
     void moveAirplane(const countryPosition& countryPosition);
     void transportMenuF();
     void mapEurope();
-    void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest);
+    void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest, vector<isDialogue>& isDialogue, vector<int>& counterPressed);
     void itemPicked(int itemX, int itemY, bool& itemPicked);
     void showInventory();
     void returnItem(int reward, int posX, int posY);

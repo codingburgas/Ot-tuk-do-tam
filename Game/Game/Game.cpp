@@ -62,7 +62,7 @@ Game::Game() {
     //player
     player.LoadSprites(fps);
 
-    setFullScreen(width, height);
+    //setFullScreen(width, height);
 
     plane.planeCurrentPosX = 1360;
     plane.planeCurrentPosY = 850;
@@ -370,7 +370,6 @@ void Game::mapEurope()
         }
     }
     
-    
     if (isBulgariaEnd)
     {
         DrawTexture(target, circles[4].x - 20, circles[4].y - 5, WHITE);
@@ -524,12 +523,12 @@ void Game::mapEurope()
     DrawText(printMoney.c_str(), 85, 50, 50, moneyColor);
 }
 
-void Game::dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest)
+void Game::dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest, vector<isDialogue>& isDialogue, vector<int>& counterPressed)
 {
 	player.DrawDotsAnimation(chadCordsX - 10 + player.XBg, chadCordsY - 10 + player.YBg);
     if(findDistance(player, chadCordsX, chadCordsY))
     {
-        if (counterPressed > dialogueLength && isQuest)
+        if (counterPressed.at(index) > dialogueLength && isQuest)
         {
             if (!openQuest)
             {
@@ -567,37 +566,37 @@ void Game::dialogues(string firstName, string secondName, string characterDialog
             }
         }
 
-        if (IsKeyPressed(KEY_E) && !isDialogueEntered)
+        if (IsKeyDown(KEY_E) && !isDialogue.at(index).isDialogueEntered)
         {
-            isDialogueStarted = true;
-            isDialogueContinued = false;
-            isDialogueEntered = true;
+            isDialogue.at(index).isDialogueStarted = true;
+            isDialogue.at(index).isDialogueContinued = false;
+            isDialogue.at(index).isDialogueEntered = true;
         }
 
-        if (isDialogueStarted && !isDialogueContinued)
+        if (isDialogue.at(index).isDialogueStarted && !isDialogue.at(index).isDialogueContinued)
         {
             DrawTexture(dialogueBox, 0, 715, WHITE);
 
             DrawTextEx(headerFont, firstName.c_str(), { 50, 750 }, 24, 5, textColor);
 
-            typewriteEffect(characterDialogues[counterPressed], 40, 900, 24, textColor);
+            typewriteEffect(characterDialogues[counterPressed.at(index)], 40, 900, 24, textColor);
 
             DrawTexture(finishedDialogueArrow, 1290, 965, WHITE);   
         }
 
-        if (IsKeyPressed(KEY_ENTER) && isDialogueEntered)
+        if (IsKeyPressed(KEY_ENTER) && isDialogue.at(index).isDialogueEntered)
         {
-            counterPressed++;
+            counterPressed.at(index)++;
 
-            isDialogueStarted = false;
-            isDialogueContinued = true;
+            isDialogue.at(index).isDialogueStarted = false;
+            isDialogue.at(index).isDialogueContinued = true;
         }
-
-        if (isDialogueContinued && !isDialogueStarted && counterPressed <= dialogueLength)
+        
+        if (isDialogue.at(index).isDialogueContinued && !isDialogue.at(index).isDialogueStarted && counterPressed.at(index) <= dialogueLength)
         {
             DrawTexture(dialogueBox, 0, 715, WHITE);
 
-            if (counterPressed % 2 == 0 && counterPressed > 0)
+            if (counterPressed.at(index) % 2 == 0 && counterPressed.at(index) > 0)
             {
                 DrawTextEx(headerFont, secondName.c_str(), { 50, 750 }, 24, 5, textColor);
             }
@@ -605,7 +604,7 @@ void Game::dialogues(string firstName, string secondName, string characterDialog
                 DrawTextEx(headerFont, firstName.c_str(), { 50, 750 }, 24, 5, textColor);
             }
        
-            DrawText(characterDialogues[counterPressed].c_str(), 40, 900, 24, textColor);
+            DrawText(characterDialogues[counterPressed.at(index)].c_str(), 40, 900, 24, textColor);
 
             DrawTexture(finishedDialogueArrow, 1290, 965, WHITE);          
         }
@@ -709,8 +708,8 @@ void Game::optionsMenu()
 
 void Game::franceLevel()
 {
-    dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, chadTextV, 1, true);
-    dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, chadTextV, 0, false);
+    dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, chadTextV, 1, true, isDialogueV, counterPressed);
+    dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, chadTextV, 0, false, isDialogueV, counterPressed);
 
     if (!isItemPicked && !isDelivered && acceptQuest)
     {
@@ -757,7 +756,7 @@ void setWidthAndHeight(Texture2D& variable)
 void gameStartup()
 {
     InitWindow(1920, 1080, "Ot tuk do tam");
-    ToggleFullscreen();
+    //ToggleFullscreen();
     InitAudioDevice();
 
     Game game;
