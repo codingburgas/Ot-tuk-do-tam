@@ -524,14 +524,47 @@ void Game::mapEurope()
     DrawText(printMoney.c_str(), 85, 50, 50, moneyColor);
 }
 
-void Game::dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY)
+void Game::dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest)
 {
 	player.DrawDotsAnimation(chadCordsX - 10 + player.XBg, chadCordsY - 10 + player.YBg);
     if(findDistance(player, chadCordsX, chadCordsY))
     {
-        if (counterPressed > dialogueLength)
+        if (counterPressed > dialogueLength && isQuest)
         {
-            questBoard(titleChadQuest, descriptionChadQuest, rewardChadQuest);
+            if (!openQuest)
+            {
+                DrawTexture(questBoardT, 581, 233, WHITE);
+                DrawTexture(cancelButton, 610, 758, WHITE);
+                DrawTexture(acceptButton, 1090, 758, WHITE);
+
+                DrawTextEx(headerFont, text.at(index).title.c_str(), {635, 265}, 48, 5, textColor);
+                DrawTextEx(textFont, text.at(index).description.c_str(), { 635, 400 }, 32, 5, textColor);
+                DrawTextEx(textFont, text.at(index).reward.c_str(), { 635, 640 }, 32, 5, textColor);
+            }
+
+            if (mousePoint.y >= 758 && mousePoint.y <= 834)
+            {
+                if (mousePoint.x >= 610 && mousePoint.x <= 835 && !openQuest)
+                {
+                    DrawTexture(cancelButtonHover, 610, 758, WHITE);
+
+                    if (isClicked())
+                    {
+                        openQuest = true;
+                        acceptQuest = false;
+                    }
+                }
+                else if (mousePoint.x >= 1090 && mousePoint.x <= 1308 && !openQuest)
+                {
+                    DrawTexture(acceptButtonHover, 1090, 758, WHITE);
+
+                    if (isClicked())
+                    {
+                        openQuest = true;
+                        acceptQuest = true;
+                    }
+                }
+            }
         }
 
         if (IsKeyPressed(KEY_E) && !isDialogueEntered)
@@ -575,44 +608,6 @@ void Game::dialogues(string firstName, string secondName, string characterDialog
             DrawText(characterDialogues[counterPressed].c_str(), 40, 900, 24, textColor);
 
             DrawTexture(finishedDialogueArrow, 1290, 965, WHITE);          
-        }
-    }
-}
-
-void Game::questBoard(string& title, string& description, string& reward)
-{
-    if (!openQuest)
-    {
-        DrawTexture(questBoardT, 581, 233, WHITE);
-        DrawTexture(cancelButton, 610, 758, WHITE);
-        DrawTexture(acceptButton, 1090, 758, WHITE);
-
-        DrawTextEx(headerFont, title.c_str(), {635, 265}, 48, 5, textColor);
-        DrawTextEx(textFont, description.c_str(), { 635, 400 }, 32, 5, textColor);
-        DrawTextEx(textFont, reward.c_str(), { 635, 640 }, 32, 5, textColor);
-    }
-
-    if (mousePoint.y >= 758 && mousePoint.y <= 834)
-    {
-        if (mousePoint.x >= 610 && mousePoint.x <= 835 && !openQuest)
-        {
-            DrawTexture(cancelButtonHover, 610, 758, WHITE);
-
-            if (isClicked())
-            {
-                openQuest = true;
-                acceptQuest = false;
-            }
-        }
-        else if (mousePoint.x >= 1090 && mousePoint.x <= 1308 && !openQuest)
-        {
-            DrawTexture(acceptButtonHover, 1090, 758, WHITE);
-
-            if (isClicked())
-            {
-                openQuest = true;
-                acceptQuest = true;
-            }
         }
     }
 }
@@ -714,8 +709,8 @@ void Game::optionsMenu()
 
 void Game::franceLevel()
 {
-    dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000);
-    dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000);
+    dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, chadTextV, 1, true);
+    dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, chadTextV, 0, false);
 
     if (!isItemPicked && !isDelivered && acceptQuest)
     {

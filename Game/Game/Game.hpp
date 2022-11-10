@@ -160,6 +160,7 @@ private:
 
     //dialogue mechanic
     Texture2D dialogueBox, finishedDialogueArrow;
+
     bool isDialogueStarted;
     bool isDialogueContinued;
     bool isDialogueEntered;
@@ -195,10 +196,14 @@ private:
 
     //quest texts
     Color textColor;
-    string chadText[100][3];
-    string titleChadQuest = "Pickup the heard!";
-    string descriptionChadQuest = "Go to the heart and take it.";
-    string rewardChadQuest = "Reward:           1000$";
+
+    struct chadText {
+        string title;
+        string description;
+        string reward;
+    };
+
+    vector<chadText> chadTextV = { {"", "", ""}, {"Pickup the heard!", "Go to the heart and take it.", "Reward:           1000$"} };
 
     bool isBulgariaEnd = true;
 public:
@@ -210,8 +215,7 @@ public:
     void moveAirplane(const countryPosition& countryPosition);
     void transportMenuF();
     void mapEurope();
-    void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY);
-    void questBoard(string& title, string& description, string& reward);
+    void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest);
     void itemPicked(int itemX, int itemY, bool& itemPicked);
     void showInventory();
     void returnItem(int reward, int posX, int posY);
