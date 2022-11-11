@@ -42,11 +42,11 @@ private:
 		UP,
 		DOWN
 	}HeroDir;
-	vector<Vector2> NPCPositions;
 	Texture2D exampleItem;
 	Vector2 playerCords;
 	friend bool findDistance(Player& player, int posX, int posY);
 public:
+	vector<Vector2> NPCPositions;
 	Player();
 	void LoadSprites(int fps);
 	void Movement();

@@ -80,7 +80,6 @@ void Player::DrawDotsAnimation()
 	for (int i = 0; i < NPCPositions.size(); i++)
 	{
 		DrawTextureRec(dotsBubble, viewDots, Vector2{ NPCPositions[i].x - 10 + XBg, NPCPositions[i].y -10 + YBg}, WHITE);
-		
 	}
 
 }

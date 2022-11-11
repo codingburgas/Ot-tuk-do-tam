@@ -705,8 +705,8 @@ void Game::optionsMenu()
 
 void Game::franceLevel()
 {
-    dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, chadTextV, 1, true, isDialogueV, counterPressed);
-    dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, chadTextV, 0, false, isDialogueV, counterPressed);
+    dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, player.NPCPositions[0].x, player.NPCPositions[0].y, chadTextV, 1, true, isDialogueV, counterPressed);
+    dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, player.NPCPositions[1].x, player.NPCPositions[1].y, chadTextV, 0, false, isDialogueV, counterPressed);
 
     if (!isItemPicked && !isDelivered && acceptQuest)
     {
