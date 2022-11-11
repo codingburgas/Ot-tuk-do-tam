@@ -42,7 +42,7 @@ private:
 		UP,
 		DOWN
 	}HeroDir;
-
+	vector<Vector2> NPCPositions;
 	Texture2D exampleItem;
 	Vector2 playerCords;
 	friend bool findDistance(Player& player, int posX, int posY);
@@ -51,6 +51,6 @@ public:
 	void LoadSprites(int fps);
 	void Movement();
 	void CheckDir();
-	void DrawDotsAnimation(float dotsBubbleX, float dotsBubbleY);
+	void DrawDotsAnimation();
 	void UnLoadTextures();
 };

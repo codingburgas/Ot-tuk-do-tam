@@ -41,6 +41,8 @@ private:
 
     Texture2D menuOptions;
 
+ 
+
     int money;
     Color moneyColor;
 

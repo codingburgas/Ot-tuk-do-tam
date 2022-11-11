@@ -18,7 +18,7 @@ Game::Game() {
     map = LoadTexture("../src/sprites/backgrounds/map.png");
 
     setWidthAndHeight(map);
-
+    
     //spain
     circles[0].x = 320;
     circles[0].y = 760;
@@ -36,8 +36,8 @@ Game::Game() {
     circles[3].y = 550;
 
     //bulgaria
-    circles[4].x = 1360;
-    circles[4].y = 820;
+    circles[4].x = 1362;
+    circles[4].y = 825;
 
     //romania
     circles[5].x = 1350;
@@ -87,6 +87,13 @@ Game::Game() {
 
     target = LoadTexture("../src/sprites/Map images/targetClean.png");
     targetHover = LoadTexture("../src/sprites/Map images/targetHover.png");
+
+    target.width -= 5;
+    target.height -= 5;
+
+    targetHover.width -= 5;
+    targetHover.height -= 5;
+    
 
     countriesV = {
         {spain, 52.5, 705},
@@ -516,7 +523,6 @@ void Game::mapEurope()
 
 void Game::dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest, vector<isDialogue>& isDialogue, vector<int>& counterPressed)
 {
-	player.DrawDotsAnimation(chadCordsX - 10 + player.XBg, chadCordsY - 10 + player.YBg);
     if(findDistance(player, chadCordsX, chadCordsY))
     {
         if (counterPressed.at(index) > dialogueLength && isQuest)

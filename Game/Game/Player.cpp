@@ -40,6 +40,8 @@ void Player::LoadSprites(int fps)
 }
 Player::Player()
 {
+	//Vector
+	NPCPositions = { {1000, 1000},{2000, 1000} };
 	playerCords.x = GetScreenWidth() / 2;
 	playerCords.y = GetScreenHeight() / 2;
 	counterDotsBubble = 0;
@@ -63,7 +65,7 @@ bool findDistance(Player&player, int posX, int posY)
 	}
 }
 
-void Player::DrawDotsAnimation(float dotsBubbleX, float dotsBubbleY)
+void Player::DrawDotsAnimation()
 {
 	if (counterDotsBubble >= 15)
 	{
@@ -75,7 +77,12 @@ void Player::DrawDotsAnimation(float dotsBubbleX, float dotsBubbleY)
 		viewDots.x = limitFrameDots;
 	}
 	counterDotsBubble++;
-	DrawTextureRec(dotsBubble, viewDots, Vector2{ dotsBubbleX, dotsBubbleY }, WHITE);
+	for (int i = 0; i < NPCPositions.size(); i++)
+	{
+		DrawTextureRec(dotsBubble, viewDots, Vector2{ NPCPositions[i].x - 10 + XBg, NPCPositions[i].y -10 + YBg}, WHITE);
+		
+	}
+
 }
 
 void Player::CheckDir()
@@ -165,6 +172,7 @@ void Player::Movement()
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
 	DrawTexture(chadFr, enemyPosX + XBg, enemyPosY + YBg, WHITE);
 	DrawTexture(chadFrTwo, enemyPosX + XBg + 1000, enemyPosY + YBg, WHITE);
+	DrawDotsAnimation();
 }
 
 void Player::UnLoadTextures()
