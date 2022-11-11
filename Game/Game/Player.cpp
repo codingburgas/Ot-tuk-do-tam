@@ -6,17 +6,18 @@ void Player::LoadSprites(int fps)
 	u = LoadTexture("../src/sprites/heroSprite/up.png");
 	l = LoadTexture("../src/sprites/heroSprite/left.png");
 	r = LoadTexture("../src/sprites/heroSprite/right.png");
+
 	//idle source
 	idleD = LoadTexture("../src/sprites/heroSprite/downIdle.png");
 	idleU = LoadTexture("../src/sprites/heroSprite/upIdle.png");
 	idleL = LoadTexture("../src/sprites/heroSprite/leftIdle.png");
 	idleR = LoadTexture("../src/sprites/heroSprite/rightIdle.png");
+
 	//background
-	background = LoadTexture("../src/sprites/inner country elements/france/frBackground.png");
+	background = LoadTexture("../src/sprites/backgrounds/frBackground.png");
 
-	chadFr = LoadTexture("../src/sprites/inner country elements/france/frChad1.png");
-	chadFrTwo = LoadTexture("../src/sprites/inner country elements/france/frChad2.png");
-
+	chadFr = LoadTexture("../src/sprites/inner country elements/france/frChad.png");
+	
 	//dots
 	dotsBubble = LoadTexture("../src/sprites/menus and boards/dotsBubble.png");
 
@@ -32,9 +33,13 @@ void Player::LoadSprites(int fps)
 
 	lim = (float)idleD.width / 2;
 	view = { lim, 0, (float)idleD.width / 2, (float)idleD.height };
+
 	//for dots
 	limitFrameDots = (float)dotsBubble.width / 4;
 	viewDots = { limitFrameDots, 0, (float)dotsBubble.width / 4, (float)dotsBubble.height };
+	//for npc anim
+	limitFrameNPC = (float)chadFr.width / 2;
+	viewNPC = { limitFrameNPC, 0, (float)chadFr.width / 2, (float)chadFr.height };
 
 	this->fps = fps;
 }
@@ -45,7 +50,7 @@ Player::Player()
 	playerCords.x = GetScreenWidth() / 2;
 	playerCords.y = GetScreenHeight() / 2;
 	counterDotsBubble = 0;
-	changeDotsBubble = 0;
+	counterNPCAnim = 0;
 	HorizotnalOrVertical[0] = 0;
 	HorizotnalOrVertical[1] = 0;
 	speed = 100;
@@ -83,7 +88,23 @@ void Player::DrawDotsAnimation()
 	}
 
 }
-
+void Player::DrawNPCAnimation()
+{
+	if (counterNPCAnim >= 15)
+	{
+		viewNPC.x += limitFrameNPC;
+		counterNPCAnim = 0;
+	}
+	if (abs(viewNPC.x) > chadFr.width)
+	{
+		viewNPC.x = limitFrameNPC;
+	}
+	counterNPCAnim++;
+	for (int i = 0; i < NPCPositions.size(); i++)
+	{
+		DrawTextureRec(chadFr, viewNPC, Vector2{ NPCPositions[i].x + XBg, NPCPositions[i].y + YBg }, WHITE);
+	}
+}
 void Player::CheckDir()
 {
 	
@@ -169,8 +190,7 @@ void Player::Movement()
 	move = Rectangle{ playerCords.x, playerCords.y, lim, (float)playerSprite.height };
 	DrawTexture(background, XBg, YBg, WHITE);
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
-	DrawTexture(chadFr, enemyPosX + XBg, enemyPosY + YBg, WHITE);
-	DrawTexture(chadFrTwo, enemyPosX + XBg + 1000, enemyPosY + YBg, WHITE);
+	DrawNPCAnimation();
 	DrawDotsAnimation();
 }
 

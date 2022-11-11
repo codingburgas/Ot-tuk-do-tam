@@ -17,13 +17,17 @@ private:
 	Texture2D idleD;
 	Texture2D idleR;
 	Texture2D idleL;
+
 	//add this
 	Texture2D dotsBubble;
 	float limitFrameDots;
 	Rectangle viewDots;
 	//to this
 	int counterDotsBubble;
-	int changeDotsBubble;
+
+	float limitFrameNPC;
+	Rectangle viewNPC;
+	int counterNPCAnim;
 
 	vector<Texture2D> playerSprites;
 	vector<Texture2D> idleSprites;
@@ -49,8 +53,9 @@ public:
 	vector<Vector2> NPCPositions;
 	Player();
 	void LoadSprites(int fps);
-	void Movement();
+	void Movement();                                                                                                                                                                                                                                                                                 
 	void CheckDir();
 	void DrawDotsAnimation();
+	void DrawNPCAnimation();
 	void UnLoadTextures();
 };
