@@ -211,7 +211,7 @@ public:
     { 
         {"", "", ""}, 
         {"Pickup the heard!", "Go to the heart and take it.", "Reward:           1000$"},
-        {}
+        {"Return the wallet!", "Find the man/woman who lost\nhis wallet and return it", "Reward:           500$"}
     };
 
     vector<int> counterPressed = {0, 0, 0, 0};
@@ -219,6 +219,11 @@ public:
     bool isBulgariaEnd;
 
     Texture2D horse;
+
+    //wallet pickup
+    Texture2D wallet;
+    bool isWalletPicked;
+    string walletFound[3] = { "It seems that someone lost his/her wallet", "Let's try to bring it back", ""};
 public:
 
     Game();
@@ -230,8 +235,8 @@ public:
     void mapEurope();
     void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest, vector<isDialogue>& isDialogue, vector<int>& counterPressed);
     void itemPicked(int itemX, int itemY, bool& itemPicked);
-    void showInventory();
     void returnItem(int reward, int posX, int posY);
+    void showInventory();
     void optionsMenu();
     
     //contry levels

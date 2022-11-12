@@ -179,6 +179,7 @@ Game::Game() {
     textColor = { 54, 54, 54, 255 };
 
     horse = LoadTexture("../src/sprites/inner country elements/france/horse.png");
+    wallet = LoadTexture("../src/sprites/Menus and boards/wallet.png");
 }
 
 void Game::backstory()
@@ -784,6 +785,7 @@ void Game::spainLevel()
 void Game::franceLevel()
 {
     dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, chadTextV, 1, true, isDialogueV, counterPressed);
+
     dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, chadTextV, 0, false, isDialogueV, counterPressed);
 
     if (!isItemPicked && !isDelivered && acceptQuest)
@@ -792,13 +794,22 @@ void Game::franceLevel()
     }
 
     itemPicked(1000, 500, isItemPicked);
-
     returnItem(1000, 1000, 1000);
 }
 
 void Game::italyLevel()
 {
+    if (IsKeyPressed(KEY_Q) && findDistance(player, 1000, 500))
+        isWalletPicked = true;
 
+    if (isWalletPicked)
+    {
+        dialogues("Vankata Smetacha", "Vankata Smetacha", walletFound, 1, 1000, 500, chadTextV, 2, true, isDialogueV, counterPressed);
+    }
+    else {
+        DrawTexture(wallet, 1000 + player.XBg, 500 + player.YBg, WHITE);
+    }
+        
 }
 
 void Game::germanyLevel()
