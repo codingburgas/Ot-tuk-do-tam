@@ -222,7 +222,7 @@ public:
         {"", "", ""},
         {"", "", ""},
         {"", "", ""},
-        {"", "", ""},
+        {"Collect all the tomatoes!", "Collect all the tomatoes", "Reward:           1000$"},
     };
 
     vector<int> counterPressed;
@@ -252,6 +252,7 @@ public:
     //adict quest
     Texture2D grShmat, tomato;
     vector<Texture2D> tomatoV;
+    bool showTomatoInventory;
 
     int tomatoPickedCounter;
 

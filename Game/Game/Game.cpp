@@ -858,7 +858,38 @@ void Game::italyLevel()
 
 void Game::germanyLevel()
 {
-    dialogues("Vankata Smetacha", "Mitio guluba", getKey, 2, 1000, 1000, chadTextV, 4, true, isDialogueV, counterPressed, false);
+    dialogues("Vankata Smetacha", "Mitio guluba", startQuestText, 1, 1000, 1000, chadTextV, 7, true, isDialogueV, counterPressed, false);
+
+    if (counterPressed.at(7) == 2)
+    {
+        showTomatoInventory = true;
+        counterPressed.at(7)++;
+    }
+
+    if (showTomatoInventory)
+    {
+        DrawTexture(tomato, 1500 + player.XBg, 500 + player.YBg, WHITE);
+        DrawTexture(tomato, 1500 + player.XBg, 1000 + player.YBg, WHITE);
+        DrawTexture(tomato, 2000 + player.XBg, 500 + player.YBg, WHITE);
+        DrawTexture(tomato, 2000 + player.XBg, 1000 + player.YBg, WHITE);
+        DrawTexture(tomato, 2200 + player.XBg, 560 + player.YBg, WHITE);
+    }
+
+    if (IsKeyPressed(KEY_Q) && (findDistance(player, 1500, 500) || findDistance(player, 1500, 100) || findDistance(player, 2000, 500) || findDistance(player, 2000, 1000) || findDistance(player, 2200, 560)))
+    {
+        tomatoPickedCounter++;
+    }
+
+    if (tomatoPickedCounter == 5)
+    {
+        dialogues("Vankata Smetacha", "Mitio guluba", finishAdictQuest, 1, 1000, 1000, chadTextV, 8, false, isDialogueV, counterPressed, false);
+
+        if (counterPressed.at(8) == 2)
+        {
+            allMoney += 1000;
+            counterPressed.at(8)++;
+        }
+    }
 }
 
 void Game::bulgariaLevel()
