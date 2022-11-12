@@ -799,7 +799,13 @@ void Game::franceLevel()
     }
 
     itemPicked(1000, 500, isItemV.at(1).isItemPicked);
-    returnItem(1000, 1000, 1000, 1, isItemV);
+
+    if (counterPressed.at(1) == 4 && IsKeyPressed(KEY_Q) && findDistance(player, 1000, 1000))
+    {
+        cout << counterPressed.at(1);
+        returnItem(1000, 1000, 1000, 1, isItemV);
+        counterPressed.at(1)++;
+    }
 }
 
 void Game::italyLevel()
