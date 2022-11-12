@@ -576,7 +576,7 @@ void Game::dialogues(string firstName, string secondName, string characterDialog
                     if (isClicked())
                     {
                         openQuest = true;
-                        acceptQuest = false;
+                        acceptQuest.at(index) = false;
                     }
                 }
                 else if (mousePoint.x >= 1090 && mousePoint.x <= 1308 && !openQuest)
@@ -586,7 +586,7 @@ void Game::dialogues(string firstName, string secondName, string characterDialog
                     if (isClicked())
                     {
                         openQuest = true;
-                        acceptQuest = true;
+                        acceptQuest.at(index) = true;
                     }
                 }
             }
@@ -641,9 +641,14 @@ void Game::showInventory()
 {
     DrawTexture(inventory, 505, 223, WHITE);
 
-    if (isItemPicked)
+    if (isItemV.at(1).isItemPicked)
     {
         DrawTexture(exampleItem, 1000, 500, WHITE);
+    }
+
+    if (!isWalletInventory)
+    {
+        DrawTexture(wallet, 1300, 500, WHITE);
     }
 }
 
@@ -655,12 +660,12 @@ void Game::itemPicked(int itemX, int itemY, bool& itemPicked)
     }
 }
 
-void Game::returnItem(int reward, int posX, int posY)
+void Game::returnItem(int reward, int posX, int posY, int index, vector<isItem> isItem)
 {
-    if (isItemPicked && findDistance(player, posX, posY) && IsKeyPressed(KEY_Q))
+    if (isItem.at(index).isItemPicked && findDistance(player, posX, posY) && IsKeyPressed(KEY_Q))
     {
-        isDelivered = true;
-        isItemPicked = false;
+        isItem.at(index).isDelivered = true;
+        isItem.at(index).isItemPicked = false;
         allMoney += reward;
     }
 }
@@ -788,28 +793,39 @@ void Game::franceLevel()
 
     dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, chadTextV, 0, false, isDialogueV, counterPressed);
 
-    if (!isItemPicked && !isDelivered && acceptQuest)
+    if (!isItemV.at(1).isItemPicked && !isItemV.at(1).isDelivered && acceptQuest.at(1))
     {
         DrawTexture(exampleItem, 1000 + player.XBg, 500 + player.YBg, WHITE);
     }
 
-    itemPicked(1000, 500, isItemPicked);
-    returnItem(1000, 1000, 1000);
+    itemPicked(1000, 500, isItemV.at(1).isItemPicked);
+    returnItem(1000, 1000, 1000, 1, isItemV);
 }
 
 void Game::italyLevel()
 {
     if (IsKeyPressed(KEY_Q) && findDistance(player, 1000, 500))
+    {
         isWalletPicked = true;
-
+        isWalletInventory = false;
+    }
+        
     if (isWalletPicked)
     {
-        dialogues("Vankata Smetacha", "Vankata Smetacha", walletFound, 1, 1000, 500, chadTextV, 2, true, isDialogueV, counterPressed);
+        dialogues("Vankata Smetacha", "Vankata Smetacha", walletFound, 1, 1000, 500, chadTextV, 2, false, isDialogueV, counterPressed);
+
+        dialogues("Vankata Smetacha", "Gabarq", walletReturnedText, 2, 1000, 1000, chadTextV, 3, false, isDialogueV, counterPressed);
+
+        if (counterPressed.at(3) == 3)
+        {
+            allMoney += 500;
+            counterPressed.at(3)++;
+            isWalletInventory = true;
+        }
     }
     else {
         DrawTexture(wallet, 1000 + player.XBg, 500 + player.YBg, WHITE);
     }
-        
 }
 
 void Game::germanyLevel()

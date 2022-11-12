@@ -169,6 +169,7 @@ public:
         {},
         {},
         {},
+        {},
     };
 
 	Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
@@ -185,15 +186,26 @@ public:
     Texture2D acceptButton, cancelButton;
     Texture2D acceptButtonHover, cancelButtonHover;
     bool openQuest;
-    bool acceptQuest;
+    vector<bool> acceptQuest = {false, false, false, false, false};
 
     string questDisplay[10];
     
     //picup system
     Texture2D inventory;
-    bool isItemPicked;
-    bool isDelivered;
 
+    struct isItem
+    {
+        bool isItemPicked;
+        bool isDelivered;
+    };
+
+    vector<isItem> isItemV = {
+        {false, false},
+        {false, false},
+        {false, false},
+        {false, false},
+    };
+    
     Texture2D exampleItem;
 
     vector<Texture2D> items;
@@ -223,7 +235,11 @@ public:
     //wallet pickup
     Texture2D wallet;
     bool isWalletPicked;
+    bool isWalletInventory = true;
+
     string walletFound[3] = { "It seems that someone lost his/her wallet", "Let's try to bring it back", ""};
+
+    string walletReturnedText[4] = { "It seems you found my wallet", "Yes.", "Ok that's a little reward from me!", " "};
 public:
 
     Game();
@@ -235,7 +251,7 @@ public:
     void mapEurope();
     void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest, vector<isDialogue>& isDialogue, vector<int>& counterPressed);
     void itemPicked(int itemX, int itemY, bool& itemPicked);
-    void returnItem(int reward, int posX, int posY);
+    void returnItem(int reward, int posX, int posY, int index, vector<isItem> isItem);
     void showInventory();
     void optionsMenu();
     
