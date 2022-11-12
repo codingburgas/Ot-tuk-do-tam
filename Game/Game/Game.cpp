@@ -550,7 +550,7 @@ void Game::mapEurope()
     DrawText(printMoney.c_str(), 85, 50, 50, moneyColor);
 }
 
-void Game::dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest, vector<isDialogue>& isDialogue, vector<int>& counterPressed)
+void Game::dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest, vector<isDialogue>& isDialogue, vector<int>& counterPressed, bool ePressed)
 {
     if(findDistance(player, chadCordsX, chadCordsY))
     {
@@ -592,7 +592,7 @@ void Game::dialogues(string firstName, string secondName, string characterDialog
             }
         }
 
-        if (IsKeyDown(KEY_E) && !isDialogue.at(index).isDialogueEntered)
+        if ((IsKeyDown(KEY_E) || ePressed) && !isDialogue.at(index).isDialogueEntered)
         {
             isDialogue.at(index).isDialogueStarted = true;
             isDialogue.at(index).isDialogueContinued = false;
@@ -605,7 +605,7 @@ void Game::dialogues(string firstName, string secondName, string characterDialog
 
             DrawTextEx(headerFont, firstName.c_str(), { 50, 750 }, 24, 5, textColor);
 
-            typewriteEffect(characterDialogues[counterPressed.at(index)], 40, 900, 24, textColor);
+            DrawText(characterDialogues[counterPressed.at(index)].c_str(), 40, 900, 24, textColor);
 
             DrawTexture(finishedDialogueArrow, 1290, 965, WHITE);   
         }
@@ -789,9 +789,9 @@ void Game::spainLevel()
 
 void Game::franceLevel()
 {
-    dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, chadTextV, 1, true, isDialogueV, counterPressed);
+    dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, chadTextV, 1, true, isDialogueV, counterPressed, false);
 
-    dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, chadTextV, 0, false, isDialogueV, counterPressed);
+    dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, chadTextV, 0, false, isDialogueV, counterPressed, false);
 
     if (!isItemV.at(1).isItemPicked && !isItemV.at(1).isDelivered && acceptQuest.at(1))
     {
@@ -800,17 +800,18 @@ void Game::franceLevel()
 
     itemPicked(1000, 500, isItemV.at(1).isItemPicked);
 
-    if (counterPressed.at(1) == 4 && IsKeyPressed(KEY_Q) && findDistance(player, 1000, 1000))
+    cout << counterPressed.at(1);
+    if (counterPressed.at(1) == 4 && findDistance(player, 1000, 1000) && IsKeyPressed(KEY_Q))
     {
-        cout << counterPressed.at(1);
-        returnItem(1000, 1000, 1000, 1, isItemV);
+        allMoney += 1000;
         counterPressed.at(1)++;
     }
+        
 }
 
 void Game::italyLevel()
 {
-    if (IsKeyPressed(KEY_Q) && findDistance(player, 1000, 500))
+    if (IsKeyPressed(KEY_Q) && findDistance(player, 2000, 500))
     {
         isWalletPicked = true;
         isWalletInventory = false;
@@ -818,9 +819,9 @@ void Game::italyLevel()
         
     if (isWalletPicked)
     {
-        dialogues("Vankata Smetacha", "Vankata Smetacha", walletFound, 1, 1000, 500, chadTextV, 2, false, isDialogueV, counterPressed);
+        dialogues("Vankata Smetacha", "Vankata Smetacha", walletFound, 1, 2000, 500, chadTextV, 2, false, isDialogueV, counterPressed, true);
 
-        dialogues("Vankata Smetacha", "Gabarq", walletReturnedText, 2, 1000, 1000, chadTextV, 3, false, isDialogueV, counterPressed);
+        dialogues("Vankata Smetacha", "Gabarq", walletReturnedText, 2, 1000, 1000, chadTextV, 3, false, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(3) == 3)
         {
@@ -830,7 +831,7 @@ void Game::italyLevel()
         }
     }
     else {
-        DrawTexture(wallet, 1000 + player.XBg, 500 + player.YBg, WHITE);
+        DrawTexture(wallet, 2000 + player.XBg, 500 + player.YBg, WHITE);
     }
 }
 

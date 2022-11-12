@@ -15,6 +15,8 @@ public:
 
     Texture2D map;
 
+    int fps = 60;
+
     //fonts
     Font headerFont, textFont;
 
@@ -139,7 +141,6 @@ public:
     int isCheckedOutside;
 
     bool playSound;
-    int fps = 60;
 
     //Exit confirmaiton table
     Color darkerWindow;
@@ -249,7 +250,7 @@ public:
     void moveAirplane(const countryPosition& countryPosition);
     void transportMenuF();
     void mapEurope();
-    void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest, vector<isDialogue>& isDialogue, vector<int>& counterPressed);
+    void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest, vector<isDialogue>& isDialogue, vector<int>& counterPressed, bool ePressed);
     void itemPicked(int itemX, int itemY, bool& itemPicked);
     void returnItem(int reward, int posX, int posY, int index, vector<isItem> isItem);
     void showInventory();
