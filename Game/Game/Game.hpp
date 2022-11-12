@@ -10,7 +10,7 @@ void gameStartup();
 
 class Game : public Player
 {
-private:
+public:
     Player player;
 
     Texture2D map;
@@ -23,7 +23,6 @@ private:
     string backstoryText;
 
     //hover effect variables
-
     struct country {
         Texture2D country;
         float x, y;
@@ -233,8 +232,14 @@ public:
     void returnItem(int reward, int posX, int posY);
     void optionsMenu();
     
-    //country levels
+    //contry levels
+    void spainLevel();
     void franceLevel();
+    void italyLevel();
+    void germanyLevel();
+    void bulgariaLevel();
+    void romaniaLevel();
+
     void update();
 
     ~Game();

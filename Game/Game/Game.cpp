@@ -479,10 +479,44 @@ void Game::mapEurope()
 
         if (changeCircles[i])
         {
-
             if (!unloadBack)
             {
-                franceLevel();
+                for (int i = 0; i < 6; i++)
+                {
+                    if (!banCountry[i])
+                    {
+                        switch (i)
+                        {
+
+                        case 1:
+                            spainLevel();
+                            break;
+
+                        case 2:
+                            franceLevel();
+                            break;
+
+                        case 3:
+                            italyLevel();
+                            break;
+
+                        case 4:
+                            germanyLevel();
+                            break;
+
+                        case 5:
+                            bulgariaLevel();
+                            break;
+
+                        case 6:
+                            romaniaLevel();
+                            break;
+
+                        default:
+                            break;
+                        }
+                    }
+                }
 
                 if (IsKeyDown(KEY_TAB))
                 {
@@ -703,21 +737,6 @@ void Game::optionsMenu()
     }
 }
 
-void Game::franceLevel()
-{
-    dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, player.NPCPositions[0].x, player.NPCPositions[0].y, chadTextV, 1, true, isDialogueV, counterPressed);
-    dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, player.NPCPositions[1].x, player.NPCPositions[1].y, chadTextV, 0, false, isDialogueV, counterPressed);
-
-    if (!isItemPicked && !isDelivered && acceptQuest)
-    {
-        DrawTexture(exampleItem, 1000 + player.XBg, 500 + player.YBg, WHITE);
-    }
-
-    itemPicked(1000, 500, isItemPicked);
-
-    returnItem(1000, 1000, 1000);
-}
-
 void Game::update()
 {
     while (!WindowShouldClose())
@@ -753,7 +772,7 @@ void setWidthAndHeight(Texture2D& variable)
 void gameStartup()
 {
     InitWindow(1920, 1080, "Ot tuk do tam");
-    ToggleFullscreen();
+
     InitAudioDevice();
 
     Game game;
@@ -761,4 +780,44 @@ void gameStartup()
     setIcon();
 
     game.update();
+}
+
+void Game::spainLevel()
+{
+
+}
+
+void Game::franceLevel()
+{
+    dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, chadTextV, 1, true, isDialogueV, counterPressed);
+    dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, chadTextV, 0, false, isDialogueV, counterPressed);
+
+    if (!isItemPicked && !isDelivered && acceptQuest)
+    {
+        DrawTexture(exampleItem, 1000 + player.XBg, 500 + player.YBg, WHITE);
+    }
+
+    itemPicked(1000, 500, isItemPicked);
+
+    returnItem(1000, 1000, 1000);
+}
+
+void Game::italyLevel()
+{
+
+}
+
+void Game::germanyLevel()
+{
+
+}
+
+void Game::bulgariaLevel()
+{
+
+}
+
+void Game::romaniaLevel()
+{
+
 }
