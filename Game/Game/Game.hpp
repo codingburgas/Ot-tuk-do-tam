@@ -173,6 +173,11 @@ public:
         {},
         {},
         {},
+        {},
+        {},
+        {},
+        {},
+        {},
     };
 
 	Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
@@ -189,7 +194,7 @@ public:
     Texture2D acceptButton, cancelButton;
     Texture2D acceptButtonHover, cancelButtonHover;
     bool openQuest;
-    vector<bool> acceptQuest = {false, false, false, false, false};
+    vector<bool> acceptQuest = {false, false, false, false, false, false, false, false};
 
     string questDisplay[10];
     
@@ -203,6 +208,10 @@ public:
     };
 
     vector<isItem> isItemV = {
+        {false, false},
+        {false, false},
+        {false, false},
+        {false, false},
         {false, false},
         {false, false},
         {false, false},
@@ -226,10 +235,16 @@ public:
     { 
         {"", "", ""}, 
         {"Pickup the heard!", "Go to the heart and take it.", "Reward:           1000$"},
-        {"Return the wallet!", "Find the man/woman who lost\nhis wallet and return it", "Reward:           500$"}
+        {"Return the wallet!", "Find the man/woman who lost\nhis wallet and return it", "Reward:           500$"},
+        {"", "", ""},
+        {"Get the key and combine it!", "Find other itema and go combine it", "Reward:           750$"},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
     };
 
-    vector<int> counterPressed = {0, 0, 0, 0};
+    vector<int> counterPressed = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     bool isBulgariaEnd;
 
@@ -242,7 +257,18 @@ public:
 
     string walletFound[3] = { "It seems that someone lost his/her wallet", "Let's try to bring it back", ""};
 
-    string walletReturnedText[4] = { "It seems you found my wallet", "Yes.", "Ok that's a little reward from me!", " "};
+    string walletReturnedText[4] = { "It seems you found my wallet", "Yes.", "Ok that's a little reward from me!", ""};
+
+    //item combination
+    Texture2D key, metalPieces, stone;
+    bool itemRequire[5];
+    bool isStonePicked;
+
+    string getKey[5] = {"Brato nati toq kluch naprai kamuk", "Huu imash go", "Basi picha si",   ""},
+    findStone[5] = {"leleee basi qkiq kamuk", "Sigurno she mi trqq", "Dai da go zema", ""},
+    itemCombinationDeal[5] = { "Ae pich moe li da napraish item", "Nqqsh problem samo dai pari", "Huu nati", "Qko e da praim biznes ai chao", ""};
+
+
 public:
 
     Game();

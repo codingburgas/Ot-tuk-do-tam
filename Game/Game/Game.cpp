@@ -182,6 +182,10 @@ Game::Game() {
 
     horse = LoadTexture("../src/sprites/inner country elements/france/horse.png");
     wallet = LoadTexture("../src/sprites/Menus and boards/wallet.png");
+
+    key = LoadTexture("../src/sprites/inner country elements/romania/key.png");
+    metalPieces = LoadTexture("../src/sprites/inner country elements/romania/metal pieces.png");
+    stone = LoadTexture("../src/sprites/inner country elements/romania/stone.png");
 }
 
 void Game::backstory()
@@ -644,14 +648,19 @@ void Game::showInventory()
     DrawTexture(inventory, 505, 223, WHITE);
 
     if (isItemV.at(1).isItemPicked)
-    {
         DrawTexture(exampleItem, 1000, 500, WHITE);
-    }
 
     if (!isWalletInventory)
-    {
         DrawTexture(wallet, 1300, 500, WHITE);
-    }
+
+    if (itemRequire[0])
+        DrawTexture(key, 1000, 500, WHITE);
+
+    if (itemRequire[1])
+        DrawTexture(stone, 1200, 500, WHITE);
+
+    if(itemRequire[2])
+        DrawTexture(metalPieces, 1200, 500, WHITE);
 }
 
 void Game::itemPicked(int itemX, int itemY, bool& itemPicked)
@@ -805,13 +814,11 @@ void Game::franceLevel()
 
     itemPicked(1000, 500, isItemV.at(1).isItemPicked);
 
-    cout << counterPressed.at(1);
     if (counterPressed.at(1) == 4 && findDistance(player, 1000, 1000) && IsKeyPressed(KEY_Q))
     {
         allMoney += 1000;
         counterPressed.at(1)++;
     }
-        
 }
 
 void Game::italyLevel()
@@ -835,9 +842,8 @@ void Game::italyLevel()
             isWalletInventory = true;
         }
     }
-    else {
+    else 
         DrawTexture(wallet, 2000 + player.XBg, 500 + player.YBg, WHITE);
-    }
 }
 
 void Game::germanyLevel()
@@ -852,5 +858,42 @@ void Game::bulgariaLevel()
 
 void Game::romaniaLevel()
 {
+    dialogues("Vankata Smetacha", "Mitio guluba", getKey, 2, 1000, 1000, chadTextV, 4, true, isDialogueV, counterPressed, false);
 
+    if (counterPressed.at(4) == 3)
+    {
+        itemRequire[0] = true;
+        counterPressed.at(4)++;
+    }
+        
+
+    if (IsKeyPressed(KEY_Q) && findDistance(player, 1500, 500))
+    {
+        itemRequire[1] = true;
+    }
+
+    if (itemRequire[1])
+    {
+        dialogues("Vankata Smetacha", "Vankata Smetacha", findStone, 2, 1500, 500, chadTextV, 5, false, isDialogueV, counterPressed, true);
+
+        if (itemRequire[0])
+        {
+            dialogues("Vankata Smetacha", "Jabata", itemCombinationDeal, 3, 1500, 1000, chadTextV, 6, false, isDialogueV, counterPressed, false);
+
+            if (counterPressed.at(6) == 4)
+            {
+                itemRequire[0] = false;
+                itemRequire[1] = false;
+                itemRequire[2] = true;
+
+                isStonePicked = true;
+
+                counterPressed.at(5)++;
+
+                allMoney += 500;
+            }
+        }
+    }
+    else if(!isStonePicked)
+        DrawTexture(stone, 1500 + player.XBg, 500 + player.YBg, WHITE);
 }

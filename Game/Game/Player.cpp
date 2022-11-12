@@ -54,6 +54,47 @@ bool findDistance(Player&player, int posX, int posY)
 	}
 }
 
+<<<<<<< Updated upstream
+=======
+void Player::DrawDotsAnimation()
+{
+	if (counterDotsBubble >= 15)
+	{
+		viewDots.x += limitFrameDots;
+		counterDotsBubble = 0;
+	}
+	if (abs(viewDots.x) > dotsBubble.width)
+	{
+		viewDots.x = limitFrameDots;
+	}
+	counterDotsBubble++;
+	for (int i = 0; i < NPCPositions.size(); i++)
+	{
+		DrawTextureRec(dotsBubble, viewDots, Vector2{ NPCPositions[i].x - 10 + XBg, NPCPositions[i].y -10 + YBg}, WHITE);
+	}
+
+}
+void Player::DrawNPCAnimation()
+{
+	if (counterNPCAnim >= 15)
+	{
+		viewNPC.x += limitFrameNPC;
+		counterNPCAnim = 0;
+	}
+
+	if (abs(viewNPC.x) > chadFr.width)
+	{
+		viewNPC.x = limitFrameNPC;
+	}
+
+	counterNPCAnim++;
+
+	for (int i = 0; i < NPCPositions.size(); i++)
+	{
+		DrawTextureRec(chadFr, viewNPC, Vector2{ NPCPositions[i].x + XBg, NPCPositions[i].y + YBg }, WHITE);
+	}
+}
+>>>>>>> Stashed changes
 void Player::CheckDir()
 {
 	
