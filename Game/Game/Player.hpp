@@ -1,9 +1,9 @@
 #pragma once
 #include "Precompile.hpp"
 #include "Background.hpp"
-#include "Enemy.hpp"
+#include "NPC.hpp"
 
-class Player : public Bg, public Enemy
+class Player : public Bg, public NPC
 {
 private:
 	Texture2D playerSprite;
@@ -18,16 +18,6 @@ private:
 	Texture2D idleR;
 	Texture2D idleL;
 
-	//add this
-	Texture2D dotsBubble;
-	float limitFrameDots;
-	Rectangle viewDots;
-	//to this
-	int counterDotsBubble;
-
-	float limitFrameNPC;
-	Rectangle viewNPC;
-	int counterNPCAnim;
 
 	vector<Texture2D> playerSprites;
 	vector<Texture2D> idleSprites;
@@ -50,12 +40,10 @@ private:
 	Vector2 playerCords;
 	friend bool findDistance(Player& player, int posX, int posY);
 public:
-	vector<Vector2> NPCPositions;
+	
 	Player();
 	void LoadSprites(int fps);
 	void Movement();                                                                                                                                                                                                                                                                                 
 	void CheckDir();
-	void DrawDotsAnimation();
-	void DrawNPCAnimation();
 	void UnLoadTextures();
 };

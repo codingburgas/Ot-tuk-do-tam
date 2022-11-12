@@ -60,6 +60,8 @@ Game::Game() {
 
     //player
     player.LoadSprites(fps);
+    race.LoadSprites();
+    npc.LoadSprites();
 
     plane.planeCurrentPosX = 1360;
     plane.planeCurrentPosY = 850;
@@ -789,6 +791,9 @@ void Game::spainLevel()
 
 void Game::franceLevel()
 {
+    race.DrawHorseAnimation();
+    npc.DrawNPCAnimation(player.XBg, player.YBg);
+    npc.DrawDotsAnimation(player.XBg, player.YBg);
     dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, chadTextV, 1, true, isDialogueV, counterPressed, false);
 
     dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, chadTextV, 0, false, isDialogueV, counterPressed, false);

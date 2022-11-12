@@ -3,7 +3,8 @@
 #include "Engine.hpp"
 #include "Backstory.hpp"
 #include "Player.hpp"
-
+#include "NPC.hpp"
+#include "HorseRacing.hpp"
 void setWidthAndHeight(Texture2D& variable);
 
 void gameStartup();
@@ -12,7 +13,8 @@ class Game : public Player
 {
 public:
     Player player;
-
+    Racing race;
+    NPC npc;
     Texture2D map;
 
     int fps = 60;

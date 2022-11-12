@@ -160,7 +160,9 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="HorseRacing.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +170,8 @@
     <ClInclude Include="Backstory.hpp" />
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="HorseRacing.hpp" />
+    <ClInclude Include="NPC.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Precompile.hpp" />
   </ItemGroup>
