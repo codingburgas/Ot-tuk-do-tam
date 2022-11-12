@@ -483,7 +483,7 @@ void Game::mapEurope()
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    if (!banCountry[i])
+                    if (banCountry[i])
                     {
                         switch (i)
                         {
