@@ -162,23 +162,13 @@ public:
     Texture2D dialogueBox, finishedDialogueArrow;
 
     struct isDialogue {
-        bool isDialogueStarted = false;
-        bool isDialogueContinued = false;
-        bool isDialogueEntered = false;
+        bool isDialogueStarted;
+        bool isDialogueContinued;
+        bool isDialogueEntered;
     };
     
-    vector<isDialogue> isDialogueV = 
-    {
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-    };
+    vector<isDialogue> isDialogueV;
+    
 
 	Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
 	vector<Texture2D> dotsBubble;
@@ -194,7 +184,7 @@ public:
     Texture2D acceptButton, cancelButton;
     Texture2D acceptButtonHover, cancelButtonHover;
     bool openQuest;
-    vector<bool> acceptQuest = {false, false, false, false, false, false, false, false};
+    vector<bool> acceptQuest;
 
     string questDisplay[10];
     
@@ -207,16 +197,7 @@ public:
         bool isDelivered;
     };
 
-    vector<isItem> isItemV = {
-        {false, false},
-        {false, false},
-        {false, false},
-        {false, false},
-        {false, false},
-        {false, false},
-        {false, false},
-        {false, false},
-    };
+    vector<isItem> isItemV;
     
     Texture2D exampleItem;
 
@@ -244,7 +225,7 @@ public:
         {"", "", ""},
     };
 
-    vector<int> counterPressed = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    vector<int> counterPressed;
 
     bool isBulgariaEnd;
 
@@ -265,9 +246,17 @@ public:
     bool isStonePicked;
 
     string getKey[5] = {"Brato nati toq kluch naprai kamuk", "Huu imash go", "Basi picha si",   ""},
-    findStone[5] = {"leleee basi qkiq kamuk", "Sigurno she mi trqq", "Dai da go zema", ""},
-    itemCombinationDeal[5] = { "Ae pich moe li da napraish item", "Nqqsh problem samo dai pari", "Huu nati", "Qko e da praim biznes ai chao", ""};
+        findStone[5] = {"leleee basi qkiq kamuk", "Sigurno she mi trqq", "Dai da go zema", ""},
+        itemCombinationDeal[5] = { "Ae pich moe li da napraish item", "Nqqsh problem samo dai pari", "Huu nati", "Qko e da praim biznes ai chao", ""};
 
+    //adict quest
+    Texture2D grShmat, tomato;
+    vector<Texture2D> tomatoV;
+
+    int tomatoPickedCounter;
+
+    string startQuestText[2] = { "Picha suberi 5 domata", "Huu" },
+           finishAdictQuest[2] = { "Subrah gi", "Huu nati tiq pari" };
 
 public:
 

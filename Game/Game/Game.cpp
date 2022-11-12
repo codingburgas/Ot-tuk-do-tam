@@ -186,6 +186,16 @@ Game::Game() {
     key = LoadTexture("../src/sprites/inner country elements/romania/key.png");
     metalPieces = LoadTexture("../src/sprites/inner country elements/romania/metal pieces.png");
     stone = LoadTexture("../src/sprites/inner country elements/romania/stone.png");
+
+    grShmat = LoadTexture("../src/sprites/inner country elements/germany/grShmat.png");
+    tomato = LoadTexture("../src/sprites/inner country elements/germany/tomato.png");
+
+    //vector resizing
+    isDialogueV.resize(10);
+    acceptQuest.resize(10);
+    isItemV.resize(10);
+    counterPressed.resize(10);
+    chadTextV.resize(10);
 }
 
 void Game::backstory()
@@ -848,7 +858,7 @@ void Game::italyLevel()
 
 void Game::germanyLevel()
 {
-
+    dialogues("Vankata Smetacha", "Mitio guluba", getKey, 2, 1000, 1000, chadTextV, 4, true, isDialogueV, counterPressed, false);
 }
 
 void Game::bulgariaLevel()
