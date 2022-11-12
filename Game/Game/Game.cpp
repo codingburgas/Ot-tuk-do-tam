@@ -177,6 +177,8 @@ Game::Game() {
     exampleItem = LoadTexture("../src/sprites/Menus and boards/heartIcon.png");
 
     textColor = { 54, 54, 54, 255 };
+
+    horse = LoadTexture("../src/sprites/inner country elements/france/horse.png");
 }
 
 void Game::backstory()
@@ -233,14 +235,6 @@ void Game::moveAirplane(const countryPosition& countryPosition)
 
 void Game::transportMenuF()
 {
-    if (mousePoint.y >= 758 && mousePoint.y <= 834)
-    {
-        if (mousePoint.x >= 610 && mousePoint.x <= 835)
-            DrawTexture(acceptButtonHover, 610, 758, WHITE);
-        else if (mousePoint.x >= 1090 && mousePoint.x <= 1308)
-            DrawTexture(cancelButtonHover, 1090, 758, WHITE);
-    }
-
     if (enableClick)
     {
         if (!planeToMove)
@@ -483,32 +477,32 @@ void Game::mapEurope()
             {
                 for (int i = 0; i < 6; i++)
                 {
-                    if (banCountry[i])
+                    if (countries[i])
                     {
                         switch (i)
                         {
 
-                        case 1:
+                        case 0:
                             spainLevel();
                             break;
 
-                        case 2:
+                        case 1:
                             franceLevel();
                             break;
 
-                        case 3:
+                        case 2:
                             italyLevel();
                             break;
 
-                        case 4:
+                        case 3:
                             germanyLevel();
                             break;
 
-                        case 5:
+                        case 4:
                             bulgariaLevel();
                             break;
 
-                        case 6:
+                        case 5:
                             romaniaLevel();
                             break;
 

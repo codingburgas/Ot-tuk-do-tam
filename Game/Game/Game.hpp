@@ -216,7 +216,9 @@ public:
 
     vector<int> counterPressed = {0, 0, 0, 0};
 
-    bool isBulgariaEnd = true;
+    bool isBulgariaEnd;
+
+    Texture2D horse;
 public:
 
     Game();
