@@ -221,8 +221,8 @@ public:
         {"Get the key and combine it!", "Find other itema and go combine it", "Reward:           750$"},
         {"", "", ""},
         {"", "", ""},
-        {"", "", ""},
         {"Collect all the tomatoes!", "Collect all the tomatoes", "Reward:           1000$"},
+        {"", "", ""},
     };
 
     vector<int> counterPressed;
@@ -250,11 +250,17 @@ public:
         itemCombinationDeal[5] = { "Ae pich moe li da napraish item", "Nqqsh problem samo dai pari", "Huu nati", "Qko e da praim biznes ai chao", ""};
 
     //adict quest
-    Texture2D grShmat, tomato;
-    vector<Texture2D> tomatoV;
-    bool showTomatoInventory;
+    Texture2D grShmat;
 
-    int tomatoPickedCounter;
+    struct tomatoes {
+       Texture2D tomato;
+       int posX, posY;
+    }tmts;
+
+    vector<tomatoes> tomatoV;
+
+    bool showTomatoInventory;
+    bool showTomatoes[6];
 
     string startQuestText[2] = { "Picha suberi 5 domata", "Huu" },
            finishAdictQuest[2] = { "Subrah gi", "Huu nati tiq pari" };

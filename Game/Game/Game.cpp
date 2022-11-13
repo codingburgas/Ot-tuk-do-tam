@@ -188,7 +188,17 @@ Game::Game() {
     stone = LoadTexture("../src/sprites/inner country elements/romania/stone.png");
 
     grShmat = LoadTexture("../src/sprites/inner country elements/germany/grShmat.png");
-    tomato = LoadTexture("../src/sprites/inner country elements/germany/tomato.png");
+    tmts.tomato = LoadTexture("../src/sprites/inner country elements/germany/tomato.png");
+    tmts.tomato.width = 150;
+    tmts.tomato.height = 150;
+
+    tomatoV = {
+        { tmts.tomato, 1500, 500 },
+        { tmts.tomato, 1500, 1000 },
+        { tmts.tomato, 2000, 500 },
+        { tmts.tomato, 2000, 1000 },
+        { tmts.tomato, 2200, 560 },
+    };
 
     //vector resizing
     isDialogueV.resize(10);
@@ -868,19 +878,22 @@ void Game::germanyLevel()
 
     if (showTomatoInventory)
     {
-        DrawTexture(tomato, 1500 + player.XBg, 500 + player.YBg, WHITE);
-        DrawTexture(tomato, 1500 + player.XBg, 1000 + player.YBg, WHITE);
-        DrawTexture(tomato, 2000 + player.XBg, 500 + player.YBg, WHITE);
-        DrawTexture(tomato, 2000 + player.XBg, 1000 + player.YBg, WHITE);
-        DrawTexture(tomato, 2200 + player.XBg, 560 + player.YBg, WHITE);
+        for (int i = 0; i < 5; i++)
+        {
+            if(!showTomatoes[i] && acceptQuest.at(7))
+                DrawTexture(tomatoV.at(i).tomato, tomatoV.at(i).posX + player.XBg, tomatoV.at(i).posY + player.YBg, WHITE);
+        }
+           
+
+        for (int i = 0; i < 5; i++) {
+            if (IsKeyPressed(KEY_Q) && findDistance(player, tomatoV.at(i).posX, tomatoV.at(i).posY))
+            {
+                showTomatoes[i] = true;
+            }
+        }
     }
 
-    if (IsKeyPressed(KEY_Q) && (findDistance(player, 1500, 500) || findDistance(player, 1500, 100) || findDistance(player, 2000, 500) || findDistance(player, 2000, 1000) || findDistance(player, 2200, 560)))
-    {
-        tomatoPickedCounter++;
-    }
-
-    if (tomatoPickedCounter == 5)
+    if (showTomatoes[0] && showTomatoes[1] && showTomatoes[2] && showTomatoes[3] && showTomatoes[4])
     {
         dialogues("Vankata Smetacha", "Mitio guluba", finishAdictQuest, 1, 1000, 1000, chadTextV, 8, false, isDialogueV, counterPressed, false);
 
