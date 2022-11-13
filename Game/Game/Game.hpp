@@ -166,7 +166,6 @@ public:
     };
     
     vector<isDialogue> isDialogueV;
-    
 
 	Texture2D dotsBubbleOne, dotsBubbleTwo, dotsBubblThree, dotsBubbleFour;
 	vector<Texture2D> dotsBubble;
@@ -222,6 +221,13 @@ public:
         {"Collect all the tomatoes!", "Collect all the tomatoes", "Reward:           1000$"},
         {"", "", ""},
         {"Buy Chad a beer!", "Buy Chad a beer", "Reward:           750$"},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
     };
 
     vector<int> counterPressed;
@@ -250,8 +256,6 @@ public:
         finishKeyQuest[3] = { "Eto subrah gi sega dai kinti", "Jiv i zdrav eto", ""};
 
     //adict quest
-    Texture2D grShmat;
-
     struct tomatoes {
        Texture2D tomato;
        int posX, posY;
@@ -277,7 +281,22 @@ public:
 
     //pizza quest
 
-    Texture2D flour, salami, cheese, mushrrom, pizza, baker;
+    Texture2D flour, salami, cheese, mushroom, pizza, baker;
+
+    struct pizzaIngredients {
+        Texture2D texture;
+        int posX, posY;
+    };
+
+    vector<pizzaIngredients> pizzaIngredientsV;
+
+    string startPizzaCollect[2] = { "Ko staa manqk suberi sustavkite", "Dobre" },
+        bakerCombine[3] = { "Kombinirai twa", "Dobre, samo che iskam 400$", "Dobre eto" },
+        finishPizzaCollect[2] = { "Ei ti picata", "Blagodarq nati parite" };
+
+    bool showIngredients;
+    bool drawIngredients[4];
+    bool finishBakerDialogue;
 public:
 
     Game();
