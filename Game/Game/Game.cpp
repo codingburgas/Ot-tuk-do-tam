@@ -837,7 +837,7 @@ void Game::spainLevel()
         counterPressed.at(9)++;
     }
 
-    if(isBeerDialogueFinished[0])
+    if(isBeerDialogueFinished[0] && acceptQuest.at(9))
         dialogues("Vankata Smetacha", "Gubarq", buyBeer, 2, 2000, 1000, chadTextV, 10, false, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(10) == 3)
