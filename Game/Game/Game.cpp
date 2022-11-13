@@ -201,16 +201,23 @@ Game::Game() {
     };
 
     //vector resizing
-    isDialogueV.resize(10);
-    acceptQuest.resize(10);
-    isItemV.resize(10);
-    counterPressed.resize(10);
-    chadTextV.resize(10);
+    isDialogueV.resize(15);
+    acceptQuest.resize(15);
+    isItemV.resize(15);
+    counterPressed.resize(15);
+    chadTextV.resize(15);
+
+
+    //buy beer quest
+    beer = LoadTexture("../src/sprites/inner country elements/spain/beer.png");
+    beer.width = 200;
+    beer.height = 200;
 }
 
 void Game::backstory()
 {
     setWidthAndHeight(backstoryImg);
+    DrawTexture(backstoryImg, 0, 0, WHITE);
     DrawTexture(backstoryImg, 0, 0, WHITE);
     // backstoryTypewriteEffect(backstoryText);
 }
@@ -539,6 +546,9 @@ void Game::mapEurope()
                     }
                 }
 
+                npc.DrawNPCAnimation(player.XBg, player.YBg);
+                npc.DrawDotsAnimation(player.XBg, player.YBg);
+
                 if (IsKeyDown(KEY_TAB))
                 {
                     showInventory();
@@ -681,6 +691,9 @@ void Game::showInventory()
 
     if(itemRequire[2])
         DrawTexture(metalPieces, 1200, 500, WHITE);
+
+    if(beerShowInventory)
+        DrawTexture(beer, 900, 500, WHITE);
 }
 
 void Game::itemPicked(int itemX, int itemY, bool& itemPicked)
@@ -815,14 +828,48 @@ void gameStartup()
 
 void Game::spainLevel()
 {
+    dialogues("Vankata Smetacha", "Mitio guluba", getBeerQuest, 2, 1000, 1000, chadTextV, 9, true, isDialogueV, counterPressed, false);
 
+    if (counterPressed.at(9) == 3)
+    {
+        isBeerDialogueFinished[0] = true;
+
+        counterPressed.at(9)++;
+    }
+
+    if(isBeerDialogueFinished[0])
+        dialogues("Vankata Smetacha", "Gubarq", buyBeer, 2, 2000, 1000, chadTextV, 10, false, isDialogueV, counterPressed, false);
+
+    if (counterPressed.at(10) == 3)
+    {
+        isBeerDialogueFinished[0] = false;
+        isBeerDialogueFinished[1] = true;
+
+        allMoney -= 300;
+
+        counterPressed.at(10)++;
+    }
+
+    if (isBeerDialogueFinished[1])
+    {
+        beerShowInventory = true;
+
+        dialogues("Vankata Smetacha", "Gubarq", bringBeer, 2, 1500, 1000, chadTextV, 11, false, isDialogueV, counterPressed, false);
+    }
+
+    if (counterPressed.at(11) == 3)
+    {
+        allMoney += 700;
+        beerShowInventory = false;
+        isBeerDialogueFinished[1] = false;
+
+        counterPressed.at(11)++;
+    }
 }
 
 void Game::franceLevel()
 {
     race.DrawHorseAnimation();
-    npc.DrawNPCAnimation(player.XBg, player.YBg);
-    npc.DrawDotsAnimation(player.XBg, player.YBg);
     dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, chadTextV, 1, true, isDialogueV, counterPressed, false);
 
     dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, chadTextV, 0, false, isDialogueV, counterPressed, false);

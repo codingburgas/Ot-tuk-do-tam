@@ -44,8 +44,6 @@ public:
 
     Texture2D menuOptions;
 
- 
-
     int money;
     Color moneyColor;
 
@@ -223,6 +221,7 @@ public:
         {"", "", ""},
         {"Collect all the tomatoes!", "Collect all the tomatoes", "Reward:           1000$"},
         {"", "", ""},
+        {"Buy Chad a beer!", "Buy Chad a beer", "Reward:           750$"},
     };
 
     vector<int> counterPressed;
@@ -264,6 +263,16 @@ public:
 
     string startQuestText[2] = { "Picha suberi 5 domata", "Huu" },
            finishAdictQuest[2] = { "Subrah gi", "Huu nati tiq pari" };
+
+    //buy beer quest
+    string getBeerQuest[4] = { "Ae pich sh mi kupish li bira", "Da e lud", "Huu shti platq"},
+        buyBeer[4] = { "Iskam da kupq bira", "Struva 250$", "Dobre vzimam q" },
+        bringBeer[4] = {"Eto ti birata", "Blagodarq lud. Na ti parite", "Blagodarq, priqten den!"};
+
+    bool isBeerDialogueFinished[2];
+
+    Texture2D beer;
+    bool beerShowInventory;
 
 public:
 
