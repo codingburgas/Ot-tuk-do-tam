@@ -12,8 +12,8 @@ Game::Game() {
     srand(time(0));
 
     //fonts
-    headerFont = LoadFont("../src/Fonts/headerFont.ttf");
-    textFont = LoadFont("../src/Fonts/textFont.ttf");
+    headerFont = LoadFont("../Fonts/headerFont.ttf");
+    textFont = LoadFont("../aFonts/textFont.ttf");
 
     map = LoadTexture("../src/sprites/backgrounds/map.png");
 
@@ -187,7 +187,6 @@ Game::Game() {
     metalPieces = LoadTexture("../src/sprites/inner country elements/romania/metal pieces.png");
     stone = LoadTexture("../src/sprites/inner country elements/romania/stone.png");
 
-    grShmat = LoadTexture("../src/sprites/inner country elements/germany/grShmat.png");
     tmts.tomato = LoadTexture("../src/sprites/inner country elements/germany/tomato.png");
     tmts.tomato.width = 150;
     tmts.tomato.height = 150;
@@ -201,17 +200,32 @@ Game::Game() {
     };
 
     //vector resizing
-    isDialogueV.resize(15);
-    acceptQuest.resize(15);
-    isItemV.resize(15);
-    counterPressed.resize(15);
-    chadTextV.resize(15);
-
+    isDialogueV.resize(20);
+    acceptQuest.resize(20);
+    isItemV.resize(20);
+    counterPressed.resize(20);
+    chadTextV.resize(20);
 
     //buy beer quest
     beer = LoadTexture("../src/sprites/inner country elements/spain/beer.png");
     beer.width = 200;
     beer.height = 200;
+
+    //pizza quest
+    flour = LoadTexture("../src/sprites/inner country elements/bulgaria/flour.png"); 
+    salami = LoadTexture("../src/sprites/inner country elements/bulgaria/salami.png"); 
+    cheese = LoadTexture("../src/sprites/inner country elements/bulgaria/cheese.png"); 
+    mushroom = LoadTexture("../src/sprites/inner country elements/bulgaria/mushroom.png"); 
+    
+    pizzaIngredientsV = {
+        { flour, 1500, 500 },
+        { salami, 1500, 1000 },
+        { cheese, 2000, 500 },
+        { mushroom, 2000, 1000 },
+    },
+    
+    baker = LoadTexture("../src/sprites/inner country elements/bulgaria/baker.png");
+    pizza = LoadTexture("../src/sprites/inner country elements/bulgaria/pizza.png");
 }
 
 void Game::backstory()
@@ -954,7 +968,55 @@ void Game::germanyLevel()
 
 void Game::bulgariaLevel()
 {
+    dialogues("Vankata Smetacha", "Mitio guluba", startPizzaCollect, 1, 1000, 1000, chadTextV, 14, true, isDialogueV, counterPressed, false);
 
+    if (counterPressed.at(14) == 2)
+    {
+        showIngredients = true;
+        counterPressed.at(14)++;
+    }
+
+    if (showIngredients)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (!drawIngredients[i] && acceptQuest.at(14))
+                DrawTexture(pizzaIngredientsV.at(i).texture, pizzaIngredientsV.at(i).posX + player.XBg, pizzaIngredientsV.at(i).posY + player.YBg, WHITE);
+        }
+
+
+        for (int i = 0; i < 4; i++) {
+            if (IsKeyPressed(KEY_Q) && findDistance(player, pizzaIngredientsV.at(i).posX, pizzaIngredientsV.at(i).posY))
+            {
+                drawIngredients[i] = true;
+            }
+        }
+    }
+
+    if (drawIngredients[0] && drawIngredients[1] && drawIngredients[2] && drawIngredients[3])
+    {
+        dialogues("Vankata Smetacha", "Mitio guluba", bakerCombine, 2, 1500, 1000, chadTextV, 15, false, isDialogueV, counterPressed, false);
+
+        if (counterPressed.at(15) == 3)
+        {
+            allMoney -= 400;
+            counterPressed.at(15)++;
+
+            finishBakerDialogue = true;
+        }
+    }
+
+    if (finishBakerDialogue)
+    {
+        dialogues("Vankata Smetacha", "Mitio guluba", finishPizzaCollect, 1, 1000, 1000, chadTextV, 16, false, isDialogueV, counterPressed, false);
+
+        if (counterPressed.at(16) == 2)
+        {
+            allMoney += 1000;
+
+            counterPressed.at(16)++;
+        }     
+    }
 }
 
 void Game::romaniaLevel()
@@ -1005,7 +1067,6 @@ void Game::romaniaLevel()
         if (counterPressed.at(12) == 2)
         {
             itemRequire[2] = false;
-            isStonePicked = false;
 
             allMoney += 800;
 
