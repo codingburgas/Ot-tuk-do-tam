@@ -244,9 +244,10 @@ public:
     bool itemRequire[5];
     bool isStonePicked;
 
-    string getKey[5] = {"Brato nati toq kluch naprai kamuk", "Huu imash go", "Basi picha si",   ""},
-        findStone[5] = {"leleee basi qkiq kamuk", "Sigurno she mi trqq", "Dai da go zema", ""},
-        itemCombinationDeal[5] = { "Ae pich moe li da napraish item", "Nqqsh problem samo dai pari", "Huu nati", "Qko e da praim biznes ai chao", ""};
+    string getKey[5] = { "Brato nati toq kluch naprai kamuk", "Huu imash go", "Basi picha si",   "" },
+        findStone[5] = { "leleee basi qkiq kamuk", "Sigurno she mi trqq", "Dai da go zema", "" },
+        itemCombinationDeal[5] = { "Ae pich moe li da napraish item", "Nqqsh problem samo dai pari", "Huu nati", "Qko e da praim biznes ai chao", "" },
+        finishKeyQuest[3] = { "Eto subrah gi sega dai kinti", "Jiv i zdrav eto", ""};
 
     //adict quest
     Texture2D grShmat;
@@ -274,6 +275,9 @@ public:
     Texture2D beer;
     bool beerShowInventory;
 
+    //pizza quest
+
+    Texture2D flour, salami, cheese, mushrrom, pizza, baker;
 public:
 
     Game();

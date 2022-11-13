@@ -989,12 +989,27 @@ void Game::romaniaLevel()
 
                 isStonePicked = true;
 
-                counterPressed.at(5)++;
+                counterPressed.at(6)++;
 
-                allMoney += 500;
+                allMoney -= 300;
             }
         }
     }
     else if(!isStonePicked)
         DrawTexture(stone, 1500 + player.XBg, 500 + player.YBg, WHITE);
+
+    if (itemRequire[2])
+    {
+        dialogues("Vankata Smetacha", "Jabata", finishKeyQuest, 1, 1000, 1000, chadTextV, 12, false, isDialogueV, counterPressed, false);
+
+        if (counterPressed.at(12) == 2)
+        {
+            itemRequire[2] = false;
+            isStonePicked = false;
+
+            allMoney += 800;
+
+            counterPressed.at(12)++;
+        }
+    }
 }

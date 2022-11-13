@@ -3,7 +3,7 @@ NPC::NPC()
 {
     enemyPosX = 1000, enemyPosY = 1000;
     enemyDistance = 100;
-    NPCPositions = { {1000, 1000},{2000, 1000} };
+    NPCPositions = { {1000, 1000},{2000, 1000}, {1500, 1000} };
     counterDotsBubble = 0;
     counterNPCAnim = 0;
 }
