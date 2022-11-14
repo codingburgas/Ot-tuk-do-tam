@@ -62,6 +62,7 @@ Game::Game() {
     player.LoadSprites(fps);
     race.LoadSprites();
     npc.LoadSprites();
+    assassin.LoadSprites();
 
     plane.planeCurrentPosX = 1360;
     plane.planeCurrentPosY = 850;
@@ -424,7 +425,7 @@ void Game::mapEurope()
 
     for (int i = 0; i < 6; i++)
     {
-        if ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || (changeCircles[i]) && !isTransportMenuOn && enableClick && i != 4))
+        if ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || (changeCircles[i]) && !isTransportMenuOn && enableClick && i != 4) && isBulgariaEnd)
         {
             hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y, circles[i].x - 20, circles[i].y - 5);
         }
@@ -478,13 +479,15 @@ void Game::mapEurope()
             if (i != coutnryNumber)
                 countries[i] = 0;
             else
+            {
                 countries[coutnryNumber] = 1;
+            }
         }
     }
 
     //counterDotsBubble++;
 
-    for (int i = 0; i < 6; i++)
+    for(int i = 0; i < 6; i++)
     {
         if (!banCountry[i])
         {
@@ -813,7 +816,7 @@ void Game::optionsMenu()
 
         if (helpIsClicked)
         {
-            
+            assassin.Draw();
         }
 
         if (audioIsClicked)

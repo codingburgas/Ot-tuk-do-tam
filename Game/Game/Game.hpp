@@ -5,6 +5,7 @@
 #include "Player.hpp"
 #include "NPC.hpp"
 #include "HorseRacing.hpp"
+#include "Assassin.hpp"
 void setWidthAndHeight(Texture2D& variable);
 
 void gameStartup();
@@ -15,6 +16,7 @@ public:
     Player player;
     Racing race;
     NPC npc;
+    Assassin assassin;
     Texture2D map;
 
     int fps = 60;

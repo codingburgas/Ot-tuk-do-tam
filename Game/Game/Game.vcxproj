@@ -155,6 +155,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Assassin.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Backstory.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Assassin.hpp" />
     <ClInclude Include="Background.hpp" />
     <ClInclude Include="Backstory.hpp" />
     <ClInclude Include="Engine.hpp" />
