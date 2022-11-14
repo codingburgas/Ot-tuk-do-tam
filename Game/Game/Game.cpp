@@ -181,22 +181,22 @@ Game::Game() {
     textColor = { 54, 54, 54, 255 };
 
     horse = LoadTexture("../src/sprites/inner country elements/france/horse.png");
-    gripper = LoadTexture("../src/sprites/inner country elements/spain/grippers.png");;
+    gripper = LoadTexture("../src/sprites/inner country elements/spain/grippers.png");
 
     key = LoadTexture("../src/sprites/inner country elements/romania/key.png");
     metalPieces = LoadTexture("../src/sprites/inner country elements/romania/metal pieces.png");
     stone = LoadTexture("../src/sprites/inner country elements/romania/stone.png");
 
-    tmts.tomato = LoadTexture("../src/sprites/inner country elements/germany/sausage.png");
-    tmts.tomato.width = 150;
-    tmts.tomato.height = 150;
+    ssgs.sausage = LoadTexture("../src/sprites/inner country elements/germany/sausage.png");
+    ssgs.sausage.width = 150;
+    ssgs.sausage.height = 150;
 
-    tomatoV = {
-        { tmts.tomato, 1500, 500 },
-        { tmts.tomato, 1500, 1000 },
-        { tmts.tomato, 2000, 500 },
-        { tmts.tomato, 2000, 1000 },
-        { tmts.tomato, 2200, 560 },
+    sausagesV = {
+        { ssgs.sausage, 1500, 500 },
+        { ssgs.sausage, 1500, 1000 },
+        { ssgs.sausage, 2000, 500 },
+        { ssgs.sausage, 2000, 1000 },
+        { ssgs.sausage, 2200, 560 },
     };
 
     //vector resizing
@@ -238,6 +238,8 @@ Game::Game() {
     
     baker = LoadTexture("../src/sprites/inner country elements/bulgaria/baker.png");
     pizza = LoadTexture("../src/sprites/inner country elements/bulgaria/pizza.png");
+
+    painting = LoadTexture("../src/sprites/inner country elements/spain/painting.png");
 }
 
 void Game::backstory()
@@ -944,32 +946,32 @@ void Game::italyLevel()
 
 void Game::germanyLevel()
 {
-    dialogues("Vankata Smetacha", "Mitio guluba", startQuestDialogue, 1, 1000, 1000, chadTextV, 7, true, isDialogueV, counterPressed, false);
+    /*dialogues("Vankata Smetacha", "Mitio guluba", startQuestDialogue, 1, 1000, 1000, chadTextV, 7, true, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(7) == 2)
     {
-        showTomatoInventory = true;
+        showSausagesInventory = true;
         counterPressed.at(7)++;
     }
 
-    if (showTomatoInventory)
+    if (showSausagesInventory)
     {
         for (int i = 0; i < 5; i++)
         {
-            if(!showTomatoes[i] && acceptQuest.at(7))
-                DrawTexture(tomatoV.at(i).tomato, tomatoV.at(i).posX + player.XBg, tomatoV.at(i).posY + player.YBg, WHITE);
+            if(!showSausages[i] && acceptQuest.at(7))
+                DrawTexture(sausagesV.at(i).sausage, sausagesV.at(i).posX + player.XBg, sausagesV.at(i).posY + player.YBg, WHITE);
         }
            
 
         for (int i = 0; i < 5; i++) {
-            if (IsKeyPressed(KEY_Q) && findDistance(player, tomatoV.at(i).posX, tomatoV.at(i).posY))
+            if (IsKeyPressed(KEY_Q) && findDistance(player, sausagesV.at(i).posX, sausagesV.at(i).posY))
             {
-                showTomatoes[i] = true;
+                showSausages[i] = true;
             }
         }
     }
 
-    if (showTomatoes[0] && showTomatoes[1] && showTomatoes[2] && showTomatoes[3] && showTomatoes[4])
+    if (showSausages[0] && showSausages[1] && showSausages[2] && showSausages[3] && showSausages[4])
     {
         dialogues("Vankata Smetacha", "Mitio guluba", finishAddictDialogue, 1, 1000, 1000, chadTextV, 8, false, isDialogueV, counterPressed, false);
 
@@ -977,6 +979,42 @@ void Game::germanyLevel()
         {
             allMoney += 1000;
             counterPressed.at(8)++;
+        }
+    }*/
+
+    dialogues("Vankata Smetacha", "Mitio guluba", startQuestDialogue, 1, 1000, 1000, chadTextV, 17, true, isDialogueV, counterPressed, false);
+
+    if (counterPressed.at(17) == 2)
+    {
+        showSausagesInventory = true;
+        counterPressed.at(17)++;
+    }
+
+    if (showSausagesInventory)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (!showSausages[i] && acceptQuest.at(17))
+                DrawTexture(sausagesV.at(i).sausage, sausagesV.at(i).posX + player.XBg, sausagesV.at(i).posY + player.YBg, WHITE);
+        }
+
+
+        for (int i = 0; i < 5; i++) {
+            if (IsKeyPressed(KEY_Q) && findDistance(player, sausagesV.at(i).posX, sausagesV.at(i).posY))
+            {
+                showSausages[i] = true;
+            }
+        }
+    }
+
+    if (showSausages[0] && showSausages[1] && showSausages[2] && showSausages[3] && showSausages[4])
+    {
+        dialogues("Vankata Smetacha", "Mitio guluba", finishAddictDialogue, 1, 1000, 1000, chadTextV, 18, false, isDialogueV, counterPressed, false);
+
+        if (counterPressed.at(18) == 2)
+        {
+            allMoney += 900;
+            counterPressed.at(18)++;
         }
     }
 }

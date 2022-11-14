@@ -218,9 +218,15 @@ public:
         {"Get the key and combine it!", "Find other itema and go combine it", "Reward:           750$"},
         {"", "", ""},
         {"", "", ""},
-        {"Collect all the sausages!", "Collect all the tomatoes", "Reward:           1000$"},
+        {"Collect all the sausages!", "Collect all the sausages", "Reward:           1000$"},
         {"", "", ""},
         {"Buy Chad a beer!", "Buy Chad a beer", "Reward:           750$"},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
         {"", "", ""},
         {"", "", ""},
         {"", "", ""},
@@ -256,15 +262,15 @@ public:
         finishKeyQuestDialogue[3] = { "Eto subrah gi sega dai kinti", "Jiv i zdrav eto", ""};
 
     //adict quest
-    struct tomatoes {
-       Texture2D tomato;
+    struct sausages {
+       Texture2D sausage;
        int posX, posY;
-    }tmts;
+    }ssgs;
 
-    vector<tomatoes> tomatoV;
+    vector<sausages> sausagesV;
 
-    bool showTomatoInventory;
-    bool showTomatoes[6];
+    bool showSausagesInventory;
+    bool showSausages[6];
 
     string startQuestDialogue[2] = { "Picha suberi 5 domata", "Huu" },
            finishAddictDialogue[2] = { "Subrah gi", "Huu nati tiq pari" };
@@ -297,6 +303,9 @@ public:
     bool showIngredients;
     bool drawIngredients[4];
     bool finishBakerDialogue;
+
+    //lost painting quest
+    Texture2D painting;
 public:
 
     Game();
