@@ -218,7 +218,7 @@ public:
         {"Get the key and combine it!", "Find other itema and go combine it", "Reward:           750$"},
         {"", "", ""},
         {"", "", ""},
-        {"Collect all the tomatoes!", "Collect all the tomatoes", "Reward:           1000$"},
+        {"Collect all the sausages!", "Collect all the tomatoes", "Reward:           1000$"},
         {"", "", ""},
         {"Buy Chad a beer!", "Buy Chad a beer", "Reward:           750$"},
         {"", "", ""},

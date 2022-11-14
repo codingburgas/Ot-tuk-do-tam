@@ -187,7 +187,7 @@ Game::Game() {
     metalPieces = LoadTexture("../src/sprites/inner country elements/romania/metal pieces.png");
     stone = LoadTexture("../src/sprites/inner country elements/romania/stone.png");
 
-    tmts.tomato = LoadTexture("../src/sprites/inner country elements/germany/tomato.png");
+    tmts.tomato = LoadTexture("../src/sprites/inner country elements/germany/sausage.png");
     tmts.tomato.width = 150;
     tmts.tomato.height = 150;
 
