@@ -305,7 +305,19 @@ public:
     bool finishBakerDialogue;
 
     //lost painting quest
-    Texture2D painting;
+
+    struct paintings {
+        Texture2D painting;
+        int posX, posY;
+    }pntng;
+
+    vector<paintings> paintingV;
+
+    bool showPaintingInventory;
+    bool showPaintings[3];
+
+    string paintingCollectDialogue[2] = { "Picha zemi tiq kartini", "Huu praim go" },
+           paintingCollectDialogueFinish[2] = { "Na ti kartinite", "Blagodarq!" };
 public:
 
     Game();

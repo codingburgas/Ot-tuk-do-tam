@@ -239,7 +239,13 @@ Game::Game() {
     baker = LoadTexture("../src/sprites/inner country elements/bulgaria/baker.png");
     pizza = LoadTexture("../src/sprites/inner country elements/bulgaria/pizza.png");
 
-    painting = LoadTexture("../src/sprites/inner country elements/spain/painting.png");
+    pntng.painting = LoadTexture("../src/sprites/inner country elements/spain/painting.png");
+
+    paintingV = {
+        {pntng.painting, 1200, 800},
+        {pntng.painting, 1500, 1000},
+        {pntng.painting, 1600, 1000},
+    };
 }
 
 void Game::backstory()
@@ -982,34 +988,34 @@ void Game::germanyLevel()
         }
     }*/
 
-    dialogues("Vankata Smetacha", "Mitio guluba", startQuestDialogue, 1, 1000, 1000, chadTextV, 17, true, isDialogueV, counterPressed, false);
+    dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogue, 1, 1000, 1000, chadTextV, 17, true, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(17) == 2)
     {
-        showSausagesInventory = true;
+        showPaintingInventory = true;
         counterPressed.at(17)++;
     }
 
-    if (showSausagesInventory)
+    if (showPaintingInventory)
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
         {
-            if (!showSausages[i] && acceptQuest.at(17))
-                DrawTexture(sausagesV.at(i).sausage, sausagesV.at(i).posX + player.XBg, sausagesV.at(i).posY + player.YBg, WHITE);
+            if (!showPaintings[i] && acceptQuest.at(17))
+                DrawTexture(paintingV.at(i).painting, paintingV.at(i).posX + player.XBg, paintingV.at(i).posY + player.YBg, WHITE);
         }
 
 
-        for (int i = 0; i < 5; i++) {
-            if (IsKeyPressed(KEY_Q) && findDistance(player, sausagesV.at(i).posX, sausagesV.at(i).posY))
+        for (int i = 0; i < 3; i++) {
+            if (IsKeyPressed(KEY_Q) && findDistance(player, paintingV.at(i).posX, paintingV.at(i).posY))
             {
-                showSausages[i] = true;
+                showPaintings[i] = true;
             }
         }
     }
 
-    if (showSausages[0] && showSausages[1] && showSausages[2] && showSausages[3] && showSausages[4])
+    if (showPaintings[0] && showPaintings[1] && showPaintings[2])
     {
-        dialogues("Vankata Smetacha", "Mitio guluba", finishAddictDialogue, 1, 1000, 1000, chadTextV, 18, false, isDialogueV, counterPressed, false);
+        dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogueFinish, 1, 1000, 1000, chadTextV, 18, false, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(18) == 2)
         {
