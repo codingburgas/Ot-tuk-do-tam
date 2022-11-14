@@ -213,7 +213,7 @@ public:
     { 
         {"", "", ""}, 
         {"Pickup the heard!", "Go to the heart and take it.", "Reward:           1000$"},
-        {"Return the wallet!", "Find the man/woman who lost\nhis wallet and return it", "Reward:           500$"},
+        {"Return the gripper!", "Find the man/woman who lost\nhis gripper and return it", "Reward:           500$"},
         {"", "", ""},
         {"Get the key and combine it!", "Find other itema and go combine it", "Reward:           750$"},
         {"", "", ""},
@@ -237,23 +237,23 @@ public:
     Texture2D horse;
 
     //wallet pickup
-    Texture2D wallet;
-    bool isWalletPicked;
-    bool isWalletInventory = true;
+    Texture2D gripper;
+    bool isGripperPicked;
+    bool isGripperInventory = true;
 
-    string walletFound[3] = { "It seems that someone lost his/her wallet", "Let's try to bring it back", ""};
+    string gripperFoundDialogue[3] = { "It seems that someone lost his/her wallet", "Let's try to bring it back", ""};
 
-    string walletReturnedText[4] = { "It seems you found my wallet", "Yes.", "Ok that's a little reward from me!", ""};
+    string gripperReturnedDialogue[4] = { "It seems you found my wallet", "Yes.", "Ok that's a little reward from me!", ""};
 
     //item combination
     Texture2D key, metalPieces, stone;
     bool itemRequire[5];
     bool isStonePicked;
 
-    string getKey[5] = { "Brato nati toq kluch naprai kamuk", "Huu imash go", "Basi picha si",   "" },
-        findStone[5] = { "leleee basi qkiq kamuk", "Sigurno she mi trqq", "Dai da go zema", "" },
-        itemCombinationDeal[5] = { "Ae pich moe li da napraish item", "Nqqsh problem samo dai pari", "Huu nati", "Qko e da praim biznes ai chao", "" },
-        finishKeyQuest[3] = { "Eto subrah gi sega dai kinti", "Jiv i zdrav eto", ""};
+    string getKeyDialogue[5] = { "Brato nati toq kluch naprai kamuk", "Huu imash go", "Basi picha si",   "" },
+        findStoneDialogue[5] = { "leleee basi qkiq kamuk", "Sigurno she mi trqq", "Dai da go zema", "" },
+        itemCombinationDealDialogue[5] = { "Ae pich moe li da napraish item", "Nqqsh problem samo dai pari", "Huu nati", "Qko e da praim biznes ai chao", "" },
+        finishKeyQuestDialogue[3] = { "Eto subrah gi sega dai kinti", "Jiv i zdrav eto", ""};
 
     //adict quest
     struct tomatoes {
@@ -266,13 +266,13 @@ public:
     bool showTomatoInventory;
     bool showTomatoes[6];
 
-    string startQuestText[2] = { "Picha suberi 5 domata", "Huu" },
-           finishAdictQuest[2] = { "Subrah gi", "Huu nati tiq pari" };
+    string startQuestDialogue[2] = { "Picha suberi 5 domata", "Huu" },
+           finishAddictDialogue[2] = { "Subrah gi", "Huu nati tiq pari" };
 
     //buy beer quest
-    string getBeerQuest[4] = { "Ae pich sh mi kupish li bira", "Da e lud", "Huu shti platq"},
-        buyBeer[4] = { "Iskam da kupq bira", "Struva 250$", "Dobre vzimam q" },
-        bringBeer[4] = {"Eto ti birata", "Blagodarq lud. Na ti parite", "Blagodarq, priqten den!"};
+    string getBeerQuestDialogue[4] = { "Ae pich sh mi kupish li bira", "Da e lud", "Huu shti platq"},
+        buyBeerDialogue[4] = { "Iskam da kupq bira", "Struva 250$", "Dobre vzimam q" },
+        bringBeerDialogue[4] = {"Eto ti birata", "Blagodarq lud. Na ti parite", "Blagodarq, priqten den!"};
 
     bool isBeerDialogueFinished[2];
 
@@ -290,9 +290,9 @@ public:
 
     vector<pizzaIngredients> pizzaIngredientsV;
 
-    string startPizzaCollect[2] = { "Ko staa manqk suberi sustavkite", "Dobre" },
-        bakerCombine[3] = { "Kombinirai twa", "Dobre, samo che iskam 400$", "Dobre eto" },
-        finishPizzaCollect[2] = { "Ei ti picata", "Blagodarq nati parite" };
+    string startPizzaCollectDialogue[2] = { "Ko staa manqk suberi sustavkite", "Dobre" },
+        bakerCombineDialogue[3] = { "Kombinirai twa", "Dobre, samo che iskam 400$", "Dobre eto" },
+        finishPizzaCollectDialogue[2] = { "Ei ti picata", "Blagodarq nati parite" };
 
     bool showIngredients;
     bool drawIngredients[4];
