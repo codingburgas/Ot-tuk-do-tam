@@ -472,7 +472,14 @@ void Game::mapEurope()
 
         StopSoundMulti();
         flyOneTime = true;
-        countries[coutnryNumber] = 1;
+        //countries[coutnryNumber] = 1;
+        for (int i = 0; i < 6; i++)
+        {
+            if (i != coutnryNumber)
+                countries[i] = 0;
+            else
+                countries[coutnryNumber] = 1;
+        }
     }
 
     //counterDotsBubble++;
@@ -543,8 +550,7 @@ void Game::mapEurope()
         {
             if (!unloadBack)
             {
-                for (int i = 0; i < 6; i++)
-                {
+                
                     if (countries[i])
                     {
                         switch (i)
@@ -552,36 +558,47 @@ void Game::mapEurope()
 
                         case 0:
                             spainLevel();
+                            npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                            npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                             break;
 
                         case 1:
                             franceLevel();
+                            npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                            npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                             break;
 
                         case 2:
                             italyLevel();
+                            npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                            npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                             break;
 
                         case 3:
                             germanyLevel();
+                            npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                            npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                             break;
 
                         case 4:
                             bulgariaLevel();
+                            npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                            npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                             break;
 
                         case 5:
                             romaniaLevel();
+                            npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                            npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                             break;
 
                         default:
                             break;
                         }
                     }
-                }
+                
 
-                npc.DrawNPCAnimation(player.XBg, player.YBg);
-                npc.DrawDotsAnimation(player.XBg, player.YBg);
+                
 
                 if (IsKeyDown(KEY_TAB))
                 {
@@ -598,7 +615,7 @@ void Game::mapEurope()
             if (isClicked() && CheckCollisionPointCircle(mousePoint, backCircle, 30))
             {
                 enableClick = true;
-                countries[i] = 0;
+                //countries[i] = 0;
                 unloadBack = true;
                 banCountry[i] = true;
             }
