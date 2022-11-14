@@ -217,6 +217,18 @@ Game::Game() {
     cheese = LoadTexture("../src/sprites/inner country elements/bulgaria/cheese.png"); 
     mushroom = LoadTexture("../src/sprites/inner country elements/bulgaria/mushroom.png"); 
     
+    flour.width = 150;
+    flour.height = 150;
+
+    salami.width = 150;
+    salami.height = 150;
+
+    cheese.width = 150;
+    cheese.height = 150;
+
+    mushroom.width = 150;
+    mushroom.height = 150;
+
     pizzaIngredientsV = {
         { flour, 1500, 500 },
         { salami, 1500, 1000 },
@@ -708,6 +720,9 @@ void Game::showInventory()
 
     if(beerShowInventory)
         DrawTexture(beer, 900, 500, WHITE);
+
+    if (finishBakerDialogue)
+        DrawTexture(pizza, 950, 500, WHITE);
 }
 
 void Game::itemPicked(int itemX, int itemY, bool& itemPicked)
@@ -1015,6 +1030,8 @@ void Game::bulgariaLevel()
             allMoney += 1000;
 
             counterPressed.at(16)++;
+
+            finishBakerDialogue = false;
         }     
     }
 }
