@@ -867,24 +867,24 @@ void Game::spainLevel()
 {
     dialogues("Vankata Smetacha", "Mitio guluba", getBeerQuestDialogue, 2, 1000, 1000, chadTextV, 9, true, isDialogueV, counterPressed, false);
 
-    if (counterPressed.at(9) == 3)
+    if (counterPressed.at(9) >= 3)
     {
         isBeerDialogueFinished[0] = true;
 
-        counterPressed.at(9)++;
+        counterPressed.at(9) = -1;
     }
 
     if(isBeerDialogueFinished[0] && acceptQuest.at(9))
         dialogues("Vankata Smetacha", "Gubarq", buyBeerDialogue, 2, 2000, 1000, chadTextV, 10, false, isDialogueV, counterPressed, false);
 
-    if (counterPressed.at(10) == 3)
+    if (counterPressed.at(10) >= 3)
     {
         isBeerDialogueFinished[0] = false;
         isBeerDialogueFinished[1] = true;
 
         allMoney -= 300;
 
-        counterPressed.at(10)++;
+        counterPressed.at(10) = -1;
     }
 
     if (isBeerDialogueFinished[1])
@@ -894,13 +894,13 @@ void Game::spainLevel()
         dialogues("Vankata Smetacha", "Gubarq", bringBeerDialogue, 2, 1500, 1000, chadTextV, 11, false, isDialogueV, counterPressed, false);
     }
 
-    if (counterPressed.at(11) == 3)
+    if (counterPressed.at(11) >= 3)
     {
         allMoney += 700;
         beerShowInventory = false;
         isBeerDialogueFinished[1] = false;
 
-        counterPressed.at(11)++;
+        counterPressed.at(11) = -1;
     }
 }
 
@@ -918,10 +918,10 @@ void Game::franceLevel()
 
     itemPicked(1000, 500, isItemV.at(1).isItemPicked);
 
-    if (counterPressed.at(1) == 4 && findDistance(player, 1000, 1000) && IsKeyPressed(KEY_Q))
+    if (counterPressed.at(1) >= 4 && findDistance(player, 1000, 1000) && IsKeyPressed(KEY_Q))
     {
         allMoney += 1000;
-        counterPressed.at(1)++;
+        counterPressed.at(1) = -1;
     }
 }
 
@@ -939,10 +939,12 @@ void Game::italyLevel()
 
         dialogues("Vankata Smetacha", "Gabarq", gripperReturnedDialogue, 2, 1000, 1000, chadTextV, 3, false, isDialogueV, counterPressed, false);
 
-        if (counterPressed.at(3) == 3)
+        if (counterPressed.at(3) >= 3)
         {
             allMoney += 500;
-            counterPressed.at(3)++;
+
+            counterPressed.at(3) = -1;
+
             isGripperInventory = true;
         }
     }
@@ -954,10 +956,11 @@ void Game::germanyLevel()
 {
     /*dialogues("Vankata Smetacha", "Mitio guluba", startQuestDialogue, 1, 1000, 1000, chadTextV, 7, true, isDialogueV, counterPressed, false);
 
-    if (counterPressed.at(7) == 2)
+    if (counterPressed.at(7) >= 2)
     {
         showSausagesInventory = true;
-        counterPressed.at(7)++;
+
+        counterPressed.at(7) = -1;
     }
 
     if (showSausagesInventory)
@@ -981,19 +984,21 @@ void Game::germanyLevel()
     {
         dialogues("Vankata Smetacha", "Mitio guluba", finishAddictDialogue, 1, 1000, 1000, chadTextV, 8, false, isDialogueV, counterPressed, false);
 
-        if (counterPressed.at(8) == 2)
+        if (counterPressed.at(8) >= 2)
         {
             allMoney += 1000;
-            counterPressed.at(8)++;
+
+            counterPressed.at(8) = -1;
         }
     }*/
 
     dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogue, 1, 1000, 1000, chadTextV, 17, true, isDialogueV, counterPressed, false);
 
-    if (counterPressed.at(17) == 2)
+    if (counterPressed.at(17) >= 2)
     {
         showPaintingInventory = true;
-        counterPressed.at(17)++;
+
+        counterPressed.at(17) = -1;
     }
 
     if (showPaintingInventory)
@@ -1017,10 +1022,11 @@ void Game::germanyLevel()
     {
         dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogueFinish, 1, 1000, 1000, chadTextV, 18, false, isDialogueV, counterPressed, false);
 
-        if (counterPressed.at(18) == 2)
+        if (counterPressed.at(18) >= 2)
         {
             allMoney += 900;
-            counterPressed.at(18)++;
+
+            counterPressed.at(18) = -1;
         }
     }
 }
@@ -1029,10 +1035,11 @@ void Game::bulgariaLevel()
 {
     dialogues("Vankata Smetacha", "Mitio guluba", startPizzaCollectDialogue, 1, 1000, 1000, chadTextV, 14, true, isDialogueV, counterPressed, false);
 
-    if (counterPressed.at(14) == 2)
+    if (counterPressed.at(14) >= 2)
     {
         showIngredients = true;
-        counterPressed.at(14)++;
+
+        counterPressed.at(14) = -1;
     }
 
     if (showIngredients)
@@ -1056,10 +1063,11 @@ void Game::bulgariaLevel()
     {
         dialogues("Vankata Smetacha", "Mitio guluba", bakerCombineDialogue, 2, 1500, 1000, chadTextV, 15, false, isDialogueV, counterPressed, false);
 
-        if (counterPressed.at(15) == 3)
+        if (counterPressed.at(15) >= 3)
         {
             allMoney -= 400;
-            counterPressed.at(15)++;
+
+            counterPressed.at(15) = -1;
 
             finishBakerDialogue = true;
         }
@@ -1069,11 +1077,11 @@ void Game::bulgariaLevel()
     {
         dialogues("Vankata Smetacha", "Mitio guluba", finishPizzaCollectDialogue, 1, 1000, 1000, chadTextV, 16, false, isDialogueV, counterPressed, false);
 
-        if (counterPressed.at(16) == 2)
+        if (counterPressed.at(16) >= 2)
         {
             allMoney += 1000;
 
-            counterPressed.at(16)++;
+            counterPressed.at(16) = -1;
 
             finishBakerDialogue = false;
         }     
@@ -1084,10 +1092,11 @@ void Game::romaniaLevel()
 {
     dialogues("Vankata Smetacha", "Mitio guluba", getKeyDialogue, 2, 1000, 1000, chadTextV, 4, true, isDialogueV, counterPressed, false);
 
-    if (counterPressed.at(4) == 3)
+    if (counterPressed.at(4) >= 3)
     {
         itemRequire[0] = true;
-        counterPressed.at(4)++;
+
+        counterPressed.at(4) = -1;
     }
         
 
@@ -1104,7 +1113,7 @@ void Game::romaniaLevel()
         {
             dialogues("Vankata Smetacha", "Jabata", itemCombinationDealDialogue, 3, 1500, 1000, chadTextV, 6, false, isDialogueV, counterPressed, false);
 
-            if (counterPressed.at(6) == 4)
+            if (counterPressed.at(6) >= 4)
             {
                 itemRequire[0] = false;
                 itemRequire[1] = false;
@@ -1112,7 +1121,7 @@ void Game::romaniaLevel()
 
                 isStonePicked = true;
 
-                counterPressed.at(6)++;
+                counterPressed.at(6) = -1;
 
                 allMoney -= 300;
             }
@@ -1125,13 +1134,13 @@ void Game::romaniaLevel()
     {
         dialogues("Vankata Smetacha", "Jabata", finishKeyQuestDialogue, 1, 1000, 1000, chadTextV, 12, false, isDialogueV, counterPressed, false);
 
-        if (counterPressed.at(12) == 2)
+        if (counterPressed.at(12) >= 2)
         {
             itemRequire[2] = false;
 
             allMoney += 800;
 
-            counterPressed.at(12)++;
+            counterPressed.at(12) = -1;
         }
     }
 }
