@@ -417,7 +417,7 @@ void Game::mapEurope()
 
     for (int i = 0; i < 6; i++)
     {
-        if (!changeCircles[i] && !isTransportMenuOn && enableClick && i != 4)
+        if (!changeCircles[i] && !isTransportMenuOn && enableClick && i != 4 && !hideCountries)
         {
             DrawTexture(target, circles[i].x - 20, circles[i].y - 5, WHITE);
         }
@@ -425,7 +425,7 @@ void Game::mapEurope()
 
     for (int i = 0; i < 6; i++)
     {
-        if ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || (changeCircles[i]) && !isTransportMenuOn && enableClick && i != 4))
+        if (!hideCountries && ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || (changeCircles[i]) && !isTransportMenuOn && enableClick && i != 4)))
         {
             hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y, circles[i].x - 20, circles[i].y - 5);
         }
@@ -433,11 +433,14 @@ void Game::mapEurope()
     
     if (isBulgariaEnd)
     {
-        DrawTexture(target, circles[4].x - 20, circles[4].y - 5, WHITE);
-
-        if (CheckCollisionPointCircle(mousePoint, circles[4], 30))
+        if (!hideCountries)
         {
-            hoverEffects(countriesV[4].country, countriesV[4].x, countriesV[4].y, circles[4].x - 20, circles[4].y - 5);
+            DrawTexture(target, circles[4].x - 20, circles[4].y - 5, WHITE);
+
+            if (CheckCollisionPointCircle(mousePoint, circles[4], 30))
+            {
+                hoverEffects(countriesV[4].country, countriesV[4].x, countriesV[4].y, circles[4].x - 20, circles[4].y - 5);
+            }
         }
     }
 
@@ -512,6 +515,8 @@ void Game::mapEurope()
                     playSound = true;
                     counterPlane++;
                     coutnryNumber = i;
+
+                    hideCountries = true;
                 }
             }
         }
@@ -553,56 +558,52 @@ void Game::mapEurope()
         {
             if (!unloadBack)
             {
-                
-                    if (countries[i])
+                if (countries[i])
+                {
+                    switch (i)
                     {
-                        switch (i)
-                        {
 
-                        case 0:
-                            spainLevel();
-                            npc.DrawNPCAnimation(player.XBg, player.YBg, i);
-                            npc.DrawDotsAnimation(player.XBg, player.YBg, i);
-                            break;
+                    case 0:
+                        spainLevel();
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        break;
 
-                        case 1:
-                            franceLevel();
-                            npc.DrawNPCAnimation(player.XBg, player.YBg, i);
-                            npc.DrawDotsAnimation(player.XBg, player.YBg, i);
-                            break;
+                    case 1:
+                        franceLevel();
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        break;
 
-                        case 2:
-                            italyLevel();
-                            npc.DrawNPCAnimation(player.XBg, player.YBg, i);
-                            npc.DrawDotsAnimation(player.XBg, player.YBg, i);
-                            break;
+                    case 2:
+                        italyLevel();
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        break;
 
-                        case 3:
-                            germanyLevel();
-                            npc.DrawNPCAnimation(player.XBg, player.YBg, i);
-                            npc.DrawDotsAnimation(player.XBg, player.YBg, i);
-                            break;
+                    case 3:
+                        germanyLevel();
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        break;
 
-                        case 4:
-                            bulgariaLevel();
-                            npc.DrawNPCAnimation(player.XBg, player.YBg, i);
-                            npc.DrawDotsAnimation(player.XBg, player.YBg, i);
-                            break;
+                    case 4:
+                        bulgariaLevel();
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        break;
 
-                        case 5:
-                            romaniaLevel();
-                            npc.DrawNPCAnimation(player.XBg, player.YBg, i);
-                            npc.DrawDotsAnimation(player.XBg, player.YBg, i);
-                            break;
+                    case 5:
+                        romaniaLevel();
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        break;
 
-                        default:
-                            break;
-                        }
+                    default:
+                        break;
                     }
-                
-
-                
-
+                }
+               
                 if (IsKeyDown(KEY_TAB))
                 {
                     showInventory();
@@ -621,6 +622,8 @@ void Game::mapEurope()
                 //countries[i] = 0;
                 unloadBack = true;
                 banCountry[i] = true;
+
+                hideCountries = false;
             }
         }
     }

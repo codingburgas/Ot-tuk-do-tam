@@ -326,6 +326,8 @@ public:
 
     string paintingCollectDialogue[2] = { "Picha zemi tiq kartini", "Huu praim go" },
            paintingCollectDialogueFinish[2] = { "Na ti kartinite", "Blagodarq!" };
+
+    bool hideCountries;
 public:
 
     Game();
