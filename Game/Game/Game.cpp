@@ -425,7 +425,7 @@ void Game::mapEurope()
 
     for (int i = 0; i < 6; i++)
     {
-        if (!hideCountries && ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || (changeCircles[i]) && !isTransportMenuOn && enableClick && i != 4)))
+        if (!hideCountries && ((CheckCollisionPointCircle(mousePoint, circles[i], 30) || (changeCircles[i]) && !isTransportMenuOn && enableClick)) && i != 4)
         {
             hoverEffects(countriesV[i].country, countriesV[i].x, countriesV[i].y, circles[i].x - 20, circles[i].y - 5);
         }
@@ -591,6 +591,7 @@ void Game::mapEurope()
                         bulgariaLevel();
                         npc.DrawNPCAnimation(player.XBg, player.YBg, i);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                            
                         break;
 
                     case 5:
