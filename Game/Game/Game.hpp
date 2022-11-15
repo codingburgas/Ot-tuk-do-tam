@@ -183,7 +183,13 @@ public:
     Texture2D acceptButton, cancelButton;
     Texture2D acceptButtonHover, cancelButtonHover;
     bool openQuest;
-    vector<bool> acceptQuest;
+
+    struct quest {
+        bool openQuest;
+        bool acceptQuest;
+    };
+
+    vector<quest> questV;
 
     string questDisplay[10];
     
@@ -329,7 +335,8 @@ public:
     void moveAirplane(const countryPosition& countryPosition);
     void transportMenuF();
     void mapEurope();
-    void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, vector<chadText> text, int index, bool isQuest, vector<isDialogue>& isDialogue, vector<int>& counterPressed, bool ePressed);
+    void dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, int index, vector<isDialogue>& isDialogue, vector<int>& counterPressed, bool ePressed);
+    void quest(vector<chadText> text, int index);
     void itemPicked(int itemX, int itemY, bool& itemPicked);
     void returnItem(int reward, int posX, int posY, int index, vector<isItem> isItem);
     void showInventory();
