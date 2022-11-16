@@ -37,9 +37,9 @@ private:
 		DOWN
 	}HeroDir;
 	Texture2D exampleItem;
-	Vector2 playerCords;
 	friend bool findDistance(Player& player, int posX, int posY);
 public:
+	Vector2 playerCords;
 	
 	Player();
 	void LoadSprites(int fps);

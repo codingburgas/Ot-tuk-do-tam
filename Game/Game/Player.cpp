@@ -81,7 +81,7 @@ void Player::CheckDir()
 		HeroDir = LEFT;
 		HorizotnalOrVertical[0] = 1;
 	}
-	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(playerCords.x >= GetScreenWidth() - playerSprite.width / 5))
+	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(playerCords.x > GetScreenWidth() - playerSprite.width / 5))
 	{
 		playerCords.x += speed * GetFrameTime();
 		HeroDir = RIGHT;
@@ -124,11 +124,11 @@ void Player::Movement()
 	counter++;
 
 	//limits
-	if (playerCords.x > speedBg && playerCords.x < GetScreenWidth() - speedBg)
+	if (playerCords.x > limits.x && playerCords.x < GetScreenWidth() - limits.x)
 	{
 		XBg = -playerCords.x + speedBg;
 	}
-	if (playerCords.y > speedBg && playerCords.y < GetScreenHeight() - speedBg)
+	if (playerCords.y > limits.y && playerCords.y < GetScreenHeight() - limits.y)
 	{
 		YBg = -playerCords.y + speedBg;
 	}

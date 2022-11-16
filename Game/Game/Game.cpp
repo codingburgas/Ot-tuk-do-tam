@@ -589,8 +589,8 @@ void Game::mapEurope()
 
                     case 4:
                         bulgariaLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
-                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        assassin.Draw(player.XBg, player.YBg);
+                        assassin.Update(player.playerCords, player.XBg, player.YBg);                   
                             
                         break;
 
@@ -820,7 +820,7 @@ void Game::optionsMenu()
 
         if (helpIsClicked)
         {
-            assassin.Draw();
+            
         }
 
         if (audioIsClicked)
