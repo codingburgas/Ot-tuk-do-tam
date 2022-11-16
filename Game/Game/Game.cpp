@@ -201,11 +201,11 @@ Game::Game() {
     };
 
     //vector resizing
-    isDialogueV.resize(20);
-    questV.resize(20);
-    isItemV.resize(20);
-    counterPressed.resize(20);
-    chadTextV.resize(20);
+    isDialogueV.resize(25);
+    questV.resize(25);
+    isItemV.resize(25);
+    counterPressed.resize(25);
+    chadTextV.resize(25);
 
     //buy beer quest
     beer = LoadTexture("../src/sprites/inner country elements/germany/beer.png");
@@ -247,6 +247,17 @@ Game::Game() {
         {pntng.painting, 1500, 1000},
         {pntng.painting, 1600, 1000},
     };
+
+    poison = LoadTexture("../src/sprites/inner country elements/germany/poison.png");
+    poison.width = 150;
+    poison.height = 200;
+
+    poisonedBeer = LoadTexture("../src/sprites/inner country elements/germany/poisonedBeer.png");
+
+    beer.width = 60;
+    beer.height = 80;
+
+    loop = LoadTexture("../src/sprites/inner country elements/romania/loop.png");
 }
 
 void Game::backstory()
@@ -589,8 +600,8 @@ void Game::mapEurope()
 
                     case 4:
                         bulgariaLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
-                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        assassin.Draw(player.XBg, player.YBg);
+                        assassin.Update(player.playerCords, player.XBg, player.YBg);                   
                             
                         break;
 
@@ -717,6 +728,14 @@ void Game::showInventory()
 
     if (finishBakerDialogue)
         DrawTexture(pizza, 950, 500, WHITE);
+
+    if(showPoisonInventory)
+        DrawTexture(poison, 950, 500, WHITE);
+
+    if (showLoop)
+    {
+        DrawTexture(loop, 950, 500, WHITE);
+    }
 }
 
 void Game::quest(vector<chadText> text, int index)
@@ -820,7 +839,7 @@ void Game::optionsMenu()
 
         if (helpIsClicked)
         {
-            assassin.Draw();
+            
         }
 
         if (audioIsClicked)
@@ -1075,6 +1094,43 @@ void Game::germanyLevel()
             counterPressed.at(18) = 4;
         }
     }
+
+    //minigame
+    dialogues("Vankata Smetacha", "Scientist", getPoisonDialogue, 1, 2000, 1000, 19, isDialogueV, counterPressed, false);
+
+    if (counterPressed.at(19) >= 2 && counterPressed.at(19) <= 3)
+    {
+        showPoisonInventory = true; 
+
+        finishGetPoisonDialogue = true;
+
+        counterPressed.at(19) = 4;
+    }
+
+    if(!swapBeers)
+        DrawTexture(beer, 1200 + player.XBg, 1000 + player.YBg, WHITE);
+    else
+        DrawTexture(poisonedBeer, 1200 + player.XBg, 1000 + player.YBg, WHITE);
+
+    if (finishGetPoisonDialogue)
+    {
+        if (IsKeyPressed(KEY_Q) && findDistance(player, 1200, 1000))
+        {
+            swapBeers = true;
+            showPoisonInventory = false;
+        }
+    }
+
+    if (swapBeers)
+    {
+        dialogues("Vankata Smetacha", "Scientist", finishMinigameDialogue, 1, 2000, 1000, 20, isDialogueV, counterPressed, false);
+    }
+
+    if (counterPressed.at(20) >= 2 && counterPressed.at(20) <= 3)
+    {
+        //nesh sh staa
+        counterPressed.at(20) = 4;
+    }
 }
 
 void Game::bulgariaLevel()
@@ -1193,5 +1249,56 @@ void Game::romaniaLevel()
 
             counterPressed.at(12) = 4;
         }
+    }
+
+    //myrder mystery
+
+    dialogues("Vankata Smetacha", "Policeman", startMurderMysteryDialogue, 2, 2000, 1000, 21, isDialogueV, counterPressed, false);
+
+    if (counterPressed.at(21) >= 3 && counterPressed.at(21) <= 4)
+    {
+        showLoop = true;
+        isMurderMysteryDialoguesStarted[0] = true;
+
+        counterPressed.at(21) = 5;
+    }
+
+    if (isMurderMysteryDialoguesStarted[0])
+    {
+        dialogues("Vankata Smetacha", "Vankata Smetacha", atTheCrimeSceneDialogue, 2, 2000, 500, 22, isDialogueV, counterPressed, true);
+
+        if (counterPressed.at(22) >= 3 && counterPressed.at(22) <= 4)
+        {
+            isMurderMysteryDialoguesStarted[0] = false;
+            isMurderMysteryDialoguesStarted[1] = true;
+
+            counterPressed.at(22) = 5;
+        }
+    }
+
+    if (isMurderMysteryDialoguesStarted[1])
+    {
+        dialogues("Vankata Smetacha", "Policeman", finishMurderMysteryDialogue, 3, 2000, 1000, 23, isDialogueV, counterPressed, false);
+
+        if (counterPressed.at(23) >= 4 && counterPressed.at(23) <= 5)
+        {
+            isMurderMysteryDialoguesStarted[1] = false;
+            isMurderMysteryDialoguesStarted[2] = true;
+
+            counterPressed.at(23) = 6;
+        }
+    }
+
+    if (isMurderMysteryDialoguesStarted[2])
+    {
+        //tuk sh ima tabloto za quessvane
+
+        if (quessSuspect == correctSuspect)
+        {
+            allMoney += 500;
+            isMurderMysteryDialoguesStarted[2] = false;
+        }
+
+        showLoop = false;
     }
 }
