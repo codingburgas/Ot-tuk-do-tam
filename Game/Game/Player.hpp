@@ -30,15 +30,15 @@ private:
 	float speed;
 	int animationSpeed;
 	int fps;
+	Texture2D exampleItem;
+	friend bool findDistance(Player& player, int posX, int posY);
+public:
 	enum Dir {
 		LEFT,
 		RIGHT,
 		UP,
 		DOWN
 	}HeroDir;
-	Texture2D exampleItem;
-	friend bool findDistance(Player& player, int posX, int posY);
-public:
 	Vector2 playerCords;
 	
 	Player();

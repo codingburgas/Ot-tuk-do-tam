@@ -13,6 +13,14 @@ void Assassin::LoadSprites()
 {
 	l = LoadTexture("../src/sprites/heroSprite/left.png");
 	r = LoadTexture("../src/sprites/heroSprite/right.png");
+	d = LoadTexture("../src/sprites/heroSprite/down.png");
+	u = LoadTexture("../src/sprites/heroSprite/up.png");
+
+	AssassinSprites.push_back(l);
+	AssassinSprites.push_back(r);
+	AssassinSprites.push_back(u);
+	AssassinSprites.push_back(d);
+
 	TableDrink = LoadTexture("../src/sprites/inner country elements/TableDrink.png");
 	SpasNPC = r;
 	SpasNPCView = { (float)SpasNPC.width / 4, 0, (float)SpasNPC.width / 4, (float)SpasNPC.height };
@@ -40,7 +48,7 @@ void Assassin::Draw(int xBg, int yBg)
 
 
 }
-void Assassin::Update(Vector2 posHero, int xBg, int yBg)
+void Assassin::Update(Vector2 posHero, int xBg, int yBg, Dir dir)
 {
 	if (speed < 0 && !isSeen){
 		position = { position.x + xBg, position.y + yBg };
@@ -49,12 +57,11 @@ void Assassin::Update(Vector2 posHero, int xBg, int yBg)
 
 	if (isSeen)
 	{
+		SpasNPC = AssassinSprites[dir];
 		isSeen = 1;
-		cout << "kude we" << endl;
 		float rotation = atan2(posHero.y - position.y, posHero.x - position.x);
 		position.x += cos(rotation) * 100 * GetFrameTime();
 		position.y += sin(rotation) * 100 * GetFrameTime();
-		cout << position.y << " " << position.x << endl;
 	}
 	else
 	{
