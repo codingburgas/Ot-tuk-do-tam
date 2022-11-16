@@ -48,7 +48,7 @@ void Assassin::Draw(int xBg, int yBg)
 
 
 }
-void Assassin::Update(Vector2 posHero, int xBg, int yBg, Dir dir)
+void Assassin::Update(Vector2 posHero, int xBg, int yBg, Player::Dir dir)
 {
 	if (speed < 0 && !isSeen){
 		position = { position.x + xBg, position.y + yBg };

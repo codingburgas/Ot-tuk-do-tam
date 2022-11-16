@@ -2,7 +2,7 @@
 #include"Precompile.hpp"
 #include"Player.hpp"
 
-class Assassin : public Player{
+class Assassin{
 private:
 	Texture2D r;
 	Texture2D l;
@@ -21,5 +21,5 @@ public:
 	Assassin();
 	void LoadSprites();
 	void Draw(int xBg, int yBg);
-	void Update(Vector2 posHero, int xBg, int yBg, Dir dir);
+	void Update(Vector2 posHero, int xBg, int yBg, Player::Dir dir);
 };
