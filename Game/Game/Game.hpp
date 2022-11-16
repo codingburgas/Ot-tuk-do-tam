@@ -328,6 +328,29 @@ public:
            paintingCollectDialogueFinish[2] = { "Na ti kartinite", "Blagodarq!" };
 
     bool hideCountries;
+
+    //germany mini game
+    Texture2D poisonedBeer, poison;
+
+    string getPoisonDialogue[2] = { "Zemi otrovata i q sloji v na Rival pitieto", "Dobre" },
+           finishMinigameDialogue[2] = {"Uspqh da otrovq na Rival birata", "Super bravo na teb"};
+
+    bool showPoisonInventory, finishGetPoisonDialogue;
+    bool swapBeers;
+
+    //murder mystery
+    Texture2D loop;
+    bool showLoop;
+
+    string startMurderMysteryDialogue[4] = { "Iskash li da razsledvash", "Da", "Dobre zemi tazi lupa i razgledvai" },
+           atTheCrimeSceneDialogue[3] = {"Qvno tova e mestoprestuplenieto", "Chakai kakwo e tova tam, parche plat", "Sigurno e na ubieca"},
+           finishMurderMysteryDialogue[4] = {"Uspqh da otkriq parche plat", "Dobre i smqtash che e na jertvata?", "Da", "Dobre spored teb koi e ubieca"};
+
+    bool isMurderMysteryDialoguesStarted[3];
+
+    int quessSuspect;
+    int correctSuspect;
+
 public:
 
     Game();
