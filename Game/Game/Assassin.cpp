@@ -50,7 +50,12 @@ void Assassin::Update(Vector2 posHero, int xBg, int yBg)
 
 	if (isSeen)
 	{
+		if (position.x > posHero.x) {
+		SpasNPC = l;
+		}
+		else {
 		SpasNPC = r;
+		}
 		isSeen = 1;
 		float rotation = atan2(posHero.y - position.y, posHero.x - position.x);
 		position.x += cos(rotation) * 100 * GetFrameTime();
