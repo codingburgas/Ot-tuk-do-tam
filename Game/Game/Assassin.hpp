@@ -1,6 +1,5 @@
 #pragma once
 #include"Precompile.hpp"
-#include"Player.hpp"
 
 class Assassin{
 private:
@@ -16,10 +15,9 @@ private:
 	Vector2 position;
 	int speed;
 	bool isSeen;
-	vector<Texture2D> AssassinSprites;
 public:
 	Assassin();
 	void LoadSprites();
 	void Draw(int xBg, int yBg);
-	void Update(Vector2 posHero, int xBg, int yBg, Player::Dir dir);
+	void Update(Vector2 posHero, int xBg, int yBg);
 };

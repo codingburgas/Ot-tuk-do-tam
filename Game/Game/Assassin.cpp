@@ -13,13 +13,6 @@ void Assassin::LoadSprites()
 {
 	l = LoadTexture("../src/sprites/heroSprite/left.png");
 	r = LoadTexture("../src/sprites/heroSprite/right.png");
-	d = LoadTexture("../src/sprites/heroSprite/down.png");
-	u = LoadTexture("../src/sprites/heroSprite/up.png");
-
-	AssassinSprites.push_back(l);
-	AssassinSprites.push_back(r);
-	AssassinSprites.push_back(u);
-	AssassinSprites.push_back(d);
 
 	TableDrink = LoadTexture("../src/sprites/inner country elements/TableDrink.png");
 	SpasNPC = r;
@@ -48,7 +41,7 @@ void Assassin::Draw(int xBg, int yBg)
 
 
 }
-void Assassin::Update(Vector2 posHero, int xBg, int yBg, Player::Dir dir)
+void Assassin::Update(Vector2 posHero, int xBg, int yBg)
 {
 	if (speed < 0 && !isSeen){
 		position = { position.x + xBg, position.y + yBg };
@@ -57,7 +50,7 @@ void Assassin::Update(Vector2 posHero, int xBg, int yBg, Player::Dir dir)
 
 	if (isSeen)
 	{
-		SpasNPC = AssassinSprites[dir];
+		SpasNPC = r;
 		isSeen = 1;
 		float rotation = atan2(posHero.y - position.y, posHero.x - position.x);
 		position.x += cos(rotation) * 100 * GetFrameTime();
