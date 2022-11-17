@@ -5,20 +5,40 @@ Assassin::Assassin()
 	counterFlip = 0;
 	counterFrame = 0;
 	speed = 100;
-	position.x = 1000;
-	position.y = 1000;
 	isSeen = 0;
-}
+	walls = {
+		{500,700,10,500},//left
+		{900,700,10,500},//right
+	};
+	
+	
+} 
 void Assassin::LoadSprites()
 {
-	l = LoadTexture("../src/sprites/heroSprite/left.png");
-	r = LoadTexture("../src/sprites/heroSprite/right.png");
+	l = LoadTexture("../src/sprites/rivalSprite/left.png");
+	r = LoadTexture("../src/sprites/rivalSprite/right.png");
 
 	TableDrink = LoadTexture("../src/sprites/inner country elements/TableDrink.png");
+	
+	itemForShowingTheMinigame = LoadTexture("../src/sprites/inner country elements/germany/poison.png");
+	
 	SpasNPC = r;
 	SpasNPCView = { (float)SpasNPC.width / 4, 0, (float)SpasNPC.width / 4, (float)SpasNPC.height };
+	position = { 500, 900, (float)SpasNPC.width / 4, (float)SpasNPC.height };
+
+	itemForShowingTheMinigame.width = 50;
+	itemForShowingTheMinigame.height = 100;
+
 }
-void Assassin::Draw(int xBg, int yBg)
+void Assassin::CheckMiniGame(bool&check, Rectangle heroRec)
+{
+	if (CheckCollisionRecs(heroRec, itemRec) && IsKeyPressed(KEY_Q))
+	{
+		cout << "konq cukna Q" << endl;
+		check = 0;
+	}
+}
+void Assassin::Draw(int xBg, int yBg, bool check)
 {
 	if (counterFrame >= 20)
 	{
@@ -30,33 +50,36 @@ void Assassin::Draw(int xBg, int yBg)
 		SpasNPCView.x = SpasNPC.width / 4;
 	}
 	counterFrame++;
-
-	if (isSeen)
+	DrawTexturePro(SpasNPC, SpasNPCView, position, Vector2{ 10, 10 }, 0, WHITE);
+	itemRec = { (float)1000 + xBg, (float)500 + yBg, 50, 100 };
+	if (check){
+		DrawRectangleRec(itemRec, PURPLE); 
+		DrawTexture(itemForShowingTheMinigame, 1000 + xBg, 500 + yBg, WHITE);
+	}
+	for (int i = 0; i < 2; i++)
 	{
-		DrawTextureRec(SpasNPC, SpasNPCView, Vector2{ position.x, position.y}, WHITE);
+		DrawRectangleRec(walls.at(i), BLACK);
 	}
-	else {
-		DrawTextureRec(SpasNPC, SpasNPCView, Vector2{ position.x + xBg, position.y + yBg }, WHITE);
-	}
-
-
 }
-void Assassin::Update(Vector2 posHero, int xBg, int yBg)
+
+void Assassin::Update(Vector2 posHero, int xBg, int yBg, Rectangle heroRec)
 {
-	if (speed < 0 && !isSeen){
-		position = { position.x + xBg, position.y + yBg };
+	if (CheckCollisionCircleRec(posHero, 100, position) && !isSeen) {
 		isSeen = 1;
+		cout << "IsSeen" << endl;
 	}
 
 	if (isSeen)
 	{
-		if (position.x > posHero.x) {
-		SpasNPC = l;
+		(position.x > posHero.x) ? SpasNPC = l : SpasNPC = r;
+
+		if (CheckCollisionRecs(position, heroRec))
+		{
+			cout << "exit the game" << endl;
 		}
 		else {
-		SpasNPC = r;
+			isSeen = 1;
 		}
-		isSeen = 1;
 		float rotation = atan2(posHero.y - position.y, posHero.x - position.x);
 		position.x += cos(rotation) * 100 * GetFrameTime();
 		position.y += sin(rotation) * 100 * GetFrameTime();
@@ -64,7 +87,7 @@ void Assassin::Update(Vector2 posHero, int xBg, int yBg)
 	else
 	{
 		isSeen = 0;
-		if (position.x > 2000) {
+		if (position.x > 800) {
 			if (counterFlip > 60) {
 				SpasNPC = l;
 				speed = -100;
@@ -74,7 +97,7 @@ void Assassin::Update(Vector2 posHero, int xBg, int yBg)
 			}
 			counterFlip++;
 		}
-		else if (position.x < 1000) {
+		else if (position.x < 450) {
 			if (counterFlip > 60) {
 				SpasNPC = r;
 				speed = 100;

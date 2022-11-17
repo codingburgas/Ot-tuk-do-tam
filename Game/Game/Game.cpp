@@ -600,8 +600,9 @@ void Game::mapEurope()
 
                     case 4:
                         bulgariaLevel();
-                        assassin.Draw(player.XBg, player.YBg);
-                        assassin.Update(player.playerCords, player.XBg, player.YBg);                   
+                        assassin.CheckMiniGame(player.MoveBg, player.move);
+                        assassin.Draw(player.XBg, player.YBg, player.MoveBg);
+                        assassin.Update(player.playerCords, player.XBg, player.YBg, player.move);                   
                             
                         break;
 

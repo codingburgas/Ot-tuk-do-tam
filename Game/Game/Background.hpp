@@ -4,9 +4,9 @@ class Bg
 {
 	protected:
 		Texture2D background;
-		unsigned int speedBg;
 		Vector2 limits;
 	public:
+		unsigned int speedBg;
 		int XBg, YBg;
 		Bg();
 };

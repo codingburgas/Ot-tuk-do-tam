@@ -37,8 +37,11 @@ Player::Player()
 	playerCords.y = GetScreenHeight() / 2;
 	HorizotnalOrVertical[0] = 0;
 	HorizotnalOrVertical[1] = 0;
-	speed = 100;
+	speed.x = 100;
+	speed.y = 100;
+	MoveBg = 1;
 	animationSpeed = 6;
+	renameMe = 0;
 	HeroDir = LEFT;
 }
 
@@ -57,56 +60,67 @@ bool findDistance(Player&player, int posX, int posY)
 void Player::CheckDir()
 {
 	
-	if ((IsKeyDown(KEY_UP) or IsKeyDown(KEY_W)) && !(playerCords.y <= 20))
+	CheckWalls();
+	if ((IsKeyDown(KEY_UP) or IsKeyDown(KEY_W)) && !(playerCords.y <= 20) )
 	{
-		playerCords.y -= speed * GetFrameTime();
-
+		playerCords.y -= speed.y * GetFrameTime();
 		HeroDir = UP;
 		HorizotnalOrVertical[1] = 1;
 	}
-	else if ((IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S)) && !(playerCords.y >= GetScreenHeight() - playerSprite.height))
+	else if ((IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S)) && !(playerCords.y >= GetScreenHeight() - playerSprite.height) )
 	{
-		playerCords.y += speed * GetFrameTime();
+		playerCords.y += speed.y * GetFrameTime();
 
 		HeroDir = DOWN;
 		HorizotnalOrVertical[1] = 1;
 	}
 	else {
+		
 		HorizotnalOrVertical[1] = 0;
 	}
 
-	if ((IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A)) && !(playerCords.x <= 0))
+	if ((IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A)) && !(playerCords.x <= 0) )
 	{
-		playerCords.x -= speed * GetFrameTime();
+		playerCords.x -= speed.x * GetFrameTime();
 		HeroDir = LEFT;
 		HorizotnalOrVertical[0] = 1;
 	}
-	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(playerCords.x >= GetScreenWidth() - 100))
+	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(playerCords.x >= GetScreenWidth() - 100) )
 	{
-		playerCords.x += speed * GetFrameTime();
+		playerCords.x += speed.x * GetFrameTime();
 		HeroDir = RIGHT;
 		HorizotnalOrVertical[0] = 1;
 	}
 	else {
 		HorizotnalOrVertical[0] = 0;
+		
 	}
-
+	
 }
 
 void Player::Movement()
 {
-	if (HorizotnalOrVertical[0] && HorizotnalOrVertical[1])
-		speed = 90;
+	if (HorizotnalOrVertical[0] && HorizotnalOrVertical[1]) {
+
+		speed.x = 90;
+		speed.y = 90;
+	}
 	else
-		speed = 150;
+	{
+		speed.x = 150;
+
+		speed.y = 150;
+	}
 
 	if (HorizotnalOrVertical[0] || HorizotnalOrVertical[1])
 	{
+		//cout << renameMe << "Jungle" << endl;
 		animationSpeed = 6;
 		playerSprite = playerSprites.at(int(HeroDir));
 	}
-	else if (!HorizotnalOrVertical[0] && !HorizotnalOrVertical[1])
+	else if (!HorizotnalOrVertical[0] && !HorizotnalOrVertical[1] )
 	{
+		//cout << renameMe << "Forest" << endl;
 		animationSpeed = 4;
 		playerSprite = idleSprites.at(int(HeroDir));
 	}
@@ -124,20 +138,36 @@ void Player::Movement()
 	counter++;
 
 	//limits
-	if (playerCords.x > limits.x && playerCords.x < GetScreenWidth() - limits.x)
+	if (playerCords.x > limits.x && playerCords.x < GetScreenWidth() - 800)
 	{
-		XBg = -playerCords.x + speedBg;
+		XBg = (- playerCords.x + speedBg) * MoveBg;
 	}
-	if (playerCords.y > limits.y && playerCords.y < GetScreenHeight() - limits.y)
+	if (playerCords.y > 200 && playerCords.y < GetScreenHeight() - limits.y)
 	{
-		YBg = -playerCords.y + speedBg;
+		YBg = (- playerCords.y + speedBg) * MoveBg;
 	}
 
 	move = Rectangle{ playerCords.x, playerCords.y, lim, (float)playerSprite.height };
 	DrawTexture(background, XBg, YBg, WHITE);
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
 }
-
+void Player::CheckWalls()
+{
+	for (int i = 0; i < 2; i++) {
+		if (CheckCollisionRecs(move, walls.at(i))) {
+			
+			if (HorizotnalOrVertical[0] || HorizotnalOrVertical[1])
+			{
+				speed.x = 0;
+				speed.y = 200;
+			}
+			else {
+				speed.x = 200;
+				speed.y = 0;
+			}
+		}
+	}
+}
 void Player::UnLoadTextures()
 {
 	UnloadTexture(d);

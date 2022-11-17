@@ -2,8 +2,9 @@
 #include "Precompile.hpp"
 #include "Background.hpp"
 #include "NPC.hpp"
+#include "Assassin.hpp"
 
-class Player : public Bg, public NPC
+class Player : public Bg, public NPC, public Assassin
 {
 private:
 	Texture2D playerSprite;
@@ -23,11 +24,10 @@ private:
 	vector<Texture2D> idleSprites;
 
 	Rectangle view;
-	Rectangle move;
 	int counter = 0;
 	float lim;
 	bool HorizotnalOrVertical[2];
-	float speed;
+	Vector2 speed;
 	int animationSpeed;
 	int fps;
 	Texture2D exampleItem;
@@ -38,10 +38,13 @@ private:
 		UP,
 		DOWN
 	}HeroDir;
+	bool renameMe;
 public:
+	bool MoveBg;
 	Vector2 playerCords;
-	
+	Rectangle move; 
 	Player();
+	void CheckWalls();
 	void LoadSprites(int fps);
 	void Movement();                                                                                                                                                                                                                                                                                 
 	void CheckDir();
