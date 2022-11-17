@@ -18,6 +18,7 @@ private:
 	Texture2D idleD;
 	Texture2D idleR;
 	Texture2D idleL;
+	Texture2D TableDrink;
 
 
 	vector<Texture2D> playerSprites;
