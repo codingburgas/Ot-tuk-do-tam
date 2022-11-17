@@ -182,7 +182,7 @@ void Player::CheckWalls()
 		if (CheckCollisionRecs(move, walls.at(i))) {
 			if(i == 2)
 			{ 
-				if ((HorizotnalOrVertical[0] || HorizotnalOrVertical[1]) || (HorizotnalOrVertical[0] && HorizotnalOrVertical[1])){
+				if ((HorizotnalOrVertical[0] || HorizotnalOrVertical[1]) || (HorizotnalOrVertical[0] && HorizotnalOrVertical[1]){
 					speed.x = 0;
 					speed.y = 200;
 				}
@@ -192,13 +192,13 @@ void Player::CheckWalls()
 				}
 			}
 			else {
-				if ((HorizotnalOrVertical[0] || HorizotnalOrVertical[1]) || (HorizotnalOrVertical[0] && HorizotnalOrVertical[1])) {
-					speed.x = 0;
+				if (HorizotnalOrVertical[0] || HorizotnalOrVertical[1]){
+					speed.x = 200;
 					speed.y = 0;
 				}
 				else {
 					speed.x = 0;
-					speed.y = 0;
+					speed.y = 200;
 				}
 			}
 		}
