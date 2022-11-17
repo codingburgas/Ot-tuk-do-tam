@@ -258,6 +258,25 @@ Game::Game() {
     beer.height = 80;
 
     loop = LoadTexture("../src/sprites/inner country elements/romania/loop.png");
+
+    fox = LoadTexture("../src/sprites/inner country elements/italy/fox.png");
+    chicken = LoadTexture("../src/sprites/inner country elements/italy/chicken.png");
+    seed = LoadTexture("../src/sprites/inner country elements/italy/seed.png");
+
+    logicGameItemsV = {
+        {fox, 1000, 300},
+        {chicken, 1000, 500},
+        {seed, 1000, 700},
+    };
+
+    isLogicItemPicked.resize(3);
+    otherLogicItemBlockPick.resize(3);
+
+    itemPutDown = {
+        {1500, 300},
+        {1500, 500},
+        {1500, 700},
+    };
 }
 
 void Game::backstory()
@@ -1007,6 +1026,51 @@ void Game::italyLevel()
     }
     else 
         DrawTexture(gripper, 2000 + player.XBg, 500 + player.YBg, WHITE);
+
+    //logic game
+
+    for (int i = 0; i < 3; i++)
+    {
+        if (!isLogicItemPicked.at(i))     
+            DrawTexture(logicGameItemsV.at(i).texture, logicGameItemsV.at(i).posX + player.XBg, logicGameItemsV.at(i).posY + player.YBg, WHITE);     
+        else 
+            DrawTexture(logicGameItemsV.at(i).texture, itemPutDown.at(i).x + player.XBg, itemPutDown.at(i).y + player.YBg, WHITE);     
+    }
+
+    for (int i = 0; i < 3; i++)
+    {
+        if (findDistance(player, logicGameItemsV.at(i).posX, logicGameItemsV.at(i).posY) && IsKeyPressed(KEY_Q))
+        {
+            otherLogicItemBlockPick.at(i) = true;
+
+            if(otherLogicItemBlockPick.at(i))
+                isLogicItemPicked.at(i) = true;
+        }     
+    }
+
+    for (int i = 0; i < 3; i++) 
+    {
+        if (findDistance(player, itemPutDown.at(i).x, itemPutDown.at(i).y) && IsKeyPressed(KEY_Q))
+        {
+            isLogicItemPicked.at(i) = false;
+        }
+    }
+
+    if (otherLogicItemBlockPick.at(0))
+    {
+        otherLogicItemBlockPick.at(1) = false;
+        otherLogicItemBlockPick.at(2) = false;
+    }
+    else if (otherLogicItemBlockPick.at(1))
+    {
+        otherLogicItemBlockPick.at(0) = false;
+        otherLogicItemBlockPick.at(2) = false;
+    }
+    else if (otherLogicItemBlockPick.at(2))
+    {
+        otherLogicItemBlockPick.at(0) = false;
+        otherLogicItemBlockPick.at(1) = false;
+    }
 }
 
 void Game::germanyLevel()
