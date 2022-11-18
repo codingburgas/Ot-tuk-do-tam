@@ -1141,8 +1141,6 @@ void Game::italyLevel()
             itemOnOtherSideCounter.at(2)++;
         }
     }
-
-    
 }
 
 void Game::germanyLevel()

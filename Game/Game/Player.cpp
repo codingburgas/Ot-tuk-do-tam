@@ -178,7 +178,7 @@ void Player::Movement()
 }
 void Player::CheckWalls()
 {
-	for (int i = 0; i < walls.size(); i++) {
+	/*for (int i = 0; i < walls.size(); i++) {
 		if (CheckCollisionRecs(move, walls.at(i))) {
 			if(i == 2)
 			{ 
@@ -202,7 +202,7 @@ void Player::CheckWalls()
 				}
 			}
 		}
-	}
+	}*/
 }
 void Player::UnLoadTextures()
 {
