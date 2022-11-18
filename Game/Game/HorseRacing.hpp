@@ -13,9 +13,12 @@ private:
 	vector<Vector2> horsePositions;
 	vector<int> horseSpeeds;
 
+	set<int> sort;
+
 	vector<int>counterHorse;
 	bool horseRunBool;
 	bool HaveToDraw;
+	unsigned counterPlace;
 
 public:
 	Racing();

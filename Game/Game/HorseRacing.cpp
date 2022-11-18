@@ -7,6 +7,7 @@ Racing::Racing()
 	horseRun.resize(6);
 	horseRectangleIdle.resize(6);
 	horseRectangleRun.resize(6);
+
 	horsePositions = {
 		{144, 344},
 		{144, 444},
@@ -15,6 +16,7 @@ Racing::Racing()
 		{144, 744},
 		{144, 844}
 	};//kon poziciq
+
 	horseSpeeds = {
 		{rand() % 100 + 50},
 		{rand() % 100 + 50},
@@ -23,8 +25,13 @@ Racing::Racing()
 		{rand() % 100 + 50},
 		{rand() % 100 + 50},
 	};
+	for (size_t i = 0; i < 6; i++)
+	{
+		sort.insert(horseSpeeds[i]);
+	}
 	horseRunBool = 0;
 	HaveToDraw = 0;
+	counterPlace = 0;
 }
 void Racing::LoadSprites()
 {
@@ -47,9 +54,23 @@ void Racing::DrawHorseAnimation()
 {
 	if (horseRunBool && HaveToDraw)
 	{
+		
 		for (int i = 0; i < 6; i++)
 		{
-			horsePositions[i].x += horseSpeeds[i] * GetFrameTime();
+			if (horsePositions[i].x < 1500)
+			{
+				horsePositions[i].x += horseSpeeds[i] * GetFrameTime();
+			}
+			else
+			{
+				DrawRectangle(500, 500, 500, 500, RED);
+				for (auto rank : sort)
+				{
+					counterPlace++;
+					DrawText(to_string(rank).c_str(), 500, 500 + (100*counterPlace), 50, BLACK);
+				}
+				counterPlace = 0;
+			}
 		}
 
 		for (int i = 0; i < 6; i++)

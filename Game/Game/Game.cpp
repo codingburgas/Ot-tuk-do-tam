@@ -593,8 +593,8 @@ void Game::mapEurope()
         {
             if (!unloadBack)
             {
-                if (countries[i])
                 {
+                if (countries[i])
                     switch (i)
                     {
 
@@ -606,9 +606,9 @@ void Game::mapEurope()
 
                     case 1:
                         franceLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);  
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
-                        race.IfHorseRun(0, 1, player.MoveBg); // <-For Actual Implementing after dialogue (fir arg is for horse running or not and sec arg is for drawing horses or not)
+                        race.IfHorseRun(1, 1, player.MoveBg); // <-For Actual Implementing after dialogue (fir arg is for horse running or not and sec arg is for drawing horses or not)
                         race.DrawHorseAnimation();
                         break;
 
