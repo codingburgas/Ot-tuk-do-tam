@@ -1,0 +1,41 @@
+#include "Precompile.hpp"
+#include "Engine.hpp"
+
+namespace variablesB {
+	Image icon = LoadImage("../src/sprites/icon.png");
+}
+
+using namespace variablesB;
+
+void setIcon()
+{
+	SetWindowIcon(icon);
+}
+
+bool isClicked()
+{
+	return IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+}
+
+void isUserQuitting(bool& isQuitting, bool& enable, Vector2& mousePoint, Texture2D& confirmationT, Color& darkerWindow, bool& isTransportMenuOn)
+{
+	if (isQuitting)
+	{
+		DrawRectangle(0, 0, 1920, 1080, darkerWindow);
+		DrawTexture(confirmationT, 0, 0, Fade(WHITE, 0.84));
+
+		if (isClicked() && (mousePoint.y >= 580 && mousePoint.y <= 640))
+		{
+			if (mousePoint.x >= 790 && mousePoint.x <= 920)
+			{
+				exit(0);
+			}
+			else if (mousePoint.x >= 990 && mousePoint.x <= 1110)
+			{
+				isQuitting = false;
+				enable = true;
+				isTransportMenuOn = false;
+			}
+		}
+	}
+}
