@@ -1046,10 +1046,10 @@ void Game::italyLevel()
             DrawTexture(itemInBoat, 1250 + player.XBg, 400 + player.YBg, WHITE);
         }         
         
-        if (itemGet.at(i) && changeBoatPos && !itemOnOtherSide.at(i))
+        if ((itemGet.at(i) || itemOnOtherSideCounter.at(i) == 2) && changeBoatPos && !itemOnOtherSide.at(i))
         {
             DrawTexture(itemInBoat, 1770 + player.XBg, 400 + player.YBg, WHITE);
-        }         
+        }  
         
         if (itemOnOtherSide.at(i))
         {
@@ -1099,19 +1099,22 @@ void Game::italyLevel()
     {
         lockBoat = false;
 
-        if (mousePoint.y >= 190 && mousePoint.y <= 290 && isClicked())
+        if (mousePoint.y >= 190 && mousePoint.y <= 290 && isClicked() && !itemOnOtherSide.at(0))
         {
             itemInBoat = logicGameItemsV.at(0).texture;
+
             itemGet.at(0) = true;
         }
-        else if (mousePoint.y >= 380 && mousePoint.y <= 490 && isClicked())
+        else if (mousePoint.y >= 380 && mousePoint.y <= 490 && isClicked() && !itemOnOtherSide.at(1))
         {
             itemInBoat = logicGameItemsV.at(1).texture;
+
             itemGet.at(1) = true;
         }
-        else if (mousePoint.y >= 555 && mousePoint.y <= 715 && isClicked())
+        else if (mousePoint.y >= 555 && mousePoint.y <= 715 && isClicked() && !itemOnOtherSide.at(2))
         {
             itemInBoat = logicGameItemsV.at(2).texture;
+
             itemGet.at(2) = true;
         }
     }
@@ -1121,24 +1124,41 @@ void Game::italyLevel()
 
         if (mousePoint.y >= 190 && mousePoint.y <= 290 && isClicked() && itemGet.at(0))
         {
-            itemOnOtherSide.at(0) = true;
-            itemInBoat = emptyTexture;
+
+            itemGet.at(0) = false;
 
             itemOnOtherSideCounter.at(0)++;
         }
         else if (mousePoint.y >= 380 && mousePoint.y <= 490 && isClicked() && itemGet.at(1))
         {
-            itemInBoat = emptyTexture;
-            itemOnOtherSide.at(1) = true;
+            itemGet.at(1) = true;
 
             itemOnOtherSideCounter.at(1)++;
         }
         else if (mousePoint.y >= 555 && mousePoint.y <= 715 && isClicked() && itemGet.at(2))
         {
-            itemOnOtherSide.at(2) = true;
-            itemInBoat = emptyTexture;
+
+            itemGet.at(2) = true;          
 
             itemOnOtherSideCounter.at(2)++;
+        }
+    }
+
+    for (int i = 0; i < 3; i++)
+    {
+        if (itemOnOtherSideCounter.at(i) == 1)
+        {
+            itemOnOtherSide.at(i) = true;
+
+            itemInBoat = emptyTexture;
+        }
+        else if (itemOnOtherSideCounter.at(i) == 2)
+        {
+            itemOnOtherSide.at(i) = false;
+
+            itemOnOtherSideCounter.at(i) = 0;
+
+            itemInBoat = logicGameItemsV.at(i).texture;
         }
     }
 }
