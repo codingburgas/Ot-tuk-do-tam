@@ -352,7 +352,7 @@ public:
     int correctSuspect;
 
     //logic game
-    Texture2D fox, chicken, seed, boad;
+    Texture2D fox, chicken, seed;
 
     struct logicGameItems {
         Texture2D texture;
@@ -361,9 +361,21 @@ public:
 
     vector<logicGameItems> logicGameItemsV;
     vector<bool> isLogicItemPicked;
-    vector<bool> otherLogicItemBlockPick;
-
+    
     vector<Vector2> itemPutDown;
+
+    Texture2D italyBackground, boat;
+
+    bool changeBoatPos;
+
+    Texture2D itemInBoat;
+    vector<bool> itemGet;
+
+    bool lockBoat;
+    vector<bool> itemOnOtherSide;
+    vector<int> itemOnOtherSideCounter;
+
+    Texture2D emptyTexture;
 
 public:
 

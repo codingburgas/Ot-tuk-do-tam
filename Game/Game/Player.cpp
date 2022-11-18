@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include "Assassin.hpp"
 
 void Player::LoadSprites(int fps)
 {
@@ -15,6 +16,8 @@ void Player::LoadSprites(int fps)
 
 	//background
 	background = LoadTexture("../src/sprites/backgrounds/frBackground.png");
+
+	TableDrink = LoadTexture("../src/sprites/backgrounds/grBackground.png");
 
 	playerSprites.push_back(l);
 	playerSprites.push_back(r);
@@ -61,35 +64,41 @@ void Player::CheckDir()
 {
 	
 	CheckWalls();
-	if ((IsKeyDown(KEY_UP) or IsKeyDown(KEY_W)) && !(playerCords.y <= 20) )
+	if ((IsKeyDown(KEY_UP) or IsKeyDown(KEY_W)) && !(playerCords.y <= 20))
 	{
 		playerCords.y -= speed.y * GetFrameTime();
 		HeroDir = UP;
+
 		HorizotnalOrVertical[1] = 1;
+		
+
 	}
-	else if ((IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S)) && !(playerCords.y >= GetScreenHeight() - playerSprite.height) )
+	else if ((IsKeyDown(KEY_DOWN) or IsKeyDown(KEY_S)) && !(playerCords.y >= GetScreenHeight() - playerSprite.height))
 	{
 		playerCords.y += speed.y * GetFrameTime();
 
 		HeroDir = DOWN;
 		HorizotnalOrVertical[1] = 1;
+		
 	}
 	else {
 		
 		HorizotnalOrVertical[1] = 0;
 	}
 
-	if ((IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A)) && !(playerCords.x <= 0) )
+	if ((IsKeyDown(KEY_LEFT) or IsKeyDown(KEY_A)) && !(playerCords.x <= 0))
 	{
 		playerCords.x -= speed.x * GetFrameTime();
-		HeroDir = LEFT;
+		HeroDir = LEFT; 
 		HorizotnalOrVertical[0] = 1;
+		
 	}
-	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(playerCords.x >= GetScreenWidth() - 100) )
+	else if ((IsKeyDown(KEY_RIGHT) or IsKeyDown(KEY_D)) && !(playerCords.x >= GetScreenWidth() - 100))
 	{
 		playerCords.x += speed.x * GetFrameTime();
 		HeroDir = RIGHT;
 		HorizotnalOrVertical[0] = 1;
+		
 	}
 	else {
 		HorizotnalOrVertical[0] = 0;
@@ -100,6 +109,20 @@ void Player::CheckDir()
 
 void Player::Movement()
 {
+	if (HorizotnalOrVertical[0] || HorizotnalOrVertical[1])
+	{
+		//cout << renameMe << "Jungle" << endl;
+		animationSpeed = 6;
+		cout << speed.x << endl;
+		playerSprite = playerSprites.at(int(HeroDir));
+	}
+	else if (!HorizotnalOrVertical[0] && !HorizotnalOrVertical[1] )
+	{
+		//cout << renameMe << "Forest" << endl;
+		animationSpeed = 4;
+		playerSprite = idleSprites.at(int(HeroDir));
+	}
+
 	if (HorizotnalOrVertical[0] && HorizotnalOrVertical[1]) {
 
 		speed.x = 90;
@@ -112,18 +135,6 @@ void Player::Movement()
 		speed.y = 150;
 	}
 
-	if (HorizotnalOrVertical[0] || HorizotnalOrVertical[1])
-	{
-		//cout << renameMe << "Jungle" << endl;
-		animationSpeed = 6;
-		playerSprite = playerSprites.at(int(HeroDir));
-	}
-	else if (!HorizotnalOrVertical[0] && !HorizotnalOrVertical[1] )
-	{
-		//cout << renameMe << "Forest" << endl;
-		animationSpeed = 4;
-		playerSprite = idleSprites.at(int(HeroDir));
-	}
 
 	//flames
 	if (counter >= fps / animationSpeed)
@@ -140,33 +151,58 @@ void Player::Movement()
 	//limits
 	if (playerCords.x > limits.x && playerCords.x < GetScreenWidth() - 800)
 	{
-		XBg = (- playerCords.x + speedBg) * MoveBg;
+		if (MoveBg)
+		{
+			XBg = (-playerCords.x + speedBg);
+		}
+		else {
+			background = TableDrink;
+			XBg = 0;
+		}
 	}
 	if (playerCords.y > 200 && playerCords.y < GetScreenHeight() - limits.y)
 	{
-		YBg = (- playerCords.y + speedBg) * MoveBg;
+		if (MoveBg)
+		{
+			YBg = (-playerCords.y + speedBg);
+		}
+		else {
+			background = TableDrink;
+			YBg = -(1605 - 1080);
+		}
+		//YBg = (- playerCords.y + speedBg) * MoveBg;
 	}
-
 	move = Rectangle{ playerCords.x, playerCords.y, lim, (float)playerSprite.height };
 	DrawTexture(background, XBg, YBg, WHITE);
 	DrawTexturePro(playerSprite, view, move, Vector2{ 10, 10 }, 0, WHITE);
 }
 void Player::CheckWalls()
 {
-	for (int i = 0; i < 2; i++) {
+	/*for (int i = 0; i < walls.size(); i++) {
 		if (CheckCollisionRecs(move, walls.at(i))) {
-			
-			if (HorizotnalOrVertical[0] || HorizotnalOrVertical[1])
-			{
-				speed.x = 0;
-				speed.y = 200;
+			if(i == 2)
+			{ 
+				if ((HorizotnalOrVertical[0] || HorizotnalOrVertical[1]) || (HorizotnalOrVertical[0] && HorizotnalOrVertical[1])){
+					speed.x = 0;
+					speed.y = 200;
+				}
+				else {
+					speed.x = 200;
+					speed.y = 0;
+				}
 			}
 			else {
-				speed.x = 200;
-				speed.y = 0;
+				if (HorizotnalOrVertical[0] || HorizotnalOrVertical[1]){
+					speed.x = 200;
+					speed.y = 0;
+				}
+				else {
+					speed.x = 0;
+					speed.y = 200;
+				}
 			}
 		}
-	}
+	}*/
 }
 void Player::UnLoadTextures()
 {
