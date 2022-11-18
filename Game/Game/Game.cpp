@@ -608,6 +608,8 @@ void Game::mapEurope()
                         franceLevel();
                         npc.DrawNPCAnimation(player.XBg, player.YBg, i);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        race.IfHorseRun(0, 1, player.MoveBg); // <-For Actual Implementing after dialogue (fir arg is for horse running or not and sec arg is for drawing horses or not)
+                        race.DrawHorseAnimation();
                         break;
 
                     case 2:
@@ -981,7 +983,7 @@ void Game::spainLevel()
 
 void Game::franceLevel()
 {
-    //race.DrawHorseAnimation();
+   
 
     dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, 1, isDialogueV, counterPressed, false);
 

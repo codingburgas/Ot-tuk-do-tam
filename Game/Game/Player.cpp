@@ -151,7 +151,11 @@ void Player::Movement()
 	//limits
 	if (playerCords.x > limits.x && playerCords.x < GetScreenWidth() - 800)
 	{
-		if (MoveBg)
+		//for (size_t i = 0; i < length; i++)
+		//{
+
+		
+		if (MoveBg/*[i]*/)
 		{
 			XBg = (-playerCords.x + speedBg);
 		}
@@ -159,6 +163,7 @@ void Player::Movement()
 			background = TableDrink;
 			XBg = 0;
 		}
+		//}
 	}
 	if (playerCords.y > 200 && playerCords.y < GetScreenHeight() - limits.y)
 	{
