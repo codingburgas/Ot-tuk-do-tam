@@ -9,7 +9,30 @@ NPC::NPC()
 }
 void NPC::LoadSprites()
 {
-    chadFr = LoadTexture("../src/sprites/inner country elements/france/frChad.png");
+    chadFr = LoadTexture("../src/sprites/NPC idles/frChad.png");
+    scientist = LoadTexture("../src/sprites/NPC idles/bgScientist.png");
+    addict = LoadTexture("../src/sprites/NPC idles/bgAddict.png");
+    tourguideGreen = LoadTexture("../src/sprites/NPC idles/ekskurzovodGreen.png");
+    tourguideYellow = LoadTexture("../src/sprites/NPC idles/ekskurzovodYellow.png");
+    policeman = LoadTexture("../src/sprites/NPC idles/policeman.png");
+    rival = LoadTexture("../src/sprites/NPC idles/bgRival.png");
+
+    NPCSprites = {
+        chadFr,
+        scientist,
+        addict,
+        tourguideGreen,
+        tourguideYellow,
+        policeman,
+        rival,
+    };
+    
+    for (size_t i = 0; i < NPCSprites.size(); i++)
+    {
+        NPCSprites.at(i).width = 225;
+        NPCSprites.at(i).height = 143;
+    }
+
     //dots
     dotsBubble = LoadTexture("../src/sprites/menus and boards/dotsBubble.png");
 
@@ -17,9 +40,9 @@ void NPC::LoadSprites()
     limitFrameDots = (float)dotsBubble.width / 4;
     viewDots = { limitFrameDots, 0, (float)dotsBubble.width / 4, (float)dotsBubble.height };
     //for npc anim
-    limitFrameNPC = (float)chadFr.width / 2;
-    viewNPC = { limitFrameNPC, 0, (float)chadFr.width / 2, (float)chadFr.height };
-
+    limitFrameNPC = (float)NPCSprites.at(0).width / 2;
+    viewNPC = { limitFrameNPC, 0, limitFrameNPC, (float)NPCSprites.at(0).height};
+    
 }
 void NPC::DrawDotsAnimation(int xbg, int ybg, int contryIndex)
 {
@@ -39,20 +62,20 @@ void NPC::DrawDotsAnimation(int xbg, int ybg, int contryIndex)
     }
 
 }
-void NPC::DrawNPCAnimation(int xbg, int ybg, int contryIndex)
+void NPC::DrawNPCAnimation(int xbg, int ybg, int contryIndex, Texture2D& texture)
 {
     if (counterNPCAnim[contryIndex] >= 20)
     {
         viewNPC.x += limitFrameNPC;
         counterNPCAnim[contryIndex] = 0;
     }
-    if (abs(viewNPC.x) > chadFr.width)
+    if (abs(viewNPC.x) > texture.width)
     {
         viewNPC.x = limitFrameNPC;
     }
     counterNPCAnim[contryIndex]++;
     for (int i = 0; i < NPCPositions.size(); i++)
     {
-        DrawTextureRec(chadFr, viewNPC, Vector2{ NPCPositions[i].x + xbg, NPCPositions[i].y + ybg }, WHITE);
+        DrawTextureRec(texture, viewNPC, Vector2{ NPCPositions[i].x + xbg, NPCPositions[i].y + ybg }, WHITE);
     }
 }

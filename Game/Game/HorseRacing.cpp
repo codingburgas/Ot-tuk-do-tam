@@ -25,7 +25,7 @@ Racing::Racing()
 		{rand() % 100 + 50},
 		{rand() % 100 + 50},
 	};
-	for (size_t i = 0; i < 6; i++)
+	for (size_t i = 0; i < horseSpeeds.size(); i++)
 	{
 		sort.insert(horseSpeeds[i]);
 	}
@@ -63,11 +63,12 @@ void Racing::DrawHorseAnimation()
 			}
 			else
 			{
+				//draw here
 				DrawRectangle(500, 500, 500, 500, RED);
 				for (auto rank : sort)
 				{
 					counterPlace++;
-					DrawText(to_string(rank).c_str(), 500, 500 + (100*counterPlace), 50, BLACK);
+					DrawText(to_string(rank).c_str(), 500, 500 + (300*counterPlace), 50, BLACK);
 				}
 				counterPlace = 0;
 			}

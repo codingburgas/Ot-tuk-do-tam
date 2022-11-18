@@ -158,6 +158,7 @@
     <ClCompile Include="Assassin.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Backstory.cpp" />
+    <ClCompile Include="Bulls.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Assassin.hpp" />
     <ClInclude Include="Background.hpp" />
     <ClInclude Include="Backstory.hpp" />
+    <ClInclude Include="Bulls.hpp" />
     <ClInclude Include="Engine.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="HorseRacing.hpp" />
