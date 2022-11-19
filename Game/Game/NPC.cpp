@@ -3,11 +3,12 @@ NPC::NPC()
 {
     enemyPosX = 1000, enemyPosY = 1000;
     enemyDistance = 100;
-    NPCPositions = { {1000, 1000},{2000, 1000}, {1500, 1000} };
     counterDotsBubble = { 0, 0, 0, 0, 0, 0 };
     counterNPCAnim = { 0, 0, 0, 0, 0, 0 };
+    NPCPositions = { {1000, 1000},{2000, 1000}, {1500, 1000} };
+    viewNPC.resize(6);
 }
-void NPC::LoadSprites()
+void NPC::LoadSprites(int country)
 {
     chadFr = LoadTexture("../src/sprites/NPC idles/frChad.png");
     scientist = LoadTexture("../src/sprites/NPC idles/bgScientist.png");
@@ -27,11 +28,10 @@ void NPC::LoadSprites()
         rival,
     };
     
-    for (size_t i = 0; i < NPCSprites.size(); i++)
-    {
-        NPCSprites.at(i).width = 225;
-        NPCSprites.at(i).height = 143;
-    }
+   
+        //for npc anim
+    limitFrameNPC = (float)NPCSprites.at(country).width / 2;
+    viewNPC[country] = {limitFrameNPC, 0, limitFrameNPC, (float)NPCSprites.at(country).height};
 
     //dots
     dotsBubble = LoadTexture("../src/sprites/menus and boards/dotsBubble.png");
@@ -39,43 +39,41 @@ void NPC::LoadSprites()
     //for dots
     limitFrameDots = (float)dotsBubble.width / 4;
     viewDots = { limitFrameDots, 0, (float)dotsBubble.width / 4, (float)dotsBubble.height };
-    //for npc anim
-    limitFrameNPC = (float)NPCSprites.at(0).width / 2;
-    viewNPC = { limitFrameNPC, 0, limitFrameNPC, (float)NPCSprites.at(0).height};
     
 }
-void NPC::DrawDotsAnimation(int xbg, int ybg, int contryIndex)
+void NPC::DrawDotsAnimation(int xbg, int ybg, int countryIndex)
 {
-    if (counterDotsBubble[contryIndex] >= 20)
+    if (counterDotsBubble[countryIndex] >= 20)
     {
         viewDots.x += limitFrameDots;
-        counterDotsBubble[contryIndex] = 0;
+        counterDotsBubble[countryIndex] = 0;
     }
     if (abs(viewDots.x) > dotsBubble.width)
     {
         viewDots.x = limitFrameDots;
     }
-    counterDotsBubble[contryIndex]++;
+    counterDotsBubble[countryIndex]++;
     for (int i = 0; i < NPCPositions.size(); i++)
     {
         DrawTextureRec(dotsBubble, viewDots, Vector2{ NPCPositions[i].x - 10 + xbg, NPCPositions[i].y - 10 + ybg }, WHITE);
     }
 
 }
-void NPC::DrawNPCAnimation(int xbg, int ybg, int contryIndex, Texture2D& texture)
+void NPC::DrawNPCAnimation(int xbg, int ybg, int countryIndex)
 {
-    if (counterNPCAnim[contryIndex] >= 20)
+   // cout << abs(viewNPC[countryIndex].x) << " " << NPCSprites[countryIndex].width << endl;
+    if (counterNPCAnim[countryIndex] >= 20)
     {
-        viewNPC.x += limitFrameNPC;
-        counterNPCAnim[contryIndex] = 0;
+        viewNPC[countryIndex].x += viewNPC[countryIndex].width;
+        counterNPCAnim[countryIndex] = 0;
     }
-    if (abs(viewNPC.x) > texture.width)
+    if (abs(viewNPC[countryIndex].x) > NPCSprites[countryIndex].width)
     {
-        viewNPC.x = limitFrameNPC;
+        viewNPC[countryIndex].x = viewNPC[countryIndex].width;
     }
-    counterNPCAnim[contryIndex]++;
+    counterNPCAnim[countryIndex]++;
     for (int i = 0; i < NPCPositions.size(); i++)
     {
-        DrawTextureRec(texture, viewNPC, Vector2{ NPCPositions[i].x + xbg, NPCPositions[i].y + ybg }, WHITE);
+        DrawTextureRec(NPCSprites[countryIndex], viewNPC[countryIndex], Vector2{NPCPositions[i].x + xbg, NPCPositions[i].y + ybg}, WHITE);
     }
 }

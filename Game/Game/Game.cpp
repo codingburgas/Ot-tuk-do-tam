@@ -61,8 +61,11 @@ Game::Game() {
     //player
     player.LoadSprites(fps);
     race.LoadSprites();
-    npc.LoadSprites();
     assassin.LoadSprites();
+    for (size_t i = 0; i < 6; i++)
+    {
+        npc.LoadSprites(i);
+    }
 
     plane.planeCurrentPosX = 1360;
     plane.planeCurrentPosY = 850;
@@ -605,14 +608,14 @@ void Game::mapEurope()
 
                     case 0:
                         spainLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i, npc.addict);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                         bulls.Draw();
                         break;
 
                     case 1:
                         franceLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i, npc.chadFr);  
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);  
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                         race.IfHorseRun(1, 1, player.MoveBg); // <-For Actual Implementing after dialogue (fir arg is for horse running or not and sec arg is for drawing horses or not)
                         race.DrawHorseAnimation();
@@ -620,13 +623,13 @@ void Game::mapEurope()
 
                     case 2:
                         italyLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i, npc.rival);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                         break;
 
                     case 3:
                         germanyLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i, npc.scientist);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                         break;
 
@@ -640,7 +643,7 @@ void Game::mapEurope()
 
                     case 5:
                         romaniaLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i, npc.tourguideGreen);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                         break;
 
