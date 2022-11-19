@@ -381,6 +381,10 @@ public:
 
     Texture2D emptyTexture;
 
+    //main menu
+    Texture2D menu, newGame, newGameHover, quit, quitHover;
+
+    bool isGameStarted;
 public:
 
     Game();
@@ -404,6 +408,8 @@ public:
     void germanyLevel();
     void bulgariaLevel();
     void romaniaLevel();
+
+    void mainMenu();
 
     void update();
 

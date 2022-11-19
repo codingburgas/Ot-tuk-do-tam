@@ -13,7 +13,7 @@ Game::Game() {
 
     //fonts
     headerFont = LoadFont("../Fonts/headerFont.ttf");
-    textFont = LoadFont("../aFonts/textFont.ttf");
+    textFont = LoadFont("../Fonts/textFont.ttf");
 
     map = LoadTexture("../src/sprites/backgrounds/map.png");
 
@@ -144,6 +144,8 @@ Game::Game() {
     trainSound = LoadSound("../Audios/Train.mp3");
     planeSound = LoadSound("../Audios/Plane.mp3");
     moneySound = LoadSound("../Audios/Money.mp3");*/
+
+    mapMusic = LoadSound("../Audios/mapMusic.mp3");
 
     moneyBackground = LoadTexture("../src/sprites/Menus and boards/moneyDisplay.png");
 
@@ -281,6 +283,12 @@ Game::Game() {
 
     italyBackground = LoadTexture("../src/sprites/backgrounds/itBackground.png");
     boat = LoadTexture("../src/sprites/inner country elements/italy/boat.png");
+
+    menu = LoadTexture("../src/sprites/backgrounds/mainMenuBackground.png"); 
+    newGame = LoadTexture("../src/sprites/Menus and boards/newGameClean.png"); 
+    newGameHover = LoadTexture("../src/sprites/Menus and boards/newGameHover.png"); 
+    quit = LoadTexture("../src/sprites/Menus and boards/quitClean.png");
+    quitHover = LoadTexture("../src/sprites/Menus and boards/quitHover.png");
 }
 
 void Game::backstory()
@@ -413,8 +421,6 @@ void Game::mapEurope()
         enableClick = false;
         isTransportMenuOn = true;
     }
-
-    mousePoint = GetMousePosition();
     //cout << mousePoint.x << " " << mousePoint.y << endl;
 
     printMoney = to_string(allMoneyCopy);
@@ -895,7 +901,7 @@ void Game::update()
         BeginDrawing();
         ClearBackground(WHITE);
 
-        mapEurope();
+        mainMenu();
 
         optionsMenu();
 
@@ -1456,4 +1462,44 @@ void Game::romaniaLevel()
 
         showLoop = false;
     }
+}
+
+void Game::mainMenu()
+{
+    mousePoint = GetMousePosition();
+    if (!isGameStarted)
+    {
+        if (audioIsClicked)
+        {
+            PlaySound(mapMusic);
+        }
+
+        DrawTexture(menu, 0, 0, WHITE);
+        DrawTexture(newGame, 809, 650, WHITE);
+        DrawTexture(quit, 878, 800, WHITE);
+        cout << mousePoint.x << " " << mousePoint.y << endl;
+        if (mousePoint.x >= 815 && mousePoint.x <= 1127 && mousePoint.y >= 640 && mousePoint.y <= 705)
+        {   
+            DrawTexture(newGameHover, 809, 650, WHITE);
+
+            if (isClicked())
+            {
+                isGameStarted = true;
+                StopSound(mapMusic);
+            }      
+        }
+
+        if (mousePoint.x >= 878 && mousePoint.x <= 1043 && mousePoint.y >= 790 && mousePoint.y <= 863)
+        {
+            DrawTexture(quitHover, 878, 800, WHITE);
+
+            if (isClicked())
+            {
+                isQuitting = true;
+                StopSound(mapMusic);
+            }         
+        }
+    }     
+    else
+        mapEurope();
 }
