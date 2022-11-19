@@ -75,10 +75,21 @@ void Racing::DrawHorseAnimation(int xbg, int ybg)
 					DrawRectangle(500, 500, 500, 500, RED);
 					for (auto rank : sort)
 					{
+						
 						counterPlace++;
+						if (counterPlace == 1){
+							firstSpeed = rank;
+						}
+						for (size_t i = 0; i < horseSpeeds.size(); i++)
+						{
+							if (firstSpeed == horseSpeeds[i]) {
+								firstHorseIndex = i;
+								break;
+							}
+						}
 						DrawText(("Horse with speed " + to_string(rank)).c_str(), 500, 480 + (20 * counterPlace), 20, BLACK);
 						DrawText(("is " + to_string(counterPlace) + "th").c_str(), 800, 480 + (20 * counterPlace), 20, BLACK);
-						cout << counterPlace << endl;
+						//cout << counterPlace << " " << firstHorseIndex << endl;
 					}
 					counterPlace = 0;
 				}

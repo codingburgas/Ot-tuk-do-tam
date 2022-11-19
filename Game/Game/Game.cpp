@@ -75,6 +75,7 @@ Game::Game() {
     race.LoadSprites();
     assassin.LoadSprites();
     npc.LoadSprites();
+    bulls.LoadSprites();
     for (size_t i = 0; i < 6; i++)
     {
         npc.SetupSprites(i);
@@ -630,6 +631,7 @@ void Game::mapEurope()
                         spainLevel();
                         npc.DrawNPCAnimation(player.XBg, player.YBg, i);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        bulls.Update();
                         bulls.Draw();
                         break;
 
@@ -1038,7 +1040,7 @@ void Game::franceLevel()
         ePressedCounter = 1;
     }
 
-    cout << mousePoint.x << " " << mousePoint.y << endl;
+    //cout << mousePoint.x << " " << mousePoint.y << endl;
 
     if (findDistance(player, 100, 1000) && ePressedCounter == 1)
     {

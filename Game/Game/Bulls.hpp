@@ -7,12 +7,13 @@ class Bulls {
 
 		vector<Vector2> bullsPositions;
 		vector<int> bullsSpeeds;
-
+		vector<int>counterFrame;
 		bool bullsBool;
 		bool HaveToDraw;
 	public:
 		Bulls();
 		void LoadSprites();
 		void Draw();
+		void Update();
 
 };
