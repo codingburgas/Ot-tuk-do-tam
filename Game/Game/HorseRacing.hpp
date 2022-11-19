@@ -11,15 +11,16 @@ private:
 	vector<Rectangle> horseRectangleRun;
 
 	vector<Vector2> horsePositions;
+
 	vector<int> horseSpeeds;
-
 	set<int> sort;
-
 	vector<int>counterHorse;
+
+	vector<bool>allFinished;
 	bool horseRunBool;
 	bool HaveToDraw;
+
 	unsigned counterPlace;
-	vector<bool>allFinished;
 	int counterForFinish = 0;
 
 public:

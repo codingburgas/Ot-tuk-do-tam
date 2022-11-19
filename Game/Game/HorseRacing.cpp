@@ -2,15 +2,13 @@
 Racing::Racing()
 {
 	srand(time(0));
-	counterHorse = { 0,0,0,0,0,0 };
-	horseIdle.resize(6);
-	horseRun.resize(6);
-	horseRectangleIdle.resize(6);
-	horseRectangleRun.resize(6);
+	counterHorse = { 0,0,0,0};
+	horseIdle.resize(4);
+	horseRun.resize(4);
+	horseRectangleIdle.resize(4);
+	horseRectangleRun.resize(4);
 
 	horsePositions = {
-		{144, 344},
-		{144, 444},
 		{144, 544},
 		{144, 644},
 		{144, 744},
@@ -18,8 +16,6 @@ Racing::Racing()
 	};//kon poziciq
 
 	horseSpeeds = {
-		{rand() % 100 + 50},
-		{rand() % 100 + 50},
 		{rand() % 100 + 50},
 		{rand() % 100 + 50},
 		{rand() % 100 + 50},
@@ -32,19 +28,19 @@ Racing::Racing()
 	horseRunBool = 0;
 	HaveToDraw = 0;
 	counterPlace = 0;
-	allFinished = {0,0,0,0,0,0};
+	allFinished = {0,0,0,0};
 }
 void Racing::LoadSprites()
 {
 	horseRacingBackground = LoadTexture("../src/sprites/backgrounds/field.png");
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < horseRun.size(); i++)
 	{
 		horseIdle[i] = LoadTexture("../src/sprites/inner country elements/france/horseIdle.png");
 		horseRun[i] = LoadTexture("../src/sprites/inner country elements/france/horse.png");
 	}
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < horseRun.size(); i++)
 	{
 
 		horseRectangleIdle[i] = { (float)horseIdle[i].width / 3, 0, (float)horseIdle[i].width / 3, (float)horseIdle[i].height };
@@ -56,7 +52,7 @@ void Racing::DrawHorseAnimation()
 	if (horseRunBool && HaveToDraw)
 	{
 		
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < horseRun.size(); i++)
 		{
 			if (horsePositions[i].x < 1500)
 			{
@@ -89,7 +85,7 @@ void Racing::DrawHorseAnimation()
 			}
 		}
 
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < horseRun.size(); i++)
 		{
 			if (counterHorse[i] >= 15)
 			{
@@ -103,7 +99,7 @@ void Racing::DrawHorseAnimation()
 			}
 			counterHorse[i]++;
 		}
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < horseRun.size(); i++)
 		{
 
 			DrawTextureRec(horseRun[i], horseRectangleRun[i], Vector2{ horsePositions[i].x, horsePositions[i].y }, WHITE);
@@ -111,7 +107,7 @@ void Racing::DrawHorseAnimation()
 	}
 	else if(HaveToDraw) {
 
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < horseRun.size(); i++)
 		{
 			if (counterHorse[i] >= 15)
 			{
@@ -125,7 +121,7 @@ void Racing::DrawHorseAnimation()
 			}
 			counterHorse[i]++;
 		}
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < horseRun.size(); i++)
 		{
 
 			DrawTextureRec(horseIdle[i], horseRectangleIdle[i], Vector2{ horsePositions[i].x, horsePositions[i].y }, WHITE);
