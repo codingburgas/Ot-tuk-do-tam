@@ -305,6 +305,8 @@ Game::Game() {
     newGameHover = LoadTexture("../src/sprites/Menus and boards/newGameHover.png"); 
     quit = LoadTexture("../src/sprites/Menus and boards/quitClean.png");
     quitHover = LoadTexture("../src/sprites/Menus and boards/quitHover.png");
+
+    helpMenu = LoadTexture("../src/sprites/Map images/helpMenu.png");
 }
 
 void Game::backstory()
@@ -869,7 +871,7 @@ void Game::optionsMenu()
             {
                 switch (i) {
                 case 0:
-                    helpIsClicked = true;
+                    counterHelpMenuClicked++;
                     break;
 
                 case 1:
@@ -886,9 +888,9 @@ void Game::optionsMenu()
             }
         }
 
-        if (helpIsClicked)
+        if (counterHelpMenuClicked % 2 != 0)
         {
-            
+            DrawTexture(helpMenu, 1110, 8, WHITE);
         }
 
         if (audioIsClicked)

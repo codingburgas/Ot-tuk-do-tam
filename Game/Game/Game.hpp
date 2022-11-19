@@ -134,8 +134,6 @@ public:
     bool isFlipped;
     bool flyOneTime;
 
-    bool helpIsClicked;
-
     bool audioIsClicked;
     int audioIsClickedCounter;
 
@@ -388,6 +386,9 @@ public:
 
     //main menu
     Texture2D menu, newGame, newGameHover, quit, quitHover;
+
+    Texture2D helpMenu;
+    int counterHelpMenuClicked;
 
     bool isGameStarted;
     
