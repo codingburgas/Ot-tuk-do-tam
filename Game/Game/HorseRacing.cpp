@@ -32,6 +32,7 @@ Racing::Racing()
 	horseRunBool = 0;
 	HaveToDraw = 0;
 	counterPlace = 0;
+	allFinished = {0,0,0,0,0,0};
 }
 void Racing::LoadSprites()
 {
@@ -59,18 +60,32 @@ void Racing::DrawHorseAnimation()
 		{
 			if (horsePositions[i].x < 1500)
 			{
+				allFinished[0] = 0;
 				horsePositions[i].x += horseSpeeds[i] * GetFrameTime();
 			}
 			else
 			{
-				//draw here
-				DrawRectangle(500, 500, 500, 500, RED);
-				for (auto rank : sort)
+				allFinished[i] = 1;
+				for (size_t j = 0; j < allFinished.size(); j++)
 				{
-					counterPlace++;
-					DrawText(to_string(rank).c_str(), 500, 500 + (300*counterPlace), 50, BLACK);
+					if (allFinished[j])
+					{
+						counterForFinish++;
+						//cout << counterForFinish << endl;
+					}
 				}
-				counterPlace = 0;
+				if (counterForFinish == allFinished.size())
+				{
+					DrawRectangle(500, 500, 500, 500, RED);
+					for (auto rank : sort)
+					{
+						counterPlace++;
+						DrawText(("Horse with speed " + to_string(rank)).c_str(), 500, 480 + (20 * counterPlace), 20, BLACK);
+						DrawText(("is " + to_string(counterPlace) + "th").c_str(), 800, 480 + (20 * counterPlace), 20, BLACK);
+					}
+					counterPlace = 0;
+				}
+				counterForFinish = 0;
 			}
 		}
 

@@ -19,6 +19,8 @@ private:
 	bool horseRunBool;
 	bool HaveToDraw;
 	unsigned counterPlace;
+	vector<bool>allFinished;
+	int counterForFinish = 0;
 
 public:
 	Racing();
