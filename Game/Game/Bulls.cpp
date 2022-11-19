@@ -1,80 +1,93 @@
 #include"Bulls.hpp"
 Bulls::Bulls() 
 {
-	bullsSprites.resize(6);
-	bullsRectangle.resize(6);
-
+	//bullsSpritesLeft.resize();
+	bullsRectangle.resize(3);
+	bullsSprites.resize(3);
+	srand(time(0));
 	bullsPositions = {
-		{144, 344},
-		{144, 444},
-		{144, 544},
-		{144, 644},
-		{144, 744},
-		{144, 844}
+		{449, 344},
+		{801, 444},
+		{449, 544},
 	};
 
 	bullsSpeeds = {
 		{rand() % 100 + 50},
 		{rand() % 100 + 50},
 		{rand() % 100 + 50},
-		{rand() % 100 + 50},
-		{rand() % 100 + 50},
-		{rand() % 100 + 50}
 	};
 
 	bullsBool = 0;
 	HaveToDraw = 0;
-	counterFrame = {0,0,0,0,0,0};
+	counterFrame = {0,0,0};
 }
 
 void Bulls::LoadSprites()
 {
-	bullsSprites[0] = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/black_bull_left.png");
-	bullsSprites[1] = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/black_bull_right.png");
-	bullsSprites[2] = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/brown_bull_left.png");
-	bullsSprites[3] = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/brown_bull_right.png");
-	bullsSprites[4] = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/white_bull_left.png");
-	bullsSprites[5] = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/white_bull_right.png");
 
-	for (int i = 0; i < 6; i++)
+	black_bull_left = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/blacê_bull_left.png");
+	black_bull_right = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/black_bull_right.png");
+	brown_bull_left = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/brown_bull_left.png");
+	brown_bull_right = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/brown_bull_right.png");
+	white_bull_left = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/white_bull_left.png");
+	white_bull_right = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/white_bull_right.png");
+
+	bullsSpritesLeft = { 
+		 black_bull_left,
+		 brown_bull_left,
+		 white_bull_left
+	};
+
+	bullsSpritesRight = {
+		 black_bull_right,
+		 brown_bull_right,
+		 white_bull_right
+	};
+
+	for (int i = 0; i < bullsRectangle.size(); i++)
 	{
-		bullsRectangle[i] = { (float)bullsSprites[i].width / 3, 0, (float)bullsSprites[i].width / 3, (float)bullsSprites[i].height };
+		bullsSpritesLeft[i].width = 144;
+		bullsSpritesRight[i].width = 144;
+		
+		bullsSpritesLeft[i].height = 47;
+		bullsSpritesRight[i].height = 47;
+
+		bullsRectangle[i] = { (float)bullsSpritesLeft[i].width / 3, 0, (float)bullsSpritesLeft[i].width / 3, (float)bullsSpritesLeft[i].height };
 	}
 }
 void Bulls::Draw()
 {
-	for (size_t i = 0; i < bullsSprites.size(); i++)
+	
+	for (size_t i = 0; i < bullsSpritesLeft.size(); i++)
 	{
 
 		if (counterFrame[i] >= 20)
 		{
-			bullsRectangle[i].x += bullsSprites[i].width / 3;
+			bullsRectangle[i].x += bullsSpritesLeft[i].width / 3;
 			counterFrame[i] = 0;
 		}
-		if (abs(bullsRectangle[i].x) > bullsSprites[i].width)
+		if (abs(bullsRectangle[i].x) > bullsSpritesLeft[i].width)
 		{
-			bullsRectangle[i].x = bullsSprites[i].width / 3;
+			bullsRectangle[i].x = bullsSpritesLeft[i].width / 3;
 		}
 		counterFrame[i]++;
+		
 		DrawTextureRec(bullsSprites[i], bullsRectangle[i], bullsPositions[i], WHITE);
 		
+		//DrawTexture(bullsSpritesLeft[3], 1000, 500, WHITE);
 	}
 }
 void Bulls::Update()
 {
-	for (size_t i = 0; i < bullsPositions.size(); i++)
+	for (size_t i = 0; i < bullsSpritesLeft.size(); i++)
 	{
 		if (bullsPositions[i].x > 800) {
-			if (i % 2 != 0){
-			bullsSprites[i] = bullsSprites[i - 1];
-			}
+			bullsSprites[i] = bullsSpritesLeft[i];
 			bullsSpeeds[i] = -100;
 		}
 		else if (bullsPositions[i].x < 450) {
-		
-			if (i % 2 ==0) {
-				bullsSprites[i] = bullsSprites[i + 1];
-			}
+			bullsSprites[i] = bullsSpritesRight[i];
+			
 			bullsSpeeds[i] = 100;
 		}
 		bullsPositions[i].x += bullsSpeeds[i] * GetFrameTime();
