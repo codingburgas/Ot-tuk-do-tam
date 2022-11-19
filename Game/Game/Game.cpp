@@ -601,6 +601,7 @@ void Game::mapEurope()
                         spainLevel();
                         npc.DrawNPCAnimation(player.XBg, player.YBg, i, npc.addict);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        bulls.Draw();
                         break;
 
                     case 1:
@@ -982,8 +983,6 @@ void Game::spainLevel()
 
 void Game::franceLevel()
 {
-   
-
     dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, 1, isDialogueV, counterPressed, false);
 
     dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, 0, isDialogueV, counterPressed, false);

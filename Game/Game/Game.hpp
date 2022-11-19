@@ -6,6 +6,7 @@
 #include "NPC.hpp"
 #include "HorseRacing.hpp"
 #include "Assassin.hpp"
+#include "Bulls.hpp"
 
 void setWidthAndHeight(Texture2D& variable);
 
@@ -18,6 +19,7 @@ protected:
     Racing race;
     NPC npc;
     Assassin assassin;
+    Bulls bulls;
 public:
     Texture2D map;
 
