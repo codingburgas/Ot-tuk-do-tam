@@ -16,10 +16,10 @@ Racing::Racing()
 	};//kon poziciq
 
 	horseSpeeds = {
-		{rand() % 100 + 50},
-		{rand() % 100 + 50},
-		{rand() % 100 + 50},
-		{rand() % 100 + 50},
+		{rand() % 50 + 120},
+		{rand() % 50 + 120},
+		{rand() % 50 + 120},
+		{rand() % 50 + 120},
 	};
 	for (size_t i = 0; i < horseSpeeds.size(); i++)
 	{
@@ -87,9 +87,8 @@ void Racing::DrawHorseAnimation()
 
 		for (int i = 0; i < horseRun.size(); i++)
 		{
-			if (counterHorse[i] >= 15)
+			if (counterHorse[i] >= horseSpeeds[i])
 			{
-
 				horseRectangleRun[i].x += horseRun[i].width / 6;
 				counterHorse[i] = 0;
 			}
