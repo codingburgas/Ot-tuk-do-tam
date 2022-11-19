@@ -1091,11 +1091,6 @@ void Game::italyLevel()
                 changeBoatPosCounter++;
             //lockBoat = true;
 
-            if (IsKeyPressed(KEY_E))
-            {
-                /*player.playerPos.x = 1270;
-                player.playerPos.y = 400;*/
-            }
 
             if (itemGet.at(0))
             {
@@ -1177,8 +1172,6 @@ void Game::italyLevel()
             if (itemOnOtherSideCounter.at(i) == 1)
             {
                 itemOnOtherSide.at(i) = true;
-
-                itemInBoat = emptyTexture;
             }
             else if (itemOnOtherSideCounter.at(i) == 2)
             {
