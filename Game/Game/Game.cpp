@@ -222,11 +222,11 @@ Game::Game() {
     };
 
     //vector resizing
-    isDialogueV.resize(25);
-    questV.resize(25);
-    isItemV.resize(25);
-    counterPressed.resize(25);
-    chadTextV.resize(25);
+    isDialogueV.resize(30);
+    questV.resize(30);
+    isItemV.resize(30);
+    counterPressed.resize(30);
+    chadTextV.resize(30);
 
     //buy beer quest
     beer = LoadTexture("../src/sprites/inner country elements/germany/beer.png");
@@ -313,6 +313,8 @@ Game::Game() {
     horseOptionMenu = LoadTexture("../src/sprites/inner country elements/france/horseBetMenu.png");
 
     fillCheck = LoadTexture("../src/sprites/Map images/check.png");
+
+    suspectBetMenu = LoadTexture("../src/sprites/inner country elements/romania/killerMenu.png");
 }
 
 void Game::backstory()
@@ -655,12 +657,11 @@ void Game::mapEurope()
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                         break;
 
-                    case 4:
+                    case 4:                       
                         bulgariaLevel();
                         assassin.CheckMiniGame(player.MoveBg, player.move);
                         assassin.Draw(player.XBg, player.YBg, player.MoveBg);
                         assassin.Update(player.playerCords, player.XBg, player.YBg, player.move, player.MoveBg);
-                            
                         break;
 
                     case 5:
@@ -1550,14 +1551,46 @@ void Game::romaniaLevel()
 
     if (isMurderMysteryDialoguesStarted[2])
     {
-        //tuk sh ima tabloto za quessvane
-
-        if (quessSuspect == correctSuspect)
+        if (findDistance(player, 2000, 1000))
         {
-            allMoney += 500;
-            isMurderMysteryDialoguesStarted[2] = false;
-        }
+            DrawTexture(suspectBetMenu, 698, 353, WHITE);
+            DrawTexture(okButtonHorseRace, 1090, 650, WHITE);
 
+            if (mousePoint.y >= 580 && mousePoint.y <= 600)
+            {
+                if (mousePoint.x >= 770 && mousePoint.x <= 800 && isClicked())
+                    quessSuspect = 1;
+                else if (mousePoint.x >= 890 && mousePoint.x <= 920 && isClicked())
+                    quessSuspect = 2;
+                else if (mousePoint.x >= 1005 && mousePoint.x <= 1035 && isClicked())
+                    quessSuspect = 3;
+                else if (mousePoint.x >= 1130 && mousePoint.x <= 1160 && isClicked())
+                    quessSuspect = 4;
+            }
+
+            if (quessSuspect == 1)
+                DrawTexture(fillCheck, 770, 600, WHITE);
+            else if (quessSuspect == 2)
+                DrawTexture(fillCheck, 890, 600, WHITE);
+            else if (quessSuspect == 3)
+                DrawTexture(fillCheck, 1005, 600, WHITE);
+            else if (quessSuspect == 4)
+                DrawTexture(fillCheck, 1130, 600, WHITE);
+
+            if (mousePoint.y >= 630 && mousePoint.y <= 690 && mousePoint.x >= 1090 && mousePoint.x <= 1190)
+            {
+                DrawTexture(okButtonHorseRaceHover, 1090, 650, WHITE);
+
+                if (isClicked())
+                {
+                    if (quessSuspect == correctSuspect)
+                    {
+                        allMoney += 500;
+                        isMurderMysteryDialoguesStarted[2] = false;
+                    }
+                }
+            }
+        }
         showLoop = false;
     }
 }

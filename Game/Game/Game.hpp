@@ -46,7 +46,7 @@ public:
     Texture2D germany, germanyHovered;
     Texture2D italy, italyHovered;
     Texture2D spain, spainHovered;
-    Texture2D romania, romaniaHovered;
+    Texture2D romaniaHovered;
 
     Texture2D menuOptions;
 
@@ -247,6 +247,10 @@ public:
         {"", "", ""},
         {"", "", ""},
         {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
+        {"", "", ""},
     };
 
     vector<int> counterPressed;
@@ -354,7 +358,8 @@ public:
     bool isMurderMysteryDialoguesStarted[3];
 
     int quessSuspect;
-    int correctSuspect;
+    int correctSuspect = 3;
+    Texture2D suspectBetMenu;
 
     //logic game
     Texture2D fox, chicken, seed;
@@ -398,6 +403,8 @@ public:
 
     Texture2D fillCheck;
     int horseBet;
+
+    Texture2D romania;
 public:
 
     Game();
