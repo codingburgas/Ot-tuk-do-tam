@@ -110,7 +110,6 @@ public:
 
     Vector2 mousePoint;
 
-    //ne se pipa ne znaem kakvo pravi :( )    
     Vector2 circles[6] = { 320, 800 };
 
     int countryFly;
@@ -371,6 +370,7 @@ public:
     Texture2D italyBackground, boat;
 
     bool changeBoatPos;
+    int changeBoatPosCounter;
 
     Texture2D itemInBoat;
     vector<bool> itemGet;
@@ -380,11 +380,13 @@ public:
     vector<int> itemOnOtherSideCounter;
 
     Texture2D emptyTexture;
+    bool isLogicGameFinished;
 
     //main menu
     Texture2D menu, newGame, newGameHover, quit, quitHover;
 
     bool isGameStarted;
+
 public:
 
     Game();
