@@ -4,7 +4,7 @@
 class NPC {
 protected: 
     vector<Rectangle>viewNPC;
-    vector<Vector2> NPCPositions;
+    vector<vector<Vector2>>NPCPositions;
     vector<int> counterDotsBubble;
     vector<Texture2D> NPCSprites;
     vector<int> counterNPCAnim;

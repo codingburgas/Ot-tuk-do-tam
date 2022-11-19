@@ -26,6 +26,6 @@ private:
 public:
 	Racing();
 	void LoadSprites();
-	void DrawHorseAnimation();
-	void IfHorseRun(bool run, bool HaveToDraw,bool& moveBg);
+	void DrawHorseAnimation(int xbg, int ybg);
+	void IfHorseRun(bool run, bool HaveToDraw);
 };

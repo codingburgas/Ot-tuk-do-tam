@@ -5,7 +5,13 @@ NPC::NPC()
     enemyDistance = 100;
     counterDotsBubble = { 0, 0, 0, 0, 0, 0 };
     counterNPCAnim = { 0, 0, 0, 0, 0, 0 };
-    NPCPositions = { {1000, 1000},{2000, 1000}, {1500, 1000} };
+    NPCPositions = { 
+        { {1000, 1000},{1500, 1000}, {100, 1000} },
+        { {1000, 1000},{1500, 1000}, {100, 1000} },
+        { {1000, 1000},{1500, 1000}, {100, 1000} },
+        { {1000, 1000},{1500, 1000}, {100, 1000} },
+        { {1000, 1000},{1500, 1000}, {100, 1000} },
+    };
     viewNPC.resize(6);
 }
 void NPC::SetupSprites(int country)
@@ -56,9 +62,9 @@ void NPC::DrawDotsAnimation(int xbg, int ybg, int countryIndex)
         viewDots.x = limitFrameDots;
     }
     counterDotsBubble[countryIndex]++;
-    for (int i = 0; i < NPCPositions.size(); i++)
+    for (int i = 0; i < NPCPositions[countryIndex].size(); i++)
     {
-        DrawTextureRec(dotsBubble, viewDots, Vector2{ NPCPositions[i].x - 10 + xbg, NPCPositions[i].y - 10 + ybg }, WHITE);
+        DrawTextureRec(dotsBubble, viewDots, Vector2{ NPCPositions[countryIndex][i].x - 10 + xbg, NPCPositions[countryIndex][i].y - 10 + ybg }, WHITE);
     }
 
 }
@@ -75,8 +81,8 @@ void NPC::DrawNPCAnimation(int xbg, int ybg, int countryIndex)
         viewNPC[countryIndex].x = viewNPC[countryIndex].width;
     }
     counterNPCAnim[countryIndex]++;
-    for (int i = 0; i < NPCPositions.size(); i++)
+    for (int i = 0; i < NPCPositions[countryIndex].size(); i++)
     {
-        DrawTextureRec(NPCSprites[countryIndex], viewNPC[countryIndex], Vector2{NPCPositions[i].x + xbg, NPCPositions[i].y + ybg}, WHITE);
+        DrawTextureRec(NPCSprites[countryIndex], viewNPC[countryIndex], Vector2{NPCPositions[countryIndex][i].x + xbg, NPCPositions[countryIndex][i].y + ybg}, WHITE);
     }
 }

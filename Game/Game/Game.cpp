@@ -632,8 +632,8 @@ void Game::mapEurope()
                         franceLevel();
                         npc.DrawNPCAnimation(player.XBg, player.YBg, i);  
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
-                        race.IfHorseRun(1, 1, player.MoveBg); // <-For Actual Implementing after dialogue (fir arg is for horse running or not and sec arg is for drawing horses or not)
-                        race.DrawHorseAnimation();
+                        race.IfHorseRun(1, 1); // <-For Actual Implementing after dialogue (fir arg is for horse running or not and sec arg is for drawing horses or not)
+                        race.DrawHorseAnimation(player.XBg, player.YBg);
                         break;
 
                     case 2:
