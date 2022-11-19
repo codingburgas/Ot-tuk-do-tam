@@ -22,7 +22,8 @@ public:
     int enemyPosX, enemyPosY;
     int enemyDistance;
     NPC();
-    void LoadSprites(int country);
+    void LoadSprites();
+    void SetupSprites(int country);
     void DrawDotsAnimation(int xbg, int ybg, int contryIndex);
     void DrawNPCAnimation(int xbg, int ybg, int contryIndex);
 };

@@ -8,7 +8,20 @@ NPC::NPC()
     NPCPositions = { {1000, 1000},{2000, 1000}, {1500, 1000} };
     viewNPC.resize(6);
 }
-void NPC::LoadSprites(int country)
+void NPC::SetupSprites(int country)
+{
+
+    //for npc anim
+    limitFrameNPC = (float)NPCSprites.at(country).width / 2;
+    viewNPC[country] = { limitFrameNPC, 0, limitFrameNPC, (float)NPCSprites.at(country).height };
+
+    //dots
+
+    //for dots
+    limitFrameDots = (float)dotsBubble.width / 4;
+    viewDots = { limitFrameDots, 0, (float)dotsBubble.width / 4, (float)dotsBubble.height };
+}
+void NPC::LoadSprites()
 {
     chadFr = LoadTexture("../src/sprites/NPC idles/frChad.png");
     scientist = LoadTexture("../src/sprites/NPC idles/bgScientist.png");
@@ -17,6 +30,8 @@ void NPC::LoadSprites(int country)
     tourguideYellow = LoadTexture("../src/sprites/NPC idles/ekskurzovodYellow.png");
     policeman = LoadTexture("../src/sprites/NPC idles/policeman.png");
     rival = LoadTexture("../src/sprites/NPC idles/bgRival.png");
+
+    dotsBubble = LoadTexture("../src/sprites/menus and boards/dotsBubble.png");
 
     NPCSprites = {
         chadFr,
@@ -27,18 +42,6 @@ void NPC::LoadSprites(int country)
         policeman,
         rival,
     };
-    
-   
-        //for npc anim
-    limitFrameNPC = (float)NPCSprites.at(country).width / 2;
-    viewNPC[country] = {limitFrameNPC, 0, limitFrameNPC, (float)NPCSprites.at(country).height};
-
-    //dots
-    dotsBubble = LoadTexture("../src/sprites/menus and boards/dotsBubble.png");
-
-    //for dots
-    limitFrameDots = (float)dotsBubble.width / 4;
-    viewDots = { limitFrameDots, 0, (float)dotsBubble.width / 4, (float)dotsBubble.height };
     
 }
 void NPC::DrawDotsAnimation(int xbg, int ybg, int countryIndex)

@@ -62,9 +62,10 @@ Game::Game() {
     player.LoadSprites(fps);
     race.LoadSprites();
     assassin.LoadSprites();
+    npc.LoadSprites();
     for (size_t i = 0; i < 6; i++)
     {
-        npc.LoadSprites(i);
+        npc.SetupSprites(i);
     }
 
     plane.planeCurrentPosX = 1360;
