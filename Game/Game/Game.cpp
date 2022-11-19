@@ -1130,7 +1130,6 @@ void Game::italyLevel()
 
         if (mousePoint.y >= 190 && mousePoint.y <= 290 && isClicked() && itemGet.at(0))
         {
-
             itemGet.at(0) = false;
 
             itemOnOtherSideCounter.at(0)++;
@@ -1167,6 +1166,8 @@ void Game::italyLevel()
             itemInBoat = logicGameItemsV.at(i).texture;
         }
     }
+
+    
 }
 
 void Game::germanyLevel()
@@ -1477,7 +1478,7 @@ void Game::mainMenu()
         DrawTexture(menu, 0, 0, WHITE);
         DrawTexture(newGame, 809, 650, WHITE);
         DrawTexture(quit, 878, 800, WHITE);
-        cout << mousePoint.x << " " << mousePoint.y << endl;
+
         if (mousePoint.x >= 815 && mousePoint.x <= 1127 && mousePoint.y >= 640 && mousePoint.y <= 705)
         {   
             DrawTexture(newGameHover, 809, 650, WHITE);
