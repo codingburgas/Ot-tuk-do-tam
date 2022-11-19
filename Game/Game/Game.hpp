@@ -209,7 +209,7 @@ public:
 
     vector<isItem> isItemV;
     
-    Texture2D exampleItem;
+    Texture2D barrel;
 
     vector<Texture2D> items;
 

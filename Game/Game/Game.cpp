@@ -195,7 +195,9 @@ Game::Game() {
 
     //pickup mechanic
     inventory = LoadTexture("../src/sprites/Menus and boards/inventory.png");
-    exampleItem = LoadTexture("../src/sprites/Menus and boards/heartIcon.png");
+    barrel = LoadTexture("../src/sprites/inner country elements/france/barrel.png");
+    barrel.width = 125;
+    barrel.height = 125;
 
     textColor = { 54, 54, 54, 255 };
 
@@ -238,9 +240,6 @@ Game::Game() {
     
     flour.width = 150;
     flour.height = 150;
-
-    salami.width = 150;
-    salami.height = 150;
 
     cheese.width = 150;
     cheese.height = 150;
@@ -760,7 +759,7 @@ void Game::showInventory()
     DrawTexture(inventory, 505, 223, WHITE);
 
     if (isItemV.at(1).isItemPicked)
-        DrawTexture(exampleItem, 1000, 500, WHITE);
+        DrawTexture(barrel, 1000, 500, WHITE);
 
     if (!isGripperInventory)
         DrawTexture(gripper, 1300, 500, WHITE);
@@ -1017,7 +1016,7 @@ void Game::franceLevel()
             quest(chadTextV, 1);
 
         if(questV.at(1).acceptQuest)
-            DrawTexture(exampleItem, 1000 + player.XBg, 500 + player.YBg, WHITE);
+            DrawTexture(barrel, 1000 + player.XBg, 500 + player.YBg, WHITE);
     }
 
     itemPicked(1000, 500, isItemV.at(1).isItemPicked);
