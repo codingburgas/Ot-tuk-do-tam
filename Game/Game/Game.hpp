@@ -386,6 +386,7 @@ public:
     Texture2D menu, newGame, newGameHover, quit, quitHover;
 
     bool isGameStarted;
+    
 
 public:
 

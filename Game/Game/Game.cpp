@@ -1180,7 +1180,7 @@ void Game::italyLevel()
             changeBoatPosCounter = 0;
         }
 
-        /*if (itemOnOtherSide.at(0) && !itemGet.at(1) && !itemGet.at(2))
+        if ((itemOnOtherSide.at(0) && !itemOnOtherSide.at(1) && !itemOnOtherSide.at(2)) || (!itemOnOtherSide.at(0) && itemOnOtherSide.at(1) && itemOnOtherSide.at(2)))
         {
             for (int i = 0; i < 3; i++)
             {
@@ -1189,7 +1189,7 @@ void Game::italyLevel()
                 itemInBoat = emptyTexture;
                 itemOnOtherSideCounter.at(i) = 0;
             }
-        }*/
+        }
 
         if (itemOnOtherSide.at(0) && itemOnOtherSide.at(1) && itemOnOtherSide.at(2))
         {
