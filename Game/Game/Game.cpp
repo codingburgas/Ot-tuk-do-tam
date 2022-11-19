@@ -306,6 +306,12 @@ Game::Game() {
     quitHover = LoadTexture("../src/sprites/Menus and boards/quitHover.png");
 
     helpMenu = LoadTexture("../src/sprites/Map images/helpMenu.png");
+
+    okButtonHorseRace = LoadTexture("../src/sprites/Map images/okCLean.png");
+    okButtonHorseRaceHover = LoadTexture("../src/sprites/Map images/okHover.png");
+    horseOptionMenu = LoadTexture("../src/sprites/inner country elements/france/horseBetMenu.png");
+
+    fillCheck = LoadTexture("../src/sprites/Map images/check.png");
 }
 
 void Game::backstory()
@@ -631,7 +637,7 @@ void Game::mapEurope()
                         franceLevel();
                         npc.DrawNPCAnimation(player.XBg, player.YBg, i);  
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
-                        race.IfHorseRun(1, 1); // <-For Actual Implementing after dialogue (fir arg is for horse running or not and sec arg is for drawing horses or not)
+                        
                         race.DrawHorseAnimation(player.XBg, player.YBg);
                         break;
 
@@ -1026,6 +1032,56 @@ void Game::franceLevel()
         allMoney += 1000;
         counterPressed.at(1) = 6;
     }
+
+    if (IsKeyPressed(KEY_E))
+    {
+        ePressedCounter = 1;
+    }
+
+    cout << mousePoint.x << " " << mousePoint.y << endl;
+
+    if (findDistance(player, 100, 1000) && ePressedCounter == 1)
+    {
+        DrawTexture(horseOptionMenu, 698, 353, WHITE);
+        DrawTexture(okButtonHorseRace, 1090, 655, WHITE);
+        
+        if (mousePoint.y >= 580 && mousePoint.y <= 600)
+        {
+            if (mousePoint.x >= 770 && mousePoint.x <= 800 && isClicked())  
+                horseBet = 1;
+            else if (mousePoint.x >= 890 && mousePoint.x <= 920 && isClicked())
+                horseBet = 2;       
+            else if (mousePoint.x >= 1005 && mousePoint.x <= 1035 && isClicked())
+                horseBet = 3;         
+            else if (mousePoint.x >= 1130 && mousePoint.x <= 1160 && isClicked())     
+                horseBet = 4; 
+        }
+
+        if (horseBet == 1)
+            DrawTexture(fillCheck, 770, 600, WHITE);
+        else if (horseBet == 2)
+            DrawTexture(fillCheck, 890, 600, WHITE);
+        else if (horseBet == 3)
+            DrawTexture(fillCheck, 1005, 600, WHITE);
+        else if (horseBet == 4)
+            DrawTexture(fillCheck, 1130, 600, WHITE);
+
+        if (mousePoint.y >= 630 && mousePoint.y <= 690 && mousePoint.x >= 1090 && mousePoint.x <= 1190)
+        {
+            DrawTexture(okButtonHorseRaceHover, 1090, 655, WHITE);
+
+            if (isClicked())
+            {
+                race.IfHorseRun(1, 1); // <-For Actual Implementing after dialogue (fir arg is for horse running or not and sec arg is for drawing horses or not)
+
+                if(horseBet == race.firstHorseIndex)
+                {
+                    allMoney += 500;
+                }
+            }
+        }
+    }
+       
 }
 
 void Game::italyLevel()

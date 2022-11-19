@@ -392,7 +392,12 @@ public:
 
     bool isGameStarted;
     
+    //horse race
+    Texture2D okButtonHorseRace, okButtonHorseRaceHover, horseOptionMenu;
+    int ePressedCounter;
 
+    Texture2D fillCheck;
+    int horseBet;
 public:
 
     Game();

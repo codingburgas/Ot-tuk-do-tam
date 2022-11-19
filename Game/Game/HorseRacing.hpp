@@ -24,6 +24,9 @@ private:
 	int counterForFinish = 0;
 
 public:
+	int firstSpeed;
+	int firstHorseIndex;
+
 	Racing();
 	void LoadSprites();
 	void DrawHorseAnimation(int xbg, int ybg);
