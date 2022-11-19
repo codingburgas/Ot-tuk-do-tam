@@ -152,6 +152,10 @@ public:
     bool isQuitting;
     Texture2D confirmationT;
 
+    Texture2D yesButton, yesButtonHover, noButton, noButtonHover;
+
+    vector<Texture2D> quitButtons;
+
     //money mechanic 
     Texture2D moneyBackground;
     int allMoney, allMoneyCopy, moneySpent;

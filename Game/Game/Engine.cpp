@@ -17,24 +17,35 @@ bool isClicked()
 	return IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 }
 
-void isUserQuitting(bool& isQuitting, bool& enable, Vector2& mousePoint, Texture2D& confirmationT, Color& darkerWindow, bool& isTransportMenuOn)
+void isUserQuitting(bool& isQuitting, bool& enable, Vector2& mousePoint, Texture2D& confirmationT, Color& darkerWindow, bool& isTransportMenuOn, vector<Texture2D> quitButtons)
 {
 	if (isQuitting)
 	{
 		DrawRectangle(0, 0, 1920, 1080, darkerWindow);
-		DrawTexture(confirmationT, 0, 0, Fade(WHITE, 0.84));
+		DrawTexture(confirmationT, 518, 345, WHITE);
+		DrawTexture(quitButtons.at(0), 795, 465, WHITE);
+		DrawTexture(quitButtons.at(2), 1020, 465, WHITE);
 
-		if (isClicked() && (mousePoint.y >= 580 && mousePoint.y <= 640))
+
+		if ((mousePoint.y >= 465 && mousePoint.y <= 540))
 		{
-			if (mousePoint.x >= 790 && mousePoint.x <= 920)
+			if (mousePoint.x >= 795 && mousePoint.x <= 938)
 			{
-				exit(0);
+				DrawTexture(quitButtons.at(1), 795, 465, WHITE);
+
+				if(isClicked())
+					exit(0);
 			}
-			else if (mousePoint.x >= 990 && mousePoint.x <= 1110)
+			else if (mousePoint.x >= 1020 && mousePoint.x <= 1125)
 			{
-				isQuitting = false;
-				enable = true;
-				isTransportMenuOn = false;
+				DrawTexture(quitButtons.at(3), 1020, 465, WHITE);
+
+				if (isClicked())
+				{
+					isQuitting = false;
+					enable = true;
+					isTransportMenuOn = false;
+				}
 			}
 		}
 	}

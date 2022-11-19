@@ -54,7 +54,19 @@ Game::Game() {
         choiceFromOptions[i].height = 50;
     }
 
-    confirmationT = LoadTexture("../src/sprites/Menus and boards/Confirmation.png");
+    confirmationT = LoadTexture("../src/sprites/Menus and boards/quitConfirmation.png");
+
+    yesButton = LoadTexture("../src/sprites/Menus and boards/yesClean.png");
+    yesButtonHover = LoadTexture("../src/sprites/Menus and boards/yesHover.png");
+    noButton = LoadTexture("../src/sprites/Menus and boards/noClean.png");
+    noButtonHover = LoadTexture("../src/sprites/Menus and boards/noHover.png");
+
+    quitButtons = {
+        yesButton,
+        yesButtonHover,
+        noButton,
+        noButtonHover,
+    };
 
     //backstoryImg = LoadTexture("../src/sprites/backgrounds/BackstoryFrame.png");
 
@@ -909,7 +921,7 @@ void Game::update()
 
         optionsMenu();
 
-        isUserQuitting(isQuitting, enableClick, mousePoint, confirmationT, darkerWindow, isTransportMenuOn);
+        isUserQuitting(isQuitting, enableClick, mousePoint, confirmationT, darkerWindow, isTransportMenuOn, quitButtons);
 
         EndDrawing();
     }

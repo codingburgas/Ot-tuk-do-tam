@@ -181,7 +181,7 @@ void Player::Movement()
 	
 	move = Rectangle{ playerCords.x, playerCords.y, lim, (float)playerSprite.height };
 	DrawTexture(background, XBg, YBg, WHITE);
-	DrawTexturePro(playerSprite, view, move, playerPos, 0, WHITE);
+	DrawTexturePro(playerSprite, view, move, Vector2{10, 10}, 0, WHITE);
 }
 void Player::CheckWalls()
 {

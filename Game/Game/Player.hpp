@@ -45,8 +45,6 @@ public:
 	Vector2 playerCords;
 	Rectangle move; 
 
-	Vector2 playerPos = { 10, 10 };
-
 	Player();
 	void CheckWalls();
 	void LoadSprites(int fps);
