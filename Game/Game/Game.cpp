@@ -985,6 +985,9 @@ void gameStartup()
 
 void Game::spainLevel()
 {
+    DrawTexture(spainKingdom, 200 + player.XBg, 200 + player.YBg, WHITE);
+    DrawTexture(spainMonument, 1000 + player.XBg, 200 + player.YBg, WHITE);
+
     dialogues("Vankata Smetacha", "Mitio guluba", getBeerQuestDialogue, 2, 1000, 1000, 9, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(9) >= 3 && counterPressed.at(9) <= 4)
@@ -1033,6 +1036,9 @@ void Game::spainLevel()
 
 void Game::franceLevel()
 {
+    DrawTexture(eiffelTower, 0 + player.XBg, 0 + player.YBg, WHITE);
+    DrawTexture(arcDeTriomphe, 0 + player.XBg, 0 + player.YBg, WHITE);
+
     dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, 1, isDialogueV, counterPressed, false);
 
     dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, 0, isDialogueV, counterPressed, false);
@@ -1107,6 +1113,9 @@ void Game::franceLevel()
 
 void Game::italyLevel()
 {
+    DrawTexture(colliseum, 500 + player.XBg, 400 + player.YBg, WHITE);
+    DrawTexture(pizzaTower, 1400 + player.XBg, 600 + player.YBg, WHITE);
+
     if (IsKeyPressed(KEY_Q) && findDistance(player, 2000, 500))
     {
         isGripperPicked = true;
@@ -1288,6 +1297,9 @@ void Game::italyLevel()
 
 void Game::germanyLevel()
 {
+    DrawTexture(kiolnWall, 200 + player.XBg, 500 + player.YBg, WHITE);
+    DrawTexture(germanyKingdom, 1000 + player.XBg, 300 + player.YBg, WHITE);
+
     /*
     dialogues("Vankata Smetacha", "Mitio guluba", startQuestDialogue, 1, 1000, 1000, 7, isDialogueV, counterPressed, false);
 
@@ -1475,6 +1487,9 @@ void Game::bulgariaLevel()
 
 void Game::romaniaLevel()
 {
+    DrawTexture(parlament, 200 + player.XBg, 200 + player.YBg, WHITE);
+    DrawTexture(draculaCastle, 1000 + player.XBg, 200 + player.YBg, WHITE);
+
     dialogues("Vankata Smetacha", "Mitio guluba", getKeyDialogue, 2, 1000, 1000, 4, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(4) >= 3 && counterPressed.at(4) <= 4)
