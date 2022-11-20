@@ -143,16 +143,8 @@ Game::Game() {
 
     targetHover.width -= 5;
     targetHover.height -= 5;
-    
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
     goldenTarget.width = target.width;
     goldenTarget.height = target.height;
-
-=======
->>>>>>> c9dbe085d18971a72b13202defc7916cbd7cc89c
->>>>>>> Stashed changes
     countriesV = {
         {spain, 52.5, 705},
         { france, 330 , 570 },
