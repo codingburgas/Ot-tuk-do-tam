@@ -33,6 +33,7 @@ public:
     Texture2D backstoryImg;
 
     string backstoryText;
+    Texture2D chadBg;
 
     //hover effect variables
     struct country {
@@ -187,7 +188,7 @@ public:
 
     string barrelDialogue[5] = { "Hey bro can you find the barrel?", "Of course mate will you pay me?", "How much?", "Enough!", "" };
     string EiffelDialogue[5] = { "Hey  can i learn something for this!", "This is the most visited monument in the world! \n As France’s symbol in the world, and the showcase of Paris, today it welcomes almost 7 million visitors a year (around 75% of whom are foreigners), making it the most visited monument that you have to pay for in the world.", "Oh really?", "Yes!", "Okay thank you!!!" };
-    string ArcDialogue[5] = { "Hey can you tell me something about this?", "", "The triumphal arch grew out of \n a tradition originating during the Roman Republic. Victorious generals, \nknown as triumphators, had monumental arches erected \nto commemorate their victories.", "Thank you so much!", "" };
+    string ArcDialogue[5] = { "Hey can you tell me something about this?", "Yes!", "The triumphal arch grew out of \n a tradition originating during the Roman Republic."};
     bool isTextEffectEnded;
 
     //quest board 
