@@ -48,6 +48,9 @@ public:
     Texture2D spain, spainHovered;
     Texture2D romaniaHovered;
 
+    //backgrounds
+    Texture2D grBackground, itBackground, romBackground, frBackground, spBackground;
+
     Texture2D menuOptions;
 
     int money;

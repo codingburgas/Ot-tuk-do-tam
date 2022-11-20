@@ -350,6 +350,12 @@ Game::Game() {
         {noodle5, 1100, 600},
         {cheeseNoodles, 1100, 800}
     };
+
+    grBackground = LoadTexture("../src/sprites/backgrounds/grBackground.png");
+    itBackground = LoadTexture("../src/sprites/backgrounds/itBackground.png");
+    romBackground = LoadTexture("../src/sprites/backgrounds/romBackground.png"); 
+    frBackground = LoadTexture("../src/sprites/backgrounds/frBackground.png");  
+    //spBackground = ;
 }
 
 void Game::backstory()
@@ -650,7 +656,7 @@ void Game::mapEurope()
 
             enableClick = false;
             player.CheckDir();
-            player.Movement();
+            player.Movement();     
             unloadBack = false;
             changeCircles[i] = true;
         }
@@ -665,14 +671,21 @@ void Game::mapEurope()
                     {
 
                     case 0:
+                        DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
+
                         spainLevel();
+
+
                         npc.DrawNPCAnimation(player.XBg, player.YBg, i);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                         bulls.Update();
-                        bulls.Draw();
+                        bulls.Draw(player.XBg, player.YBg);
                         break;
 
                     case 1:
+                        DrawTexture(frBackground ,player.XBg, player.YBg, WHITE);
+                        DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
+
                         franceLevel();
                         npc.DrawNPCAnimation(player.XBg, player.YBg, i);  
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
@@ -681,12 +694,18 @@ void Game::mapEurope()
                         break;
 
                     case 2:
+                        DrawTexture(itBackground, player.XBg, player.YBg, WHITE);
+                        DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
+
                         italyLevel();
                         npc.DrawNPCAnimation(player.XBg, player.YBg, i);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
                         break;
 
                     case 3:
+                        DrawTexture(grBackground, player.XBg, player.YBg, WHITE);
+                        DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
+
                         germanyLevel();
                         npc.DrawNPCAnimation(player.XBg, player.YBg, i);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
@@ -700,6 +719,9 @@ void Game::mapEurope()
                         break;
 
                     case 5:
+                        DrawTexture(romBackground, player.XBg, player.YBg, WHITE);
+                        DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
+
                         romaniaLevel();
                         npc.DrawNPCAnimation(player.XBg, player.YBg, i);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);
@@ -708,6 +730,7 @@ void Game::mapEurope()
                     default:
                         break;
                     }
+               
                 }
                
                 if (IsKeyDown(KEY_TAB))

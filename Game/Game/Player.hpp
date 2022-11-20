@@ -7,7 +7,7 @@
 class Player : public Bg, public NPC, public Assassin
 {
 private:
-	Texture2D playerSprite;
+	
 
 	Texture2D u;
 	Texture2D d;
@@ -24,7 +24,7 @@ private:
 	vector<Texture2D> playerSprites;
 	vector<Texture2D> idleSprites;
 
-	Rectangle view;
+	
 	int counter = 0;
 	float lim;
 	bool HorizotnalOrVertical[2];
@@ -44,6 +44,8 @@ public:
 	bool MoveBg;
 	Vector2 playerCords;
 	Rectangle move; 
+	Texture2D playerSprite;
+	Rectangle view;
 
 	Player();
 	void CheckWalls();
