@@ -1486,8 +1486,7 @@ void Game::germanyLevel()
     DrawTexture(kiolnWall, 200 + player.XBg, 215 + player.YBg, WHITE);
     DrawTexture(germanyKingdom, 2200 + player.XBg, 600 + player.YBg, WHITE);
 
-    /*
-    dialogues("Vankata Smetacha", "Mitio guluba", startQuestDialogue, 1, 1000, 1000, 7, isDialogueV, counterPressed, false);
+    dialogues("Vankata Smetacha", "Mitio guluba", startQuestDialogue, 1, 1800, 1200, 7, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(7) >= 2 && counterPressed.at(7) <= 3)
     {
@@ -1507,7 +1506,7 @@ void Game::germanyLevel()
             {
                 if(questV.at(7).acceptQuest)
                     DrawTexture(sausagesV.at(i).sausage, sausagesV.at(i).posX + player.XBg, sausagesV.at(i).posY + player.YBg, WHITE);
-            }            
+            }
         }
 
         for (int i = 0; i < 5; i++) {
@@ -1520,7 +1519,7 @@ void Game::germanyLevel()
 
     if (showSausages[0] && showSausages[1] && showSausages[2] && showSausages[3] && showSausages[4])
     {
-        dialogues("Vankata Smetacha", "Mitio guluba", finishAddictDialogue, 1, 1000, 1000, 8, isDialogueV, counterPressed, false);
+        dialogues("Vankata Smetacha", "Mitio guluba", finishAddictDialogue, 1, 1800, 1200, 8, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(8) >= 2 && counterPressed.at(8) <= 3)
         {
@@ -1528,9 +1527,9 @@ void Game::germanyLevel()
 
             counterPressed.at(8) = 4;
         }
-    }*/
+    }
 
-    dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogue, 1, 1000, 1000, 17, isDialogueV, counterPressed, false);
+    /*dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogue, 1, 1000, 1000, 17, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(17) >= 2 && counterPressed.at(17) <= 3)
     {
@@ -1541,7 +1540,7 @@ void Game::germanyLevel()
 
     if (showPaintingInventory)
     {
-        if(!questV.at(17).openQuest)
+        if (!questV.at(17).openQuest)
             quest(chadTextV, 17);
 
         for (int i = 0; i < 3; i++)
@@ -1568,28 +1567,28 @@ void Game::germanyLevel()
 
             counterPressed.at(18) = 4;
         }
-    }
+    }*/
 
     //minigame
-    dialogues("Vankata Smetacha", "Scientist", getPoisonDialogue, 1, 2000, 1000, 19, isDialogueV, counterPressed, false);
+    dialogues("Vankata Smetacha", "Scientist", getPoisonDialogue, 1, 2000, 300, 19, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(19) >= 2 && counterPressed.at(19) <= 3)
     {
-        showPoisonInventory = true; 
+        showPoisonInventory = true;
 
         finishGetPoisonDialogue = true;
 
         counterPressed.at(19) = 4;
     }
 
-    if(!swapBeers)
-        DrawTexture(beer, 1200 + player.XBg, 1000 + player.YBg, WHITE);
+    if (!swapBeers)
+        DrawTexture(beer, 950 + player.XBg, 1400 + player.YBg, WHITE);
     else
-        DrawTexture(poisonedBeer, 1200 + player.XBg, 1000 + player.YBg, WHITE);
+        DrawTexture(poisonedBeer, 950 + player.XBg, 1400 + player.YBg, WHITE);
 
     if (finishGetPoisonDialogue)
     {
-        if (IsKeyPressed(KEY_Q) && findDistance(player, 1200, 1000))
+        if (IsKeyPressed(KEY_Q) && findDistance(player, 950, 1400))
         {
             swapBeers = true;
             showPoisonInventory = false;
@@ -1598,12 +1597,13 @@ void Game::germanyLevel()
 
     if (swapBeers)
     {
-        dialogues("Vankata Smetacha", "Scientist", finishMinigameDialogue, 1, 2000, 1000, 20, isDialogueV, counterPressed, false);
+        dialogues("Vankata Smetacha", "Scientist", finishMinigameDialogue, 1, 2000, 300, 20, isDialogueV, counterPressed, false);
     }
 
     if (counterPressed.at(20) >= 2 && counterPressed.at(20) <= 3)
     {
-        //nesh sh staa
+        allMoney += 500;
+
         counterPressed.at(20) = 4;
     }
 }
