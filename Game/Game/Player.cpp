@@ -14,9 +14,6 @@ void Player::LoadSprites(int fps)
 	idleL = LoadTexture("../src/sprites/heroSprite/leftIdle.png");
 	idleR = LoadTexture("../src/sprites/heroSprite/rightIdle.png");
 
-	//background
-	//background = LoadTexture("../src/sprites/backgrounds/frBackground.png");
-
 	TableDrink = LoadTexture("../src/sprites/backgrounds/grBackground.png");
 
 	playerSprites.push_back(l);
@@ -34,6 +31,8 @@ void Player::LoadSprites(int fps)
 
 	this->fps = fps;
 }
+
+//player load
 Player::Player()
 {
 	playerCords.x = GetScreenWidth() / 2;
@@ -48,6 +47,7 @@ Player::Player()
 	HeroDir = LEFT;
 }
 
+//find if the player is colliding item
 bool findDistance(Player&player, int posX, int posY)
 {
 	
@@ -60,6 +60,7 @@ bool findDistance(Player&player, int posX, int posY)
 	}
 }
 
+//switch sprite when button is clicked
 void Player::CheckDir()
 {
 	

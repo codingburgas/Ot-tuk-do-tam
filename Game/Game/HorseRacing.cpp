@@ -13,7 +13,7 @@ Racing::Racing()
 		{144, 1244},
 		{144, 1344},
 		{144, 1444}
-	};//kon poziciq
+	};
 
 	horseSpeeds = {
 		{rand() % 50 + 200},
@@ -70,26 +70,25 @@ void Racing::DrawHorseAnimation(int xbg, int ybg)
 					if (allFinished[j])
 					{
 						counterForFinish++;
-						//cout << counterForFinish << endl;
+						
 					}
 				}
 				if (counterForFinish == allFinished.size())
 				{
+					//finish horse
 					for (auto rank : sort)
 					{
 						
 						firstSpeed = rank;
-						//counterPlace++;
 						for (size_t j = 0; j < horseSpeeds.size(); j++)
 						{
 							if (firstSpeed == horseSpeeds[j] && counterIndex < 4) {
 								HorseIndex[counterIndex] = j + 1;
-								//cout << HorseIndex[counterIndex] << " " << j << " " << j + 1 << endl;
 								counterIndex++;
 								break;
 							}
 						}
-						//cout << counterPlace << " " << firstHorseIndex << endl;
+						
 					}
 					DrawRectangle(500, 500, 500, 500, RED);
 					DrawText(("Horse Number " + to_string(HorseIndex[3]) + " is 1th").c_str(), 500, 500, 50, BLACK);
@@ -101,7 +100,7 @@ void Racing::DrawHorseAnimation(int xbg, int ybg)
 				counterForFinish = 0;
 			}
 		}
-
+		//frames to horse
 		for (int i = 0; i < horseRun.size(); i++)
 		{
 			if (counterHorse[i] >= 6)
@@ -150,6 +149,5 @@ void Racing::IfHorseRun(bool run, bool Draw)
 
 	horseRunBool = run;
 	HaveToDraw = Draw;
-	//moveBg = !Draw;
 
 }

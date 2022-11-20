@@ -1559,6 +1559,7 @@ void Game::germanyLevel()
     DrawTexture(kiolnWall, 200 + player.XBg, 215 + player.YBg, WHITE);
     DrawTexture(germanyKingdom, 2200 + player.XBg, 600 + player.YBg, WHITE);
 
+    //saussages collect
     dialogues("Vankata Smetacha", "Mitio guluba", startQuestDialogue, 1, 1800, 1200, 7, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(7) >= 2 && counterPressed.at(7) <= 3)
@@ -1692,6 +1693,7 @@ void Game::romaniaLevel()
     DrawTexture(parlament, 200 + player.XBg, 215 + player.YBg, WHITE);
     DrawTexture(draculaCastle, 2000 + player.XBg, 800 + player.YBg, WHITE);
 
+    //find gripper
     if (IsKeyPressed(KEY_Q) && findDistance(player, 1300, 1000))
     {
         isGripperPicked = true;

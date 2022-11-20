@@ -17,6 +17,8 @@ void Assassin::LoadSprites()
 	position = { 500, 900, (float)SpasNPC.width / 4, (float)SpasNPC.height };
 
 }
+
+//assassin moevement
 void Assassin::CheckMiniGame(bool&check, Rectangle heroRec, bool talk)
 {
 	if (talk)

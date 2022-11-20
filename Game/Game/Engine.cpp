@@ -12,11 +12,13 @@ void setIcon()
 	SetWindowIcon(icon);
 }
 
+//when mouse button is clicked
 bool isClicked()
 {
 	return IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 }
 
+//exit end panel
 void isUserQuitting(bool& isQuitting, bool& enable, Vector2& mousePoint, Texture2D& confirmationT, Color& darkerWindow, bool& isTransportMenuOn, vector<Texture2D> quitButtons)
 {
 	if (isQuitting)
