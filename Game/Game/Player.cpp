@@ -15,7 +15,7 @@ void Player::LoadSprites(int fps)
 	idleR = LoadTexture("../src/sprites/heroSprite/rightIdle.png");
 
 	//background
-	background = LoadTexture("../src/sprites/backgrounds/frBackground.png");
+	//background = LoadTexture("../src/sprites/backgrounds/frBackground.png");
 
 	TableDrink = LoadTexture("../src/sprites/backgrounds/grBackground.png");
 
@@ -113,7 +113,7 @@ void Player::Movement()
 	{
 		//cout << renameMe << "Jungle" << endl;
 		animationSpeed = 6;
-		cout << speed.x << endl;
+		//cout << speed.x << endl;
 		playerSprite = playerSprites.at(int(HeroDir));
 	}
 	else if (!HorizotnalOrVertical[0] && !HorizotnalOrVertical[1] )
@@ -220,5 +220,5 @@ void Player::UnLoadTextures()
 	UnloadTexture(idleR);
 	UnloadTexture(idleU);
 
-	UnloadTexture(background);
+	//UnloadTexture(background);
 }
