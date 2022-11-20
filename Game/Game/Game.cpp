@@ -430,6 +430,10 @@ Game::Game() {
     chadTextV.at(14) = { "Make pizza!", "Collect all the ingedients,\n give them to\nthe baker and return the pizza", "Reward:           1000$" };
     chadTextV.at(17) = { "Collect the paintings!", "Collect the paintings.", "Reward:           750$" };
     chadTextV.at(24) = { "Collect the noodles!", "Collect the noodles.", "Reward:           750$" };
+
+    tomato = LoadTexture("../src/sprites/inner country elements/spain/tomato.png");
+    tomato.width = 100;
+    tomato.height = 100;
 }
 
 void Game::backstory()
@@ -1169,8 +1173,21 @@ void Game::spainLevel()
 {
     DrawTexture(spainKingdom, 100 + player.XBg, 100 + player.YBg, WHITE);
     DrawTexture(spainMonument, 100 + player.XBg, 1050 + player.YBg, WHITE);
-
+    
     dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogue, 1, 1600, 200, 17, isDialogueV, counterPressed, false);
+
+    if (!getTomato)
+    {
+        DrawTexture(tomato, 2725 + player.XBg, 650 + player.YBg, WHITE);
+    }
+
+    if(findDistance(player, 2725, 650) && IsKeyPressed(KEY_Q))
+        getTomato = true;
+
+    if (getTomato && findDistance(player, 1600, 900) && IsKeyPressed(KEY_Q))
+    {
+        allMoney += 500;
+    }
 
     if (counterPressed.at(17) >= 2 && counterPressed.at(17) <= 3)
     {

@@ -225,7 +225,7 @@ public:
     vector<isItem> isItemV;
     
     Texture2D barrel;
-
+    Texture2D tomato;
     vector<Texture2D> items;
 
     //quest texts
@@ -339,6 +339,8 @@ public:
     bool showPoisonInventory, finishGetPoisonDialogue;
     bool swapBeers;
 
+
+    bool getTomato;
     //murder mystery
     Texture2D loop;
     bool showLoop;
