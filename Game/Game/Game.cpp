@@ -59,7 +59,15 @@ Game::Game() {
     rectangleQuit.width = 200;
     rectangleQuit.height = 85;
 
+    backButton.x = 1800;
+    backButton.y = 940;
+    backButton.width = 125;
+    backButton.height = 100;
+
     allPoints = 5000 + rand() % 1000;
+
+    backButtonClean = LoadTexture("../src/sprites/menus and boards/mapIconClean.png");
+    backButtonHover = LoadTexture("../src/sprites/menus and boards/mapIconHover.png");
 
     for (int i = 0; i < 3; i++)
     {
@@ -827,14 +835,19 @@ void Game::mapEurope()
                     showInventory();
                 }
 
-                DrawCircleGradient(backCircle.x, backCircle.y, 30, GREEN, SKYBLUE);
+                DrawTexture(backButtonClean, 1800, 940, WHITE);
+
+                if (CheckCollisionPointRec(mousePoint, backButton) && !isClicked())
+                {
+                    DrawTexture(backButtonHover, 1800, 940, WHITE);
+                }
             }
             else {
                 DrawTexture(countriesHoveredV[i].country, countriesHoveredV[i].x, countriesHoveredV[i].y, WHITE);
                 isTransportMenuOn = false;
             }
 
-            if (isClicked() && CheckCollisionPointCircle(mousePoint, backCircle, 30))
+            if (isClicked() && CheckCollisionPointRec(mousePoint, backButton))
             {
                 enableClick = true;
                 //countries[i] = 0;

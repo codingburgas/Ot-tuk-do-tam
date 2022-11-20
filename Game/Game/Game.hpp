@@ -25,6 +25,10 @@ public:
     bool EnterOnce;
     int fps = 60;
 
+    Texture2D backButtonClean;
+    Texture2D backButtonHover;
+
+    Rectangle backButton;
 
     Texture2D chadFr, scientist, addict, tourguideGreen, tourguideYellow, policeman, rival;
     //fonts
