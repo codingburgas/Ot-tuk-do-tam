@@ -161,17 +161,20 @@ public:
 
     vector<Texture2D> quitButtons;
 
+    Rectangle Fader;
+
+    Texture gameIsFinished;
+
     //money mechanic 
     Texture2D moneyBackground;
     int allMoney, allMoneyCopy, moneySpent;
     string printMoney, allMoneyCopyPrint, moneySpentPrint;
     Sound moneySound;
 
-    //points mechanic
-    int points;
-
     //dialogue mechanic
     Texture2D dialogueBox, finishedDialogueArrow;
+
+    Texture goldenTarget;
 
     struct isDialogue {
         bool isDialogueStarted;
@@ -235,6 +238,12 @@ public:
     vector<int> counterPressed;
 
     bool isBulgariaEnd;
+
+    Rectangle rectangleQuit;
+
+    string pointText;
+    int points;
+    int allPoints;
 
     Texture2D horse;
 

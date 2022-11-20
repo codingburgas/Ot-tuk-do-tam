@@ -38,8 +38,8 @@ Game::Game() {
     circles[3].y = 550;
 
     //bulgaria
-    circles[4].x = 1362;
-    circles[4].y = 825;
+    circles[4].x = -1362;
+    circles[4].y = -825;
 
     //romania
     circles[5].x = 1350;
@@ -47,6 +47,19 @@ Game::Game() {
 
     backCircle.x = 1800;
     backCircle.y = 785;
+
+    Fader.x = 0;
+    Fader.y = 0;
+    Fader.width = 1920;
+    Fader.height = 1080;
+
+
+    rectangleQuit.x = 850;
+    rectangleQuit.y = 780;
+    rectangleQuit.width = 200;
+    rectangleQuit.height = 85;
+
+    allPoints = 5000 + rand() % 1000;
 
     for (int i = 0; i < 3; i++)
     {
@@ -57,6 +70,10 @@ Game::Game() {
     }
 
     confirmationT = LoadTexture("../src/sprites/Menus and boards/quitConfirmation.png");
+
+    goldenTarget = LoadTexture("../src/sprites/Map images/goldenTarget.png");
+
+    gameIsFinished = LoadTexture("../src/sprites/Map images/gameFinishedScreen.png");
 
     yesButton = LoadTexture("../src/sprites/Menus and boards/yesClean.png");
     yesButtonHover = LoadTexture("../src/sprites/Menus and boards/yesHover.png");
@@ -94,7 +111,6 @@ Game::Game() {
     moneyColor = { 51, 171, 69, 255 };
 
     //hover effect variables
-    bulgaria = LoadTexture("../src/sprites/countries/Bulgaria.png");
     france = LoadTexture("../src/sprites/countries/France.png");
     germany = LoadTexture("../src/sprites/countries/Germany.png");
     italy = LoadTexture("../src/sprites/countries/Italy.png");
@@ -128,12 +144,21 @@ Game::Game() {
     targetHover.width -= 5;
     targetHover.height -= 5;
     
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+    goldenTarget.width = target.width;
+    goldenTarget.height = target.height;
+
+=======
+>>>>>>> c9dbe085d18971a72b13202defc7916cbd7cc89c
+>>>>>>> Stashed changes
     countriesV = {
         {spain, 52.5, 705},
         { france, 330 , 570 },
         { italy, 682.5, 720 },
-        {  germany, 720 , 487.5 },
-        { bulgaria, 1267.5 , 810 },
+        { germany, 720 , 487.5 },
+        { bulgaria, -200 , -810 },
         { romania, 1200 , 690 }
     };
 
@@ -142,10 +167,12 @@ Game::Game() {
         { franceHovered, 330 , 570 },
         { italyHovered, 682.5, 720 },
         { germanyHovered, 720 , 487.5 },
-        { bulgariaHovered, 1267.5 , 810 },
+        { bulgariaHovered, -1267.5 , -810 },
         { romaniaHovered, 1200 , 690 }
     };
 
+
+    isBulgariaEnd = true;
     optionImage = LoadTexture("../src/sprites/Map images/settingsButtonClean.png");
     optionImageHovered = LoadTexture("../src/sprites/Map images/settingsButtonHover.png");
     optionImageClicked = LoadTexture("../src/sprites/Map images/settingsButtonPressed.png");
@@ -170,7 +197,6 @@ Game::Game() {
     okCleanButtonTransportMenu = LoadTexture("../src/sprites/Map images/okCLean.png");
     okHoverButtonTransportMenu = LoadTexture("../src/sprites/Map images/okHover.png");
 
-    touranSound = LoadSound("../Audios/Touran.mp3");
     trainSound = LoadSound("../Audios/Train.mp3");
     planeSound = LoadSound("../Audios/Plane.mp3");
     moneySound = LoadSound("../Audios/Money.mp3");
@@ -309,6 +335,8 @@ Game::Game() {
         {2000, 520},
         {2000, 720},
     };
+
+
 
     italyBackground = LoadTexture("../src/sprites/backgrounds/itBackground.png");
     boat = LoadTexture("../src/sprites/inner country elements/italy/boat.png");
@@ -534,7 +562,6 @@ void Game::mapEurope()
         enableClick = false;
         isTransportMenuOn = true;
     }
-    //cout << mousePoint.x << " " << mousePoint.y << endl;
 
     printMoney = to_string(allMoneyCopy);
 
@@ -584,18 +611,7 @@ void Game::mapEurope()
         }
     }
     
-    if (isBulgariaEnd)
-    {
-        if (!hideCountries)
-        {
-            DrawTexture(target, circles[4].x - 20, circles[4].y - 5, WHITE);
-
-            if (CheckCollisionPointCircle(mousePoint, circles[4], 30))
-            {
-                hoverEffects(countriesV[4].country, countriesV[4].x, countriesV[4].y, circles[4].x - 20, circles[4].y - 5);
-            }
-        }
-    }
+    
 
     if (plane.planeCurrentPosX < countryPositions.at(countryFly).x)
     {
@@ -861,6 +877,37 @@ void Game::mapEurope()
         mainMenuDialogue = false;
 
         counterPressed.at(27) = 4;
+    }
+
+    if (isBulgariaEnd)
+    {
+        DrawTexture(goldenTarget, circles[5].x, circles[5].y + 100, WHITE);
+        DrawRectangleRec(Fader, Fade(BLACK, 0.7));
+        DrawTexture(gameIsFinished, 400, 175, WHITE);
+
+        if (points < allPoints)
+        {
+            points += 50;
+        }
+
+        pointText = to_string(points);
+
+        DrawText(pointText.c_str(), 1015, 485, 70, BLACK);
+
+        DrawText("Score: ", 725,475, 80,BLACK);
+
+        DrawTexture(quit, 875, 780, WHITE);
+
+        DrawRectangleRec(rectangleQuit, BLANK);
+
+        if (CheckCollisionPointRec(mousePoint, rectangleQuit) && isClicked())
+        {
+            isQuitting = true;
+        }
+        else if (CheckCollisionPointRec(mousePoint, rectangleQuit) && !isClicked())
+        {
+            DrawTexture(quitHover,875,780, WHITE);
+        }
     }
 }
 
