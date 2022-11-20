@@ -157,10 +157,10 @@ Game::Game() {
     okCleanButtonTransportMenu = LoadTexture("../src/sprites/Map images/okCLean.png");
     okHoverButtonTransportMenu = LoadTexture("../src/sprites/Map images/okHover.png");
 
-    /*touranSound = LoadSound("../Audios/Touran.mp3");
+    touranSound = LoadSound("../Audios/Touran.mp3");
     trainSound = LoadSound("../Audios/Train.mp3");
     planeSound = LoadSound("../Audios/Plane.mp3");
-    moneySound = LoadSound("../Audios/Money.mp3");*/
+    moneySound = LoadSound("../Audios/Money.mp3");
 
     mapMusic = LoadSound("../Audios/mapMusic.mp3");
 
@@ -315,6 +315,24 @@ Game::Game() {
     fillCheck = LoadTexture("../src/sprites/Map images/check.png");
 
     suspectBetMenu = LoadTexture("../src/sprites/inner country elements/romania/killerMenu.png");
+
+    //landmark
+
+    //france
+    eiffelTower = LoadTexture("../src/sprites/inner country elements/france/eifelTower.png"); 
+    arcDeTriomphe = LoadTexture("../src/sprites/inner country elements/france/triumfalnaArka.png");
+    //italy
+    colliseum = LoadTexture("../src/sprites/inner country elements/italy/colliseum.png");
+    pizzaTower = LoadTexture("../src/sprites/inner country elements/italy/pizza.png");
+    //germany
+    kiolnWall = LoadTexture("../src/sprites/inner country elements/germany/kionWall.png");
+    germanyKingdom = LoadTexture("../src/sprites/inner country elements/germany/germanyKingdom.png");
+    //spain
+    spainKingdom = LoadTexture("../src/sprites/inner country elements/spain/spainKingdom.png");
+    spainMonument = LoadTexture("../src/sprites/inner country elements/spain/spainMonument.png");
+    //romania
+    draculaCastle = LoadTexture("../src/sprites/inner country elements/romania/castle.png");
+    parlament = LoadTexture("../src/sprites/inner country elements/romania/parlament.png");
 }
 
 void Game::backstory()

@@ -405,6 +405,19 @@ public:
     int horseBet;
 
     Texture2D romania;
+
+    //landmarks
+
+    //france
+    Texture2D eiffelTower, arcDeTriomphe;
+    //italy
+    Texture2D colliseum, pizzaTower;
+    //germany
+    Texture2D kiolnWall, germanyKingdom;
+    //spain
+    Texture2D spainKingdom, spainMonument;
+    //romania
+    Texture2D draculaCastle, parlament;
 public:
 
     Game();
