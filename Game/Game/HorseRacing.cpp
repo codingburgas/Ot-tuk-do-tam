@@ -29,6 +29,9 @@ Racing::Racing()
 	HaveToDraw = 0;
 	counterPlace = 0;
 	allFinished = {0,0,0,0};
+	firstSpeed = 0;
+	counterIndex = 0;
+	HorseIndex = { 0,0,0,0 };
 }
 void Racing::LoadSprites()
 {
@@ -72,25 +75,27 @@ void Racing::DrawHorseAnimation(int xbg, int ybg)
 				}
 				if (counterForFinish == allFinished.size())
 				{
-					DrawRectangle(500, 500, 500, 500, RED);
 					for (auto rank : sort)
 					{
 						
-						counterPlace++;
-						if (counterPlace == 1){
-							firstSpeed = rank;
-						}
-						for (size_t i = 0; i < horseSpeeds.size(); i++)
+						firstSpeed = rank;
+						//counterPlace++;
+						for (size_t j = 0; j < horseSpeeds.size(); j++)
 						{
-							if (firstSpeed == horseSpeeds[i]) {
-								firstHorseIndex = i;
+							if (firstSpeed == horseSpeeds[j] && counterIndex < 4) {
+								HorseIndex[counterIndex] = j + 1;
+								//cout << HorseIndex[counterIndex] << " " << j << " " << j + 1 << endl;
+								counterIndex++;
 								break;
 							}
 						}
-						DrawText(("Horse with speed " + to_string(rank)).c_str(), 500, 480 + (20 * counterPlace), 20, BLACK);
-						DrawText(("is " + to_string(counterPlace) + "th").c_str(), 800, 480 + (20 * counterPlace), 20, BLACK);
 						//cout << counterPlace << " " << firstHorseIndex << endl;
 					}
+					DrawRectangle(500, 500, 500, 500, RED);
+					DrawText(("Horse Number " + to_string(HorseIndex[3]) + " is 1th").c_str(), 500, 500, 50, BLACK);
+					DrawText(("Horse Number " + to_string(HorseIndex[2]) + " is 2th").c_str(), 500, 550, 50, BLACK);
+					DrawText(("Horse Number " + to_string(HorseIndex[1]) + " is 3th").c_str(), 500, 600, 50, BLACK);
+					DrawText(("Horse Number " + to_string(HorseIndex[0]) + " is 4th").c_str(), 500, 650, 50, BLACK);
 					counterPlace = 0;
 				}
 				counterForFinish = 0;

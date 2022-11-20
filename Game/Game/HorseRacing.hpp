@@ -21,11 +21,12 @@ private:
 	bool HaveToDraw;
 
 	unsigned counterPlace;
+	unsigned counterIndex;
 	int counterForFinish = 0;
 
 public:
 	int firstSpeed;
-	int firstHorseIndex;
+	vector<int>HorseIndex;
 	Racing();
 	void LoadSprites();
 	void DrawHorseAnimation(int xbg, int ybg);
