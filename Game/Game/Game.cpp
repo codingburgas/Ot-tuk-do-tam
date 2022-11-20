@@ -1213,7 +1213,7 @@ void Game::italyLevel()
                 DrawTexture(logicGameItemsV.at(i).texture, logicGameItemsV.at(i).posX + player.XBg, logicGameItemsV.at(i).posY + player.YBg, WHITE);
             }
 
-            if (itemGet.at(i) && !changeBoatPos)
+            if (itemGet.at(i) && !changeBoatPos && !itemOnOtherSide.at(i))
             {
                 DrawTexture(itemInBoat, 1250 + player.XBg, 400 + player.YBg, WHITE);
             }
@@ -1295,20 +1295,19 @@ void Game::italyLevel()
 
             if (mousePoint.y >= 190 && mousePoint.y <= 290 && isClicked() && itemGet.at(0))
             {
-                itemGet.at(0) = true;
+                itemGet.at(0) = false;
 
                 itemOnOtherSideCounter.at(0)++;
             }
             else if (mousePoint.y >= 380 && mousePoint.y <= 490 && isClicked() && itemGet.at(1))
             {
-                itemGet.at(1) = true;
+                itemGet.at(1) = false;
 
                 itemOnOtherSideCounter.at(1)++;
             }
             else if (mousePoint.y >= 555 && mousePoint.y <= 715 && isClicked() && itemGet.at(2))
             {
-
-                itemGet.at(2) = true;
+                itemGet.at(2) = false;
 
                 itemOnOtherSideCounter.at(2)++;
             }
@@ -1425,7 +1424,6 @@ void Game::germanyLevel()
             if (!showPaintings[i] && questV.at(17).acceptQuest)
                 DrawTexture(paintingV.at(i).painting, paintingV.at(i).posX + player.XBg, paintingV.at(i).posY + player.YBg, WHITE);
         }
-
 
         for (int i = 0; i < 3; i++) {
             if (IsKeyPressed(KEY_Q) && findDistance(player, paintingV.at(i).posX, paintingV.at(i).posY))
