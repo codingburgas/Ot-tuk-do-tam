@@ -1331,7 +1331,7 @@ void Game::italyLevel()
             changeBoatPosCounter = 0;
         }
 
-        if ((itemOnOtherSide.at(0) && !itemOnOtherSide.at(1) && !itemOnOtherSide.at(2)) || (!itemOnOtherSide.at(0) && itemOnOtherSide.at(1) && itemOnOtherSide.at(2)))
+        if ((itemOnOtherSide.at(0) && !itemOnOtherSide.at(1) && !itemOnOtherSide.at(2)))
         {
             for (int i = 0; i < 3; i++)
             {
