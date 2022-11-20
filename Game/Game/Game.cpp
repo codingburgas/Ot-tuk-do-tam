@@ -1151,9 +1151,11 @@ void Game::franceLevel()
 
 
     //return item
-    dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, 1, isDialogueV, counterPressed, false);
+    dialogues("Vankata", "Chad", barrelDialogue, 3, 1000, 1000, 1, isDialogueV, counterPressed, false);
 
-    dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, 0, isDialogueV, counterPressed, false);
+    dialogues("Vankata", "Chad", EiffelDialogue, 3, 2000, 1000, 0, isDialogueV, counterPressed, false);
+
+    dialogues("Vankata", "Chad", ArcDialogue, 3, 2000, 1000, 29, isDialogueV, counterPressed, false);
 
     if (!isItemV.at(1).isItemPicked && !isItemV.at(1).isDelivered && counterPressed.at(1) >= 4 && counterPressed.at(1) <= 5)
     {
