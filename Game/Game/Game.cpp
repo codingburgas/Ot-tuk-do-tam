@@ -324,15 +324,42 @@ Game::Game() {
     //italy
     colliseum = LoadTexture("../src/sprites/inner country elements/italy/colliseum.png");
     pizzaTower = LoadTexture("../src/sprites/inner country elements/italy/pizza.png");
+
+    colliseum.width *= 2;
+    colliseum.height *= 2;
+
+    pizzaTower.width *= 2;
+    pizzaTower.height *= 2;
     //germany
     kiolnWall = LoadTexture("../src/sprites/inner country elements/germany/kionWall.png");
     germanyKingdom = LoadTexture("../src/sprites/inner country elements/germany/germanyKingdom.png");
+
+    kiolnWall.width *= 2.5;
+    kiolnWall.height *= 2.5;
+
+    germanyKingdom.width *= 2;
+    germanyKingdom.height *= 2;
     //spain
     spainKingdom = LoadTexture("../src/sprites/inner country elements/spain/spainKingdom.png");
+
+    spainKingdom.width *= 3;
+    spainKingdom.height *= 3;
+
     spainMonument = LoadTexture("../src/sprites/inner country elements/spain/spainMonument.png");
+
+    spainMonument.width *= 2;
+    spainMonument.height *= 2;
+
     //romania
     draculaCastle = LoadTexture("../src/sprites/inner country elements/romania/castle.png");
     parlament = LoadTexture("../src/sprites/inner country elements/romania/parlament.png");
+
+    draculaCastle.width *= 3;
+    draculaCastle.height *= 3;
+
+    parlament.width *= 2.5;
+    parlament.height *= 2.5;
+
 
     noodle1 = LoadTexture("../src/sprites/inner country elements/italy/noodles/noodles1.png");
     noodle2 = LoadTexture("../src/sprites/inner country elements/italy/noodles/noodles2.png");
@@ -353,7 +380,7 @@ Game::Game() {
 
     grBackground = LoadTexture("../src/sprites/backgrounds/grBackground.png");
     itBackground = LoadTexture("../src/sprites/backgrounds/itBackground.png");
-    romBackground = LoadTexture("../src/sprites/backgrounds/romBackground.png"); 
+    romBackground = LoadTexture("../src/sprites/backgrounds/roBackground.png"); 
     frBackground = LoadTexture("../src/sprites/backgrounds/frBackground.png");  
     spBackground = LoadTexture("../src/sprites/backgrounds/spBackground.png");
 
@@ -383,8 +410,6 @@ void Game::hoverEffects(Texture2D& country, float posx, float posy, float posxTa
 void Game::moveAirplane(const countryPosition& countryPosition)
 {
     Vector2 difference = { countryPosition.x - plane.planeCurrentPosX,  countryPosition.y - plane.planeCurrentPosY };
-
-    //cout << difference.x << " " << difference.y << endl;
 
     float rotation = atan2(difference.y, difference.x) * 180 / PI;
 
