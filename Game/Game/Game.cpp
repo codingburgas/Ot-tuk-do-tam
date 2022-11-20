@@ -355,7 +355,15 @@ Game::Game() {
     itBackground = LoadTexture("../src/sprites/backgrounds/itBackground.png");
     romBackground = LoadTexture("../src/sprites/backgrounds/romBackground.png"); 
     frBackground = LoadTexture("../src/sprites/backgrounds/frBackground.png");  
-    //spBackground = ;
+    spBackground = LoadTexture("../src/sprites/backgrounds/spBackground.png");
+
+    chadTextV.at(1) = { "Pickup the heart", "Go to the heart and take it.", "Reward:           1000$" };
+    chadTextV.at(3) = { "Get the key and combine it!", "Find other itema and go combine it", "Reward:           750$" };
+    chadTextV.at(6) = { "Collect all the sausages!", "Collect all the sausages", "Reward:           1000$" };
+    chadTextV.at(8) = { "Buy Chad a beer!", "Buy Chad a beer", "Reward:           750$" };
+    chadTextV.at(13) = { "Make pizza!", "Collect all the ingedients, give them to\nthe baker and return the pizza", "Reward:           1000$" };
+    chadTextV.at(16) = { "Collect the paintings!", "Collect the paintings.", "Reward:           750$" };
+    chadTextV.at(23) = { "Collect the noodles!", "Collect the noodles.", "Reward:           750$" };
 }
 
 void Game::backstory()
@@ -671,10 +679,10 @@ void Game::mapEurope()
                     {
 
                     case 0:
+                        DrawTexture(spBackground, player.XBg, player.YBg, WHITE);
                         DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
 
                         spainLevel();
-
 
                         npc.DrawNPCAnimation(player.XBg, player.YBg, i);
                         npc.DrawDotsAnimation(player.XBg, player.YBg, i);

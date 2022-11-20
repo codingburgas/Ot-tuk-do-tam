@@ -225,36 +225,7 @@ public:
         string reward;
     };
 
-    vector<chadText> chadTextV = 
-    { 
-        {"", "", ""}, 
-        {"Pickup the heart", "Go to the heart and take it.", "Reward:           1000$"},
-        {"Return the gripper!", "Find the man/woman who lost\nhis gripper and return it", "Reward:           500$"},
-        {"", "", ""},
-        {"Get the key and combine it!", "Find other itema and go combine it", "Reward:           750$"},
-        {"", "", ""},
-        {"", "", ""},
-        {"Collect all the sausages!", "Collect all the sausages", "Reward:           1000$"},
-        {"", "", ""},
-        {"Buy Chad a beer!", "Buy Chad a beer", "Reward:           750$"},
-        {"", "", ""},
-        {"", "", ""},
-        {"", "", ""},
-        {"", "", ""},
-        {"Make pizza!", "Collect all the ingedients, give them to\nthe baker and return the pizza", "Reward:           1000$"},
-        {"", "", ""},
-        {"", "", ""},
-        {"Collect the paintings!", "Collect the paintings.", "Reward:           750$"},
-        {"", "", ""},
-        {"", "", ""},
-        {"", "", ""},
-        {"", "", ""},
-        {"", "", ""},
-        {"", "", ""},
-        {"Collect the noodles!", "Collect the noodles.", "Reward:           750$"},
-        {"", "", ""},
-        {"", "", ""},
-    };
+    vector<chadText> chadTextV;
 
     vector<int> counterPressed;
 
