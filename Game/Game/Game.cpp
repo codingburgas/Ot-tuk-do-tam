@@ -652,7 +652,8 @@ void Game::mapEurope()
                 countries[i] = 0;
             else
             {
-                countries[coutnryNumber] = 1;
+                countries[coutnryNumber] = 1; cout << coutnryNumber <<endl;
+
                 //change this switch to set up relative positions to hero in diff countries
                 switch (coutnryNumber)
                 {
@@ -767,6 +768,8 @@ void Game::mapEurope()
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 4, chadBg, 1600, 900);
 
                         bulls.Update();
+                        bulls.IfDisplayed(1);
+                        bulls.CheckCollisionBulls(player.move, player.playerCords);
                         bulls.Draw(player.XBg, player.YBg);
                         break;
 

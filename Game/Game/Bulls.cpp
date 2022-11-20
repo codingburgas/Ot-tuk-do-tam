@@ -6,14 +6,10 @@ Bulls::Bulls()
 	bullsSprites.resize(3);
 	srand(time(0));
 	bullsPositions = {
-		{449, 344},
-		{801, 444},
-		{449, 544},
-		{801, 644},
-		{449, 744},
-		{801, 844}
+		{2349, 544},
+		{2741, 744},
+		{2349, 944},
 	};
-
 	bullsSpeeds = {
 		{rand() % 100 + 50},
 		{rand() % 100 + 50},
@@ -25,13 +21,25 @@ Bulls::Bulls()
 
 	bullsBool = 0;
 	HaveToDraw = 0;
-	counterFrame = { 0,0,0 };
+	counterFrame = {0,0,0};
+	moveBulls.resize(3);
 }
+void Bulls::CheckCollisionBulls(Rectangle move, Vector2& plyercords)
+{
+	for (size_t i = 0; i < moveBulls.size(); i++)
+	{
+		if (CheckCollisionRecs(move, moveBulls[i])) {
 
+			plyercords.x = GetScreenWidth() / 2 - 200;
+			plyercords.y = GetScreenHeight() / 2 - 200;
+
+		}
+	}
+}
 void Bulls::LoadSprites()
 {
 
-	black_bull_left = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/blacê_bull_left.png");
+	black_bull_left = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/black_bull_left.png");
 	black_bull_right = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/black_bull_right.png");
 	brown_bull_left = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/brown_bull_left.png");
 	brown_bull_right = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/brown_bull_right.png");
@@ -81,7 +89,10 @@ void Bulls::Draw(int xbg, int ybg)
 				bullsRectangle[i].x = bullsSpritesLeft[i].width / 3;
 			}
 			counterFrame[i]++;
-			DrawTextureRec(bullsSprites[i], bullsRectangle[i], { bullsPositions[i].x + xbg, bullsPositions[i].y + ybg }, WHITE);
+
+			moveBulls[i] = Rectangle{bullsPositions[i].x + xbg, bullsPositions[i].y + ybg, (float)bullsSpritesLeft[i].width / 3, (float)bullsSpritesLeft[i].height};
+
+			DrawTexturePro(bullsSprites[i], bullsRectangle[i], moveBulls[i], Vector2{10, 10}, 0, WHITE);
 		}
 	}
 
@@ -90,11 +101,11 @@ void Bulls::Update()
 {
 	for (size_t i = 0; i < bullsSpritesLeft.size(); i++)
 	{
-		if (bullsPositions[i].x > 800) {
+		if (bullsPositions[i].x > 2740) {
 			bullsSprites[i] = bullsSpritesLeft[i];
 			bullsSpeeds[i] = -100;
 		}
-		else if (bullsPositions[i].x < 450) {
+		else if (bullsPositions[i].x < 2350) {
 			bullsSprites[i] = bullsSpritesRight[i];
 
 			bullsSpeeds[i] = 100;

@@ -48,9 +48,9 @@ public:
 	Rectangle view;
 
 	Player();
-	void CheckWalls();
 	void LoadSprites(int fps);
 	void Movement();                                                                                                                                                                                                                                                                                 
 	void CheckDir();
+	void CheckWalls();
 	void UnLoadTextures();
 };

@@ -18,10 +18,12 @@ private:
 	bool bullsBool;
 	bool HaveToDraw;
 public:
+	vector<Rectangle> moveBulls;
 	Bulls();
 	void LoadSprites();
 	void Draw(int xbg, int ybg);
 	void Update();
 	void IfDisplayed(bool draw);
+	void CheckCollisionBulls(Rectangle move, Vector2&playrechords);
 
 };
