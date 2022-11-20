@@ -81,6 +81,8 @@ Game::Game() {
         npc.SetupSprites(i);
     }
 
+    mainMenuDialogue = true;
+
     plane.planeCurrentPosX = 1360;
     plane.planeCurrentPosY = 850;
 
@@ -803,11 +805,20 @@ void Game::mapEurope()
 
     DrawTexture(moneyBackground, 7, 30, WHITE);
     DrawText(printMoney.c_str(), 85, 50, 50, moneyColor);
+
+    dialogues("Narrator", "Vankata smetacha", menuDialogue, 1, 1000, 1000, 27, isDialogueV, counterPressed, true);
+
+    if (counterPressed.at(27) >= 2 && counterPressed.at(27) <= 3)
+    {
+        mainMenuDialogue = false;
+
+        counterPressed.at(27) = 4;
+    }
 }
 
 void Game::dialogues(string firstName, string secondName, string characterDialogues[], int dialogueLength, int chadCordsX, int chadCordsY, int index, vector<isDialogue>& isDialogue, vector<int>& counterPressed, bool ePressed)
 {
-    if(findDistance(player, chadCordsX, chadCordsY))
+    if(findDistance(player, chadCordsX, chadCordsY) || mainMenuDialogue)
     {
         if ((IsKeyDown(KEY_E) || ePressed) && !isDialogue.at(index).isDialogueEntered)
         {
@@ -818,13 +829,13 @@ void Game::dialogues(string firstName, string secondName, string characterDialog
 
         if (isDialogue.at(index).isDialogueStarted && !isDialogue.at(index).isDialogueContinued)
         {
-            DrawTexture(dialogueBox, 0, 715, WHITE);
+            DrawTexture(dialogueBox, 278, 715, WHITE);
 
-            DrawTextEx(headerFont, firstName.c_str(), { 50, 750 }, 24, 5, textColor);
+            DrawTextEx(headerFont, firstName.c_str(), { 328, 750 }, 24, 5, textColor);
 
-            DrawText(characterDialogues[counterPressed.at(index)].c_str(), 40, 900, 24, textColor);
+            DrawText(characterDialogues[counterPressed.at(index)].c_str(), 368, 900, 24, textColor);
 
-            DrawTexture(finishedDialogueArrow, 1290, 965, WHITE);   
+            DrawTexture(finishedDialogueArrow, 1518, 965, WHITE);   
         }
 
         if (IsKeyPressed(KEY_ENTER) && isDialogue.at(index).isDialogueEntered)
@@ -837,19 +848,19 @@ void Game::dialogues(string firstName, string secondName, string characterDialog
         
         if (isDialogue.at(index).isDialogueContinued && !isDialogue.at(index).isDialogueStarted && counterPressed.at(index) <= dialogueLength)
         {
-            DrawTexture(dialogueBox, 0, 715, WHITE);
+            DrawTexture(dialogueBox, 278, 715, WHITE);
 
             if (counterPressed.at(index) % 2 == 0 && counterPressed.at(index) > 0)
             {
-                DrawTextEx(headerFont, secondName.c_str(), { 50, 750 }, 24, 5, textColor);
+                DrawTextEx(headerFont, secondName.c_str(), { 328, 750 }, 24, 5, textColor);
             }
             else {
-                DrawTextEx(headerFont, firstName.c_str(), { 50, 750 }, 24, 5, textColor);
+                DrawTextEx(headerFont, firstName.c_str(), { 328, 750 }, 24, 5, textColor);
             }
        
-            DrawText(characterDialogues[counterPressed.at(index)].c_str(), 40, 900, 24, textColor);
+            DrawText(characterDialogues[counterPressed.at(index)].c_str(), 328, 900, 24, textColor);
 
-            DrawTexture(finishedDialogueArrow, 1290, 965, WHITE);          
+            DrawTexture(finishedDialogueArrow, 1518, 965, WHITE);          
         }
     }
 }
@@ -1760,7 +1771,7 @@ void Game::mainMenu()
             {
                 isGameStarted = true;
                 StopSound(mapMusic);
-            }      
+            }    
         }
 
         if (mousePoint.x >= 878 && mousePoint.x <= 1043 && mousePoint.y >= 790 && mousePoint.y <= 863)
@@ -1775,5 +1786,5 @@ void Game::mainMenu()
         }
     }     
     else
-        mapEurope();
+        mapEurope();   
 }

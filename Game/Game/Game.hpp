@@ -81,6 +81,7 @@ public:
     Texture2D transportMenu;
     Texture2D okCleanButtonTransportMenu;
     Texture2D okHoverButtonTransportMenu;
+    bool mainMenuDialogue;
 
     Texture2D audioIsOn;
 
@@ -411,6 +412,9 @@ public:
 
     bool showNoodleInventory;
     bool showNoodles[6];
+
+    string menuDialogue[2] = { "Da", "Dobre" };
+    bool newGameClicked;
 public:
 
     Game();
