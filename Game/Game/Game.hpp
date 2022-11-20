@@ -22,9 +22,11 @@ protected:
     Bulls bulls;
 public:
     Texture2D map;
-
+    bool EnterOnce;
     int fps = 60;
 
+
+    Texture2D chadFr, scientist, addict, tourguideGreen, tourguideYellow, policeman, rival;
     //fonts
     Font headerFont, textFont;
 

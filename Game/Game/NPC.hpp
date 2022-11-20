@@ -3,20 +3,17 @@
 
 class NPC {
 protected: 
-    vector<Rectangle>viewNPC;
-    vector<vector<Vector2>>NPCPositions;
+    vector<Rectangle> viewNPC;
     vector<int> counterDotsBubble;
-    vector<Texture2D> NPCSprites;
+    vector<Texture2D>NPCSprites;
     vector<int> counterNPCAnim;
-    float limitFrameNPC;
-
     Texture2D dotsBubble;
     float limitFrameDots;
     Rectangle viewDots;
     //to this
 
 public:
-    Texture2D chadFr, scientist, addict, tourguideGreen, tourguideYellow, policeman, rival;
+    
     vector<Texture2D> idles;
 
     int enemyPosX, enemyPosY;
@@ -24,6 +21,6 @@ public:
     NPC();
     void LoadSprites();
     void SetupSprites(int country);
-    void DrawDotsAnimation(int xbg, int ybg, int contryIndex);
-    void DrawNPCAnimation(int xbg, int ybg, int contryIndex);
+    void DrawDotsAnimation(int xbg, int ybg, int countryIndex, int posX, int posY);
+    void DrawNPCAnimation(int xbg, int ybg,int countryIndex, Texture2D texture, int posX, int posY);
 };

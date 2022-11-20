@@ -11,6 +11,8 @@ Game::Game() {
     SetTargetFPS(fps);
     srand(time(0));
 
+
+    EnterOnce = 0;
     //fonts
     headerFont = LoadFont("../Fonts/headerFont.ttf");
     textFont = LoadFont("../Fonts/textFont.ttf");
@@ -107,6 +109,18 @@ Game::Game() {
     spainHovered = LoadTexture("../src/sprites/countries/SpainDark.png");
     romaniaHovered = LoadTexture("../src/sprites/countries/RomaniaDark.png");
 
+
+    chadFr = LoadTexture("../src/sprites/NPC idles/frChad.png");
+    scientist = LoadTexture("../src/sprites/NPC idles/bgScientist.png");
+    addict = LoadTexture("../src/sprites/NPC idles/bgAddict.png");
+    tourguideGreen = LoadTexture("../src/sprites/NPC idles/ekskurzovodGreen.png");
+    tourguideYellow = LoadTexture("../src/sprites/NPC idles/ekskurzovodYellow.png");
+    policeman = LoadTexture("../src/sprites/NPC idles/policeman.png");
+    rival = LoadTexture("../src/sprites/NPC idles/bgRival.png");
+
+
+
+
     target = LoadTexture("../src/sprites/Map images/targetClean.png");
     targetHover = LoadTexture("../src/sprites/Map images/targetHover.png");
 
@@ -115,6 +129,7 @@ Game::Game() {
 
     targetHover.width -= 5;
     targetHover.height -= 5;
+    
     
 
     countriesV = {
@@ -626,6 +641,25 @@ void Game::mapEurope()
             else
             {
                 countries[coutnryNumber] = 1;
+                //change this switch to set up relative positions to hero in diff countries
+                switch (coutnryNumber)
+                {
+                    case 1:
+                        player.playerCords = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+                        break;
+                    case 2:
+                        player.playerCords = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+                        break;
+                    case 3:
+                        player.playerCords = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+                        break;
+                    case 4:
+                        player.playerCords = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+                        break;
+                    case 5:
+                        player.playerCords = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+                        break;
+                }
             }
         }
     }
@@ -669,6 +703,8 @@ void Game::mapEurope()
 
         if (playSound && audioIsClicked)
         {
+            
+            player.playerCords = Vector2{ (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
             PlaySound(vehicleSound);
         }
 
@@ -688,7 +724,7 @@ void Game::mapEurope()
         {
             StopSound(vehicleSound);
             DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), GRAY);
-
+            
             enableClick = false;
             player.CheckDir();
             player.Movement();     
@@ -706,13 +742,18 @@ void Game::mapEurope()
                     {
 
                     case 0:
+                        
                         DrawTexture(spBackground, player.XBg, player.YBg, WHITE);
                         DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
 
                         spainLevel();
 
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
-                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 0, rival, 400, 500);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 1, scientist, 500, 500);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 2, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 3, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 4, rival, 100, 100);
+
                         bulls.Update();
                         bulls.Draw(player.XBg, player.YBg);
                         break;
@@ -722,8 +763,11 @@ void Game::mapEurope()
                         DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
 
                         franceLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);  
-                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 5, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 6, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 7, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 8, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 9, rival, 100, 100);
                         
                         race.DrawHorseAnimation(player.XBg, player.YBg);
                         break;
@@ -733,8 +777,11 @@ void Game::mapEurope()
                         DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
 
                         italyLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
-                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 10, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 11, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 12, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 13, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 14, rival, 100, 100);
                         break;
 
                     case 3:
@@ -742,24 +789,30 @@ void Game::mapEurope()
                         DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
 
                         germanyLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
-                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 15, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 16, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 17, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 18, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 19, rival, 100, 100);
                         break;
 
-                    case 4:                       
-                        bulgariaLevel();
-                        assassin.CheckMiniGame(player.MoveBg, player.move);
-                        assassin.Draw(player.XBg, player.YBg, player.MoveBg);
-                        assassin.Update(player.playerCords, player.XBg, player.YBg, player.move, player.MoveBg);
-                        break;
+                    // case 4:                       
+                    //     bulgariaLevel();
+                    //     assassin.CheckMiniGame(player.MoveBg, player.move);
+                    //     assassin.Draw(player.XBg, player.YBg, player.MoveBg);
+                    //     assassin.Update(player.playerCords, player.XBg, player.YBg, player.move, player.MoveBg);
+                    //     break;
 
                     case 5:
                         DrawTexture(romBackground, player.XBg, player.YBg, WHITE);
                         DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
 
                         romaniaLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, i);
-                        npc.DrawDotsAnimation(player.XBg, player.YBg, i);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 20, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 21, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 22, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 23, rival, 100, 100);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 24, rival, 100, 100);
                         break;
 
                     default:
