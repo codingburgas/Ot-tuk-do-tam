@@ -24,6 +24,6 @@ public:
 	void Draw(int xbg, int ybg);
 	void Update();
 	void IfDisplayed(bool draw);
-	void CheckCollisionBulls(Rectangle move, Vector2&playrechords);
+	void CheckCollisionBulls(Rectangle move, Vector2& playrechords);
 
 };

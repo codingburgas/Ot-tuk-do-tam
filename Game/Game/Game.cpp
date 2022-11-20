@@ -164,7 +164,7 @@ Game::Game() {
     };
 
 
-    isBulgariaEnd = true;
+    
     optionImage = LoadTexture("../src/sprites/Map images/settingsButtonClean.png");
     optionImageHovered = LoadTexture("../src/sprites/Map images/settingsButtonHover.png");
     optionImageClicked = LoadTexture("../src/sprites/Map images/settingsButtonPressed.png");
@@ -761,6 +761,7 @@ void Game::mapEurope()
 
                         bulls.Update();
                         bulls.IfDisplayed(1);
+                        bulls.CheckCollisionBulls(player.move, player.playerCords);
                         bulls.CheckCollisionBulls(player.move, player.playerCords);
                         bulls.Draw(player.XBg, player.YBg);
                         break;

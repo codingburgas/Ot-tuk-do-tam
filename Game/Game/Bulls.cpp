@@ -21,7 +21,7 @@ Bulls::Bulls()
 
 	bullsBool = 0;
 	HaveToDraw = 0;
-	counterFrame = {0,0,0};
+	counterFrame = { 0,0,0 };
 	moveBulls.resize(3);
 }
 void Bulls::CheckCollisionBulls(Rectangle move, Vector2& plyercords)
@@ -90,9 +90,9 @@ void Bulls::Draw(int xbg, int ybg)
 			}
 			counterFrame[i]++;
 
-			moveBulls[i] = Rectangle{bullsPositions[i].x + xbg, bullsPositions[i].y + ybg, (float)bullsSpritesLeft[i].width / 3, (float)bullsSpritesLeft[i].height};
+			moveBulls[i] = Rectangle{ bullsPositions[i].x + xbg, bullsPositions[i].y + ybg, (float)bullsSpritesLeft[i].width / 3, (float)bullsSpritesLeft[i].height };
 
-			DrawTexturePro(bullsSprites[i], bullsRectangle[i], moveBulls[i], Vector2{10, 10}, 0, WHITE);
+			DrawTexturePro(bullsSprites[i], bullsRectangle[i], moveBulls[i], Vector2{ 10, 10 }, 0, WHITE);
 		}
 	}
 
