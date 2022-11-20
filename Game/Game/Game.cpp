@@ -333,6 +333,23 @@ Game::Game() {
     //romania
     draculaCastle = LoadTexture("../src/sprites/inner country elements/romania/castle.png");
     parlament = LoadTexture("../src/sprites/inner country elements/romania/parlament.png");
+
+    noodle1 = LoadTexture("../src/sprites/inner country elements/italy/noodles/noodles1.png");
+    noodle2 = LoadTexture("../src/sprites/inner country elements/italy/noodles/noodles2.png");
+    noodle3 = LoadTexture("../src/sprites/inner country elements/italy/noodles/noodles3.png");
+    noodle4 = LoadTexture("../src/sprites/inner country elements/italy/noodles/noodles4.png");
+    noodle5 = LoadTexture("../src/sprites/inner country elements/italy/noodles/noodles5.png");
+
+    cheeseNoodles = LoadTexture("../src/sprites/inner country elements/italy/noodles/cheeseNoodles.png");
+
+    noodlesV = {
+        {noodle1, 300, 600},
+        {noodle2, 500, 600},
+        {noodle3, 700, 600},
+        {noodle4, 900, 600},
+        {noodle5, 1100, 600},
+        {cheeseNoodles, 1100, 800}
+    };
 }
 
 void Game::backstory()
@@ -1039,6 +1056,10 @@ void Game::franceLevel()
     DrawTexture(eiffelTower, 0 + player.XBg, 0 + player.YBg, WHITE);
     DrawTexture(arcDeTriomphe, 0 + player.XBg, 0 + player.YBg, WHITE);
 
+    //collect noodles
+
+
+    //return item
     dialogues("Vankata Smetacha", "Mitio guluba", firstDialogue, 3, 1000, 1000, 1, isDialogueV, counterPressed, false);
 
     dialogues("Mitio pishtova", "Gosho rendeto", secondDialogue, 3, 2000, 1000, 0, isDialogueV, counterPressed, false);
@@ -1116,7 +1137,7 @@ void Game::italyLevel()
     DrawTexture(colliseum, 500 + player.XBg, 400 + player.YBg, WHITE);
     DrawTexture(pizzaTower, 1400 + player.XBg, 600 + player.YBg, WHITE);
 
-    if (IsKeyPressed(KEY_Q) && findDistance(player, 2000, 500))
+    /*if (IsKeyPressed(KEY_Q) && findDistance(player, 2000, 500))
     {
         isGripperPicked = true;
         isGripperInventory = false;
@@ -1139,7 +1160,48 @@ void Game::italyLevel()
         }
     }
     else 
-        DrawTexture(gripper, 2000 + player.XBg, 500 + player.YBg, WHITE);
+        DrawTexture(gripper, 2000 + player.XBg, 500 + player.YBg, WHITE);*/
+
+    dialogues("Vankata Smetacha", "Mitio guluba", startNoodleQuestDialogue, 2, 1000, 1000, 24, isDialogueV, counterPressed, false);
+
+    if (counterPressed.at(24) >= 3 && counterPressed.at(24) <= 4)
+    {
+        showNoodleInventory = true;
+
+        counterPressed.at(24) = 5;
+    }
+
+    if (showNoodleInventory)
+    {
+        if (!questV.at(24).openQuest)
+            quest(chadTextV, 24);
+
+        for (int i = 0; i < 6; i++)
+        {
+            if (!showNoodles[i] && questV.at(24).acceptQuest)
+                DrawTexture(noodlesV.at(i).texture, noodlesV.at(i).posX + player.XBg, noodlesV.at(i).posY + player.YBg, WHITE);
+        }
+
+
+        for (int i = 0; i < 6; i++) {
+            if (IsKeyPressed(KEY_Q) && findDistance(player, noodlesV.at(i).posX, noodlesV.at(i).posY))
+            {
+                showNoodles[i] = true;
+            }
+        }
+    }
+
+    if (showNoodles[0] && showNoodles[1] && showNoodles[2] && showNoodles[3] && showNoodles[4] && showNoodles[5])
+    {
+        dialogues("Vankata Smetacha", "Mitio guluba", finishNoodleQuestDialogue, 2, 1000, 1000, 25, isDialogueV, counterPressed, false);
+
+        if (counterPressed.at(25) >= 3 && counterPressed.at(25) <= 4)
+        {
+            allMoney += 500;
+
+            counterPressed.at(25) = 5;
+        }
+    }
 
     //logic game
     if (!isLogicGameFinished)

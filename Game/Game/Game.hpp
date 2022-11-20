@@ -248,7 +248,7 @@ public:
         {"", "", ""},
         {"", "", ""},
         {"", "", ""},
-        {"", "", ""},
+        {"Collect the noodles!", "Collect the noodles.", "Reward:           750$"},
         {"", "", ""},
         {"", "", ""},
     };
@@ -418,6 +418,25 @@ public:
     Texture2D spainKingdom, spainMonument;
     //romania
     Texture2D draculaCastle, parlament;
+
+    //noodle quest
+    Texture2D noodle1, noodle2, noodle3, noodle4, noodle5;
+
+    struct noodles {
+        Texture2D texture;
+        int posX, posY;
+    };
+
+    vector<noodles> noodlesV;
+    int pickNoodleCounter;
+
+    Texture2D cheeseNoodles;
+
+    string startNoodleQuestDialogue[3] = { "suberi nudalite sireneto i mi gi donesi za da napravq makaroni", "Dobre imash go", "plashtam dvoino" },
+            finishNoodleQuestDialogue[3] = { "Subra li gi", "da", "huu na ti pari" };
+
+    bool showNoodleInventory;
+    bool showNoodles[6];
 public:
 
     Game();
