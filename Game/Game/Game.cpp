@@ -1313,13 +1313,13 @@ void Game::italyLevel()
             {
                 itemOnOtherSide.at(i) = false;
                 itemGet.at(i) = true;
+
+                itemInBoat = logicGameItemsV.at(i).texture;
             }
             else if (itemOnOtherSideCounter.at(i) % 2 == 0 && itemOnOtherSideCounter.at(i) > 0)
             {
                 itemOnOtherSide.at(i) = true;
                 itemGet.at(i) = false;
-
-                itemInBoat = logicGameItemsV.at(i).texture;
             }
         }
 
