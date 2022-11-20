@@ -280,8 +280,8 @@ Game::Game() {
     mushroom.height = 150;
 
     pizzaIngredientsV = {
-        { flour, 1500, 500 },
-        { salami, 1500, 1000 },
+        { flour, 1000, 500 },
+        { salami, 1000, 1000 },
         { cheese, 2000, 500 },
         { mushroom, 2000, 1000 },
     },
@@ -404,9 +404,9 @@ Game::Game() {
         {noodle1, 300, 600},
         {noodle2, 500, 600},
         {noodle3, 700, 600},
-        {noodle4, 900, 600},
-        {noodle5, 1100, 600},
-        {cheeseNoodles, 1100, 800}
+        {noodle4, 2000, 600},
+        {noodle5, 2100, 800},
+        {cheeseNoodles, 2000, 900}
     };
 
     grBackground = LoadTexture("../src/sprites/backgrounds/grBackground.png");
