@@ -419,7 +419,7 @@ Game::Game() {
     chadTextV.at(3) = { "Get the key and combine it!", "Find other itema and go combine it", "Reward:           750$" };
     chadTextV.at(7) = { "Collect all the sausages!", "Collect all the sausages", "Reward:           1000$" };
     chadTextV.at(9) = { "Buy Chad a beer!", "Buy Chad a beer", "Reward:           750$" };
-    chadTextV.at(14) = { "Make pizza!", "Collect all the ingedients, give them to\nthe baker and return the pizza", "Reward:           1000$" };
+    chadTextV.at(14) = { "Make pizza!", "Collect all the ingedients,\n give them to\nthe baker and return the pizza", "Reward:           1000$" };
     chadTextV.at(17) = { "Collect the paintings!", "Collect the paintings.", "Reward:           750$" };
     chadTextV.at(24) = { "Collect the noodles!", "Collect the noodles.", "Reward:           750$" };
 }
@@ -1281,8 +1281,7 @@ void Game::italyLevel()
     DrawTexture(colliseum, 100 + player.XBg, 1000 + player.YBg, WHITE);
     DrawTexture(pizzaTower, 2300 + player.XBg, 200 + player.YBg, WHITE);
 
-
-    dialogues("Vankata Smetacha", "Mitio guluba", startNoodleQuestDialogue, 2, 1000, 1000, 24, isDialogueV, counterPressed, false);
+    dialogues("Vankata Smetacha", "Mitio guluba", startNoodleQuestDialogue, 2, 200, 300, 24, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(24) >= 3 && counterPressed.at(24) <= 4)
     {
@@ -1313,7 +1312,7 @@ void Game::italyLevel()
 
     if (showNoodles[0] && showNoodles[1] && showNoodles[2] && showNoodles[3] && showNoodles[4] && showNoodles[5])
     {
-        dialogues("Vankata Smetacha", "Mitio guluba", finishNoodleQuestDialogue, 2, 1000, 1000, 25, isDialogueV, counterPressed, false);
+        dialogues("Vankata Smetacha", "Mitio guluba", finishNoodleQuestDialogue, 2, 200, 300, 25, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(25) >= 3 && counterPressed.at(25) <= 4)
         {
@@ -1469,7 +1468,8 @@ void Game::italyLevel()
         }
     }
 
-    /*dialogues("Vankata Smetacha", "Mitio guluba", startPizzaCollectDialogue, 1, 1000, 1000, 14, isDialogueV, counterPressed, false);
+    //pizza quest
+    dialogues("Vankata Smetacha", "Mitio guluba", startPizzaCollectDialogue, 1, 2400, 1200, 14, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(14) >= 2 && counterPressed.at(14) <= 3)
     {
@@ -1502,7 +1502,7 @@ void Game::italyLevel()
 
     if (drawIngredients[0] && drawIngredients[1] && drawIngredients[2] && drawIngredients[3])
     {
-        dialogues("Vankata Smetacha", "Mitio guluba", bakerCombineDialogue, 2, 1500, 1000, 15, isDialogueV, counterPressed, false);
+        dialogues("Vankata Smetacha", "Mitio guluba", bakerCombineDialogue, 2, 700, 320, 15, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(15) >= 3 && counterPressed.at(15) <= 4)
         {
@@ -1516,7 +1516,7 @@ void Game::italyLevel()
 
     if (finishBakerDialogue)
     {
-        dialogues("Vankata Smetacha", "Mitio guluba", finishPizzaCollectDialogue, 1, 1000, 1000, 16, isDialogueV, counterPressed, false);
+        dialogues("Vankata Smetacha", "Mitio guluba", finishPizzaCollectDialogue, 1, 2400, 1200, 16, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(16) >= 2 && counterPressed.at(16) <= 3)
         {
@@ -1526,7 +1526,7 @@ void Game::italyLevel()
 
             finishBakerDialogue = false;
         }
-    }*/
+    }
 }
 
 void Game::germanyLevel()
