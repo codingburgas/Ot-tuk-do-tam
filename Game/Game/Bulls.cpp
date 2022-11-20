@@ -1,5 +1,5 @@
 #include"Bulls.hpp"
-Bulls::Bulls() 
+Bulls::Bulls()
 {
 	//bullsSpritesLeft.resize();
 	bullsRectangle.resize(3);
@@ -9,17 +9,23 @@ Bulls::Bulls()
 		{449, 344},
 		{801, 444},
 		{449, 544},
+		{801, 644},
+		{449, 744},
+		{801, 844}
 	};
 
 	bullsSpeeds = {
 		{rand() % 100 + 50},
 		{rand() % 100 + 50},
 		{rand() % 100 + 50},
+		{rand() % 100 + 50},
+		{rand() % 100 + 50},
+		{rand() % 100 + 50}
 	};
 
 	bullsBool = 0;
 	HaveToDraw = 0;
-	counterFrame = {0,0,0};
+	counterFrame = { 0,0,0 };
 }
 
 void Bulls::LoadSprites()
@@ -32,7 +38,7 @@ void Bulls::LoadSprites()
 	white_bull_left = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/white_bull_left.png");
 	white_bull_right = LoadTexture("../src/sprites/inner country elements/spain/bulls sprites/white_bull_right.png");
 
-	bullsSpritesLeft = { 
+	bullsSpritesLeft = {
 		 black_bull_left,
 		 brown_bull_left,
 		 white_bull_left
@@ -46,36 +52,39 @@ void Bulls::LoadSprites()
 
 	for (int i = 0; i < bullsRectangle.size(); i++)
 	{
-		bullsSpritesLeft[i].width = 144;
-		bullsSpritesRight[i].width = 144;
-		
-		bullsSpritesLeft[i].height = 47;
-		bullsSpritesRight[i].height = 47;
+		bullsSpritesLeft[i].width = 344;
+		bullsSpritesRight[i].width = 344;
+
+		bullsSpritesLeft[i].height = 77;
+		bullsSpritesRight[i].height = 77;
 
 		bullsRectangle[i] = { (float)bullsSpritesLeft[i].width / 3, 0, (float)bullsSpritesLeft[i].width / 3, (float)bullsSpritesLeft[i].height };
 	}
 }
-void Bulls::Draw()
+void Bulls::IfDisplayed(bool draw) {
+	HaveToDraw = draw;
+}
+void Bulls::Draw(int xbg, int ybg)
 {
-	
-	for (size_t i = 0; i < bullsSpritesLeft.size(); i++)
+	if (HaveToDraw)
 	{
+		for (size_t i = 0; i < bullsSpritesLeft.size(); i++)
+		{
 
-		if (counterFrame[i] >= 20)
-		{
-			bullsRectangle[i].x += bullsSpritesLeft[i].width / 3;
-			counterFrame[i] = 0;
+			if (counterFrame[i] >= 20)
+			{
+				bullsRectangle[i].x += bullsSpritesLeft[i].width / 3;
+				counterFrame[i] = 0;
+			}
+			if (abs(bullsRectangle[i].x) > bullsSpritesLeft[i].width)
+			{
+				bullsRectangle[i].x = bullsSpritesLeft[i].width / 3;
+			}
+			counterFrame[i]++;
+			DrawTextureRec(bullsSprites[i], bullsRectangle[i], { bullsPositions[i].x + xbg, bullsPositions[i].y + ybg }, WHITE);
 		}
-		if (abs(bullsRectangle[i].x) > bullsSpritesLeft[i].width)
-		{
-			bullsRectangle[i].x = bullsSpritesLeft[i].width / 3;
-		}
-		counterFrame[i]++;
-		
-		DrawTextureRec(bullsSprites[i], bullsRectangle[i], bullsPositions[i], WHITE);
-		
-		//DrawTexture(bullsSpritesLeft[3], 1000, 500, WHITE);
 	}
+
 }
 void Bulls::Update()
 {
@@ -87,7 +96,7 @@ void Bulls::Update()
 		}
 		else if (bullsPositions[i].x < 450) {
 			bullsSprites[i] = bullsSpritesRight[i];
-			
+
 			bullsSpeeds[i] = 100;
 		}
 		bullsPositions[i].x += bullsSpeeds[i] * GetFrameTime();
