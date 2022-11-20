@@ -551,7 +551,7 @@ void Game::transportMenuF()
 
         if ((mousePoint.x <= 1450 || mousePoint.x >= 1865 || mousePoint.y <= 250 || mousePoint.y >= 475) && isClicked())
         {
-            //isCheckedOutside++;
+            
         }
     }
 }
@@ -589,12 +589,11 @@ void Game::mapEurope()
         vehicleSound = trainSound;
     }
     else {
-        //plane.planeT = touranLeft;
         vehicleSound = touranSound;
     }
 
-    //backstory()
 
+    
     DrawTexture(map, 0, 0, WHITE);
 
     for (int i = 0; i < 6; i++)
@@ -647,14 +646,13 @@ void Game::mapEurope()
 
         StopSoundMulti();
         flyOneTime = true;
-        //countries[coutnryNumber] = 1;
         for (int i = 0; i < 6; i++)
         {
             if (i != coutnryNumber)
                 countries[i] = 0;
             else
             {
-                countries[coutnryNumber] = 1; cout << coutnryNumber <<endl;
+                countries[coutnryNumber] = 1;
 
                 //change this switch to set up relative positions to hero in diff countries
                 switch (coutnryNumber)
@@ -678,8 +676,6 @@ void Game::mapEurope()
             }
         }
     }
-
-    //counterDotsBubble++;
 
     for(int i = 0; i < 6; i++)
     {
@@ -812,7 +808,7 @@ void Game::mapEurope()
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 18, scientist, 2000, 300);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 19, chadBg, 1000, 600);
 
-                        assassin.CheckMiniGame(player.MoveBg, player.move);
+                        
                         assassin.Draw(player.XBg, player.YBg, player.MoveBg);
                         assassin.Update(player.playerCords, player.XBg, player.YBg, player.move, player.MoveBg);
                         break;
@@ -854,7 +850,6 @@ void Game::mapEurope()
             if (isClicked() && CheckCollisionPointRec(mousePoint, backButton))
             {
                 enableClick = true;
-                //countries[i] = 0;
                 unloadBack = true;
                 banCountry[i] = true;
 
@@ -1660,7 +1655,7 @@ void Game::germanyLevel()
         showPoisonInventory = true;
 
         finishGetPoisonDialogue = true;
-
+        assassin.CheckMiniGame(player.MoveBg, player.move, finishGetPoisonDialogue);
         counterPressed.at(19) = 4;
     }
 

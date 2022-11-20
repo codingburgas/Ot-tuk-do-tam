@@ -14,14 +14,11 @@ private:
 	int counterFrame;
 	Rectangle position;
 	int speed;
-	bool isSeen;
-	Rectangle itemRec;
 public:
-	Texture2D TableDrink;
 	vector<Rectangle> walls;
 	Assassin();
 	void LoadSprites();
 	void Draw(int xBg, int yBg, bool check);
-	void CheckMiniGame(bool&check, Rectangle heroRec);
+	void CheckMiniGame(bool&check, Rectangle heroRec, bool talk);
 	void Update(Vector2 posHero, int xBg, int yBg, Rectangle heroRec, bool MoveBg);
 };
