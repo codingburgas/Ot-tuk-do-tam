@@ -39,7 +39,7 @@
    <h1>📋 Documents</h1>
   <p>
  <h2> <a href ="https://codingburgas-my.sharepoint.com/:w:/g/personal/dgbratoevski20_codingburgas_bg/EQgbprDmLxdIvkujBQluhgoBj98I1efJeKp8J9aiLFo9Hg" >📜 Documentation</h2>
- <h2> <a href = "">📤 QA Documentation</h2>
+ <h2> <a href = "https://codingburgas-my.sharepoint.com/:w:/g/personal/dgbratoevski20_codingburgas_bg/EfmfGaemuxNNsdYknT-e7sgBPBculZI8QscNTj5XPNeUuQ?e=1R4LKg">📤 QA Documentation</h2>
  <h2> <a href = "https://codingburgas-my.sharepoint.com/:x:/g/personal/dgbratoevski20_codingburgas_bg/EW8HcuNnisFEgTGN4rQfVboBr6DN_VtEumH0-nBOoNVw1g?e=ec0FhX">🔍 QA Tests Table</h2>
  <h2> <a href ="https://codingburgas-my.sharepoint.com/:p:/r/personal/dgbratoevski20_codingburgas_bg/Documents/Presentation_-_Ot_tuk_do_tam.pptx?d=w9ec2cc0f8922437dbef34bdcb7d0c575&csf=1&web=1&e=3uohXl" >📰 Presentation</h2>
 </p>
