@@ -1122,7 +1122,7 @@ void Game::franceLevel()
             {
                 race.IfHorseRun(1, 1); // <-For Actual Implementing after dialogue (fir arg is for horse running or not and sec arg is for drawing horses or not)
 
-                if(horseBet == race.HorseIndex[0])
+                if(horseBet == race.HorseIndex[3])
                 {
                     allMoney += 500;
                 }
