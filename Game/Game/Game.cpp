@@ -1069,8 +1069,32 @@ void gameStartup()
 
 void Game::spainLevel()
 {
-    DrawTexture(spainKingdom, 200 + player.XBg, 200 + player.YBg, WHITE);
-    DrawTexture(spainMonument, 1000 + player.XBg, 200 + player.YBg, WHITE);
+    DrawTexture(spainKingdom, 100 + player.XBg, 100 + player.YBg, WHITE);
+    DrawTexture(spainMonument, 100 + player.XBg, 1050 + player.YBg, WHITE);
+
+    if (IsKeyPressed(KEY_Q) && findDistance(player, 1300, 400))
+    {
+        isGripperPicked = true;
+        isGripperInventory = false;
+    }
+
+    if (isGripperPicked)
+    {
+        dialogues("Vankata Smetacha", "Vankata Smetacha", gripperFoundDialogue, 1, 1300, 400, 2, isDialogueV, counterPressed, true);
+
+        dialogues("Vankata Smetacha", "Gabarq", gripperReturnedDialogue, 2, 1000, 1000, 3, isDialogueV, counterPressed, false);
+
+        if (counterPressed.at(3) >= 3 && counterPressed.at(3) <= 4)
+        {
+            allMoney += 500;
+
+            counterPressed.at(3) = 5;
+
+            isGripperInventory = true;
+        }
+    }
+    else
+        DrawTexture(gripper, 1300 + player.XBg, 400 + player.YBg, WHITE);
 
     dialogues("Vankata Smetacha", "Mitio guluba", getBeerQuestDialogue, 2, 1000, 1000, 9, isDialogueV, counterPressed, false);
 
@@ -1201,33 +1225,9 @@ void Game::franceLevel()
 
 void Game::italyLevel()
 {
-    DrawTexture(colliseum, 500 + player.XBg, 400 + player.YBg, WHITE);
-    DrawTexture(pizzaTower, 1400 + player.XBg, 600 + player.YBg, WHITE);
+    DrawTexture(colliseum, 100 + player.XBg, 1000 + player.YBg, WHITE);
+    DrawTexture(pizzaTower, 2300 + player.XBg, 200 + player.YBg, WHITE);
 
-    /*if (IsKeyPressed(KEY_Q) && findDistance(player, 2000, 500))
-    {
-        isGripperPicked = true;
-        isGripperInventory = false;
-    }
-        
-    if (isGripperPicked)
-    {
-        dialogues("Vankata Smetacha", "Vankata Smetacha", gripperFoundDialogue, 1, 2000, 500, 2, isDialogueV, counterPressed, true);
-
-        //fix na dialozite tuk
-        dialogues("Vankata Smetacha", "Gabarq", gripperReturnedDialogue, 2, 1000, 1000, 3, isDialogueV, counterPressed, false);
-
-        if (counterPressed.at(3) >= 3 && counterPressed.at(3) <= 4)
-        {
-            allMoney += 500;
-
-            counterPressed.at(3) = 5;
-
-            isGripperInventory = true;
-        }
-    }
-    else 
-        DrawTexture(gripper, 2000 + player.XBg, 500 + player.YBg, WHITE);*/
 
     dialogues("Vankata Smetacha", "Mitio guluba", startNoodleQuestDialogue, 2, 1000, 1000, 24, isDialogueV, counterPressed, false);
 
@@ -1419,8 +1419,8 @@ void Game::italyLevel()
 
 void Game::germanyLevel()
 {
-    DrawTexture(kiolnWall, 200 + player.XBg, 500 + player.YBg, WHITE);
-    DrawTexture(germanyKingdom, 1000 + player.XBg, 300 + player.YBg, WHITE);
+    DrawTexture(kiolnWall, 200 + player.XBg, 215 + player.YBg, WHITE);
+    DrawTexture(germanyKingdom, 2200 + player.XBg, 600 + player.YBg, WHITE);
 
     /*
     dialogues("Vankata Smetacha", "Mitio guluba", startQuestDialogue, 1, 1000, 1000, 7, isDialogueV, counterPressed, false);
@@ -1609,7 +1609,7 @@ void Game::bulgariaLevel()
 void Game::romaniaLevel()
 {
     DrawTexture(parlament, 200 + player.XBg, 200 + player.YBg, WHITE);
-    DrawTexture(draculaCastle, 1000 + player.XBg, 200 + player.YBg, WHITE);
+    DrawTexture(draculaCastle, 2000 + player.XBg, 800 + player.YBg, WHITE);
 
     dialogues("Vankata Smetacha", "Mitio guluba", getKeyDialogue, 2, 1000, 1000, 4, isDialogueV, counterPressed, false);
 
