@@ -293,7 +293,7 @@ Game::Game() {
     paintingV = {
         {pntng.painting, 1200, 800},
         {pntng.painting, 1500, 1000},
-        {pntng.painting, 1600, 1000},
+        {pntng.painting, 1600, 1300},
     };
 
     poison = LoadTexture("../src/sprites/inner country elements/germany/poison.png");
@@ -327,8 +327,6 @@ Game::Game() {
         {2000, 520},
         {2000, 720},
     };
-
-
 
     italyBackground = LoadTexture("../src/sprites/backgrounds/itBackground.png");
     boat = LoadTexture("../src/sprites/inner country elements/italy/boat.png");
@@ -755,7 +753,6 @@ void Game::mapEurope()
 
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 0, tourguideGreen, 600, 450);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 2, tourguideYellow, 500, 1100);
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, 1, rival, 1500, 1150);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 3, addict, 1600, 200);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 4, chadBg, 1600, 900);
 
@@ -802,14 +799,11 @@ void Game::mapEurope()
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 17, addict, 1800, 1200);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 18, scientist, 2000, 300);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 19, chadBg, 1000, 600);
-                        break;
 
-                    // case 4:                       
-                    //     bulgariaLevel();
-                    //     assassin.CheckMiniGame(player.MoveBg, player.move);
-                    //     assassin.Draw(player.XBg, player.YBg, player.MoveBg);
-                    //     assassin.Update(player.playerCords, player.XBg, player.YBg, player.move, player.MoveBg);
-                    //     break;
+                        assassin.CheckMiniGame(player.MoveBg, player.move);
+                        assassin.Draw(player.XBg, player.YBg, player.MoveBg);
+                        assassin.Update(player.playerCords, player.XBg, player.YBg, player.move, player.MoveBg);
+                        break;
 
                     case 5:
                         DrawTexture(romBackground, player.XBg, player.YBg, WHITE);
@@ -1163,49 +1157,44 @@ void Game::spainLevel()
     DrawTexture(spainKingdom, 100 + player.XBg, 100 + player.YBg, WHITE);
     DrawTexture(spainMonument, 100 + player.XBg, 1050 + player.YBg, WHITE);
 
-    dialogues("Vankata Smetacha", "Mitio guluba", getBeerQuestDialogue, 2, 1000, 1000, 9, isDialogueV, counterPressed, false);
+    dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogue, 1, 1600, 200, 17, isDialogueV, counterPressed, false);
 
-    if (counterPressed.at(9) >= 3 && counterPressed.at(9) <= 4)
+    if (counterPressed.at(17) >= 2 && counterPressed.at(17) <= 3)
     {
-        isBeerDialogueFinished[0] = true;
+        showPaintingInventory = true;
 
-        counterPressed.at(9) = 5;
+        counterPressed.at(17) = 4;
     }
 
-    if (isBeerDialogueFinished[0])
+    if (showPaintingInventory)
     {
-        if (!questV.at(9).openQuest)
-            quest(chadTextV, 9);
+        if (!questV.at(17).openQuest)
+            quest(chadTextV, 17);
 
-        if(questV.at(9).acceptQuest)
-            dialogues("Vankata Smetacha", "Gubarq", buyBeerDialogue, 2, 2000, 1000, 10, isDialogueV, counterPressed, false);
-    }
-        
+        for (int i = 0; i < 3; i++)
+        {
+            if (!showPaintings[i] && questV.at(17).acceptQuest)
+                DrawTexture(paintingV.at(i).painting, paintingV.at(i).posX + player.XBg, paintingV.at(i).posY + player.YBg, WHITE);
+        }
 
-    if (counterPressed.at(10) >= 3 && counterPressed.at(10) <= 4)
-    {
-        isBeerDialogueFinished[0] = false;
-        isBeerDialogueFinished[1] = true;
-
-        allMoney -= 300;
-
-        counterPressed.at(10) = 5;
-    }
-
-    if (isBeerDialogueFinished[1])
-    {
-        beerShowInventory = true;
-
-        dialogues("Vankata Smetacha", "Gubarq", bringBeerDialogue, 2, 1500, 1000, 11, isDialogueV, counterPressed, false);
+        for (int i = 0; i < 3; i++) {
+            if (IsKeyPressed(KEY_Q) && findDistance(player, paintingV.at(i).posX, paintingV.at(i).posY))
+            {
+                showPaintings[i] = true;
+            }
+        }
     }
 
-    if (counterPressed.at(11) >= 3 && counterPressed.at(11) <= 4)
+    if (showPaintings[0] && showPaintings[1] && showPaintings[2])
     {
-        allMoney += 700;
-        beerShowInventory = false;
-        isBeerDialogueFinished[1] = false;
+        dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogueFinish, 1, 1600, 200, 18, isDialogueV, counterPressed, false);
 
-        counterPressed.at(11) = 5;
+        if (counterPressed.at(18) >= 2 && counterPressed.at(18) <= 3)
+        {
+            allMoney += 500;
+
+            counterPressed.at(18) = 4;
+        }
     }
 }
 
@@ -1479,6 +1468,65 @@ void Game::italyLevel()
             isLogicGameFinished = true;
         }
     }
+
+    /*dialogues("Vankata Smetacha", "Mitio guluba", startPizzaCollectDialogue, 1, 1000, 1000, 14, isDialogueV, counterPressed, false);
+
+    if (counterPressed.at(14) >= 2 && counterPressed.at(14) <= 3)
+    {
+        showIngredients = true;
+
+        counterPressed.at(14) = 4;
+    }
+
+    if (showIngredients)
+    {
+        if (!questV.at(14).openQuest)
+            quest(chadTextV, 14);
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (!drawIngredients[i])
+            {
+                if (questV.at(14).acceptQuest)
+                    DrawTexture(pizzaIngredientsV.at(i).texture, pizzaIngredientsV.at(i).posX + player.XBg, pizzaIngredientsV.at(i).posY + player.YBg, WHITE);
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (IsKeyPressed(KEY_Q) && findDistance(player, pizzaIngredientsV.at(i).posX, pizzaIngredientsV.at(i).posY))
+            {
+                drawIngredients[i] = true;
+            }
+        }
+    }
+
+    if (drawIngredients[0] && drawIngredients[1] && drawIngredients[2] && drawIngredients[3])
+    {
+        dialogues("Vankata Smetacha", "Mitio guluba", bakerCombineDialogue, 2, 1500, 1000, 15, isDialogueV, counterPressed, false);
+
+        if (counterPressed.at(15) >= 3 && counterPressed.at(15) <= 4)
+        {
+            allMoney -= 400;
+
+            counterPressed.at(15) = 5;
+
+            finishBakerDialogue = true;
+        }
+    }
+
+    if (finishBakerDialogue)
+    {
+        dialogues("Vankata Smetacha", "Mitio guluba", finishPizzaCollectDialogue, 1, 1000, 1000, 16, isDialogueV, counterPressed, false);
+
+        if (counterPressed.at(16) >= 2 && counterPressed.at(16) <= 3)
+        {
+            allMoney += 1000;
+
+            counterPressed.at(16) = 4;
+
+            finishBakerDialogue = false;
+        }
+    }*/
 }
 
 void Game::germanyLevel()
@@ -1529,45 +1577,50 @@ void Game::germanyLevel()
         }
     }
 
-    /*dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogue, 1, 1000, 1000, 17, isDialogueV, counterPressed, false);
+    dialogues("Vankata Smetacha", "Mitio guluba", getBeerQuestDialogue, 2, 1000, 1000, 9, isDialogueV, counterPressed, false);
 
-    if (counterPressed.at(17) >= 2 && counterPressed.at(17) <= 3)
+    if (counterPressed.at(9) >= 3 && counterPressed.at(9) <= 4)
     {
-        showPaintingInventory = true;
+        isBeerDialogueFinished[0] = true;
 
-        counterPressed.at(17) = 4;
+        counterPressed.at(9) = 5;
     }
 
-    if (showPaintingInventory)
+    if (isBeerDialogueFinished[0])
     {
-        if (!questV.at(17).openQuest)
-            quest(chadTextV, 17);
+        if (!questV.at(9).openQuest)
+            quest(chadTextV, 9);
 
-        for (int i = 0; i < 3; i++)
-        {
-            if (!showPaintings[i] && questV.at(17).acceptQuest)
-                DrawTexture(paintingV.at(i).painting, paintingV.at(i).posX + player.XBg, paintingV.at(i).posY + player.YBg, WHITE);
-        }
-
-        for (int i = 0; i < 3; i++) {
-            if (IsKeyPressed(KEY_Q) && findDistance(player, paintingV.at(i).posX, paintingV.at(i).posY))
-            {
-                showPaintings[i] = true;
-            }
-        }
+        if (questV.at(9).acceptQuest)
+            dialogues("Vankata Smetacha", "Gubarq", buyBeerDialogue, 2, 2000, 1000, 10, isDialogueV, counterPressed, false);
     }
 
-    if (showPaintings[0] && showPaintings[1] && showPaintings[2])
+
+    if (counterPressed.at(10) >= 3 && counterPressed.at(10) <= 4)
     {
-        dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogueFinish, 1, 1000, 1000, 18, isDialogueV, counterPressed, false);
+        isBeerDialogueFinished[0] = false;
+        isBeerDialogueFinished[1] = true;
 
-        if (counterPressed.at(18) >= 2 && counterPressed.at(18) <= 3)
-        {
-            allMoney += 900;
+        allMoney -= 300;
 
-            counterPressed.at(18) = 4;
-        }
-    }*/
+        counterPressed.at(10) = 5;
+    }
+
+    if (isBeerDialogueFinished[1])
+    {
+        beerShowInventory = true;
+
+        dialogues("Vankata Smetacha", "Gubarq", bringBeerDialogue, 2, 1500, 1000, 11, isDialogueV, counterPressed, false);
+    }
+
+    if (counterPressed.at(11) >= 3 && counterPressed.at(11) <= 4)
+    {
+        allMoney += 700;
+        beerShowInventory = false;
+        isBeerDialogueFinished[1] = false;
+
+        counterPressed.at(11) = 5;
+    }
 
     //minigame
     dialogues("Vankata Smetacha", "Scientist", getPoisonDialogue, 1, 2000, 300, 19, isDialogueV, counterPressed, false);
@@ -1608,67 +1661,6 @@ void Game::germanyLevel()
     }
 }
 
-void Game::bulgariaLevel()
-{
-    dialogues("Vankata Smetacha", "Mitio guluba", startPizzaCollectDialogue, 1, 1000, 1000, 14, isDialogueV, counterPressed, false);
-
-    if (counterPressed.at(14) >= 2 && counterPressed.at(14) <= 3)
-    {
-        showIngredients = true;
-
-        counterPressed.at(14) = 4;
-    }
-
-    if (showIngredients)
-    {
-        if (!questV.at(14).openQuest)
-            quest(chadTextV, 14);
-
-        for (int i = 0; i < 4; i++)
-        {
-            if (!drawIngredients[i])
-            {        
-                if(questV.at(14).acceptQuest)
-                    DrawTexture(pizzaIngredientsV.at(i).texture, pizzaIngredientsV.at(i).posX + player.XBg, pizzaIngredientsV.at(i).posY + player.YBg, WHITE);
-            }
-        }
-               
-        for (int i = 0; i < 4; i++) {
-            if (IsKeyPressed(KEY_Q) && findDistance(player, pizzaIngredientsV.at(i).posX, pizzaIngredientsV.at(i).posY))
-            {
-                drawIngredients[i] = true;
-            }
-        }
-    }
-
-    if (drawIngredients[0] && drawIngredients[1] && drawIngredients[2] && drawIngredients[3])
-    {
-        dialogues("Vankata Smetacha", "Mitio guluba", bakerCombineDialogue, 2, 1500, 1000, 15, isDialogueV, counterPressed, false);
-
-        if (counterPressed.at(15) >= 3 && counterPressed.at(15) <= 4)
-        {
-            allMoney -= 400;
-
-            counterPressed.at(15) = 5;
-
-            finishBakerDialogue = true;
-        }
-    }
-
-    if (finishBakerDialogue)
-    {
-        dialogues("Vankata Smetacha", "Mitio guluba", finishPizzaCollectDialogue, 1, 1000, 1000, 16, isDialogueV, counterPressed, false);
-
-        if (counterPressed.at(16) >= 2 && counterPressed.at(16) <= 3)
-        {
-            allMoney += 1000;
-
-            counterPressed.at(16) = 4;
-
-            finishBakerDialogue = false;
-        }     
-    }
-}
 
 void Game::romaniaLevel()
 {
