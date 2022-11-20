@@ -873,7 +873,7 @@ void Game::mapEurope()
     DrawTexture(moneyBackground, 7, 30, WHITE);
     DrawText(printMoney.c_str(), 85, 50, 50, moneyColor);
 
-    dialogues("Narrator", "Vankata smetacha", menuDialogue, 1, 1000, 1000, 27, isDialogueV, counterPressed, true);
+    dialogues("Narrator", "Vankata", menuDialogue, 1, 1000, 1000, 27, isDialogueV, counterPressed, true);
 
     if (counterPressed.at(27) >= 2 && counterPressed.at(27) <= 3)
     {

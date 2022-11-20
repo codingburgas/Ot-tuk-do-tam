@@ -430,7 +430,7 @@ public:
     bool showNoodleInventory;
     bool showNoodles[6];
 
-    string menuDialogue[2] = { "Da", "Dobre" };
+    string menuDialogue[2] = { "Hello here you can visit different countries and learn new stuff and having fun \n at the same time with playing minigames and complete quests", "Okay I can't wait let's go!" };
     bool newGameClicked;
 public:
 
