@@ -1293,37 +1293,31 @@ void Game::italyLevel()
         {
             lockBoat = false;
 
-            if (mousePoint.y >= 190 && mousePoint.y <= 290 && isClicked() && itemGet.at(0))
+            if (mousePoint.y >= 190 && mousePoint.y <= 290 && isClicked())
             {
-                itemGet.at(0) = false;
-
                 itemOnOtherSideCounter.at(0)++;
             }
-            else if (mousePoint.y >= 380 && mousePoint.y <= 490 && isClicked() && itemGet.at(1))
+            else if (mousePoint.y >= 380 && mousePoint.y <= 490 && isClicked())
             {
-                itemGet.at(1) = false;
-
                 itemOnOtherSideCounter.at(1)++;
             }
-            else if (mousePoint.y >= 555 && mousePoint.y <= 715 && isClicked() && itemGet.at(2))
+            else if (mousePoint.y >= 555 && mousePoint.y <= 715 && isClicked())
             {
-                itemGet.at(2) = false;
-
                 itemOnOtherSideCounter.at(2)++;
             }
         }
 
         for (int i = 0; i < 3; i++)
         {
-            if (itemOnOtherSideCounter.at(i) == 1)
-            {
-                itemOnOtherSide.at(i) = true;
-            }
-            else if (itemOnOtherSideCounter.at(i) == 2)
+            if (itemOnOtherSideCounter.at(i) % 2 != 0)
             {
                 itemOnOtherSide.at(i) = false;
-
-                itemOnOtherSideCounter.at(i) = 0;
+                itemGet.at(i) = true;
+            }
+            else if (itemOnOtherSideCounter.at(i) % 2 == 0 && itemOnOtherSideCounter.at(i) > 0)
+            {
+                itemOnOtherSide.at(i) = true;
+                itemGet.at(i) = false;
 
                 itemInBoat = logicGameItemsV.at(i).texture;
             }
