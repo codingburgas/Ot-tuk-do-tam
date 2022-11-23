@@ -757,51 +757,52 @@ void Game::mapEurope()
                         DrawTexture(spBackground, player.XBg, player.YBg, WHITE);
                         DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
 
-                        spainLevel();
-
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, 0, tourguideGreen, 600, 450);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 0, tourguideGreen, 600, 600);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 2, tourguideYellow, 500, 1100);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 3, addict, 1600, 200);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 4, chadBg, 1600, 900);
 
+                   
                         bulls.Update();
                         bulls.IfDisplayed(1);
                         bulls.CheckCollisionBulls(player.move, player.playerCords);
                         bulls.CheckCollisionBulls(player.move, player.playerCords);
                         bulls.Draw(player.XBg, player.YBg);
+                        spainLevel();
                         break;
 
                     case 1:
                         DrawTexture(frBackground ,player.XBg, player.YBg, WHITE);
                         DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
 
-                        franceLevel();
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 5, tourguideGreen, 400, 400);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 6, tourguideYellow, 2070, 700);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 7, chadBg, 100, 1000);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 8, chadFr, 1000, 800);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 9, scientist, 1500, 300);
+
                         
                         race.DrawHorseAnimation(player.XBg, player.YBg);
+                        franceLevel();                        
                         break;
 
                     case 2:
                         DrawTexture(itBackground, player.XBg, player.YBg, WHITE);
                         DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
 
-                        italyLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, 10, tourguideGreen, 2300, 550);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 10, tourguideGreen, 2300, 650);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 11, tourguideYellow, 360, 1000);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 12, addict, 200, 300);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 13, rival, 2400, 1200);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 14, chadBg, 700, 320);
+
+                        italyLevel();                    
                         break;
 
                     case 3:
                         DrawTexture(grBackground, player.XBg, player.YBg, WHITE);
                         DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
 
-                        germanyLevel();
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 15, tourguideGreen, 500, 500);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 16, tourguideYellow, 2000, 800);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 17, addict, 1800, 1200);
@@ -811,17 +812,19 @@ void Game::mapEurope()
                         
                         assassin.Draw(player.XBg, player.YBg, player.MoveBg);
                         assassin.Update(player.playerCords, player.XBg, player.YBg, player.move, player.MoveBg);
+                        germanyLevel();                   
                         break;
 
                     case 5:
                         DrawTexture(romBackground, player.XBg, player.YBg, WHITE);
                         DrawTexturePro(player.playerSprite, player.view, player.move, Vector2{ 10, 10 }, 0, WHITE);
 
-                        romaniaLevel();
-                        npc.DrawNPCAnimation(player.XBg, player.YBg, 20, tourguideGreen, 600, 500);
+                        npc.DrawNPCAnimation(player.XBg, player.YBg, 20, tourguideGreen, 600, 630);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 21, tourguideYellow, 1900, 1100);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 22, policeman, 300, 800);
                         npc.DrawNPCAnimation(player.XBg, player.YBg, 23, chadBg, 1700, 500);
+
+                        romaniaLevel();                  
                         break;
 
                     default:
@@ -1169,7 +1172,7 @@ void Game::spainLevel()
     DrawTexture(spainKingdom, 100 + player.XBg, 100 + player.YBg, WHITE);
     DrawTexture(spainMonument, 100 + player.XBg, 1050 + player.YBg, WHITE);
     
-    dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogue, 1, 1600, 200, 17, isDialogueV, counterPressed, false);
+    dialogues("Vankata ", "Chad", paintingCollectDialogue, 1, 1600, 200, 17, isDialogueV, counterPressed, false);
 
     if (!getTomato)
     {
@@ -1212,7 +1215,7 @@ void Game::spainLevel()
 
     if (showPaintings[0] && showPaintings[1] && showPaintings[2])
     {
-        dialogues("Vankata Smetacha", "Mitio guluba", paintingCollectDialogueFinish, 1, 1600, 200, 18, isDialogueV, counterPressed, false);
+        dialogues("Vankata ", "Chad", paintingCollectDialogueFinish, 1, 1600, 200, 18, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(18) >= 2 && counterPressed.at(18) <= 3)
         {
@@ -1306,7 +1309,7 @@ void Game::italyLevel()
     DrawTexture(colliseum, 100 + player.XBg, 1000 + player.YBg, WHITE);
     DrawTexture(pizzaTower, 2300 + player.XBg, 200 + player.YBg, WHITE);
 
-    dialogues("Vankata Smetacha", "Mitio guluba", startNoodleQuestDialogue, 2, 200, 300, 24, isDialogueV, counterPressed, false);
+    dialogues("Vankata ", "Chad", startNoodleQuestDialogue, 2, 200, 300, 24, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(24) >= 3 && counterPressed.at(24) <= 4)
     {
@@ -1337,7 +1340,7 @@ void Game::italyLevel()
 
     if (showNoodles[0] && showNoodles[1] && showNoodles[2] && showNoodles[3] && showNoodles[4] && showNoodles[5])
     {
-        dialogues("Vankata Smetacha", "Mitio guluba", finishNoodleQuestDialogue, 2, 200, 300, 25, isDialogueV, counterPressed, false);
+        dialogues("Vankata ", "Chad", finishNoodleQuestDialogue, 2, 200, 300, 25, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(25) >= 3 && counterPressed.at(25) <= 4)
         {
@@ -1494,7 +1497,7 @@ void Game::italyLevel()
     }
 
     //pizza quest
-    dialogues("Vankata Smetacha", "Mitio guluba", startPizzaCollectDialogue, 1, 2400, 1200, 14, isDialogueV, counterPressed, false);
+    dialogues("Vankata ", "Chad", startPizzaCollectDialogue, 1, 2400, 1200, 14, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(14) >= 2 && counterPressed.at(14) <= 3)
     {
@@ -1527,7 +1530,7 @@ void Game::italyLevel()
 
     if (drawIngredients[0] && drawIngredients[1] && drawIngredients[2] && drawIngredients[3])
     {
-        dialogues("Vankata Smetacha", "Mitio guluba", bakerCombineDialogue, 2, 700, 320, 15, isDialogueV, counterPressed, false);
+        dialogues("Vankata ", "Chad", bakerCombineDialogue, 2, 700, 320, 15, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(15) >= 3 && counterPressed.at(15) <= 4)
         {
@@ -1541,7 +1544,7 @@ void Game::italyLevel()
 
     if (finishBakerDialogue)
     {
-        dialogues("Vankata Smetacha", "Mitio guluba", finishPizzaCollectDialogue, 1, 2400, 1200, 16, isDialogueV, counterPressed, false);
+        dialogues("Vankata ", "Chad", finishPizzaCollectDialogue, 1, 2400, 1200, 16, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(16) >= 2 && counterPressed.at(16) <= 3)
         {
@@ -1560,7 +1563,7 @@ void Game::germanyLevel()
     DrawTexture(germanyKingdom, 2200 + player.XBg, 600 + player.YBg, WHITE);
 
     //saussages collect
-    dialogues("Vankata Smetacha", "Mitio guluba", startQuestDialogue, 1, 1800, 1200, 7, isDialogueV, counterPressed, false);
+    dialogues("Vankata ", "Chad", startQuestDialogue, 1, 1800, 1200, 7, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(7) >= 2 && counterPressed.at(7) <= 3)
     {
@@ -1593,7 +1596,7 @@ void Game::germanyLevel()
 
     if (showSausages[0] && showSausages[1] && showSausages[2] && showSausages[3] && showSausages[4])
     {
-        dialogues("Vankata Smetacha", "Mitio guluba", finishAddictDialogue, 1, 1800, 1200, 8, isDialogueV, counterPressed, false);
+        dialogues("Vankata ", "Chad", finishAddictDialogue, 1, 1800, 1200, 8, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(8) >= 2 && counterPressed.at(8) <= 3)
         {
@@ -1603,7 +1606,7 @@ void Game::germanyLevel()
         }
     }
 
-    dialogues("Vankata Smetacha", "Mitio guluba", getBeerQuestDialogue, 2, 1000, 1000, 9, isDialogueV, counterPressed, false);
+    dialogues("Vankata ", "Chad", getBeerQuestDialogue, 2, 1000, 1000, 9, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(9) >= 3 && counterPressed.at(9) <= 4)
     {
@@ -1618,7 +1621,7 @@ void Game::germanyLevel()
             quest(chadTextV, 9);
 
         if (questV.at(9).acceptQuest)
-            dialogues("Vankata Smetacha", "Gubarq", buyBeerDialogue, 2, 2000, 1000, 10, isDialogueV, counterPressed, false);
+            dialogues("Vankata ", "Gubarq", buyBeerDialogue, 2, 2000, 1000, 10, isDialogueV, counterPressed, false);
     }
 
 
@@ -1636,7 +1639,7 @@ void Game::germanyLevel()
     {
         beerShowInventory = true;
 
-        dialogues("Vankata Smetacha", "Gubarq", bringBeerDialogue, 2, 1500, 1000, 11, isDialogueV, counterPressed, false);
+        dialogues("Vankata ", "Gubarq", bringBeerDialogue, 2, 1500, 1000, 11, isDialogueV, counterPressed, false);
     }
 
     if (counterPressed.at(11) >= 3 && counterPressed.at(11) <= 4)
@@ -1649,7 +1652,7 @@ void Game::germanyLevel()
     }
 
     //minigame
-    dialogues("Vankata Smetacha", "Scientist", getPoisonDialogue, 1, 2000, 300, 19, isDialogueV, counterPressed, false);
+    dialogues("Vankata ", "Scientist", getPoisonDialogue, 1, 2000, 300, 19, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(19) >= 2 && counterPressed.at(19) <= 3)
     {
@@ -1676,7 +1679,7 @@ void Game::germanyLevel()
 
     if (swapBeers)
     {
-        dialogues("Vankata Smetacha", "Scientist", finishMinigameDialogue, 1, 2000, 300, 20, isDialogueV, counterPressed, false);
+        dialogues("Vankata ", "Scientist", finishMinigameDialogue, 1, 2000, 300, 20, isDialogueV, counterPressed, false);
     }
 
     if (counterPressed.at(20) >= 2 && counterPressed.at(20) <= 3)
@@ -1702,9 +1705,9 @@ void Game::romaniaLevel()
 
     if (isGripperPicked)
     {
-        dialogues("Vankata Smetacha", "Vankata Smetacha", gripperFoundDialogue, 1, 1300, 1000, 2, isDialogueV, counterPressed, true);
+        dialogues("Vankata ", "Vankata ", gripperFoundDialogue, 1, 1300, 1000, 2, isDialogueV, counterPressed, true);
 
-        dialogues("Vankata Smetacha", "Mitaka", gripperReturnedDialogue, 2, 1700, 500, 3, isDialogueV, counterPressed, false);
+        dialogues("Vankata ", "Mitaka", gripperReturnedDialogue, 2, 1700, 500, 3, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(3) >= 3 && counterPressed.at(3) <= 4)
         {
@@ -1718,7 +1721,7 @@ void Game::romaniaLevel()
     else
         DrawTexture(gripper, 1300 + player.XBg, 1000 + player.YBg, WHITE);
 
-    /*dialogues("Vankata Smetacha", "Mitio guluba", getKeyDialogue, 2, 1000, 1000, 4, isDialogueV, counterPressed, false);
+    /*dialogues("Vankata ", "Chad", getKeyDialogue, 2, 1000, 1000, 4, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(4) >= 3 && counterPressed.at(4) <= 4)
     {
@@ -1735,11 +1738,11 @@ void Game::romaniaLevel()
 
     if (itemRequire[1])
     {
-        dialogues("Vankata Smetacha", "Vankata Smetacha", findStoneDialogue, 2, 1500, 500, 5, isDialogueV, counterPressed, true);
+        dialogues("Vankata ", "Vankata ", findStoneDialogue, 2, 1500, 500, 5, isDialogueV, counterPressed, true);
 
         if (itemRequire[0])
         {
-            dialogues("Vankata Smetacha", "Jabata", itemCombinationDealDialogue, 3, 1500, 1000, 6, isDialogueV, counterPressed, false);
+            dialogues("Vankata ", "Jabata", itemCombinationDealDialogue, 3, 1500, 1000, 6, isDialogueV, counterPressed, false);
 
             if (counterPressed.at(6) >= 4 && counterPressed.at(6) <= 5)
             {
@@ -1760,7 +1763,7 @@ void Game::romaniaLevel()
 
     if (itemRequire[2])
     {
-        dialogues("Vankata Smetacha", "Jabata", finishKeyQuestDialogue, 1, 1000, 1000, 12, isDialogueV, counterPressed, false);
+        dialogues("Vankata ", "Jabata", finishKeyQuestDialogue, 1, 1000, 1000, 12, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(12) >= 2 && counterPressed.at(12) <= 3)
         {
@@ -1774,7 +1777,7 @@ void Game::romaniaLevel()
 
     //myrder mystery
 
-    dialogues("Vankata Smetacha", "Policeman", startMurderMysteryDialogue, 2, 300, 800, 21, isDialogueV, counterPressed, false);
+    dialogues("Vankata ", "Policeman", startMurderMysteryDialogue, 2, 300, 800, 21, isDialogueV, counterPressed, false);
 
     if (counterPressed.at(21) >= 3 && counterPressed.at(21) <= 4)
     {
@@ -1786,7 +1789,7 @@ void Game::romaniaLevel()
 
     if (isMurderMysteryDialoguesStarted[0])
     {
-        dialogues("Vankata Smetacha", "Vankata Smetacha", atTheCrimeSceneDialogue, 2, 1463, 903, 22, isDialogueV, counterPressed, true);
+        dialogues("Vankata ", "Vankata ", atTheCrimeSceneDialogue, 2, 1463, 903, 22, isDialogueV, counterPressed, true);
 
         if (counterPressed.at(22) >= 3 && counterPressed.at(22) <= 4)
         {
@@ -1799,7 +1802,7 @@ void Game::romaniaLevel()
 
     if (isMurderMysteryDialoguesStarted[1])
     {
-        dialogues("Vankata Smetacha", "Policeman", finishMurderMysteryDialogue, 3, 300, 800, 23, isDialogueV, counterPressed, false);
+        dialogues("Vankata", "Policeman", finishMurderMysteryDialogue, 3, 300, 800, 23, isDialogueV, counterPressed, false);
 
         if (counterPressed.at(23) >= 4 && counterPressed.at(23) <= 5)
         {

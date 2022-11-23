@@ -90,11 +90,6 @@ void Racing::DrawHorseAnimation(int xbg, int ybg)
 						}
 						
 					}
-					DrawRectangle(500, 500, 500, 500, RED);
-					DrawText(("Horse Number " + to_string(HorseIndex[3]) + " is 1th").c_str(), 500, 500, 50, BLACK);
-					DrawText(("Horse Number " + to_string(HorseIndex[2]) + " is 2th").c_str(), 500, 550, 50, BLACK);
-					DrawText(("Horse Number " + to_string(HorseIndex[1]) + " is 3th").c_str(), 500, 600, 50, BLACK);
-					DrawText(("Horse Number " + to_string(HorseIndex[0]) + " is 4th").c_str(), 500, 650, 50, BLACK);
 					counterPlace = 0;
 				}
 				counterForFinish = 0;

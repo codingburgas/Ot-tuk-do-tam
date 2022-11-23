@@ -23,7 +23,6 @@ void Assassin::CheckMiniGame(bool&check, Rectangle heroRec, bool talk)
 {
 	if (talk)
 	{
-		cout << "konq cukna Q" << endl;
 		check = 0;
 	}
 }

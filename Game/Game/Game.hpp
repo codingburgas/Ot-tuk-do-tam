@@ -265,10 +265,10 @@ public:
     bool itemRequire[5];
     bool isStonePicked;
 
-    string getKeyDialogue[5] = { "Brato nati toq kluch naprai kamuk", "Huu imash go", "Basi picha si",   "" },
-        findStoneDialogue[5] = { "leleee basi qkiq kamuk", "Sigurno she mi trqq", "Dai da go zema", "" },
-        itemCombinationDealDialogue[5] = { "Ae pich moe li da napraish item", "Nqqsh problem samo dai pari", "Huu nati", "Qko e da praim biznes ai chao", "" },
-        finishKeyQuestDialogue[3] = { "Eto subrah gi sega dai kinti", "Jiv i zdrav eto", ""};
+    string getKeyDialogue[5] = { "Get this and make me stone!", "You have it boss G!", "Thanks!",   "No problem!" },
+        findStoneDialogue[5] = { "Very cool stoneee!", "Maybe i will need it later!", "Let me get it!", "SUIII!" },
+        itemCombinationDealDialogue[5] = { "Can you make me an item?", "Weeeeeeeeeeeeeeeeelll i can!", "Okay do it NOWWW!!!", "Thanks for the deal!", "Shut up!" },
+        finishKeyQuestDialogue[3] = { "Get it i want the cash now!", "Thanks mate!", "No problem!"};
 
     //adict quest
     struct sausages {
@@ -281,13 +281,13 @@ public:
     bool showSausagesInventory;
     bool showSausages[6];
 
-    string startQuestDialogue[2] = { "Picha suberi 5 domata", "Huu" },
-           finishAddictDialogue[2] = { "Subrah gi", "Huu nati tiq pari" };
+    string startQuestDialogue[2] = { "You have to collect this sausage!", "Okay i will do it!" },
+           finishAddictDialogue[2] = { "I did it!", "Nice job!" };
 
     //buy beer quest
-    string getBeerQuestDialogue[4] = { "Ae pich sh mi kupish li bira", "Da e lud", "Huu shti platq"},
-        buyBeerDialogue[4] = { "Iskam da kupq bira", "Struva 250$", "Dobre vzimam q" },
-        bringBeerDialogue[4] = {"Eto ti birata", "Blagodarq lud. Na ti parite", "Blagodarq, priqten den!"};
+    string getBeerQuestDialogue[4] = { "Hey can you buy me a beer mate", "Yes no problem", "Okay i will give you money"},
+        buyBeerDialogue[4] = { "Hey i want one beer now!!!", "It costs 250$", "Okay i will give you 300 cause I can!" },
+        bringBeerDialogue[4] = {"Get it mate", "Thanks here is your money!", "Thanks mate!"};
 
     bool isBeerDialogueFinished[2];
 
@@ -305,9 +305,9 @@ public:
 
     vector<pizzaIngredients> pizzaIngredientsV;
 
-    string startPizzaCollectDialogue[2] = { "Ko staa manqk suberi sustavkite", "Dobre" },
-        bakerCombineDialogue[3] = { "Kombinirai twa", "Dobre, samo che iskam 400$", "Dobre eto" },
-        finishPizzaCollectDialogue[2] = { "Ei ti picata", "Blagodarq nati parite" };
+    string startPizzaCollectDialogue[2] = { "Collect the pizza supplements and make me a pizza", "Fine" },
+        bakerCombineDialogue[3] = { "Make me a pizza! Now!", "Okay but i want 400$", "Fine!" },
+        finishPizzaCollectDialogue[2] = { "Here you are!", "Thanks for the money!" };
 
     bool showIngredients;
     bool drawIngredients[4];
@@ -325,16 +325,16 @@ public:
     bool showPaintingInventory;
     bool showPaintings[3];
 
-    string paintingCollectDialogue[2] = { "Picha zemi tiq kartini", "Huu praim go" },
-           paintingCollectDialogueFinish[2] = { "Na ti kartinite", "Blagodarq!" };
+    string paintingCollectDialogue[2] = { "Collect the paintings!", "Okay no problem!" },
+           paintingCollectDialogueFinish[2] = { "It is ready!", "Thanks!" };
 
     bool hideCountries;
 
     //germany mini game
     Texture2D poisonedBeer, poison;
 
-    string getPoisonDialogue[2] = { "Zemi otrovata i q sloji v na Rival pitieto", "Dobre" },
-           finishMinigameDialogue[2] = {"Uspqh da otrovq na Rival birata", "Super bravo na teb"};
+    string getPoisonDialogue[2] = { "Your mission is to poison your rival's beer", "Okay no problem!" },
+           finishMinigameDialogue[2] = {"I did it! Everything is ready!", "Nice job! Get this money mate!"};
 
     bool showPoisonInventory, finishGetPoisonDialogue;
     bool swapBeers;
@@ -345,9 +345,9 @@ public:
     Texture2D loop;
     bool showLoop;
 
-    string startMurderMysteryDialogue[4] = { "Iskash li da razsledvash", "Da", "Dobre zemi tazi lupa i razgledvai" },
-           atTheCrimeSceneDialogue[3] = {"Qvno tova e mestoprestuplenieto", "Chakai kakwo e tova tam, parche plat", "Sigurno e na ubieca"},
-           finishMurderMysteryDialogue[4] = {"Uspqh da otkriq parche plat", "Dobre i smqtash che e na jertvata?", "Da", "Dobre spored teb koi e ubieca"};
+    string startMurderMysteryDialogue[4] = { "Do you want to find one mystery?", "Yes!", "Get this magnifying glass!" },
+           atTheCrimeSceneDialogue[3] = {"Oh soo this is the place nice!", "Wait what is this? Let me check!", "Uhmmm this might be the killer"},
+           finishMurderMysteryDialogue[4] = {"I found this mate!", "Nice job!", "Thanks", "Okay and who is the killer in your opinion?"};
 
     bool isMurderMysteryDialoguesStarted[3];
 
@@ -426,8 +426,8 @@ public:
 
     Texture2D cheeseNoodles;
 
-    string startNoodleQuestDialogue[3] = { "suberi nudalite sireneto i mi gi donesi za da napravq makaroni", "Dobre imash go", "plashtam dvoino" },
-            finishNoodleQuestDialogue[3] = { "Subra li gi", "da", "huu na ti pari" };
+    string startNoodleQuestDialogue[3] = { "Collect the mac and cheese and combiene it!", "Okay no problem!", "I will pay you doble!" },
+            finishNoodleQuestDialogue[3] = { "Did you collect them?", "Yesss!", "Okay get this money you deserve it!" };
 
     bool showNoodleInventory;
     bool showNoodles[6];
